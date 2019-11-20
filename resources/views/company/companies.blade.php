@@ -135,6 +135,7 @@
   @endif
   <script src="{{url('public/js/company/company.js')}}"></script>
   @include('company.companyNew')
+  @include('company.companyEdit')
 </div>
 
 

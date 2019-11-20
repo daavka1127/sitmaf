@@ -94,4 +94,10 @@ $(document).ready(function(){
       });
     });
 });
-function dada(){}
+
+
+$(document).ready(function(){
+    $("#btnEditCompany").click(function(){
+        alert("aa");
+    });
+});

@@ -91,18 +91,18 @@
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtgUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
+            <input type="number" min="0" id="txtEditgUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtgUuliinShuuduu" step="any" name="gUuliinShuuduu" class="form-control" />
+            <input type="number" min="0" id="txtEditgUuliinShuuduu" step="any" name="gUuliinShuuduu" class="form-control" />
           </div>
           <div class="clearfix"></div>
           {{-- END GUITSETGELT --}}
           <div class="col-md-6" id="error_message"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnNewCompany" type="submit" class="btn btn-success">Нэмэх</button>
+              <button id="btnEditPostCompany" type="submit" class="btn btn-success">Нэмэх</button>
             </div>
           </div>
           <div class="clearfix"></div>
