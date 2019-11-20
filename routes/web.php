@@ -19,5 +19,5 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/companies/new', 'companyController@index')->name('home');
-Route::get('/companies/new/get/company', 'companyController@getCompanyToNew');
+Route::post('/companies/new/get/company', 'companyController@getCompanyToNew');
 Route::post('/companies/store', 'companyController@store');

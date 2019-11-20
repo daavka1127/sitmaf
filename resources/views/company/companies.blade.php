@@ -12,8 +12,9 @@
 
 <script>
     var newCompanyUrl = "{{url("/companies/store")}}";
+    var getCompaniesUrl = "{{url("/companies/store")}}";
 
-    var data = "";
+    var dataRow = "";
 
     $(document).ready(function(){
       $('#datatable').DataTable( {
@@ -32,7 +33,7 @@
           "processing": true,
           "serverSide": true,
           "ajax":{
-                   "url": "{{url('/get/trainings')}}",
+                   "url": "{{url('/companies/new/get/company')}}",
                    "dataType": "json",
                    "type": "POST",
                    "data":{
@@ -64,6 +65,19 @@
             ]
       });
   });
+
+
+  $(document).ready(function(){
+    $('#datatable tbody').on( 'click', 'tr', function () {
+
+        var currow = $(this).closest('tr');
+        $('#datatable tbody tr').css("background-color", "white");
+        $(this).closest('tr').css("background-color", "yellow");
+        dataRow = $('#datatable').DataTable().row(currow).data();
+        // alert(dataRow["companyName"]);
+      });
+  });
+
 </script>
 
 <div class="col-xs-12">
@@ -113,6 +127,7 @@
   </div>
   <div class="text-left">
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
+      <button type="button" class="btn btn-warning" id="btnEditCompany">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteCompany">Устгах</button>
   </div>
   @if ($errors->any())
