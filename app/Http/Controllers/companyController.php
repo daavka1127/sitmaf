@@ -20,7 +20,6 @@ class companyController extends Controller
 
     public function getCompanyToNew(){
         $companies = DB::table('tb_companies')->get();
-        $companies1 = DB::table('tb_companies')->get();
         return DataTables::of($companies)
             ->make(true);
     }
