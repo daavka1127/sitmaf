@@ -14,12 +14,17 @@ class companyController extends Controller
         $this->middleware('auth');
     }
 
+    public function showSlider(){
+        return view('companySlider.companySliderShow');
+    }
+
     public function index(){
         return view('company.companies');
     }
 
     public function getCompanyToNew(){
-        $companies = DB::table('tb_companies')->get();
+        $companies = DB::table('tb_companies')
+        ->get();
         return DataTables::of($companies)
             ->make(true);
     }
@@ -75,5 +80,36 @@ class companyController extends Controller
         return "Амжилттай хадгаллаа.";
     }
 
+    public function update(Request $req){
+        $company = company::find($req->id);
+        $company->companyName = $req->companyName;
+        $company->ajliinHeseg = $req->ajliinHeseg;
+        $company->hursHuulalt = $req->hursHuulalt;
+        $company->dalan = $req->dalan;
+        $company->uhmal = $req->uhmal;
+        $company->suuriinUy = $req->suuriinUy;
+        $company->shuuduu = $req->shuuduu;
+        $company->uhmaliinHamgaalalt = $req->uhmaliinHamgaalalt;
+        $company->uuliinShuuduu = $req->uuliinShuuduu;
+        $company->niit = ($req->hursHuulalt + $req->dalan + $req->uhmal + $req->suuriinUy + $req->shuuduu + $req->uhmaliinHamgaalalt + $req->uuliinShuuduu);
+        $company->gereeOgnoo = $req->gereeOgnoo;
+        $company->hunHuch = $req->hunHuch;
+        $company->mashinTehnik = $req->mashinTehnik;
+        $company->gHursHuulalt = $req->gHursHuulalt;
+        $company->gDalan = $req->gDalan;
+        $company->gUhmal = $req->gUhmal;
+        $company->gSuuriinUy = $req->gSuuriinUy;
+        $company->gShuuduu = $req->gShuuduu;
+        $company->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
+        $company->gUuliinShuuduu = $req->gUuliinShuuduu;
+        $company->save();
+        return "Амжилттай заслаа.";
+    }
+
+    public function delete(Request $req){
+        $company = company::find($req->id);
+        $company->delete();
+        return "Амжилттай устгалаа.";
+    }
 
 }

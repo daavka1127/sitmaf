@@ -13,6 +13,11 @@
     <title>Зэвсэгт хүчний жанжин штаб</title>
 
     <link href="{{url('public/css/zam_styles.css')}}" rel="stylesheet">
+
+    <!-- SLIDER CSS -->
+		<link rel="stylesheet" href="{{url('public/dist/css/slider-pro.min.css')}}"/>
+		<!-- END SLIDER CSS -->
+
     <!-- Bootstrap -->
     <link href="{{url('public/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -75,7 +80,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-globe"></i> Аж ахуйн нэгж <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('/companies')}}">Аж ахуйн нэгжүүд</a></li>
+                      <li><a href="{{url('/show/companies/slider')}}">Аж ахуйн нэгжүүд</a></li>
                       <li><a href="{{url('/mission/search')}}">Аж ахуйн хүнэгтээр</a></li>
                       <li><a href="{{url('/companies/new')}}">Шинэ бүртгэл хийх</a></li>
                     </ul>
@@ -172,6 +177,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{url('public/build/js/custom.min.js')}}"></script>
+
+    <!-- SLIDER JS -->
+		<script src="{{url("public/dist/js/jquery.sliderPro.min.js")}}"></script>
 
   </body>
 </html>

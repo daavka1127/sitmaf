@@ -12,10 +12,10 @@
 
 <script>
     var newCompanyUrl = "{{url("/companies/store")}}";
-    var getCompaniesUrl = "{{url("/companies/store")}}";
-
+    var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
+    var editCompanyUrl = "{{url("/companies/update")}}";
+    var deleteCompanyUrl = "{{url("/companies/delete")}}";
     var dataRow = "";
-
     $(document).ready(function(){
       $('#datatable').DataTable( {
           "language": {
@@ -47,7 +47,7 @@
               { data: "gereeOgnoo", name: "gereeOgnoo" },
               { data: "hunHuch", name: "hunHuch" },
               { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "mashinTehnik", name: "mashinTehnik" },
+              { data: "mashinTehnik", name: "mashinTehnik", visible:false },
               { data: "hursHuulalt", name: "hursHuulalt" },
               { data: "gHursHuulalt", name: "gHursHuulalt" },
               { data: "dalan", name: "dalan" },
@@ -65,11 +65,8 @@
             ]
       });
   });
-
-
   $(document).ready(function(){
     $('#datatable tbody').on( 'click', 'tr', function () {
-
         var currow = $(this).closest('tr');
         $('#datatable tbody tr').css("background-color", "white");
         $(this).closest('tr').css("background-color", "yellow");
@@ -77,7 +74,6 @@
         // alert(dataRow["companyName"]);
       });
   });
-
 </script>
 
 <div class="col-xs-12">
@@ -100,11 +96,8 @@
                   <th colspan="2">Шуудуу</th>
                   <th colspan="2">Ухмалын хамгаалалт</th>
                   <th colspan="2">Уулын шуудуу</th>
-                  <th colspan="2">Нийт</th>
               </tr>
               <tr>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
                   <th>Хийх</th>
                   <th>Гүйцэтгэлт</th>
                   <th>Хийх</th>

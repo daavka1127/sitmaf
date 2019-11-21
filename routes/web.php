@@ -22,3 +22,7 @@ Auth::routes();
 Route::get('/companies/new', 'companyController@index')->name('home');
 Route::post('/companies/new/get/company', 'companyController@getCompanyToNew');
 Route::post('/companies/store', 'companyController@store');
+Route::post('/companies/update', 'companyController@update');
+Route::post('/companies/delete', 'companyController@delete');
+
+Route::get('/show/companies/slider', 'companyController@showSlider');

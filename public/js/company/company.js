@@ -81,6 +81,7 @@ $(document).ready(function(){
           data: $("#frmNewCompany").serialize(),
           success:function(response){
               alertify.alert(response);
+              emptyNewModal();
               refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
@@ -90,14 +91,133 @@ $(document).ready(function(){
                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
             });
             alert(errorsHtml);
-        }
-      });
+          }
+        });
+    });
+});
+
+
+function emptyNewModal(){
+  $("#txtCompanyName").val("");
+  $("#txtAjliinHeseg").val("");
+  $("#txtGereeOgnoo").val("");
+  $("#txtHunHuch").val("");
+  $("#txtMashinTehnik").val("");
+  $("#txtHursHuulalt").val("");
+  $("#txtDalan").val("");
+  $("#txtUhmal").val("");
+  $("#txtSuuriinUy").val("");
+  $("#txtShuuduu").val("");
+  $("#txtUhmaliinHamgaalalt").val("");
+  $("#txtUuliinShuuduu").val("");
+  $("#txtgHursHuulalt").val("");
+  $("#txtgDalan").val("");
+  $("#txtgUhmal").val("");
+  $("#txtgSuuriinUy").val("");
+  $("#txtgShuuduu").val("");
+  $("#txtgUhmaliinHamgaalalt").val("");
+  $("#txtgUuliinShuuduu").val("");
+}
+
+
+$(document).ready(function(){
+    $("#btnEditCompany").click(function(){
+        $("#txtEditID").val(dataRow["id"]);
+        $("#txtEditCompanyName").val(dataRow["companyName"]);
+        $("#txtEditAjliinHeseg").val(dataRow["ajliinHeseg"]);
+        $("#txtEditGereeOgnoo").val(dataRow["gereeOgnoo"]);
+        $("#txtEditHunHuch").val(dataRow["hunHuch"]);
+        $("#txtEditMashinTehnik").val(dataRow["mashinTehnik"]);
+        $("#txtEditHursHuulalt").val(dataRow["hursHuulalt"]);
+        $("#txtEditDalan").val(dataRow["dalan"]);
+        $("#txtEditUhmal").val(dataRow["uhmal"]);
+        $("#txtEditSuuriinUy").val(dataRow["suuriinUy"]);
+        $("#txtEditShuuduu").val(dataRow["shuuduu"]);
+        $("#txtEditUhmaliinHamgaalalt").val(dataRow["uhmaliinHamgaalalt"]);
+        $("#txtEditUuliinShuuduu").val(dataRow["uuliinShuuduu"]);
+        $("#txtEditgHursHuulalt").val(dataRow["gHursHuulalt"]);
+        $("#txtEditgDalan").val(dataRow["gDalan"]);
+        $("#txtEditgUhmal").val(dataRow["gUhmal"]);
+        $("#txtEditgSuuriinUy").val(dataRow["gSuuriinUy"]);
+        $("#txtEditgShuuduu").val(dataRow["gShuuduu"]);
+        $("#txtEditgUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
+        $("#txtEditgUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
+
+        $('#modalEditCompany').modal('show');
     });
 });
 
 
 $(document).ready(function(){
-    $("#btnEditCompany").click(function(){
-        alert("aa");
+    $("#btnEditPostCompany").click(function(e){
+        e.preventDefault();
+        var isInsert = true;
+        if($("#txtEditCompanyName").val()==""||$("#txtEditCompanyName").val()==null){
+            alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if($("#txtEditAjliinHeseg").val()==""||$("#txtEditAjliinHeseg").val()==null){
+            alertify.error("Ажлын хэсэг оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if($("#txtEditGereeOgnoo").val()==""||$("#txtEditGereeOgnoo").val()==null){
+            alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if($("#txtEditHunHuch").val()==""||$("#txtEditHunHuch").val()==null){
+            alertify.error("Хүн хүч оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if($("#txtEditMashinTehnik").val()==""||$("#txtEditMashinTehnik").val()==null){
+            alertify.error("Ажлын машин техник оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if(isInsert == false){return;}
+        $.ajax({
+          type: 'POST',
+          url: editCompanyUrl,
+          data: $("#frmEditCompany").serialize(),
+          success:function(response){
+              alertify.alert(response);
+              refresh();
+          },
+          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+            var errors = jqXhr.responseJSON;
+            var errorsHtml = '';
+            $.each(errors['errors'], function (index, value) {
+                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+            });
+            alert(errorsHtml);
+          }
+        });
+    });
+});
+
+$(document).ready(function(){
+    $("#btnDeleteCompany").click(function(){
+        if(dataRow == ""){
+            alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
+            return;
+        }
+
+        alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
+          if (e) {
+            var csrf = $('meta[name=csrf-token]').attr("content");
+            $.ajax({
+                type: 'POST',
+                url: deleteCompanyUrl,
+                data: {_token: csrf, id : dataRow['id']},
+                success:function(response){
+                    alertify.alert(response);
+                    refresh();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
+                }
+            })
+          } else {
+              alertify.error('Устгах үйлдэл цуцлагдлаа.');
+          }
+        });
     });
 });

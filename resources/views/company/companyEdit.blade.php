@@ -10,10 +10,11 @@
 
       <div class="modal-body">
         <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгж бүртгэл</strong></h2>
-        <form id="frmEditCompany" action="{{ action('companyController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
+        <form id="frmEditCompany" action="{{ action('companyController@update')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
           @csrf
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
+            <input type="hidden" id="txtEditID" name="id" class="form-control" />
             <input type="text" id="txtEditCompanyName" name="companyName" class="form-control" />
           </div>
           <div class="form-group col-md-3 text-left">
@@ -102,7 +103,7 @@
           <div class="col-md-6" id="error_message"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnEditPostCompany" type="submit" class="btn btn-success">Нэмэх</button>
+              <button id="btnEditPostCompany" type="submit" class="btn btn-success">Засах</button>
             </div>
           </div>
           <div class="clearfix"></div>
