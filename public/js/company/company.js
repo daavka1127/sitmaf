@@ -31,21 +31,14 @@ function refresh(){
               { data: "gereeOgnoo", name: "gereeOgnoo" },
               { data: "hunHuch", name: "hunHuch" },
               { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "mashinTehnik", name: "mashinTehnik" },
+              { data: "mashinTehnik", name: "mashinTehnik", visible:false },
               { data: "hursHuulalt", name: "hursHuulalt" },
-              { data: "gHursHuulalt", name: "gHursHuulalt" },
               { data: "dalan", name: "dalan" },
-              { data: "gDalan", name: "gDalan" },
               { data: "uhmal", name: "uhmal" },
-              { data: "gUhmal", name: "gUhmal" },
               { data: "suuriinUy", name: "suuriinUy" },
-              { data: "gSuuriinUy", name: "gSuuriinUy" },
               { data: "shuuduu", name: "shuuduu" },
-              { data: "gShuuduu", name: "gShuuduu" },
               { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt" },
-              { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
-              { data: "uuliinShuuduu", name: "uuliinShuuduu" },
-              { data: "gUuliinShuuduu", name: "gUuliinShuuduu" }
+              { data: "uuliinShuuduu", name: "uuliinShuuduu" }
             ]
       }).ajax.reload();
 }
@@ -110,13 +103,6 @@ function emptyNewModal(){
   $("#txtShuuduu").val("");
   $("#txtUhmaliinHamgaalalt").val("");
   $("#txtUuliinShuuduu").val("");
-  $("#txtgHursHuulalt").val("");
-  $("#txtgDalan").val("");
-  $("#txtgUhmal").val("");
-  $("#txtgSuuriinUy").val("");
-  $("#txtgShuuduu").val("");
-  $("#txtgUhmaliinHamgaalalt").val("");
-  $("#txtgUuliinShuuduu").val("");
 }
 
 
@@ -135,13 +121,6 @@ $(document).ready(function(){
         $("#txtEditShuuduu").val(dataRow["shuuduu"]);
         $("#txtEditUhmaliinHamgaalalt").val(dataRow["uhmaliinHamgaalalt"]);
         $("#txtEditUuliinShuuduu").val(dataRow["uuliinShuuduu"]);
-        $("#txtEditgHursHuulalt").val(dataRow["gHursHuulalt"]);
-        $("#txtEditgDalan").val(dataRow["gDalan"]);
-        $("#txtEditgUhmal").val(dataRow["gUhmal"]);
-        $("#txtEditgSuuriinUy").val(dataRow["gSuuriinUy"]);
-        $("#txtEditgShuuduu").val(dataRow["gShuuduu"]);
-        $("#txtEditgUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
-        $("#txtEditgUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
 
         $('#modalEditCompany').modal('show');
     });
@@ -210,6 +189,7 @@ $(document).ready(function(){
                 success:function(response){
                     alertify.alert(response);
                     refresh();
+                    dataRow="";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);

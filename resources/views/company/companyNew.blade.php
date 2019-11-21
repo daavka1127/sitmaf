@@ -67,42 +67,7 @@
           <div class="clearfix"></div>
           {{-- END HIIGDEH AJIL --}}
 
-          {{-- START GUITSETGELT --}}
-          <h5 style="text-align:center;"><strong>Яг одоо хийгдсэн гүйцэтгэлт</strong></h5>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtgHursHuulalt" step="any" name="gHursHuulalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtgDalan" step="any" name="gDalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtgUhmal" step="any" name="gUhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtgSuuriinUy" step="any" name="gSuuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtgShuuduu" step="any" name="gShuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtgUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtgUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtgUuliinShuuduu" step="any" name="gUuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END GUITSETGELT --}}
+
           <div class="col-md-6" id="error_message"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">

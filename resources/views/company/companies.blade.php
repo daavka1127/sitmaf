@@ -49,19 +49,12 @@
               { data: "mashinTehnik", name: "mashinTehnik" },
               { data: "mashinTehnik", name: "mashinTehnik", visible:false },
               { data: "hursHuulalt", name: "hursHuulalt" },
-              { data: "gHursHuulalt", name: "gHursHuulalt" },
               { data: "dalan", name: "dalan" },
-              { data: "gDalan", name: "gDalan" },
               { data: "uhmal", name: "uhmal" },
-              { data: "gUhmal", name: "gUhmal" },
               { data: "suuriinUy", name: "suuriinUy" },
-              { data: "gSuuriinUy", name: "gSuuriinUy" },
               { data: "shuuduu", name: "shuuduu" },
-              { data: "gShuuduu", name: "gShuuduu" },
               { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt" },
-              { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
-              { data: "uuliinShuuduu", name: "uuliinShuuduu" },
-              { data: "gUuliinShuuduu", name: "gUuliinShuuduu" }
+              { data: "uuliinShuuduu", name: "uuliinShuuduu" }
             ]
       });
   });
@@ -82,36 +75,20 @@
       <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
           <thead>
               <tr>
-                  <th rowspan="2">ID</th>
-                  <th rowspan="2">Аж ахуй нэгжийн нэр</th>
-                  <th rowspan="2">Ажлын хэсэг</th>
-                  <th rowspan="2">Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
-                  <th rowspan="2">Хүн хүч</th>
-                  <th rowspan="2">Газар шорооны ажлын машин, техник</th>
-                  <th rowspan="2">Гүйцэтгэлийн хувь</th>
-                  <th colspan="2">Хөрс хуулалт</th>
-                  <th colspan="2">Далан</th>
-                  <th colspan="2">Ухмал</th>
-                  <th colspan="2">Суурийн үе</th>
-                  <th colspan="2">Шуудуу</th>
-                  <th colspan="2">Ухмалын хамгаалалт</th>
-                  <th colspan="2">Уулын шуудуу</th>
-              </tr>
-              <tr>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
-                  <th>Хийх</th>
-                  <th>Гүйцэтгэлт</th>
+                  <th>ID</th>
+                  <th>Аж ахуй нэгжийн нэр</th>
+                  <th>Ажлын хэсэг</th>
+                  <th>Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
+                  <th>Хүн хүч</th>
+                  <th>Газар шорооны ажлын машин, техник</th>
+                  <th>Гүйцэтгэлийн хувь</th>
+                  <th>Хөрс хуулалт</th>
+                  <th>Далан</th>
+                  <th>Ухмал</th>
+                  <th>Суурийн үе</th>
+                  <th>Шуудуу</th>
+                  <th>Ухмалын хамгаалалт</th>
+                  <th>Уулын шуудуу</th>
               </tr>
           </thead>
       </table>

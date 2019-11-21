@@ -69,13 +69,6 @@ class companyController extends Controller
         $company->gereeOgnoo = $req->gereeOgnoo;
         $company->hunHuch = $req->hunHuch;
         $company->mashinTehnik = $req->mashinTehnik;
-        $company->gHursHuulalt = $req->gHursHuulalt;
-        $company->gDalan = $req->gDalan;
-        $company->gUhmal = $req->gUhmal;
-        $company->gSuuriinUy = $req->gSuuriinUy;
-        $company->gShuuduu = $req->gShuuduu;
-        $company->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
-        $company->gUuliinShuuduu = $req->gUuliinShuuduu;
         $company->save();
         return "Амжилттай хадгаллаа.";
     }
@@ -95,13 +88,6 @@ class companyController extends Controller
         $company->gereeOgnoo = $req->gereeOgnoo;
         $company->hunHuch = $req->hunHuch;
         $company->mashinTehnik = $req->mashinTehnik;
-        $company->gHursHuulalt = $req->gHursHuulalt;
-        $company->gDalan = $req->gDalan;
-        $company->gUhmal = $req->gUhmal;
-        $company->gSuuriinUy = $req->gSuuriinUy;
-        $company->gShuuduu = $req->gShuuduu;
-        $company->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
-        $company->gUuliinShuuduu = $req->gUuliinShuuduu;
         $company->save();
         return "Амжилттай заслаа.";
     }
