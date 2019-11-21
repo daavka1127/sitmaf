@@ -12,9 +12,9 @@
 
 <script>
     var newCompanyUrl = "{{url("/guitsetgel/store")}}";
-    var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
-    var editCompanyUrl = "{{url("/companies/update")}}";
-    var deleteCompanyUrl = "{{url("/companies/delete")}}";
+    var getCompaniesUrl = "{{url("/guitsetgel/new/get")}}";
+    var editCompanyUrl = "{{url("/guitsetgel/update")}}";
+    var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
     var dataRow = "";
     $(document).ready(function(){
       $('#datatable').DataTable( {
@@ -33,7 +33,7 @@
           "processing": true,
           "serverSide": true,
           "ajax":{
-                   "url": "{{url('/companies/new/get/company')}}",
+                   "url": "{{url("/guitsetgel/new/get")}}",
                    "dataType": "json",
                    "type": "POST",
                    "data":{
@@ -42,7 +42,8 @@
                  },
           "columns": [
               { data: "id", name: "id" },
-              { data: "companyID", name: "companyID"},
+              { data: "companyID", name: "companyID", visible:false},
+              { data: "companyName", name: "companyName"},
               { data: "gHursHuulalt", name: "gHursHuulalt"},
               { data: "gDalan", name: "gDalan" },
               { data: "gUhmal", name: "gUhmal" },
@@ -50,7 +51,7 @@
               { data: "gShuuduu", name: "gShuuduu" },
               { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
               { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-              { data: "ognoo", name: "ognoo" },
+              { data: "ognoo", name: "ognoo" }
             ]
       });
   });
@@ -72,12 +73,8 @@
           <thead>
               <tr>
                   <th>ID</th>
+                  <th></th>
                   <th>Аж ахуй нэгжийн нэр</th>
-                  <th>Ажлын хэсэг</th>
-                  <th>Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
-                  <th>Хүн хүч</th>
-                  <th>Газар шорооны ажлын машин, техник</th>
-                  <th>Гүйцэтгэлийн хувь</th>
                   <th>Хөрс хуулалт</th>
                   <th>Далан</th>
                   <th>Ухмал</th>
@@ -85,11 +82,11 @@
                   <th>Шуудуу</th>
                   <th>Ухмалын хамгаалалт</th>
                   <th>Уулын шуудуу</th>
+                  <th>Огноо</th>
+
               </tr>
           </thead>
       </table>
-
-
 
   </div>
   <div class="text-left">
@@ -100,9 +97,9 @@
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-  <script src="{{url('public/js/company/company.js')}}"></script>
-  @include('company.companyNew')
-  @include('company.companyEdit')
+  <script src="{{url('public/js/guitsetgel/guitsetgel.js')}}"></script>
+  @include('guitsetgel.guitsetgelNew')
+  @include('guitsetgel.guitsetgelEdit')
 </div>
 
 
