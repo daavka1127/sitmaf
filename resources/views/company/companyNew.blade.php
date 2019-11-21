@@ -94,6 +94,10 @@
             <input type="number" min="0" id="txtgUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
           </div>
           <div class="form-group col-md-3 text-left">
+            <label>Ухмалын хамгаалалт </label>
+            <input type="number" min="0" id="txtgUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
+          </div>
+          <div class="form-group col-md-3 text-left">
             <label>Уулын шуудуу </label>
             <input type="number" min="0" id="txtgUuliinShuuduu" step="any" name="gUuliinShuuduu" class="form-control" />
           </div>
