@@ -121,8 +121,9 @@ $(document).ready(function(){
         $("#txtEditShuuduu").val(dataRow["shuuduu"]);
         $("#txtEditUhmaliinHamgaalalt").val(dataRow["uhmaliinHamgaalalt"]);
         $("#txtEditUuliinShuuduu").val(dataRow["uuliinShuuduu"]);
+        if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
+        else{$('#modalEditCompany').modal('show');}
 
-        $('#modalEditCompany').modal('show');
     });
 });
 

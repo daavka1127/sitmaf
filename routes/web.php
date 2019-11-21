@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
+Route::get('/changePassword','HomeController@showChangePasswordForm');
+Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
 
 Route::get('/companies/new', 'companyController@index')->name('home');
 Route::post('/companies/new/get/company', 'companyController@getCompanyToNew');
