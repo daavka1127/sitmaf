@@ -93,6 +93,27 @@
           </thead>
       </table>
 
+      <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Аж ахуй нэгжийн нэр</th>
+                  <th>Ажлын хэсэг</th>
+                  <th>Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
+                  <th>Хүн хүч</th>
+                  <th>Газар шорооны ажлын машин, техник</th>
+                  <th>Гүйцэтгэлийн хувь</th>
+                  <th>Хөрс хуулалт</th>
+                  <th>Далан</th>
+                  <th>Ухмал</th>
+                  <th>Суурийн үе</th>
+                  <th>Шуудуу</th>
+                  <th>Ухмалын хамгаалалт</th>
+                  <th>Уулын шуудуу</th>
+              </tr>
+          </thead>
+      </table>
+
 
   </div>
   <div class="text-left">
