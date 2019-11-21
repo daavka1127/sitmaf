@@ -27,4 +27,10 @@ Route::post('/companies/store', 'companyController@store');
 Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
 
+Route::get('/guitsetgel/new', 'GuitsetgelController@index')->name('home');
+Route::post('/guitsetgel/new/get', 'GuitsetgelController@getCompanyToNew');
+Route::post('/guitsetgel/store', 'GuitsetgelController@store');
+Route::post('/guitsetgel/update', 'GuitsetgelController@update');
+Route::post('/guitsetgel/delete', 'GuitsetgelController@delete');
+
 Route::get('/show/companies/slider', 'companyController@showSlider');
