@@ -28,3 +28,10 @@ Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
 
 Route::get('/show/companies/slider', 'companyController@showSlider');
+
+
+Route::get('/hunHuch/new', 'hunHuchController@index');
+Route::post('/hunHuch/new/get', 'hunHuchController@getHunHuchToNew');
+Route::post('/hunHuch/store', 'hunHuchController@store');
+Route::post('/hunHuch/update', 'hunHuchController@update');
+Route::post('/hunHuch/delete', 'hunHuchController@delete');

@@ -11,10 +11,10 @@
       <link href="{{url('public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
 
 <script>
-    var newCompanyUrl = "{{url("/companies/store")}}";
-    var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
-    var editCompanyUrl = "{{url("/companies/update")}}";
-    var deleteCompanyUrl = "{{url("/companies/delete")}}";
+    var newHunHuchUrl = "{{url("/hunHuch/store")}}";
+    var getHunHuchUrl = "{{url("/hunHuch/new/get")}}";
+    var editHunHuchUrl = "{{url("/hunHuch/update")}}";
+    var deleteHunHuchUrl = "{{url("/hunHuch/delete")}}";
     var dataRow = "";
     $(document).ready(function(){
       $('#datatable').DataTable( {
@@ -33,7 +33,7 @@
           "processing": true,
           "serverSide": true,
           "ajax":{
-                   "url": "{{url('/companies/new/get/company')}}",
+                   "url": "{{url('/hunHuch/new/get')}}",
                    "dataType": "json",
                    "type": "POST",
                    "data":{
@@ -43,18 +43,10 @@
           "columns": [
               { data: "id", name: "id" },
               { data: "companyName", name: "companyName"},
-              { data: "ajliinHeseg", name: "ajliinHeseg"},
-              { data: "gereeOgnoo", name: "gereeOgnoo" },
+              { data: "companyID", name: "companyID", visible:false},
               { data: "hunHuch", name: "hunHuch" },
               { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "mashinTehnik", name: "mashinTehnik", visible:false },
-              { data: "hursHuulalt", name: "hursHuulalt" },
-              { data: "dalan", name: "dalan" },
-              { data: "uhmal", name: "uhmal" },
-              { data: "suuriinUy", name: "suuriinUy" },
-              { data: "shuuduu", name: "shuuduu" },
-              { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt" },
-              { data: "uuliinShuuduu", name: "uuliinShuuduu" }
+              { data: "ognoo", name: "ognoo" }
             ]
       });
   });
@@ -77,18 +69,10 @@
               <tr>
                   <th>ID</th>
                   <th>Аж ахуй нэгжийн нэр</th>
-                  <th>Ажлын хэсэг</th>
-                  <th>Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
+                  <th></th>
                   <th>Хүн хүч</th>
                   <th>Газар шорооны ажлын машин, техник</th>
-                  <th>Гүйцэтгэлийн хувь</th>
-                  <th>Хөрс хуулалт</th>
-                  <th>Далан</th>
-                  <th>Ухмал</th>
-                  <th>Суурийн үе</th>
-                  <th>Шуудуу</th>
-                  <th>Ухмалын хамгаалалт</th>
-                  <th>Уулын шуудуу</th>
+                  <th>Огноо</th>
               </tr>
           </thead>
       </table>
@@ -96,9 +80,9 @@
 
   </div>
   <div class="text-left">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
-      <button type="button" class="btn btn-warning" id="btnEditCompany">Засах</button>
-      <button type="button" class="btn btn-danger" id="btnDeleteCompany">Устгах</button>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newHunHuch">Нэмэх</button>
+      <button type="button" class="btn btn-warning" id="btnEditHunHuch">Засах</button>
+      <button type="button" class="btn btn-danger" id="btnDeleteHunHuch">Устгах</button>
   </div>
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
