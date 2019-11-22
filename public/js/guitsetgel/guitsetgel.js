@@ -42,7 +42,7 @@ function refresh(){
 }
 
 $(document).ready(function(){
-    $("#btnNewGuitsetgel").click(function(e){
+    $("#btnPostNewGuitsetgel").click(function(e){
         e.preventDefault();
         var isInsert = true;
         if($("#cmbNewCompanyID").val()=="-1"||$("#cmbNewCompanyID").val()==null){
