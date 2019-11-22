@@ -122,7 +122,7 @@ class GuitsetgelController extends Controller
             $i++;
         }
         $dundaj = ($guitsetgelHursHuulalt + $guitsetgelDalan + $guitsetgelUhmal + $guitsetgelSuuriinUy + $guitsetgelShuuduu + $guitsetgelUhmaliinHamgaalalt + $guitsetgelUuliinShuuduu)/$i;
-        return $dundaj;
+        return $i;
 
     }
 }

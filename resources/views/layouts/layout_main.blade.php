@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Зэвсэгт хүчний жанжин штаб</title>
+    <title>Төмөр замын ажлын мэдээлэл</title>
 
     <link href="{{url('public/css/zam_styles.css')}}" rel="stylesheet">
 
