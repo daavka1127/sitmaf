@@ -73,6 +73,12 @@ class GuitsetgelController extends Controller
         return view('chart.guitsetgelAllChart', compact('companies'));
     }
 
+    public function chartByDateShow($companyID){
+        $datas = DB::table('tb_guitsetgel')
+        ->where('companyID','=',$companyID)->get();
+        return view('chart.guitsetgelByDateChart', compact('datas'));
+    }
+
     public static function getGuitsetgelHuvi($companyID){
         $guitsetgel = DB::table('tb_guitsetgel')
             ->where('companyID', '=', $companyID)

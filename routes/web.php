@@ -42,6 +42,6 @@ Route::post('/hunHuch/store', 'hunHuchController@store');
 Route::post('/hunHuch/update', 'hunHuchController@update');
 Route::post('/hunHuch/delete', 'hunHuchController@delete');
 
-
+Route::get('/chart/byDate/{id}', 'GuitsetgelController@chartByDateShow');
 Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
 Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');

@@ -6,7 +6,7 @@
       <label>Аж ахуйн нэгж</label>
       <select class="form-control">
         <option value="0">Сонгоно уу</option>
-        
+
       </select>
     </div>
     <div class="col-md-4">
