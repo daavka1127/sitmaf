@@ -80,16 +80,16 @@
 
   </div>
   <div class="text-left">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newHunHuch">Нэмэх</button>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newHunHuchModal">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditHunHuch">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteHunHuch">Устгах</button>
   </div>
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-  <script src="{{url('public/js/company/company.js')}}"></script>
-  @include('company.companyNew')
-  @include('company.companyEdit')
+  <script src="{{url('public/js/hunHuch/hunHuch.js')}}"></script>
+  @include('hunHuch.hunHuchNew')
+  @include('hunHuch.hunHuchEdit')
 </div>
 
 

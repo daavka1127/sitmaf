@@ -16,7 +16,8 @@ class hunHuchController extends Controller
     }
 
     public function index(){
-        return view('hunHuch.hunHuchShow');
+        $companies = DB::table('tb_companies')->get();
+        return view('hunHuch.hunHuchShow', compact('companies'));
     }
 
     public function getHunHuchToNew(){
