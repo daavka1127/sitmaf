@@ -17,7 +17,9 @@ class GuitsetgelController extends Controller
     }
 
     public function index(){
-        return view('guitsetgel.guitsetgelShow');
+        $companies = DB::table('tb_companies')->get();
+
+        return view('guitsetgel.guitsetgelShow', compact('companies'));
     }
 
     public function getCompanyToNew(){
