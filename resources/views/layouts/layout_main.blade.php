@@ -171,6 +171,8 @@
       </div>
     </div>
 
+    {{-- CHART JS --}}
+    <script src="{{url('public/js/chart/jquery.canvasjs.min.js')}}"></script>
 
     <!-- Bootstrap -->
     <script src="{{url('public/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
