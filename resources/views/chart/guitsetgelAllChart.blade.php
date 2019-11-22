@@ -8,10 +8,14 @@
       <label>Аж ахуйн нэгж</label>
       <select class="form-control" id="cmbHeseg">
         <option value="0">Сонгоно уу</option>
+<<<<<<< HEAD
         <option value="1">Зүүнбаян чиглэл I хэсэг</option>
         <option value="2">Мандах чиглэл II хэсэг</option>
         <option value="3">Цогтцэций чиглэл III чиглэл</option>
         <option value="4">Бүх аж ахуйн нэгжээр</option>
+=======
+
+>>>>>>> d3ce559effabd4fde52443de099696c00abd399a
       </select>
     </div>
     <div class="col-md-4">
