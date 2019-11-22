@@ -3,7 +3,13 @@
 
   <div class="clearfix"></div>
   <div class="row">
-
+    <script>
+      $(document).ready(function(){
+          $("#cmbCompany").change(function(){
+              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val();
+          });
+      });
+    </script>
     <div class="col-md-4">
       <label>Аж ахуйн нэгж</label>
       <select class="form-control" id="cmbHeseg">
@@ -28,5 +34,5 @@
   <div id="chartContent">
 
   </div>
-  <script type="text/javascript" src="{{url('public/js/guitsetgelChartAll/guitsetgelChartAll.js')}}"></script>
+  {{-- <script type="text/javascript" src="{{url('public/js/guitsetgelChartAll/guitsetgelChartAll.js')}}"></script> --}}
 @endsection

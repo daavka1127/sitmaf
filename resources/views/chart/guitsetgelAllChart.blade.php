@@ -3,19 +3,28 @@
 
   <div class="clearfix"></div>
   <div class="row">
-
+    <script>
+      $(document).ready(function(){
+          $("#cmbCompany").change(function(){
+              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val();
+          });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+          $("#cmbHeseg").change(function(){
+              window.location.href = "{{url('/chart/all')}}";
+          });
+      });
+    </script>
     <div class="col-md-4">
       <label>Аж ахуйн нэгж</label>
       <select class="form-control" id="cmbHeseg">
         <option value="0">Сонгоно уу</option>
-<<<<<<< HEAD
         <option value="1">Зүүнбаян чиглэл I хэсэг</option>
         <option value="2">Мандах чиглэл II хэсэг</option>
         <option value="3">Цогтцэций чиглэл III чиглэл</option>
         <option value="4">Бүх аж ахуйн нэгжээр</option>
-=======
-
->>>>>>> d3ce559effabd4fde52443de099696c00abd399a
       </select>
     </div>
     <div class="col-md-4">
@@ -79,9 +88,9 @@ var options = {
 $("#chartContainer").CanvasJSChart(options);
 }
 </script>
-<div id="chartContent">
+
   <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-</div>
+
 {{-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 @endsection
