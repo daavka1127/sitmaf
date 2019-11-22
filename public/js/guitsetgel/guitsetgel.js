@@ -1,4 +1,5 @@
 function refresh(){
+
     var csrf = $('meta[name=csrf-token]').attr("content");
     $('#datatable').dataTable().fnDestroy();
       $('#datatable').DataTable( {
@@ -26,7 +27,8 @@ function refresh(){
                  },
           "columns": [
             { data: "id", name: "id" },
-            { data: "companyID", name: "companyID"},
+            { data: "companyID", name: "companyID", visible:false},
+            { data: "companyName", name: "companyName"},
             { data: "gHursHuulalt", name: "gHursHuulalt"},
             { data: "gDalan", name: "gDalan" },
             { data: "gUhmal", name: "gUhmal" },
@@ -34,40 +36,30 @@ function refresh(){
             { data: "gShuuduu", name: "gShuuduu" },
             { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
             { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-            { data: "ognoo", name: "ognoo" },
+            { data: "ognoo", name: "ognoo" }
             ]
       }).ajax.reload();
 }
 
 $(document).ready(function(){
-    $("#btnNewCompany").click(function(e){
+    $("#btnNewGuitsetgel").click(function(e){
         e.preventDefault();
         var isInsert = true;
-        if($("#txtCompanyName").val()==""||$("#txtCompanyName").val()==null){
-            alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
+        if($("#cmbNewCompanyID").val()=="-1"||$("#cmbNewCompanyID").val()==null){
+            alertify.error("Аж ахуйн нэгжийг сонгоно уу.");
             isInsert = false;
         }
-        if($("#txtAjliinHeseg").val()==""||$("#txtAjliinHeseg").val()==null){
-            alertify.error("Ажлын хэсэг оруулаагүй байна!!!");
+        if($("#txtOgnoo").val()==""||$("#txtOgnoo").val()==null){
+            alertify.error("Oгноо оруулаагүй байна!");
             isInsert = false;
         }
-        if($("#txtGereeOgnoo").val()==""||$("#txtGereeOgnoo").val()==null){
-            alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtHunHuch").val()==""||$("#txtHunHuch").val()==null){
-            alertify.error("Хүн хүч оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtMashinTehnik").val()==""||$("#txtMashinTehnik").val()==null){
-            alertify.error("Ажлын машин техник оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if(isInsert == false){return;}
+
+        if(isInsert == false) { return; }
+
         $.ajax({
           type: 'POST',
           url: newCompanyUrl,
-          data: $("#frmNewCompany").serialize(),
+          data: $("#frmNewGuitsetgel").serialize(),
           success:function(response){
               alertify.alert(response);
               emptyNewModal();
@@ -88,10 +80,7 @@ $(document).ready(function(){
 
 function emptyNewModal(){
   $("#txtCompanyName").val("");
-  $("#txtAjliinHeseg").val("");
-  $("#txtGereeOgnoo").val("");
-  $("#txtHunHuch").val("");
-  $("#txtMashinTehnik").val("");
+  $("#txtOgnoo").val("");
   $("#txtHursHuulalt").val("");
   $("#txtDalan").val("");
   $("#txtUhmal").val("");
@@ -103,58 +92,44 @@ function emptyNewModal(){
 
 
 $(document).ready(function(){
-    $("#btnEditCompany").click(function(){
+    $("#btnEditGuitsetgel").click(function(){
         $("#txtEditID").val(dataRow["id"]);
-        $("#txtEditCompanyName").val(dataRow["companyName"]);
-        $("#txtEditAjliinHeseg").val(dataRow["ajliinHeseg"]);
-        $("#txtEditGereeOgnoo").val(dataRow["gereeOgnoo"]);
-        $("#txtEditHunHuch").val(dataRow["hunHuch"]);
-        $("#txtEditMashinTehnik").val(dataRow["mashinTehnik"]);
-        $("#txtEditHursHuulalt").val(dataRow["hursHuulalt"]);
-        $("#txtEditDalan").val(dataRow["dalan"]);
-        $("#txtEditUhmal").val(dataRow["uhmal"]);
-        $("#txtEditSuuriinUy").val(dataRow["suuriinUy"]);
-        $("#txtEditShuuduu").val(dataRow["shuuduu"]);
-        $("#txtEditUhmaliinHamgaalalt").val(dataRow["uhmaliinHamgaalalt"]);
-        $("#txtEditUuliinShuuduu").val(dataRow["uuliinShuuduu"]);
+        $("#cmbEditGCompany").val(dataRow["companyID"]);
+        $("#txtEditOgnoo").val(dataRow["ognoo"]);
+        $("#txtEditGHursHuulalt").val(dataRow["gHursHuulalt"]);
+        $("#txtEditGDalan").val(dataRow["gDalan"]);
+        $("#txtEditGUhmal").val(dataRow["gUhmal"]);
+        $("#txtEditGSuuriinUy").val(dataRow["gSuuriinUy"]);
+        $("#txtEditGShuuduu").val(dataRow["gShuuduu"]);
+        $("#txtEditGUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
+        $("#txtEditGUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
         if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
-        else{$('#modalEditCompany').modal('show');}
+        else{$('#modalEditGuitsetgel').modal('show');}
 
     });
 });
 
 
 $(document).ready(function(){
-    $("#btnEditPostCompany").click(function(e){
+    $("#btnEditPostGuitsetgel").click(function(e){
         e.preventDefault();
         var isInsert = true;
-        if($("#txtEditCompanyName").val()==""||$("#txtEditCompanyName").val()==null){
+        if($("#cmbEditGCompany").val()==""||$("#cmbEditGCompany").val()==null){
             alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
             isInsert = false;
         }
-        if($("#txtEditAjliinHeseg").val()==""||$("#txtEditAjliinHeseg").val()==null){
-            alertify.error("Ажлын хэсэг оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditGereeOgnoo").val()==""||$("#txtEditGereeOgnoo").val()==null){
+        if($("#txtEditOgnoo").val()==""||$("#txtEditOgnoo").val()==null){
             alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditHunHuch").val()==""||$("#txtEditHunHuch").val()==null){
-            alertify.error("Хүн хүч оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditMashinTehnik").val()==""||$("#txtEditMashinTehnik").val()==null){
-            alertify.error("Ажлын машин техник оруулаагүй байна!!!");
             isInsert = false;
         }
         if(isInsert == false){return;}
         $.ajax({
           type: 'POST',
           url: editCompanyUrl,
-          data: $("#frmEditCompany").serialize(),
+          data: $("#frmEditGuitsetgel").serialize(),
           success:function(response){
               alertify.alert(response);
+              $('#modalEditGuitsetgel').modal('hide');
               refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
@@ -170,7 +145,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $("#btnDeleteCompany").click(function(){
+    $("#btnDeleteGuitsetgel").click(function(){
         if(dataRow == ""){
             alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
             return;

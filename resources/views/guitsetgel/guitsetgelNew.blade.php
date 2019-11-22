@@ -1,88 +1,126 @@
-{{-- START NEW COMPANY --}}
-<div class="modal fade" id="newGuitsetgelModal">
-  <div class="modal-dialog" style="width:80%;">
-    <div class="modal-content">
+<?php
 
-      <div class="modal-header">
-        <span class="red-required">* - той талбарыг заавал бөглөнө үү!!!</span>
-        <button type="button" class="close" data-dismiss="modal">X</button>
-      </div>
+namespace App\Http\Controllers;
 
-      <div class="modal-body">
-        <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгж бүртгэл</strong></h2>
-        <form id="frmNewCompany" action="{{ action('companyController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
-          @csrf
-          <div class="form-group col-md-3 text-left">
-            <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
-            <input type="text" id="txtCompanyName" name="companyName" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ажлын хэсэг <span class="red-required">*</span> </label>
-            <input type="text" id="txtAjliinHeseg" name="ajliinHeseg" class="form-control" required />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ажил эхэлсэн огноо <span class="red-required">*</span> </label>
-            <input type="date" id="txtGereeOgnoo" name="gereeOgnoo" class="form-control" required />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Хүн хүч <span class="red-required">*</span> </label>
-            <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ажлын машин техник <span class="red-required">*</span> </label>
-            <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
-          </div>
-          <div class="clearfix"></div>
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\guitsetgel;
+use DB;
+use Yajra\DataTables\DataTables;
 
-          {{-- START HIIGDEH AJIL --}}
-          <h5 style="text-align:center;"><strong>Хийгдэх ажил</strong></h5>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtHursHuulalt" step="any" name="hursHuulalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtDalan" step="any" name="dalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtUhmal" step="any" name="uhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtSuuriinUy" step="any" name="suuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtShuuduu" step="any" name="shuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtUhmaliinHamgaalalt" step="any" name="uhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtUuliinShuuduu" step="any" name="uuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END HIIGDEH AJIL --}}
+class GuitsetgelController extends Controller
+{
+    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
+    public function index(){
+        return view('guitsetgel.guitsetgelShow');
+    }
 
-          <div class="col-md-6" id="error_message"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnNewCompany" type="submit" class="btn btn-success">Нэмэх</button>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-        </form>
-      </div>
-      <div class="clearfix"></div>
-      <div class = "modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Хаах</button>
-      </div>
+    public function getCompanyToNew(){
+        $guitsetgel = DB::table('tb_guitsetgel')
+        ->join('tb_companies', 'tb_guitsetgel.companyID', '=','tb_companies.id')
+        ->select('tb_guitsetgel.*', 'tb_companies.companyName')
+        ->get();
+        return DataTables:f($guitsetgel)
+            ->make(true);
+    }
 
-    </div>
-  </div>
-</div>
-{{-- END NEW COMPANY --}}
+    public function store(Request $req){
+
+        $guitsetgel = new guitsetgel;
+        $guitsetgel->companyID = $req->companyID;
+        $guitsetgel->gHursHuulalt = $req->gHursHuulalt;
+        $guitsetgel->gDalan = $req->gDalan;
+        $guitsetgel->gUhmal = $req->gUhmal;
+        $guitsetgel->gSuuriinUy = $req->gSuuriinUy;
+        $guitsetgel->gShuuduu = $req->gShuuduu;
+        $guitsetgel->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
+        $guitsetgel->gUuliinShuuduu = $req->gUuliinShuuduu;
+        $guitsetgel->ognoo = $req->ognoo;
+        $guitsetgel->save();
+        return "Амжилттай хадгаллаа.";
+    }
+
+    public function update(Request $req){
+        $guitsetgel = guitsetgel::find($req->id);
+        $guitsetgel->companyID = $req->companyID;
+        $guitsetgel->gHursHuulalt = $req->gHursHuulalt;
+        $guitsetgel->gDalan = $req->gDalan;
+        $guitsetgel->gUhmal = $req->gUhmal;
+        $guitsetgel->gSuuriinUy = $req->gSuuriinUy;
+        $guitsetgel->gShuuduu = $req->gShuuduu;
+        $guitsetgel->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
+        $guitsetgel->gUuliinShuuduu = $req->gUuliinShuuduu;
+        $guitsetgel->ognoo = $req->ognoo;
+        $guitsetgel->save();
+        return "Амжилттай заслаа.";
+    }
+
+    public function delete(Request $req){
+        $guitsetgel = guitsetgel::find($req->id);
+        $guitsetgel->delete();
+        return "Амжилттай устгалаа.";
+    }
+
+    public function chartAllShow(){
+        $companies = DB::table('tb_companies')->get();
+        return view('chart.guitsetgelAllChart', compact('companies'));
+    }
+
+    public static function getGuitsetgelHuvi($companyID){
+        $guitsetgel = DB::table('tb_guitsetgel')
+            ->where('companyID', '=', $companyID)
+            ->orderBy('ognoo', 'desc')
+            ->first();
+        $company = DB::table('tb_companies')
+            ->where('id', '=', $companyID)
+            ->first();
+        $guitsetgelHursHuulalt = null;
+        $guitsetgelDalan = null;
+        $guitsetgelUhmal = null;
+        $guitsetgelSuuriinUy = null;
+        $guitsetgelShuuduu = null;
+        $guitsetgelUhmaliinHamgaalalt = null;
+        $guitsetgelUuliinShuuduu = null;
+        $dundaj = null;
+        $i=0;
+        if($guitsetgel == null){
+          return 0;
+        }
+        if($company->hursHuulalt != null && $guitsetgel->gHursHuulalt != null){
+            $guitsetgelHursHuulalt = $guitsetgel->gHursHuulalt * 100 / $company->hursHuulalt;
+            $i++;
+        }
+        if($company->dalan != null && $guitsetgel->gDalan != null){
+            $guitsetgelDalan = $guitsetgel->gDalan * 100 / $company->dalan;
+            $i++;
+        }
+        if($company->uhmal != null && $guitsetgel->gUhmal != null){
+            $guitsetgelUhmal = $guitsetgel->gUhmal * 100 / $company->uhmal;
+            $i++;
+        }
+        if($company->suuriinUy != null && $guitsetgel->gSuuriinUy != null){
+            $guitsetgelSuuriinUy = $guitsetgel->gSuuriinUy * 100 / $company->suuriinUy;
+            $i++;
+        }
+        if($company->shuuduu != null && $guitsetgel->gShuuduu != null){
+            $guitsetgelShuuduu = $guitsetgel->gShuuduu * 100 / $company->shuuduu;
+            $i++;
+        }
+        if($company->uhmaliinHamgaalalt != null && $guitsetgel->gUhmaliinHamgaalalt != null){
+            $guitsetgelUhmaliinHamgaalalt = $guitsetgel->gUhmaliinHamgaalalt * 100 / $company->uhmaliinHamgaalalt;
+            $i++;
+        }
+        if($company->uuliinShuuduu != null && $guitsetgel->gUuliinShuuduu != null){
+            $guitsetgelUuliinShuuduu = $guitsetgel->gUuliinShuuduu * 100 / $company->uuliinShuuduu;
+            $i++;
+        }
+        $dundaj = ($guitsetgelHursHuulalt + $guitsetgelDalan + $guitsetgelUhmal + $guitsetgelSuuriinUy + $guitsetgelShuuduu + $guitsetgelUhmaliinHamgaalalt + $guitsetgelUuliinShuuduu)/$i;
+        return $dundaj;
+
+    }
+}

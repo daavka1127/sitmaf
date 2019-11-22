@@ -33,7 +33,7 @@
           "processing": true,
           "serverSide": true,
           "ajax":{
-                   "url": "{{url("/guitsetgel/new/get")}}",
+                   "url": getCompaniesUrl,
                    "dataType": "json",
                    "type": "POST",
                    "data":{
