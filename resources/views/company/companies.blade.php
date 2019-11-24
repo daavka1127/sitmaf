@@ -43,6 +43,7 @@
           "columns": [
               { data: "id", name: "id" },
               { data: "companyName", name: "companyName"},
+              { data: "heseg_id", name: "heseg_id"},
               { data: "ajliinHeseg", name: "ajliinHeseg"},
               { data: "gereeOgnoo", name: "gereeOgnoo" },
               { data: "hunHuch", name: "hunHuch" },
@@ -77,6 +78,7 @@
               <tr>
                   <th>ID</th>
                   <th>Аж ахуй нэгжийн нэр</th>
+                  <th>Хэсэг</th>
                   <th>Ажлын хэсэг</th>
                   <th>Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
                   <th>Хүн хүч</th>

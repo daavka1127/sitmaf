@@ -19,4 +19,10 @@ class guitsetgelChartController extends Controller
         }
         return view('chart.guitsetgelAllChart', compact('companies'));
     }
+
+    public function getCompaniesChartHorizontal(Request $req){
+        $companies = DB::table('tb_companies')
+            ->get();
+        return view('chart.guitsetgelAllChartHorizontal', compact('companies'));
+    }
 }

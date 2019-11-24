@@ -18,7 +18,7 @@
       });
     </script>
     <div class="col-md-4">
-      <label>Аж ахуйн нэгж</label>
+      <label>Хэсэг</label>
       <select class="form-control" id="cmbHeseg">
         <option value="0">Сонгоно уу</option>
         <option value="1">Зүүнбаян чиглэл I хэсэг</option>

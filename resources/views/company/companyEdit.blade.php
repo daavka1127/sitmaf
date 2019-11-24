@@ -9,13 +9,23 @@
       </div>
 
       <div class="modal-body">
-        <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгж бүртгэл</strong></h2>
+        <h2 style="text-align:center;"><strong>Аж ахуйн нэгж засах</strong></h2>
         <form id="frmEditCompany" action="{{ action('companyController@update')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
           @csrf
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
             <input type="hidden" id="txtEditID" name="id" class="form-control" />
             <input type="text" id="txtEditCompanyName" name="companyName" class="form-control" />
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Хэсэг <span class="red-required">*</span> </label>
+            <select class="form-control" id="cmbEditHeseg" name="heseg_id">
+              <option value="0">Сонгоно уу</option>
+              <option value="1">Зүүнбаян чиглэл I хэсэг</option>
+              <option value="2">Мандах чиглэл II хэсэг</option>
+              <option value="3">Цогтцэций чиглэл III чиглэл</option>
+              <option value="4">Бүх аж ахуйн нэгжээр</option>
+            </select>
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Ажлын хэсэг <span class="red-required">*</span> </label>

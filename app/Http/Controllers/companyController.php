@@ -30,33 +30,9 @@ class companyController extends Controller
     }
 
     public function store(Request $req){
-        // $validator = Validator::make($req->all(), [
-        //     'companyName' => 'required|unique:tb_companies|max:250',
-        //     'ajliinHeseg' => 'required|unique:tb_companies|max:150',
-        //     'gereeOgnoo' => 'required|date',
-        //     'hunHuch' => 'required',
-        //     'mashinTehnik' => 'required',
-        // ]);
-        // if ($validator->fails()) {
-        //
-        //     if($req->ajax())
-        //     {
-        //         return response()->json(array(
-        //             'success' => false,
-        //             'message' => 'There are incorect values in the form!',
-        //             'errors' => $validator->getMessageBag()->toArray()
-        //         ), 422);
-        //     }
-        //
-        //     $this->throwValidationException(
-        //
-        //         $req, $validator
-        //
-        //     );
-        //     return;
-        // }
         $company = new company;
         $company->companyName = $req->companyName;
+        $company->heseg_id = $req->heseg_id;
         $company->ajliinHeseg = $req->ajliinHeseg;
         $company->hursHuulalt = $req->hursHuulalt;
         $company->dalan = $req->dalan;
@@ -76,6 +52,7 @@ class companyController extends Controller
     public function update(Request $req){
         $company = company::find($req->id);
         $company->companyName = $req->companyName;
+        $company->heseg_id = $req->heseg_id;
         $company->ajliinHeseg = $req->ajliinHeseg;
         $company->hursHuulalt = $req->hursHuulalt;
         $company->dalan = $req->dalan;
