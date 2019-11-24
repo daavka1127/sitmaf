@@ -25,4 +25,16 @@ class guitsetgelChartController extends Controller
             ->get();
         return view('chart.guitsetgelAllChartHorizontal', compact('companies'));
     }
+
+    public function chartAllReact(Request $req){
+      $companies = DB::table('tb_companies')
+          ->get();
+      return view('chart.guitsetgelReact', compact('companies'));
+    }
+
+    public function chartAlljqChart(Request $req){
+      $companies = DB::table('tb_companies')
+          ->get();
+      return view('chart.guitsetgelAllChartJqChart', compact('companies'));
+    }
 }

@@ -44,5 +44,7 @@ Route::post('/hunHuch/delete', 'hunHuchController@delete');
 
 Route::get('/chart/byDate/{id}', 'GuitsetgelController@chartByDateShow');
 Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
+Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
+Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
 Route::get('/chart/all/horizontal', 'guitsetgelChartController@getCompaniesChartHorizontal');
 Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
