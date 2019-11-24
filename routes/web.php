@@ -14,8 +14,8 @@
 // Route::get('/', function () {
 //     return view('home');
 // });
-Route::get('/', 'GuitsetgelController@chartAllShow')->name('home');
-Route::get('/home', 'GuitsetgelController@chartAllShow')->name('home');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 Route::get('/changePassword','HomeController@showChangePasswordForm');

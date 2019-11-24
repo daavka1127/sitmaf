@@ -10,6 +10,13 @@
           });
       });
     </script>
+    <script>
+      $(document).ready(function(){
+          $("#cmbHeseg").change(function(){
+              window.location.href = "{{url('/chart/all')}}";
+          });
+      });
+    </script>
     <div class="col-md-4">
       <label>Аж ахуйн нэгж</label>
       <select class="form-control" id="cmbHeseg">
@@ -31,6 +38,11 @@
     </div>
   </div>
 
+  <div style="display:none;" id="loading" class="col-md-2 col-md-offset-5">
+    <br/>
+    <div class="clearfix"></div>
+    <img width="100" src="{{url('public/images/loading_big.gif')}}" />
+  </div>
   <div id="chartContent">
 
   </div>
