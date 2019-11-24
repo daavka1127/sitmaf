@@ -77,7 +77,7 @@ class GuitsetgelController extends Controller
         $datas = DB::table('tb_guitsetgel')
         ->where('companyID','=',$companyID)->get();
         $companies = DB::table('tb_companies')->get();
-        return view('chart.guitsetgelByDateChart', compact('datas', 'companies'));
+        return view('chart.guitsetgelByDateChart', compact('datas', 'companies', 'companyID'));
     }
 
     public static function getGuitsetgelHuvi($companyID){
