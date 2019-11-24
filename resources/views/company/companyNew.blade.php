@@ -17,6 +17,16 @@
             <input type="text" id="txtCompanyName" name="companyName" class="form-control" />
           </div>
           <div class="form-group col-md-3 text-left">
+            <label>Хэсэг <span class="red-required">*</span> </label>
+            <select class="form-control" id="cmbHeseg" name="heseg_id">
+              <option value="0">Сонгоно уу</option>
+              <option value="1">Зүүнбаян чиглэл I хэсэг</option>
+              <option value="2">Мандах чиглэл II хэсэг</option>
+              <option value="3">Цогтцэций чиглэл III чиглэл</option>
+              <option value="4">Бүх аж ахуйн нэгжээр</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3 text-left">
             <label>Ажлын хэсэг <span class="red-required">*</span> </label>
             <input type="text" id="txtAjliinHeseg" name="ajliinHeseg" class="form-control" required />
           </div>

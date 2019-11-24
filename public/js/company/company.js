@@ -27,6 +27,7 @@ function refresh(){
           "columns": [
               { data: "id", name: "id" },
               { data: "companyName", name: "companyName"},
+              { data: "heseg_id", name: "heseg_id"},
               { data: "ajliinHeseg", name: "ajliinHeseg"},
               { data: "gereeOgnoo", name: "gereeOgnoo" },
               { data: "hunHuch", name: "hunHuch" },
@@ -49,6 +50,10 @@ $(document).ready(function(){
         var isInsert = true;
         if($("#txtCompanyName").val()==""||$("#txtCompanyName").val()==null){
             alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if($("#cmbHeseg").val()=="0"){
+            alertify.error("Хэсэг ээ сонгоно уу!!!");
             isInsert = false;
         }
         if($("#txtAjliinHeseg").val()==""||$("#txtAjliinHeseg").val()==null){
@@ -92,6 +97,7 @@ $(document).ready(function(){
 
 function emptyNewModal(){
   $("#txtCompanyName").val("");
+  $("#cmbHeseg").val("0");
   $("#txtAjliinHeseg").val("");
   $("#txtGereeOgnoo").val("");
   $("#txtHunHuch").val("");
@@ -110,6 +116,7 @@ $(document).ready(function(){
     $("#btnEditCompany").click(function(){
         $("#txtEditID").val(dataRow["id"]);
         $("#txtEditCompanyName").val(dataRow["companyName"]);
+        $("#cmbEditHeseg").val(dataRow["heseg_id"]);
         $("#txtEditAjliinHeseg").val(dataRow["ajliinHeseg"]);
         $("#txtEditGereeOgnoo").val(dataRow["gereeOgnoo"]);
         $("#txtEditHunHuch").val(dataRow["hunHuch"]);
@@ -134,6 +141,10 @@ $(document).ready(function(){
         var isInsert = true;
         if($("#txtEditCompanyName").val()==""||$("#txtEditCompanyName").val()==null){
             alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
+            isInsert = false;
+        }
+        if($("#cmbEditHeseg").val()=="0"){
+            alertify.error("Хэсэг ээ сонгоно уу!!!");
             isInsert = false;
         }
         if($("#txtEditAjliinHeseg").val()==""||$("#txtEditAjliinHeseg").val()==null){
