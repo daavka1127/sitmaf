@@ -37,7 +37,9 @@
     </div>
   </div>
   <div class="clearfix"></div>
-@include('chart.chartByDate');
-@include('chart.chartByTorol');
+@include('chart.chartByDate')
+
+@include('chart.chartByTorol')
 <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
 @endsection

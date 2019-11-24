@@ -77,7 +77,13 @@ class GuitsetgelController extends Controller
         $datas = DB::table('tb_guitsetgel')
         ->where('companyID','=',$companyID)->get();
         $companies = DB::table('tb_companies')->get();
-        return view('chart.guitsetgelByDateChart', compact('datas', 'companies', 'companyID'));
+        return view('chart.showCharts', compact('datas', 'companies', 'companyID'));
+    }
+    public static function getGuitsetgelTorol($companyID){
+      $guitsetgel = DB::table('tb_guitsetgel')
+          ->where('companyID', '=', $companyID)
+          ->orderBy('ognoo', 'desc')
+          ->first();
     }
 
     public static function getGuitsetgelHuvi($companyID){
