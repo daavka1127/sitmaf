@@ -36,10 +36,16 @@
       </select>
     </div>
   </div>
+  <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
+  <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">
+  <script src="{{url('public/jqChart/jquery.jqChart.min.js')}}"></script>
   <div class="clearfix"></div>
-@include('chart.chartByDate')
-
+  <br>
+  @include('chart.chartByDate')
+<div class="clearfix"></div>
 @include('chart.chartByTorol')
-<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-<div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<div class="clearfix"></div>
+<br>
+<div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #555"></div>
 @endsection

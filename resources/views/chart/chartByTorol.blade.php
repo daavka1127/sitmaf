@@ -1,9 +1,8 @@
-<div class="clearfix"></div>
 <script>
 window.onload = function () {
 
     //Better to construct options first and then pass it as a parameter
-    var options = {
+    var options1 = {
     	animationEnabled: true,
     	theme: "light1", //"light1", "dark1", "dark2"
     	title:{
@@ -46,6 +45,6 @@ window.onload = function () {
     	}]
     };
 
-    $("#chartContainer123").CanvasJSChart(options);
+    $("#chartContainer123").CanvasJSChart(options1);
 }
 </script>
