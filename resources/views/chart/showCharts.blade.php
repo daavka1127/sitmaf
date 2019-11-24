@@ -31,7 +31,11 @@
       <select class="form-control" id="cmbCompany">
         <option value="0">Сонгоно уу</option>
         @foreach ($companies as $company)
+          @if($companyID == $company->id)
+            <option value="{{$company->id}}" selected>{{$company->companyName}}</option>
+          @else
             <option value="{{$company->id}}">{{$company->companyName}}</option>
+          @endif
         @endforeach
       </select>
     </div>
@@ -44,8 +48,11 @@
   @include('chart.chartByDate')
 <div class="clearfix"></div>
 @include('chart.chartByTorol')
-<div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #fff"></div>
 <div class="clearfix"></div>
 <br>
-<div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #555"></div>
+<div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Гүйцэтгэл /үзүүлэлтээр/</div>
+<div class="clearfix"></div>
+
+<div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
 @endsection
