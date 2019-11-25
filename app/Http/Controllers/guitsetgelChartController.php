@@ -32,9 +32,22 @@ class guitsetgelChartController extends Controller
       return view('chart.guitsetgelReact', compact('companies'));
     }
 
-    public function chartAlljqChart(Request $req){
-      $companies = DB::table('tb_companies')
-          ->get();
-      return view('chart.guitsetgelAllChartJqChart', compact('companies'));
+    public function chartAlljqChart($hesegID){
+        if($hesegID == 0 ){
+            $companiesChart = DB::table('tb_companies')
+                ->get();
+        }
+        else if($hesegID > 0 && $hesegID < 4){
+            $companiesChart = DB::table('tb_companies')
+                ->where('heseg_id', '=', $hesegID)
+                ->get();
+        }
+        else{
+            $companiesChart = DB::table('tb_companies')
+                ->get();
+        }
+        $companies = DB::table('tb_companies')
+            ->get();
+        return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'companies', 'hesegID'));
     }
 }

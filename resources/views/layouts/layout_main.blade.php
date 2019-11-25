@@ -80,7 +80,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-bar-chart"></i>Тайлан график <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('/')}}">Гүйцэтгэлийн график</a></li>
+                      <li><a href="{{url('/home')}}">Гүйцэтгэлийн график</a></li>
                       <li><a href="{{url('/report/table')}}">Гүйцэтгэл хүснэгтээр</a></li>
                     </ul>
                   </li>

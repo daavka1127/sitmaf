@@ -13,12 +13,12 @@
     <script>
       $(document).ready(function(){
           $("#cmbHeseg").change(function(){
-              window.location.href = "{{url('/chart/all')}}";
+              window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
           });
       });
     </script>
     <div class="col-md-4">
-      <label>Хэсэг</label>
+      <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
         <option value="0">Сонгоно уу</option>
         <option value="1">Зүүнбаян чиглэл I хэсэг</option>
@@ -28,7 +28,7 @@
       </select>
     </div>
     <div class="col-md-4">
-      <label>Аж ахуйн нэгж</label>
+      <label>Аж ахуйн нэгжээр харах</label>
       <select class="form-control" id="cmbCompany">
         <option value="0">Сонгоно уу</option>
         @foreach ($companies as $company)
