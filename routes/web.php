@@ -44,10 +44,12 @@ Route::post('/hunHuch/update', 'hunHuchController@update');
 Route::post('/hunHuch/delete', 'hunHuchController@delete');
 
 Route::get('/chart/byDate/{id}', 'GuitsetgelController@chartByDateShow');
-Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
-Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
+// Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
+Route::get('/chart/all/{id}', 'guitsetgelChartController@chartAlljqChart');
+// Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
 Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
 Route::get('/chart/all/horizontal', 'guitsetgelChartController@getCompaniesChartHorizontal');
 Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
+Route::get('/average/chart/{id}', 'GuitsetgelController@generalChart');
 Route::get('/report/table', 'GuitsetgelController@getCompanyGuitsetgelTable');
 Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable');

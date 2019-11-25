@@ -34,8 +34,20 @@ class GuitsetgelController extends Controller
     }
 
     public function getCompanyGuitsetgelTable(){
-        $companies = DB::table('tb_companies')->get();
-        return view('report.companyGuitsetgelt', compact('companies'));
+        $companies = DB::table('tb_companies')
+            ->orderby('heseg_id', 'DESC')
+            ->get();
+        $companies1 = DB::table('tb_companies')
+            ->where('heseg_id', '=', 1)
+            ->get();
+        $companies2 = DB::table('tb_companies')
+            ->where('heseg_id', '=', 2)
+            ->get();
+        $companies3 = DB::table('tb_companies')
+            ->where('heseg_id', '=', 3)
+            ->get();
+
+        return view('report.companyGuitsetgelt', compact('companies', 'companies1', 'companies2', 'companies3'));
     }
 
     public static function getCompanyRow($companyID){
@@ -47,7 +59,9 @@ class GuitsetgelController extends Controller
             DB::raw('(SELECT tb_guitsetgel.gSuuriinUy FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gSuuriinUy'),
             DB::raw('(SELECT tb_guitsetgel.gShuuduu FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gShuuduu'),
             DB::raw('(SELECT tb_guitsetgel.gUhmaliinHamgaalalt FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gUhmaliinHamgaalalt'),
-            DB::raw('(SELECT tb_guitsetgel.gUuliinShuuduu FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gUuliinShuuduu'))
+            DB::raw('(SELECT tb_guitsetgel.gUuliinShuuduu FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gUuliinShuuduu'),
+            DB::raw('(SELECT tb_hunhuch.hunHuch FROM tb_hunhuch WHERE tb_hunhuch.companyID = tb_companies.id ORDER BY tb_hunhuch.ognoo DESC LIMIT 1) as hunHuch'),
+            DB::raw('(SELECT tb_hunhuch.mashinTehnik FROM tb_hunhuch WHERE tb_hunhuch.companyID = tb_companies.id ORDER BY tb_hunhuch.ognoo DESC LIMIT 1) as mashinTehnik'))
             ->first();
         return $company;
     }
@@ -165,5 +179,28 @@ class GuitsetgelController extends Controller
         }
         $dundaj = ($guitsetgelHursHuulalt + $guitsetgelDalan + $guitsetgelUhmal + $guitsetgelSuuriinUy + $guitsetgelShuuduu + $guitsetgelUhmaliinHamgaalalt + $guitsetgelUuliinShuuduu)/$i;
         return $dundaj;
+    }
+
+    public static function generalChart($hesegID){
+        $count = 0;
+        $dundajHuvi = null;
+
+        if($hesegID == 4){
+            $companies = DB::table('tb_companies')->get();
+        }
+        else{
+            $companies = DB::table('tb_companies')
+                ->where('heseg_id', '=', $hesegID)
+                ->get();
+        }
+
+        foreach($companies as $company){
+            $dundaj = self::getGuitsetgelHuvi($company->id);
+            $dundajHuvi = $dundajHuvi + $dundaj;
+            $count++;
+        }
+
+        $dundajHuvi = $dundajHuvi / $count;
+        return round($dundajHuvi, 2);
     }
 }

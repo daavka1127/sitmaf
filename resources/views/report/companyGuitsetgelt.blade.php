@@ -43,8 +43,28 @@ $(document).ready(function(){
       text-align: center;
     }
 </style>
+
+<div class="col-md-4">
+  <label>Хэсгээр харах</label>
+  <select class="form-control" id="cmbHeseg">
+    <option value="0">Сонгоно уу</option>
+    <option value="1">Зүүнбаян чиглэл I хэсэг</option>
+    <option value="2">Мандах чиглэл II хэсэг</option>
+    <option value="3">Цогтцэций чиглэл III чиглэл</option>
+    <option value="4">Бүх аж ахуйн нэгжээр</option>
+  </select>
+</div>
+<div class="clearfix"></div>
+
+<h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2>
 <table class="table table-striped table-bordered">
   <thead>
+      <tr>
+          <th colspan="2">Хэсэг</th>
+          <th colspan="{{count($companies3)*2}}">Цогтцэций чиглэл III чиглэл</th>
+          <th colspan="{{count($companies2)*2}}">Мандах чиглэл II хэсэг</th>
+          <th colspan="{{count($companies1)*2}}">Зүүнбаян чиглэл I хэсэг</th>
+      </tr>
       <tr>
           <th colspan="2">Аж ахуйн нэр</th>
           @foreach ($companies as $company)
@@ -150,7 +170,25 @@ $(document).ready(function(){
         @php
           $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
         @endphp
-        <td>{{$company1->gereeOgnoo}}</td>
+        <td colspan="2">{{$company1->gereeOgnoo}}</td>
+      @endforeach
+    </tr>
+    <tr>
+      <td colspan="2">Хүн хүч</td>
+      @foreach ($companies as $company)
+        @php
+          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+        @endphp
+        <td colspan="2">{{$company1->hunHuch}}</td>
+      @endforeach
+    </tr>
+    <tr>
+      <td colspan="2">Газар шорооны ажлын машин, техник</td>
+      @foreach ($companies as $company)
+        @php
+          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+        @endphp
+        <td colspan="2">{{$company1->mashinTehnik}}</td>
       @endforeach
     </tr>
     <tr>
@@ -165,21 +203,21 @@ $(document).ready(function(){
     </tr>
     </tbody>
   </table>
-
+<div class="clearfix"></div>
       <!-- Datatables -->
-          <script src="{{url('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
-          <script src="{{url('public/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
-          <script src="{{url('public/vendors/jszip/dist/jszip.min.js')}}"></script>
-          <script src="{{url('public/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
-          <script src="{{url('public/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+      <script src="{{url('public/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
+      <script src="{{url('public/vendors/jszip/dist/jszip.min.js')}}"></script>
+      <script src="{{url('public/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
+      <script src="{{url('public/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
 @endsection
