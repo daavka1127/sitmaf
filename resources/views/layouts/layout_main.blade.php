@@ -78,15 +78,15 @@
               <div class="menu_section">
                 <h3>Цэс</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-globe"></i> Аж ахуйн нэгж <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-bar-chart"></i>Тайлан график <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('/show/companies/slider')}}">Аж ахуйн нэгжүүд</a></li>
-                      <li><a href="{{url('/mission/search')}}">Аж ахуйн хүнэгтээр</a></li>
-                      <li><a href="{{url('/companies/new')}}">Шинэ бүртгэл хийх</a></li>
+                      <li><a href="{{url('/')}}">Гүйцэтгэлийн график</a></li>
+                      <li><a href="{{url('/report/table')}}">Гүйцэтгэл хүснэгтээр</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-globe"></i> Өгөгдөл оруулах <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-plus-square"></i> Өгөгдөл оруулах <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <li><a href="{{url('/companies/new')}}">Аж ахуйн нэгж нэмэх</a></li>
                       <li><a href="{{url('/guitsetgel/new')}}">Гүйцэтгэл нэмэх</a></li>
                       <li><a href="{{url('/hunHuch/new')}}">Хүн, хүч нэмэх</a></li>
                     </ul>

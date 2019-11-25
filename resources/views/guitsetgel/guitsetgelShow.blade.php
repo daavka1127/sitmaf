@@ -13,6 +13,7 @@
 <script>
     var newCompanyUrl = "{{url("/guitsetgel/store")}}";
     var getCompaniesUrl = "{{url("/guitsetgel/new/get")}}";
+    var getCompanyByID = "{{url("/get/company/by/id")}}";
     var editCompanyUrl = "{{url("/guitsetgel/update")}}";
     var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
     var dataRow = "";
@@ -51,7 +52,14 @@
               { data: "gShuuduu", name: "gShuuduu" },
               { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
               { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-              { data: "ognoo", name: "ognoo" }
+              { data: "ognoo", name: "ognoo" },
+              { data: "hursHuulalt", name: "hursHuulalt", visible:false},
+              { data: "dalan", name: "dalan", visible:false},
+              { data: "uhmal", name: "uhmal", visible:false},
+              { data: "suuriinUy", name: "suuriinUy", visible:false},
+              { data: "shuuduu", name: "shuuduu", visible:false},
+              { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
+              { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false},
             ]
       });
   });
@@ -83,7 +91,13 @@
                   <th>Ухмалын хамгаалалт</th>
                   <th>Уулын шуудуу</th>
                   <th>Огноо</th>
-
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
               </tr>
           </thead>
       </table>

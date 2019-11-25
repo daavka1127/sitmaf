@@ -36,7 +36,14 @@ function refresh(){
             { data: "gShuuduu", name: "gShuuduu" },
             { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
             { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-            { data: "ognoo", name: "ognoo" }
+            { data: "ognoo", name: "ognoo" },
+            { data: "hursHuulalt", name: "hursHuulalt", visible:false},
+            { data: "dalan", name: "dalan", visible:false},
+            { data: "uhmal", name: "uhmal", visible:false},
+            { data: "suuriinUy", name: "suuriinUy", visible:false},
+            { data: "shuuduu", name: "shuuduu", visible:false},
+            { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
+            { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false},
             ]
       }).ajax.reload();
 }
@@ -88,7 +95,33 @@ function emptyNewModal(){
   $("#txtShuuduu").val("");
   $("#txtUhmaliinHamgaalalt").val("");
   $("#txtUuliinShuuduu").val("");
+  $("#cmbNewCompanyID").val('-1');
 }
+
+$(document).ready(function(){
+    $("#cmbNewCompanyID").change(function(){
+        var csrf = $('meta[name=csrf-token]').attr("content");
+        $.ajax({
+          type: 'POST',
+          url: getCompanyByID,
+          data: {
+              _token: csrf,
+              id : $("#cmbNewCompanyID").val()
+          },
+          success:function(response){
+              // alert(response[0].companyName);
+          },
+          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+            var errors = jqXhr.responseJSON;
+            var errorsHtml = '';
+            $.each(errors['errors'], function (index, value) {
+                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+            });
+            alert(errorsHtml);
+          }
+        });
+    });
+});
 
 
 $(document).ready(function(){

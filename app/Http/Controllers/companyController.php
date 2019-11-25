@@ -29,6 +29,13 @@ class companyController extends Controller
             ->make(true);
     }
 
+    public function getCompanyByID(Request $req){
+        $company = DB::table('tb_companies')
+            ->where('tb_companies.id', '=', $req->id)
+            ->get();
+        return $company;
+    }
+
     public function store(Request $req){
         $company = new company;
         $company->companyName = $req->companyName;

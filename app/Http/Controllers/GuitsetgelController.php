@@ -24,11 +24,40 @@ class GuitsetgelController extends Controller
 
     public function getCompanyToNew(){
         $guitsetgel = DB::table('tb_guitsetgel')
-        ->join('tb_companies', 'tb_guitsetgel.companyID', '=','tb_companies.id')
-        ->select('tb_guitsetgel.*', 'tb_companies.companyName')
-        ->get();
+            ->join('tb_companies', 'tb_guitsetgel.companyID', '=','tb_companies.id')
+            ->select('tb_guitsetgel.*', 'tb_companies.companyName', 'tb_companies.hursHuulalt', 'tb_companies.dalan',
+            'tb_companies.uhmal', 'tb_companies.suuriinUy', 'tb_companies.shuuduu', 'tb_companies.uhmaliinHamgaalalt',
+            'tb_companies.uuliinShuuduu')
+            ->get();
         return DataTables::of($guitsetgel)
             ->make(true);
+    }
+
+    public function getCompanyGuitsetgelTable(){
+        $companies = DB::table('tb_companies')->get();
+        return view('report.companyGuitsetgelt', compact('companies'));
+    }
+
+    public static function getCompanyRow($companyID){
+        $company = DB::table('tb_companies')
+            ->where('id', '=', $companyID)
+            ->select('tb_companies.*', DB::raw('(SELECT tb_guitsetgel.gHursHuulalt FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gHursHuulalt'),
+            DB::raw('(SELECT tb_guitsetgel.gDalan FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gDalan'),
+            DB::raw('(SELECT tb_guitsetgel.gUhmal FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gUhmal'),
+            DB::raw('(SELECT tb_guitsetgel.gSuuriinUy FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gSuuriinUy'),
+            DB::raw('(SELECT tb_guitsetgel.gShuuduu FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gShuuduu'),
+            DB::raw('(SELECT tb_guitsetgel.gUhmaliinHamgaalalt FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gUhmaliinHamgaalalt'),
+            DB::raw('(SELECT tb_guitsetgel.gUuliinShuuduu FROM tb_guitsetgel WHERE tb_guitsetgel.companyID = tb_companies.id ORDER BY tb_guitsetgel.ognoo DESC LIMIT 1) as gUuliinShuuduu'))
+            ->first();
+        return $company;
+    }
+
+    public static function getGuitsetgelTable($companyID){
+        $guitsetgelt = DB::table('tb_guitsetgel')
+            ->where('tb_guitsetgel.companyID', '=', $companyID)
+            ->orderBy('tb_guitsetgel.ognoo', 'desc')
+            ->first();
+        return $guitsetgelt;
     }
 
     public function store(Request $req){

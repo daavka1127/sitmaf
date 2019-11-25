@@ -23,6 +23,7 @@ Route::post('/changePassword','HomeController@changePassword')->name('changePass
 
 Route::get('/companies/new', 'companyController@index')->name('home');
 Route::post('/companies/new/get/company', 'companyController@getCompanyToNew');
+Route::post('/get/company/by/id', 'companyController@getCompanyByID');
 Route::post('/companies/store', 'companyController@store');
 Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
@@ -48,3 +49,5 @@ Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
 Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
 Route::get('/chart/all/horizontal', 'guitsetgelChartController@getCompaniesChartHorizontal');
 Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
+Route::get('/report/table', 'GuitsetgelController@getCompanyGuitsetgelTable');
+Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable');
