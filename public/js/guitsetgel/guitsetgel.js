@@ -127,6 +127,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#btnEditGuitsetgel").click(function(){
         $("#txtEditID").val(dataRow["id"]);
+        //alert("datarowID: " + dataRow["id"]);
         $("#cmbEditGCompany").val(dataRow["companyID"]);
         $("#txtEditOgnoo").val(dataRow["ognoo"]);
         $("#txtEditGHursHuulalt").val(dataRow["gHursHuulalt"]);
@@ -136,6 +137,7 @@ $(document).ready(function(){
         $("#txtEditGShuuduu").val(dataRow["gShuuduu"]);
         $("#txtEditGUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
         $("#txtEditGUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
+        alert($("#frmEditGuitsetgel").serialize());
         if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
         else{$('#modalEditGuitsetgel').modal('show');}
 
@@ -152,7 +154,7 @@ $(document).ready(function(){
             isInsert = false;
         }
         if($("#txtEditOgnoo").val()==""||$("#txtEditOgnoo").val()==null){
-            alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
+            alertify.error("Oгноо оруулаагүй байна!!!");
             isInsert = false;
         }
         if(isInsert == false){return;}
