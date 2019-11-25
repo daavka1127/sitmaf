@@ -160,7 +160,7 @@ $(document).ready(function(){
           $company1 = App\Http\Controllers\GuitsetgelController::getGuitsetgelHuvi($company->id);
 
         @endphp
-        <td colspan="2">{{$company1}}%</td>
+        <td colspan="2">{{round($company1, 2)}}%</td>
       @endforeach
     </tr>
     </tbody>
