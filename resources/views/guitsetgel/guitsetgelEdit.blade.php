@@ -14,7 +14,7 @@
           @csrf
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
-            <input type="hidden" id="txtEditID" name="id" class="form-control" />
+            <input type="hidden" id="txtEditGID" name="id" value="12" class="form-control" />
             <select name='companyID' class="form-control" id="cmbEditGCompany">
 
               @foreach ($companies as $company)

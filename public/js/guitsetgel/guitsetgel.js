@@ -126,7 +126,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#btnEditGuitsetgel").click(function(){
-        $("#txtEditID").val(dataRow["id"]);
+        $("#txtEditGID").val(dataRow["id"]);
         $("#cmbEditGCompany").val(dataRow["companyID"]);
         $("#txtEditOgnoo").val(dataRow["ognoo"]);
         $("#txtEditGHursHuulalt").val(dataRow["gHursHuulalt"]);
@@ -163,6 +163,7 @@ $(document).ready(function(){
           success:function(response){
               alertify.alert(response);
               $('#modalEditGuitsetgel').modal('hide');
+              dataRow = "";
               refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
