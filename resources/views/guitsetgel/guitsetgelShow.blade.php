@@ -17,6 +17,7 @@
     var editCompanyUrl = "{{url("/guitsetgel/update")}}";
     var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
     var dataRow = "";
+    var updateRD = "";
     $(document).ready(function(){
       $('#datatable').DataTable( {
           "language": {
@@ -59,7 +60,7 @@
               { data: "suuriinUy", name: "suuriinUy", visible:false},
               { data: "shuuduu", name: "shuuduu", visible:false},
               { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
-              { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false},
+              { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false}
             ]
       });
   });

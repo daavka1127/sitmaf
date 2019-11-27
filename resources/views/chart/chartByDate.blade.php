@@ -12,6 +12,7 @@ $(document).ready(function () {
                     }
                 ],
                 series: [
+
                     {
                         type: 'line',
                         title: 'Хөрс хуулалт',

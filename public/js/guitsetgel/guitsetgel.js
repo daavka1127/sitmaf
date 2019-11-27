@@ -126,7 +126,12 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#btnEditGuitsetgel").click(function(){
+<<<<<<< HEAD
         $("#txtEditGID").val(dataRow["id"]);
+=======
+        $("#txtEditID").val(dataRow["id"]);
+        //alert("datarowID: " + dataRow["id"]);
+>>>>>>> d49ad72af74aaa5d99c9eff80b2344698fe753f8
         $("#cmbEditGCompany").val(dataRow["companyID"]);
         $("#txtEditOgnoo").val(dataRow["ognoo"]);
         $("#txtEditGHursHuulalt").val(dataRow["gHursHuulalt"]);
@@ -136,6 +141,7 @@ $(document).ready(function(){
         $("#txtEditGShuuduu").val(dataRow["gShuuduu"]);
         $("#txtEditGUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
         $("#txtEditGUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
+        alert($("#frmEditGuitsetgel").serialize());
         if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
         else{$('#modalEditGuitsetgel').modal('show');}
 
@@ -152,7 +158,7 @@ $(document).ready(function(){
             isInsert = false;
         }
         if($("#txtEditOgnoo").val()==""||$("#txtEditOgnoo").val()==null){
-            alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
+            alertify.error("Oгноо оруулаагүй байна!!!");
             isInsert = false;
         }
         if(isInsert == false){return;}

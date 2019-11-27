@@ -91,18 +91,19 @@ class GuitsetgelController extends Controller
     }
 
     public function update(Request $req){
-        $guitsetgel = guitsetgel::find($req->id);
-        $guitsetgel->companyID = $req->companyID;
-        $guitsetgel->gHursHuulalt = $req->gHursHuulalt;
-        $guitsetgel->gDalan = $req->gDalan;
-        $guitsetgel->gUhmal = $req->gUhmal;
-        $guitsetgel->gSuuriinUy = $req->gSuuriinUy;
-        $guitsetgel->gShuuduu = $req->gShuuduu;
-        $guitsetgel->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
-        $guitsetgel->gUuliinShuuduu = $req->gUuliinShuuduu;
-        $guitsetgel->ognoo = $req->ognoo;
-        $guitsetgel->save();
-        return "Амжилттай заслаа.";
+        // $guitsetgel = guitsetgel::find($req->id);
+        // $guitsetgel->companyID = $req->companyID;
+        // $guitsetgel->gHursHuulalt = $req->gHursHuulalt;
+        // $guitsetgel->gDalan = $req->gDalan;
+        // $guitsetgel->gUhmal = $req->gUhmal;
+        // $guitsetgel->gSuuriinUy = $req->gSuuriinUy;
+        // $guitsetgel->gShuuduu = $req->gShuuduu;
+        // $guitsetgel->gUhmaliinHamgaalalt = $req->gUhmaliinHamgaalalt;
+        // $guitsetgel->gUuliinShuuduu = $req->gUuliinShuuduu;
+        // $guitsetgel->ognoo = $req->ognoo;
+        // $guitsetgel->save();
+        // return "Амжилттай заслаа.";
+        return $req->id;
     }
 
     public function delete(Request $req){
