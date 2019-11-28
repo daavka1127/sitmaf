@@ -45,7 +45,8 @@
   <script src="{{url('public/jqChart/jquery.jqChart.min.js')}}"></script>
   <div class="clearfix"></div>
   <br>
-  @include('chart.chartByDate')
+
+@include('chart.chartByDate')
 <div class="clearfix"></div>
 @include('chart.chartByTorol')
 <div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #fff"></div>

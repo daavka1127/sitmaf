@@ -1,3 +1,4 @@
+<div>{{$guitsetgel->hursHuulalt}}</div>
 <script>
 window.onload = function () {
 
@@ -21,6 +22,7 @@ window.onload = function () {
     		showInLegend: true,
     		name: "Гүйцэтгэл",
     		dataPoints: [
+
             @if($guitsetgel->hursHuulalt != null || $guitsetgel->hursHuulalt != 0)
             { y: {{ 100*$guitsetgel->gHursHuulalt/$guitsetgel->hursHuulalt }}, label: "Хөрс хуулалт" },
             @endif
