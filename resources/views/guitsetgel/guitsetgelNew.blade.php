@@ -29,9 +29,32 @@
           </div>
 
           <div class="clearfix"></div>
-
+          <h3 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h3>
+          <div class="form-group col-md-3 text-left">
+            <label>Хөрс хуулалт:</label> <label id="lbl_hursHuulalt" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Далан:</label> <label id="lbl_dalan" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Ухмал:</label> <label id="lbl_uhmal" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Суурийн үе:</label> <label  id="lbl_suuriinUy" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Шуудуу:</label> <label id="lbl_shuuduu" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Ухмалын хамгаалалт:</label> <label id="lbl_uhmalHamgaalalt" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Уулын шуудуу:</label> <label id="lbl_uuliinShuuduu" class="newGuitsetgelText"></label>
+          </div>
+          <div class="clearfix"></div>
           {{-- START HIIGDEH AJIL --}}
           <h3 style="text-align:center;"><strong>Гүйцэтгэсэн ажил</strong></h3>
+
           <div class="form-group col-md-3 text-left">
             <label>Хөрс хуулалт </label>
             <input type="number" min="0" id="txtHursHuulalt" step="any" name="gHursHuulalt" class="form-control" />

@@ -100,6 +100,15 @@ function emptyNewModal(){
 
 $(document).ready(function(){
     $("#cmbNewCompanyID").change(function(){
+      $("#txtHursHuulalt").prop("disabled", false);
+      $("#txtDalan").prop("disabled", false);
+      $("#txtUhmal").prop("disabled", false);
+      $("#txtSuuriinUy").prop("disabled", false);
+      $("#txtShuuduu").prop("disabled", false);
+      $("#txtUhmaliinHamgaalalt").prop("disabled", false);
+      $("#txtUuliinShuuduu").prop("disabled", false);
+
+
         var csrf = $('meta[name=csrf-token]').attr("content");
         $.ajax({
           type: 'POST',
@@ -109,7 +118,28 @@ $(document).ready(function(){
               id : $("#cmbNewCompanyID").val()
           },
           success:function(response){
-              // alert(response[0].companyName);
+              if(response[0].uuliinShuuduu == null)
+                $("#txtUuliinShuuduu").prop("disabled", true);
+              if(response[0].uhmaliinHamgaalalt == null)
+                $("#txtUhmaliinHamgaalalt").prop("disabled", true);
+              if(response[0].dalan == null)
+                $("#txtDalan").prop("disabled", true);
+              if(response[0].uhmal == null)
+                $("#txtUhmal").prop("disabled", true);
+              if(response[0].hursHuulalt == null)
+                $("#txtHursHuulalt").prop("disabled", true);
+              if(response[0].suuriinUy == null)
+                $("#txtSuuriinUy").prop("disabled", true);
+              if(response[0].shuuduu == null)
+                $("#txtShuuduu").prop("disabled", true);
+
+              $("#lbl_hursHuulalt").text(response[0].hursHuulalt);
+              $("#lbl_dalan").text(response[0].dalan);
+              $("#lbl_uhmal").text(response[0].uhmal);
+              $("#lbl_suuriinUy").text(response[0].suuriinUy);
+              $("#lbl_shuuduu").text(response[0].shuuduu);
+              $("#lbl_uhmalHamgaalalt").text(response[0].uhmaliinHamgaalalt);
+              $("#lbl_uuliinShuuduu").text(response[0].uuliinShuuduu);
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;
@@ -126,6 +156,14 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#btnEditGuitsetgel").click(function(){
+      $("#txtEditGHursHuulalt").prop("disabled", false);
+      $("#txtEditGDalan").prop("disabled", false);
+      $("#txtEditGUhmal").prop("disabled", false);
+      $("#txtEditGSuuriinUy").prop("disabled", false);
+      $("#txtEditGShuuduu").prop("disabled", false);
+      $("#txtEditGUhmaliinHamgaalalt").prop("disabled", false);
+      $("#txtEditGUuliinShuuduu").prop("disabled", false);
+
         $("#txtEditGID").val(dataRow["id"]);
         $("#cmbEditGCompany").val(dataRow["companyID"]);
         $("#txtEditOgnoo").val(dataRow["ognoo"]);
@@ -139,9 +177,53 @@ $(document).ready(function(){
         if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
         else{$('#modalEditGuitsetgel').modal('show');}
 
+        disableEditInputs();
+
     });
 });
+function disableEditInputs(){
+  var csrf = $('meta[name=csrf-token]').attr("content");
+  $.ajax({
+    type: 'POST',
+    url: getCompanyByID,
+    data: {
+        _token: csrf,
+        id : $("#cmbEditGCompany").val()
+    },
+    success:function(response){
+        if(response[0].uuliinShuuduu == null)
+          $("#txtEditGUuliinShuuduu").prop("disabled", true);
+        if(response[0].uhmaliinHamgaalalt == null)
+          $("#txtEditGUhmaliinHamgaalalt").prop("disabled", true);
+        if(response[0].dalan == null)
+          $("#txtEditGDalan").prop("disabled", true);
+        if(response[0].uhmal == null)
+          $("#txtEditGUhmal").prop("disabled", true);
+        if(response[0].hursHuulalt == null)
+          $("#txtEditGHursHuulalt").prop("disabled", true);
+        if(response[0].suuriinUy == null)
+          $("#txtEditGSuuriinUy").prop("disabled", true);
+        if(response[0].shuuduu == null)
+          $("#txtEditGShuuduu").prop("disabled", true);
 
+          $("#lbl_ehursHuulalt").text(response[0].hursHuulalt);
+          $("#lbl_edalan").text(response[0].dalan);
+          $("#lbl_euhmal").text(response[0].uhmal);
+          $("#lbl_esuuriinUy").text(response[0].suuriinUy);
+          $("#lbl_eshuuduu").text(response[0].shuuduu);
+          $("#lbl_euhmalHamgaalalt").text(response[0].uhmaliinHamgaalalt);
+          $("#lbl_euuliinShuuduu").text(response[0].uuliinShuuduu);
+    },
+    error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+      var errors = jqXhr.responseJSON;
+      var errorsHtml = '';
+      $.each(errors['errors'], function (index, value) {
+          errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+      });
+      alert(errorsHtml);
+    }
+  });
+}
 
 $(document).ready(function(){
     $("#btnEditPostGuitsetgel").click(function(e){
