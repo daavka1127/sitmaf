@@ -15,7 +15,7 @@
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
             <input type="hidden" id="txtEditGID" name="id" class="form-control" />
-            <select name='companyID' class="form-control" id="cmbEditGCompany">
+            <select name='companyID' class="form-control" id="cmbEditGCompany" disabled>
 
               @foreach ($companies as $company)
                   <option value="{{$company->id}}">{{$company->companyName}}</option>
@@ -28,6 +28,29 @@
             <input type="date" id="txtEditOgnoo" name="ognoo" class="form-control" required />
           </div>
 
+          <div class="clearfix"></div>
+          <h3 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h3>
+          <div class="form-group col-md-3 text-left">
+            <label>Хөрс хуулалт:</label> <label id="lbl_ehursHuulalt" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Далан:</label> <label id="lbl_edalan" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Ухмал:</label> <label id="lbl_euhmal" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Суурийн үе:</label> <label  id="lbl_esuuriinUy" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Шуудуу:</label> <label id="lbl_eshuuduu" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Ухмалын хамгаалалт:</label> <label id="lbl_euhmalHamgaalalt" class="newGuitsetgelText"></label>
+          </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Уулын шуудуу:</label> <label id="lbl_euuliinShuuduu" class="newGuitsetgelText"></label>
+          </div>
           <div class="clearfix"></div>
 
           {{-- START HIIGDEH AJIL --}}
