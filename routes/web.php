@@ -17,6 +17,10 @@
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
+Route::get('/login/dadaa', function(){
+  return view('layouts.layout_login');
+});
+
 Auth::routes();
 Route::get('/changePassword','HomeController@showChangePasswordForm');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');

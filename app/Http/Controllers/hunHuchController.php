@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\hunHuch;
 use DB;
 use Yajra\DataTables\DataTables;
+use Auth;
 
 class hunHuchController extends Controller
 {
@@ -16,7 +17,13 @@ class hunHuchController extends Controller
     }
 
     public function index(){
-        $companies = DB::table('tb_companies')->get();
+        if(Auth::user()->heseg_id == 0){
+            $companies = DB::table('tb_companies')->get();
+        }else{
+            $companies = DB::table('tb_companies')
+                ->where('tb_companies.heseg_id', '=', Auth::user()->heseg_id)
+                ->get();
+        }
         return view('hunHuch.hunHuchShow', compact('companies'));
     }
 

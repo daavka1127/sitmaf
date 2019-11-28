@@ -43,17 +43,6 @@ $(document).ready(function(){
       text-align: center;
     }
 </style>
-
-<div class="col-md-4">
-  <label>Хэсгээр харах</label>
-  <select class="form-control" id="cmbHeseg">
-    <option value="0">Сонгоно уу</option>
-    <option value="1">Зүүнбаян чиглэл I хэсэг</option>
-    <option value="2">Мандах чиглэл II хэсэг</option>
-    <option value="3">Цогтцэций чиглэл III чиглэл</option>
-    <option value="4">Бүх аж ахуйн нэгжээр</option>
-  </select>
-</div>
 <div class="clearfix"></div>
 
 <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2>

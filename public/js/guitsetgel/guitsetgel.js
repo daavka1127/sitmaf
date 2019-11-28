@@ -156,8 +156,6 @@ $(document).ready(function(){
             isInsert = false;
         }
         if(isInsert == false){return;}
-        alert($("#frmEditGuitsetgel").serialize());
-
         $.ajax({
           type: 'POST',
           url: editCompanyUrl,
