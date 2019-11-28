@@ -28,10 +28,23 @@ class hunHuchController extends Controller
     }
 
     public function getHunHuchToNew(){
-        $hunHuchs = DB::table('tb_hunhuch')
-            ->join('tb_companies', 'tb_hunhuch.companyID', '=', 'tb_companies.id')
-            ->select('tb_hunhuch.*', 'tb_companies.companyName')
-            ->get();
+        if(Auth::user()->heseg_id == 0){
+            $hunHuchs = DB::table('tb_hunhuch')
+                ->join('tb_companies', 'tb_hunhuch.companyID', '=', 'tb_companies.id')
+                ->select('tb_hunhuch.*', 'tb_companies.companyName')
+                ->orderby('tb_companies.companyName', 'ASC')
+                ->orderby('tb_hunhuch.ognoo', 'ASC')
+                ->get();
+        }
+        else{
+            $hunHuchs = DB::table('tb_hunhuch')
+                ->join('tb_companies', 'tb_hunhuch.companyID', '=', 'tb_companies.id')
+                ->select('tb_hunhuch.*', 'tb_companies.companyName')
+                ->where('tb_companies.heseg_id', '=', Auth::user()->heseg_id)
+                ->orderby('tb_companies.companyName', 'ASC')
+                ->orderby('tb_hunhuch.ognoo', 'ASC')
+                ->get();
+        }
         return DataTables::of($hunHuchs)
             ->make(true);
     }
@@ -48,7 +61,6 @@ class hunHuchController extends Controller
 
     public function update(Request $req){
         $hunHuch = hunHuch::find($req->id);
-        $hunHuch->companyID = $req->companyID;
         $hunHuch->hunHuch = $req->hunHuch;
         $hunHuch->mashinTehnik = $req->mashinTehnik;
         $hunHuch->ognoo = $req->ognoo;

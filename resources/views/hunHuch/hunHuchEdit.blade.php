@@ -14,8 +14,8 @@
           @csrf
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгж <span class="red-required">*</span> </label>
-            <input type="hidden" id="editHunHuchID" name="id" value=""/>
-            <select class="form-control" name="companyID" id="cmbEditCompanyID">
+            <input type="hidden" id="hideEditHunHuchID" name="id" value=""/>
+            <select class="form-control" name="companyID" id="cmbEditCompanyID" disabled>
                 @foreach ($companies as $company)
                     <option value="{{$company->id}}">{{$company->companyName}}</option>
                 @endforeach

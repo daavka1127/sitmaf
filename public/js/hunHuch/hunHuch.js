@@ -88,7 +88,7 @@ function emptyNewModal(){
 
 $(document).ready(function(){
     $("#btnEditHunHuch").click(function(){
-        $("#editHunHuchID").val(dataRow["id"]);
+        $("#hideEditHunHuchID").val(dataRow["id"]);
         $("#cmbEditCompanyID").val(dataRow["companyID"]);
         $("#txtEditHunHuch").val(dataRow["hunHuch"]);
         $("#txtEditMashinTehnik").val(dataRow["mashinTehnik"]);
