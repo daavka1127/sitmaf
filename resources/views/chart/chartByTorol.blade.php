@@ -1,4 +1,3 @@
-<div>{{$guitsetgel->hursHuulalt}}</div>
 <script>
 window.onload = function () {
 
@@ -23,28 +22,29 @@ window.onload = function () {
     		name: "Гүйцэтгэл",
     		dataPoints: [
 
-            @if($guitsetgel->hursHuulalt != null || $guitsetgel->hursHuulalt != 0)
-            { y: {{ 100*$guitsetgel->gHursHuulalt/$guitsetgel->hursHuulalt }}, label: "Хөрс хуулалт" },
-            @endif
-            @if($guitsetgel->dalan != null || $guitsetgel->dalan != 0)
-            { y: {{ 100*$guitsetgel->gDalan/$guitsetgel->dalan }}, label: "Далан" },
-            @endif
-            @if($guitsetgel->uhmal != null || $guitsetgel->uhmal != 0)
-            { y: {{ 100*$guitsetgel->gUhmal/$guitsetgel->uhmal }}, label: "Ухмал" },
-            @endif
-            @if($guitsetgel->suuriinUy != null || $guitsetgel->suuriinUy != 0)
-            { y: {{ 100*$guitsetgel->gSuuriinUy/$guitsetgel->suuriinUy }}, label: "Суурийн үе" },
-            @endif
-            @if($guitsetgel->shuuduu != null || $guitsetgel->shuuduu != 0)
-            { y: {{ 100*$guitsetgel->gShuuduu/$guitsetgel->shuuduu }}, label: "Шуудуу" },
-            @endif
-            @if($guitsetgel->uhmaliinHamgaalalt != null || $guitsetgel->uhmaliinHamgaalalt != 0)
-            { y: {{ 100*$guitsetgel->gUhmaliinHamgaalalt/$guitsetgel->uhmaliinHamgaalalt }}, label: "Ухмалын хамгаалалт" },
-            @endif
-            @if($guitsetgel->uuliinShuuduu != null || $guitsetgel->uuliinShuuduu != 0)
-            { y: {{ 100*$guitsetgel->gUuliinShuuduu/$guitsetgel->uuliinShuuduu }}, label: "Уулын шуудуу" }
-            @endif
-
+          @if(count($datas) > 0)
+              @if($guitsetgel->hursHuulalt != null || $guitsetgel->hursHuulalt != 0)
+              { y: {{ 100*$guitsetgel->gHursHuulalt/$guitsetgel->hursHuulalt }}, label: "Хөрс хуулалт" },
+              @endif
+              @if($guitsetgel->dalan != null || $guitsetgel->dalan != 0)
+              { y: {{ 100*$guitsetgel->gDalan/$guitsetgel->dalan }}, label: "Далан" },
+              @endif
+              @if($guitsetgel->uhmal != null || $guitsetgel->uhmal != 0)
+              { y: {{ 100*$guitsetgel->gUhmal/$guitsetgel->uhmal }}, label: "Ухмал" },
+              @endif
+              @if($guitsetgel->suuriinUy != null || $guitsetgel->suuriinUy != 0)
+              { y: {{ 100*$guitsetgel->gSuuriinUy/$guitsetgel->suuriinUy }}, label: "Суурийн үе" },
+              @endif
+              @if($guitsetgel->shuuduu != null || $guitsetgel->shuuduu != 0)
+              { y: {{ 100*$guitsetgel->gShuuduu/$guitsetgel->shuuduu }}, label: "Шуудуу" },
+              @endif
+              @if($guitsetgel->uhmaliinHamgaalalt != null || $guitsetgel->uhmaliinHamgaalalt != 0)
+              { y: {{ 100*$guitsetgel->gUhmaliinHamgaalalt/$guitsetgel->uhmaliinHamgaalalt }}, label: "Ухмалын хамгаалалт" },
+              @endif
+              @if($guitsetgel->uuliinShuuduu != null || $guitsetgel->uuliinShuuduu != 0)
+              { y: {{ 100*$guitsetgel->gUuliinShuuduu/$guitsetgel->uuliinShuuduu }}, label: "Уулын шуудуу" }
+              @endif
+          @endif
     		]
     	},
     	{
@@ -53,29 +53,29 @@ window.onload = function () {
     		showInLegend: true,
     		name: "Үлдсэн ажил",
     		dataPoints: [
-
-          @if($guitsetgel->hursHuulalt != null || $guitsetgel->hursHuulalt != 0)
-          { y: {{ 100-100*$guitsetgel->gHursHuulalt/$guitsetgel->hursHuulalt }}, label: "Хөрс хуулалт" },
+          @if(count($datas) > 0)
+            @if($guitsetgel->hursHuulalt != null || $guitsetgel->hursHuulalt != 0)
+            { y: {{ 100-100*$guitsetgel->gHursHuulalt/$guitsetgel->hursHuulalt }}, label: "Хөрс хуулалт" },
+            @endif
+            @if($guitsetgel->dalan != null || $guitsetgel->dalan != 0)
+            { y: {{ 100-100*$guitsetgel->gDalan/$guitsetgel->dalan }}, label: "Далан" },
+            @endif
+            @if($guitsetgel->uhmal != null || $guitsetgel->uhmal != 0)
+            { y: {{ 100-100*$guitsetgel->gUhmal/$guitsetgel->uhmal }}, label: "Ухмал" },
+            @endif
+            @if($guitsetgel->suuriinUy != null || $guitsetgel->suuriinUy != 0)
+            { y: {{ 100-100*$guitsetgel->gSuuriinUy/$guitsetgel->suuriinUy }}, label: "Суурийн үе" },
+            @endif
+            @if($guitsetgel->shuuduu != null || $guitsetgel->shuuduu != 0)
+            { y: {{ 100-100*$guitsetgel->gShuuduu/$guitsetgel->shuuduu }}, label: "Шуудуу" },
+            @endif
+            @if($guitsetgel->uhmaliinHamgaalalt != null || $guitsetgel->uhmaliinHamgaalalt != 0)
+            { y: {{ 100-100*$guitsetgel->gUhmaliinHamgaalalt/$guitsetgel->uhmaliinHamgaalalt }}, label: "Ухмалын хамгаалалт" },
+            @endif
+            @if($guitsetgel->uuliinShuuduu != null || $guitsetgel->uuliinShuuduu != 0)
+            { y: {{ 100-100*$guitsetgel->gUuliinShuuduu/$guitsetgel->uuliinShuuduu }}, label: "Уулын шуудуу" }
+            @endif
           @endif
-          @if($guitsetgel->dalan != null || $guitsetgel->dalan != 0)
-          { y: {{ 100-100*$guitsetgel->gDalan/$guitsetgel->dalan }}, label: "Далан" },
-          @endif
-          @if($guitsetgel->uhmal != null || $guitsetgel->uhmal != 0)
-          { y: {{ 100-100*$guitsetgel->gUhmal/$guitsetgel->uhmal }}, label: "Ухмал" },
-          @endif
-          @if($guitsetgel->suuriinUy != null || $guitsetgel->suuriinUy != 0)
-          { y: {{ 100-100*$guitsetgel->gSuuriinUy/$guitsetgel->suuriinUy }}, label: "Суурийн үе" },
-          @endif
-          @if($guitsetgel->shuuduu != null || $guitsetgel->shuuduu != 0)
-          { y: {{ 100-100*$guitsetgel->gShuuduu/$guitsetgel->shuuduu }}, label: "Шуудуу" },
-          @endif
-          @if($guitsetgel->uhmaliinHamgaalalt != null || $guitsetgel->uhmaliinHamgaalalt != 0)
-          { y: {{ 100-100*$guitsetgel->gUhmaliinHamgaalalt/$guitsetgel->uhmaliinHamgaalalt }}, label: "Ухмалын хамгаалалт" },
-          @endif
-          @if($guitsetgel->uuliinShuuduu != null || $guitsetgel->uuliinShuuduu != 0)
-          { y: {{ 100-100*$guitsetgel->gUuliinShuuduu/$guitsetgel->uuliinShuuduu }}, label: "Уулын шуудуу" }
-          @endif
-
     		]
     	}]
     };

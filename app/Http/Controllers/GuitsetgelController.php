@@ -120,13 +120,17 @@ class GuitsetgelController extends Controller
     public function chartByDateShow($companyID){
         $datas = DB::table('tb_guitsetgel')
         ->where('companyID','=',$companyID)->get();
-        $guitsetgel = DB::table('tb_guitsetgel')
+
+        
+          $guitsetgel = DB::table('tb_guitsetgel')
             ->join('tb_companies', 'tb_guitsetgel.companyID', '=','tb_companies.id')
             ->select('tb_guitsetgel.*','tb_companies.hursHuulalt','tb_companies.dalan','tb_companies.uhmal','tb_companies.suuriinUy','tb_companies.shuuduu','tb_companies.uhmaliinHamgaalalt','tb_companies.uuliinShuuduu')
             ->where('tb_guitsetgel.companyID', '=', $companyID)
             ->orderBy('tb_guitsetgel.ognoo', 'desc')
             ->first();
+
         $companies = DB::table('tb_companies')->get();
+        //return $guitsetgel->hursHuulalt;
         return view('chart.showCharts', compact('datas', 'companies', 'companyID', 'guitsetgel'));
     }
 
