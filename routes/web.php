@@ -57,3 +57,7 @@ Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
 Route::get('/average/chart/{id}', 'GuitsetgelController@generalChart');
 Route::get('/report/table', 'GuitsetgelController@getCompanyGuitsetgelTable');
 Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable');
+
+
+Route::get('resizeImage', 'ImageController@resizeImage');
+Route::post('resizeImagePost', 'ImageController@resizeImagePost')->name('resizeImagePost');

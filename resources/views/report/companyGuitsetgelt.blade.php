@@ -9,189 +9,218 @@
       <link href="{{url('public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
 
 <script>
-$(document).ready(function(){
-  $('#datatable').DataTable( {
-      "language": {
-          "lengthMenu": "_MENU_ мөрөөр харах",
-          "zeroRecords": "Хайлт илэрцгүй байна",
-          "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
-          "infoEmpty": "Хайлт илэрцгүй",
-          "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
-          "sSearch": "Хайх: ",
-          "paginate": {
-            "previous": "Өмнөх",
-            "next": "Дараахи"
-          }
-      },
-      "bSort" : false,
-      "searching": false,
-      "paginate": false,
-      "info":false
-  });
-});
+// requires jquery library
+jQuery(document).ready(function() {
+   jQuery(".main-table").clone(true).appendTo('#table-scroll').addClass('clone');
+ });
+
 </script>
 <style>
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    td{
-      text-align: center;
-    }
-    th{
-      text-align: center;
-    }
+.table-scroll {
+position:relative;
+max-width:100%;
+margin:auto;
+overflow:hidden;
+border:1px solid #000;
+}
+.table-wrap {
+width:100%;
+overflow:auto;
+}
+.table-scroll table {
+width:100%;
+margin:auto;
+border-collapse:separate;
+border-spacing:0;
+}
+.table-scroll th, .table-scroll td {
+padding:5px 10px;
+border:1px solid #000;
+background:#fff;
+white-space:nowrap;
+vertical-align:top;
+}
+.table-scroll thead, .table-scroll tfoot {
+background:#f9f9f9;
+}
+.clone {
+position:absolute;
+top:0;
+left:0;
+pointer-events:none;
+}
+.clone th, .clone td {
+visibility:hidden
+}
+.clone td, .clone th {
+border-color:transparent
+}
+.clone tbody th {
+visibility:visible;
+color:red;
+}
+.clone .fixed-side {
+border:1px solid #000;
+background:#eee;
+visibility:visible;
+}
+.clone thead, .clone tfoot{background:transparent;}
 </style>
 <div class="clearfix"></div>
 
-<h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2>
-<table class="table table-striped table-bordered">
-  <thead>
-      <tr>
-          <th colspan="2">Хэсэг</th>
-          <th colspan="{{count($companies3)*2}}">Цогтцэций чиглэл III чиглэл</th>
-          <th colspan="{{count($companies2)*2}}">Мандах чиглэл II хэсэг</th>
-          <th colspan="{{count($companies1)*2}}">Зүүнбаян чиглэл I хэсэг</th>
-      </tr>
-      <tr>
-          <th colspan="2">Аж ахуйн нэр</th>
-          @foreach ($companies as $company)
-            <th colspan="2">{{$company->companyName}}</th>
-          @endforeach
-      </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="2">Ажлын хэсэг</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td colspan="2">{{$company1->ajliinHeseg}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td style="vertical-align: inherit;" rowspan="7">Ажлын тоо хэмжээ /м.куб/</td>
-      <td>Хөрс хуулалт</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->hursHuulalt}}</td>
-        <td>{{$company1->gHursHuulalt}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td>Далан</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->dalan}}</td>
-        <td>{{$company1->gDalan}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td>Ухмал</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->uhmal}}</td>
-        <td>{{$company1->gUhmal}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td>Суурийн үе</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->suuriinUy}}</td>
-        <td>{{$company1->gSuuriinUy}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td>Шуудуу</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->shuuduu}}</td>
-        <td>{{$company1->gShuuduu}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td>Ухмалын хамгаалалт</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->uhmaliinHamgaalalt}}</td>
-        <td>{{$company1->gUhmaliinHamgaalalt}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td>Уулын шуудуу</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-          $guitsetgel1 = App\Http\Controllers\GuitsetgelController::getGuitsetgelTable($company->id);
-        @endphp
-        <td>{{$company1->uuliinShuuduu}}</td>
-        <td>{{$company1->gUuliinShuuduu}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td colspan="2">Нийт</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td>{{$company1->uuliinShuuduu+$company1->uhmaliinHamgaalalt+$company1->shuuduu+$company1->suuriinUy+$company1->uhmal+$company1->dalan+$company1->hursHuulalt}}</td>
-        <td>{{$company1->gUuliinShuuduu+$company1->gUhmaliinHamgaalalt+$company1->gShuuduu+$company1->gSuuriinUy+$company1->gUhmal+$company1->gDalan+$company1->gHursHuulalt}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td colspan="2">Ажил эхэлсэн гэрээ байгуулсан огноо</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td colspan="2">{{$company1->gereeOgnoo}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td colspan="2">Хүн хүч</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td colspan="2">{{$company1->hunHuch}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td colspan="2">Газар шорооны ажлын машин, техник</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
-        @endphp
-        <td colspan="2">{{$company1->mashinTehnik}}</td>
-      @endforeach
-    </tr>
-    <tr>
-      <td colspan="2">Гүйцэтгэлт</td>
-      @foreach ($companies as $company)
-        @php
-          $company1 = App\Http\Controllers\GuitsetgelController::getGuitsetgelHuvi($company->id);
+<script src="{{url('public/js/freezecol/freeze-table.js')}}"></script>
 
-        @endphp
-        <td colspan="2">{{round($company1, 2)}}%</td>
-      @endforeach
-    </tr>
-    </tbody>
-  </table>
+<h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2>
+<div id="table-scroll" class="table-scroll">
+  <div class="table-wrap">
+    <table class="main-table">
+      <thead>
+          <tr>
+              <th class="fixed-side" colspan="2">Хэсэг</th>
+              <th colspan="{{count($companies3)*2}}">Цогтцэций чиглэл III чиглэл</th>
+              <th colspan="{{count($companies2)*2}}">Мандах чиглэл II хэсэг</th>
+              <th colspan="{{count($companies1)*2}}">Зүүнбаян чиглэл I хэсэг</th>
+          </tr>
+          <tr>
+              <th class="fixed-side" colspan="2">Аж ахуйн нэр</th>
+              @foreach ($companies as $company)
+                <th colspan="2">{{$company->companyName}}</th>
+              @endforeach
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fixed-side" colspan="2">Ажлын хэсэг</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td colspan="2">{{$company1->ajliinHeseg}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side" style="vertical-align: inherit;" rowspan="7">Ажлын тоо хэмжээ /м.куб/</td>
+          <td class="fixed-side">Хөрс хуулалт</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->hursHuulalt}}</td>
+            <td>{{$company1->gHursHuulalt}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side">Далан</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->dalan}}</td>
+            <td>{{$company1->gDalan}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side">Ухмал</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->uhmal}}</td>
+            <td>{{$company1->gUhmal}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side">Суурийн үе</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->suuriinUy}}</td>
+            <td>{{$company1->gSuuriinUy}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side">Шуудуу</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->shuuduu}}</td>
+            <td>{{$company1->gShuuduu}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side">Ухмалын хамгаалалт</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->uhmaliinHamgaalalt}}</td>
+            <td>{{$company1->gUhmaliinHamgaalalt}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side">Уулын шуудуу</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+              $guitsetgel1 = App\Http\Controllers\GuitsetgelController::getGuitsetgelTable($company->id);
+            @endphp
+            <td>{{$company1->uuliinShuuduu}}</td>
+            <td>{{$company1->gUuliinShuuduu}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side" colspan="2">Нийт</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td>{{$company1->uuliinShuuduu+$company1->uhmaliinHamgaalalt+$company1->shuuduu+$company1->suuriinUy+$company1->uhmal+$company1->dalan+$company1->hursHuulalt}}</td>
+            <td>{{$company1->gUuliinShuuduu+$company1->gUhmaliinHamgaalalt+$company1->gShuuduu+$company1->gSuuriinUy+$company1->gUhmal+$company1->gDalan+$company1->gHursHuulalt}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side" colspan="2">Ажил эхэлсэн гэрээ байгуулсан огноо</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td colspan="2">{{$company1->gereeOgnoo}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side" colspan="2">Хүн хүч</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td colspan="2">{{$company1->hunHuch}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side" colspan="2">Газар шорооны ажлын машин, техник</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getCompanyRow($company->id);
+            @endphp
+            <td colspan="2">{{$company1->mashinTehnik}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td class="fixed-side" colspan="2">Гүйцэтгэлт</td>
+          @foreach ($companies as $company)
+            @php
+              $company1 = App\Http\Controllers\GuitsetgelController::getGuitsetgelHuvi($company->id);
+
+            @endphp
+            <td colspan="2">{{round($company1, 2)}}%</td>
+          @endforeach
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div class="clearfix"></div>
       <!-- Datatables -->
       <script src="{{url('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>

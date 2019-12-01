@@ -177,6 +177,10 @@ return [
 
         Yajra\DataTables\DataTablesServiceProvider::class,
 
+        'Intervention\Image\ImageServiceProvider',
+
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -229,6 +233,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
+        'Image' => 'Intervention\Image\Facades\Image',
+
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
