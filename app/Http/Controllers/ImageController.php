@@ -11,6 +11,11 @@ use DB;
 
 class ImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function resizeImage()
     {
         $images = DB::table('tb_images')->get();

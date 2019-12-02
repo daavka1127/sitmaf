@@ -101,7 +101,7 @@
                   <li><a><i class="fa fa-user"></i>Админ эрх <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{url('/register')}}">Админ нэмэх</a></li>
-                      <li><a href="{{url('/admins')}}">Админ засах</a></li>
+                      {{-- <li><a href="{{url('/admins')}}">Админ засах</a></li> --}}
                     </ul>
                   </li>
                 </ul>
