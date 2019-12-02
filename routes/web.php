@@ -60,4 +60,5 @@ Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable')
 
 
 Route::get('resizeImage', 'ImageController@resizeImage');
+Route::get('/image/new', 'ImageController@newImageShow');
 Route::post('resizeImagePost', 'ImageController@resizeImagePost')->name('resizeImagePost');

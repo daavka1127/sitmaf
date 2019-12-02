@@ -1,7 +1,9 @@
 @extends('layouts.layout_main')
-
 @section('content')
+
 <div class="container">
+
+
 <h1>Зураг оруулах</h1>
 @if (count($errors) > 0)
     <div class="alert alert-danger">
