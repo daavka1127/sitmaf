@@ -10,7 +10,7 @@
 <div class="container">
 
 @foreach ($images as $image)
-  <a href="{{url('/public/images')}}/{{$image->url}}" data-fancybox="images" data-caption="Caption for single image">
+  <a href="{{url('/public/images')}}/{{$image->url}}" data-fancybox="images" data-caption="{{$image->title}}">
   	<img src="{{url('/public/thumbnail')}}/{{$image->url}}" alt="" />
   </a>
 @endforeach
