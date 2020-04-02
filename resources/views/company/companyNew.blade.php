@@ -43,48 +43,45 @@
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div>
           <div class="clearfix"></div>
-
-          {{-- START HIIGDEH AJIL --}}
-          <h5 style="text-align:center;"><strong>Хийгдэх ажил</strong></h5>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtHursHuulalt" step="any" name="hursHuulalt" class="form-control" />
+          <div class="col-md-12">
+              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
           </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtDalan" step="any" name="dalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtUhmal" step="any" name="uhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtSuuriinUy" step="any" name="suuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtShuuduu" step="any" name="shuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtUhmaliinHamgaalalt" step="any" name="uhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtUuliinShuuduu" step="any" name="uuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END HIIGDEH AJIL --}}
-
-
-          <div class="col-md-6" id="error_message"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnNewCompany" type="submit" class="btn btn-success">Нэмэх</button>
+          <div class="col-md-12" id="worktypeid">
+            <div class="form-group col-md-3 text-left">
+              <label>Хүн хүч <span class="red-required">*</span> </label>
+              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+            </div>
+            <div class="form-group col-md-3 text-left">
+              <label>Хүн хүч <span class="red-required">*</span> </label>
+              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+            </div>
+            <div class="form-group col-md-3 text-left">
+              <label>Хүн хүч <span class="red-required">*</span> </label>
+              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+            </div>
+            <div class="form-group col-md-3 text-left">
+              <label>Хүн хүч <span class="red-required">*</span> </label>
+              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+            </div>
+            <div class="form-group col-md-3 text-left">
+              <label>Хүн хүч <span class="red-required">*</span> </label>
+              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
             </div>
           </div>
-          <div class="clearfix"></div>
+          <div class="col-md-12">
+              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
+          </div>
+          <div class="col-md-12">
+              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
+          </div>
+          <div class="col-md-12">
+              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
+          </div>
+          <div class="col-md-12">
+              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
+          </div>
+
+
         </form>
       </div>
       <div class="clearfix"></div>
