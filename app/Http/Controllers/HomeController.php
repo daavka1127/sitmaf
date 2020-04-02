@@ -19,6 +19,11 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function dadaa()
+    {
+        
+    }
+
     /**
      * Show the application dashboard.
      *

@@ -62,3 +62,10 @@ Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable')
 Route::get('resizeImage', 'ImageController@resizeImage');
 Route::get('/image/new', 'ImageController@newImageShow');
 Route::post('resizeImagePost', 'ImageController@resizeImagePost')->name('resizeImagePost');
+
+//start Work_type table
+Route::get("/work_type/show", "WorktypeController@work_typeShow");
+Route::post("/work_type/get", "WorktypeController@getWorkType"); // get json table
+Route::post('/work_type/store', 'WorktypeController@store');
+Route::post('/work_type/update', 'WorktypeController@update');
+//end Work_type table

@@ -18,6 +18,7 @@ class GuitsetgelController extends Controller
 
     public function index(){
         $companies = DB::table('tb_companies')->get();
+        // $companies  =DB::SELECT("SELECT * FROM tb_companies")->get();
 
         return view('guitsetgel.guitsetgelShow', compact('companies'));
     }
@@ -121,7 +122,7 @@ class GuitsetgelController extends Controller
         $datas = DB::table('tb_guitsetgel')
         ->where('companyID','=',$companyID)->get();
 
-        
+
           $guitsetgel = DB::table('tb_guitsetgel')
             ->join('tb_companies', 'tb_guitsetgel.companyID', '=','tb_companies.id')
             ->select('tb_guitsetgel.*','tb_companies.hursHuulalt','tb_companies.dalan','tb_companies.uhmal','tb_companies.suuriinUy','tb_companies.shuuduu','tb_companies.uhmaliinHamgaalalt','tb_companies.uuliinShuuduu')

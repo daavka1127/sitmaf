@@ -104,6 +104,12 @@
                       {{-- <li><a href="{{url('/admins')}}">Админ засах</a></li> --}}
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-th-list"></i>Ажил table <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="{{url('/work_type/show')}}">Ажлын төрөл</a></li>
+                        <li><a href="{{url('/menuHztsk/show')}}">Хийх ажилууд</a></li>
+                      </ul>
+                  </li>
                 </ul>
               </div>
               <div class="menu_section">
