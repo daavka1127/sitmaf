@@ -1,3 +1,4 @@
+var dataRow="";
 function refresh(){
 
     var csrf = $('meta[name=csrf-token]').attr("content");
@@ -75,64 +76,105 @@ $(document).ready(function(){
       // alert(dataRow["companyName"]);
     });
 
-    $(document).ready(function(){
-        $("#btnWorkTypeAdd").click(function(e){
-            e.preventDefault();
-            // alert("adfadf");
-            var isInsert = true;
-            if($("#work_type_id").val()==""){
-                alertify.error("Ажлын төрөл оруулан уу?");
-                isInsert = false;
-            }
 
 
-            if(isInsert == false) { return; }
+});
 
-            $.ajax({
+$(document).ready(function(){
+  $("#btnWorkTypeAdd").click(function(e){
+      e.preventDefault();
+      // alert("adfadf");
+      var isInsert = true;
+      if($("#work_type_id").val()==""){
+          alertify.error("Ажлын төрөл оруулан уу?");
+          isInsert = false;
+      }
+
+
+      if(isInsert == false) { return; }
+
+      $.ajax({
+        type: 'POST',
+        url: newWorkTypeUrl,
+        data: $("#frmAddWorkTypeName").serialize(),
+        success:function(response){
+            alertify.alert(response);
+            emptyNewModal();
+            refresh();
+        },
+        error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+          var errors = jqXhr.responseJSON;
+          var errorsHtml = '';
+          $.each(errors['errors'], function (index, value) {
+              errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+          });
+          alert(errorsHtml);
+        }
+      });
+  });
+
+  $("#btnEditWorkType").click(function(){
+    $("#txtEditWorkTypeID").val(dataRow["id"]);
+    $("#ework_type_id").val(dataRow["name"]);
+      if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
+      else{$('#ModelEditWorkType').modal('show');}
+
+  });
+
+  $("#btnWorkTypeEdit").click(function(e){
+      e.preventDefault();
+      // alert("adfadf");
+      var isInsert = true;
+      if($("#ework_type_id").val()==""){
+          alertify.error("Ажлын төрөл оруулан уу?");
+          isInsert = false;
+      }
+      if(isInsert == false) { return; }
+      $.ajax({
+        type: 'POST',
+        url: updateWorkTypeUrl,
+        data: $("#frmUpdateWorkType").serialize(),
+        success:function(response){
+            alertify.alert(response);
+            emptyNewModal();
+            refresh();
+        },
+        error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+          var errors = jqXhr.responseJSON;
+          var errorsHtml = '';
+          $.each(errors['errors'], function (index, value) {
+              errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+          });
+          alert(errorsHtml);
+        }
+      });
+  });
+
+  $("#btnDeleteWorkType").click(function(){
+      if(dataRow == ""){
+          alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
+          return;
+      }
+
+      alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
+        if (e) {
+          var csrf = $('meta[name=csrf-token]').attr("content");
+          $.ajax({
               type: 'POST',
-              url: newWorkTypeUrl,
-              data: $("#frmAddWorkTypeName").serialize(),
+              url: deleteWorkTypeUrl,
+              data: {_token: csrf, id : dataRow['id']},
               success:function(response){
                   alertify.alert(response);
-                  emptyNewModal();
                   refresh();
+                  dataRow="";
               },
-              error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-                var errors = jqXhr.responseJSON;
-                var errorsHtml = '';
-                $.each(errors['errors'], function (index, value) {
-                    errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-                });
-                alert(errorsHtml);
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
               }
-            });
-        });
-
-        $("#btnEditWorkType").click(function(){
-          $("#txtEditGHursHuulalt").prop("disabled", false);
-          $("#txtEditGDalan").prop("disabled", false);
-          $("#txtEditGUhmal").prop("disabled", false);
-          $("#txtEditGSuuriinUy").prop("disabled", false);
-          $("#txtEditGShuuduu").prop("disabled", false);
-          $("#txtEditGUhmaliinHamgaalalt").prop("disabled", false);
-          $("#txtEditGUuliinShuuduu").prop("disabled", false);
-
-            $("#txtEditGID").val(dataRow["id"]);
-            $("#cmbEditGCompany").val(dataRow["companyID"]);
-            $("#txtEditOgnoo").val(dataRow["ognoo"]);
-            $("#txtEditGHursHuulalt").val(dataRow["gHursHuulalt"]);
-            $("#txtEditGDalan").val(dataRow["gDalan"]);
-            $("#txtEditGUhmal").val(dataRow["gUhmal"]);
-            $("#txtEditGSuuriinUy").val(dataRow["gSuuriinUy"]);
-            $("#txtEditGShuuduu").val(dataRow["gShuuduu"]);
-            $("#txtEditGUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
-            $("#txtEditGUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
-            if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
-            else{$('#modalEditGuitsetgel').modal('show');}
-
-            // disableEditInputs();
-
-        });
-    });
-
+          })
+        } else {
+            alertify.error('Устгах үйлдэл цуцлагдлаа.');
+        }
+      });
+  });
 });

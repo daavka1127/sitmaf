@@ -35,11 +35,17 @@ class WorktypeController extends Controller
   }
 
   public function update(Request $req){
+
       $work_type = Work_type::find($req->id);
       $work_type->name = $req->work_type_name;
       $work_type->save();
-      //return "Амжилттай заслаа.";
-      return $req->id;
+      return "Амжилттай заслаа.";
+      //return $req->id;
+  }
+  public function delete(Request $req){
+      $work_type = Work_type::find($req->id);
+      $work_type->delete();
+      return "Амжилттай устгалаа.";
   }
 
 

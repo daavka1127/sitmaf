@@ -12,6 +12,7 @@
     var getWorkTypeUr = "{{url('/work_type/get')}}";
     var newWorkTypeUrl = "{{url("/work_type/store")}}";
     var updateWorkTypeUrl = "{{url("/work_type/update")}}";
+    var deleteWorkTypeUrl = "{{url("/work_type/delete")}}";
 
     var csrf = "{{csrf_token()}}"
   </script>
@@ -32,7 +33,7 @@
   <div calss="row">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newWorkTypeModal">Нэмэх</button>
     <button type="button" class="btn btn-warning" id="btnEditWorkType">Засах</button>
-    <button type="button" class="btn btn-danger" id="btnDeleteGuitsetgel">Устгах</button>
+    <button type="button" class="btn btn-danger" id="btnDeleteWorkType">Устгах</button>
   </div>
   @include('work.work_type.work_type_add')
   @include('work.work_type.work_type_edit')

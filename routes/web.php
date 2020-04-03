@@ -68,4 +68,5 @@ Route::get("/work_type/show", "WorktypeController@work_typeShow");
 Route::post("/work_type/get", "WorktypeController@getWorkType"); // get json table
 Route::post('/work_type/store', 'WorktypeController@store');
 Route::post('/work_type/update', 'WorktypeController@update');
+Route::post('/work_type/delete', 'WorktypeController@delete');
 //end Work_type table
