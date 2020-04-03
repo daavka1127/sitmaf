@@ -16,6 +16,7 @@
     var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
     var editCompanyUrl = "{{url("/companies/update")}}";
     var deleteCompanyUrl = "{{url("/companies/delete")}}";
+    
     var dataRow = "";
     $(document).ready(function(){
       $('#datatable').DataTable( {
