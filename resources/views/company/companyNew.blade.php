@@ -1,4 +1,5 @@
 {{-- START NEW COMPANY --}}
+<input type="hidden" name="companyID" value="0" />
 <div class="modal fade" id="newCompany">
   <div class="modal-dialog" style="width:80%;">
     <div class="modal-content">
@@ -42,50 +43,36 @@
             <label>Ажлын машин техник <span class="red-required">*</span> </label>
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div>
+          </form>
           <div class="clearfix"></div>
-
-          {{-- START HIIGDEH AJIL --}}
-          <h5 style="text-align:center;"><strong>Хийгдэх ажил</strong></h5>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtHursHuulalt" step="any" name="hursHuulalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtDalan" step="any" name="dalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtUhmal" step="any" name="uhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtSuuriinUy" step="any" name="suuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtShuuduu" step="any" name="shuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtUhmaliinHamgaalalt" step="any" name="uhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtUuliinShuuduu" step="any" name="uuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END HIIGDEH AJIL --}}
-
-
-          <div class="col-md-6" id="error_message"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnNewCompany" type="submit" class="btn btn-success">Нэмэх</button>
+          @php
+            $worktypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
+          @endphp
+          @foreach ($worktypes as $worktype)
+            <div class="col-md-12">
+                <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$worktype->id}}" id="checkBoxes{{$worktype->id}}">  {{$worktype->name}}</label>
             </div>
-          </div>
-          <div class="clearfix"></div>
-        </form>
+            <form id="saveWorks{{$worktype->id}}" class="saveWorks" action="{{ action('companyController@storeWorks')}}" method="post" workTypeID = "{{$worktype->id}}">
+              <div class="col-md-12" style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$worktype->id}}">
+                @php
+                  $works = \App\Http\Controllers\WorkController::getCompactWorks($worktype->id);
+                @endphp
+
+                  @foreach ($works as $work)
+                    <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
+                      <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
+                      <input type="number" min="0" step="1" id="txtInput{{$worktype->id}}" name="input{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
+                    </div>
+                  @endforeach
+                  @if (count($works) != 0)
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                      <button id="btnWork" type="button" btnworkid="{{$worktype->id}}" class="btnWorkTypeID btn btn-success">Хадгалах</button>
+                    </div>
+                  @endif
+              </div>
+            </form>
+          @endforeach
+
       </div>
       <div class="clearfix"></div>
       <div class = "modal-footer">
