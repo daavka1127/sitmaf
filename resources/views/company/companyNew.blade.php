@@ -1,5 +1,4 @@
 {{-- START NEW COMPANY --}}
-<script src="{{url('/public/js/work_type/hideShowWorks.js')}}"></script>
 
 <div class="modal fade" id="newCompany">
   <div class="modal-dialog" style="width:80%;">
@@ -44,6 +43,7 @@
             <label>Ажлын машин техник <span class="red-required">*</span> </label>
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div>
+          </form>
           <div class="clearfix"></div>
           @php
             $worktypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
@@ -52,36 +52,31 @@
             <div class="col-md-12">
                 <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$worktype->id}}" id="checkBoxes{{$worktype->id}}">  {{$worktype->name}}</label>
             </div>
-            <div class="col-md-12" style="display:none;" id="worktypeid{{$worktype->id}}">
-              <div class="form-group col-md-3 text-left">
-                <label>Хүн хүч <span class="red-required">*</span> </label>
-                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+            <form id="saveWorks{{$worktype->id}}" class="saveWorks" action="{{ action('companyController@storeWorks')}}" method="post" workTypeID = "{{$worktype->id}}">
+              <div class="col-md-12" style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$worktype->id}}">
+                @php
+                  $works = \App\Http\Controllers\WorkController::getCompactWorks($worktype->id);
+                @endphp
+
+                  @foreach ($works as $work)
+                    <div class="form-group col-md-3 text-left" style="padding-top: 5px;">
+                      <label>{{$work->name}} /{{$work->hemjih_negj}}/</label>
+                      <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" />
+                    </div>
+                  @endforeach
+                  @if (count($works) != 0)
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                      <button id="btnWork" type="button" btnworkid="{{$worktype->id}}" class="btnWorkTypeID btn btn-success">Нэмэх</button>
+                    </div>
+                  @endif
               </div>
-              <div class="form-group col-md-3 text-left">
-                <label>Хүн хүч <span class="red-required">*</span> </label>
-                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-              </div>
-              <div class="form-group col-md-3 text-left">
-                <label>Хүн хүч <span class="red-required">*</span> </label>
-                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-              </div>
-              <div class="form-group col-md-3 text-left">
-                <label>Хүн хүч <span class="red-required">*</span> </label>
-                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-              </div>
-              <div class="form-group col-md-3 text-left">
-                <label>Хүн хүч <span class="red-required">*</span> </label>
-                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-              </div>
-            </div>
-            <div class="clearfix"></div>
+            </form>
           @endforeach
 
-
-        </form>
       </div>
       <div class="clearfix"></div>
       <div class = "modal-footer">
+        <button type="button" class="btn btn-success" data-target="#newCompany">Хадгалах</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Хаах</button>
       </div>
 
