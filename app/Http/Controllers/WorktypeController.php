@@ -42,6 +42,13 @@ class WorktypeController extends Controller
       return $req->id;
   }
 
+  public static function getCompactWorkType()
+  {
+    $work_type = DB::table('tb_work_type')
+        ->where("name", "!=", null)
+        ->get();
+    return $work_type;
+  }
 
 
 

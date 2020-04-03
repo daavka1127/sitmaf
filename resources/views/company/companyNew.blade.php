@@ -1,4 +1,6 @@
 {{-- START NEW COMPANY --}}
+<script src="{{url('/public/js/work_type/hideShowWorks.js')}}"></script>
+
 <div class="modal fade" id="newCompany">
   <div class="modal-dialog" style="width:80%;">
     <div class="modal-content">
@@ -43,43 +45,37 @@
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div>
           <div class="clearfix"></div>
-          <div class="col-md-12">
-              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
-          </div>
-          <div class="col-md-12" id="worktypeid">
-            <div class="form-group col-md-3 text-left">
-              <label>Хүн хүч <span class="red-required">*</span> </label>
-              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+          @php
+            $worktypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
+          @endphp
+          @foreach ($worktypes as $worktype)
+            <div class="col-md-12">
+                <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$worktype->id}}" id="checkBoxes{{$worktype->id}}">  {{$worktype->name}}</label>
             </div>
-            <div class="form-group col-md-3 text-left">
-              <label>Хүн хүч <span class="red-required">*</span> </label>
-              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+            <div class="col-md-12" style="display:none;" id="worktypeid{{$worktype->id}}">
+              <div class="form-group col-md-3 text-left">
+                <label>Хүн хүч <span class="red-required">*</span> </label>
+                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+              </div>
+              <div class="form-group col-md-3 text-left">
+                <label>Хүн хүч <span class="red-required">*</span> </label>
+                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+              </div>
+              <div class="form-group col-md-3 text-left">
+                <label>Хүн хүч <span class="red-required">*</span> </label>
+                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+              </div>
+              <div class="form-group col-md-3 text-left">
+                <label>Хүн хүч <span class="red-required">*</span> </label>
+                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+              </div>
+              <div class="form-group col-md-3 text-left">
+                <label>Хүн хүч <span class="red-required">*</span> </label>
+                <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
+              </div>
             </div>
-            <div class="form-group col-md-3 text-left">
-              <label>Хүн хүч <span class="red-required">*</span> </label>
-              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-            </div>
-            <div class="form-group col-md-3 text-left">
-              <label>Хүн хүч <span class="red-required">*</span> </label>
-              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-            </div>
-            <div class="form-group col-md-3 text-left">
-              <label>Хүн хүч <span class="red-required">*</span> </label>
-              <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
-            </div>
-          </div>
-          <div class="col-md-12">
-              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
-          </div>
-          <div class="col-md-12">
-              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
-          </div>
-          <div class="col-md-12">
-              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
-          </div>
-          <div class="col-md-12">
-              <label class="checkbox-inline"><input type="checkbox" id="1" name="bai">  gjhjghjghjgh</label>
-          </div>
+            <div class="clearfix"></div>
+          @endforeach
 
 
         </form>
