@@ -70,3 +70,11 @@ Route::post('/work_type/store', 'WorktypeController@store');
 Route::post('/work_type/update', 'WorktypeController@update');
 Route::post('/work_type/delete', 'WorktypeController@delete');
 //end Work_type table
+
+//start Work table
+Route::get("/work/show", "WorkController@work_typeShow");
+Route::post("/work/get", "WorkController@getWorkType"); // get json table
+Route::post('/work/store', 'WorkController@store');
+Route::post('/work/update', 'WorkController@update');
+Route::post('/work/delete', 'WorkController@delete');
+//end Work table
