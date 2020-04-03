@@ -101,4 +101,22 @@ class companyController extends Controller
         return $req->hunHuch;
     }
 
+    // davaanyam uusegsen start
+    public static function getCompany(){
+        $companies = DB::table('tb_companies')
+        ->get();
+        return $companies;
+    }
+
+    public static function getCompanyByHeseg($hesegID){
+        $companiesHeseg = DB::table('tb_companies')
+        ->where('tb_companies.heseg_id', '=', $hesegID)
+        ->get();
+        return $companiesHeseg;
+    }
+
+    
+
+    // davaanyam uusegsen end
+
 }
