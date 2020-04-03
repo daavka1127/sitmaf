@@ -52,7 +52,7 @@ class WorkController extends Controller
         $work_type->delete();
         return "Амжилттай устгалаа.";
     }
-    
+
     public static function getCompactWorks($worktype)
     {
       $works = DB::table('tb_work')
