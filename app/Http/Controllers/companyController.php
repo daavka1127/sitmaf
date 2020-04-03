@@ -81,36 +81,14 @@ class companyController extends Controller
         $company->delete();
         return "Амжилттай устгалаа.";
     }
-    public function storeWorks(Request $req, $val, $worktype){
+    public function storeWorks(Request $req){
 
-        //$company = new company;
-
-        $s=0;
-
-        // $name = $req->input('name');
-
-        $input = $req->inputs->all();
-
-        foreach ($input as $key => $value) {
-            
+        $str="";
+        foreach ($req->json as $key => $value) {
+            $str = $str . " " .  $value['workID'];
         }
 
-        // $company->companyName = $req->companyName;
-        // $company->heseg_id = $req->heseg_id;
-        // $company->ajliinHeseg = $req->ajliinHeseg;
-        // $company->hursHuulalt = $req->hursHuulalt;
-        // $company->dalan = $req->dalan;
-        // $company->uhmal = $req->uhmal;
-        // $company->suuriinUy = $req->suuriinUy;
-        // $company->shuuduu = $req->shuuduu;
-        // $company->uhmaliinHamgaalalt = $req->uhmaliinHamgaalalt;
-        // $company->uuliinShuuduu = $req->uuliinShuuduu;
-        // $company->niit = ($req->hursHuulalt + $req->dalan + $req->uhmal + $req->suuriinUy + $req->shuuduu + $req->uhmaliinHamgaalalt + $req->uuliinShuuduu);
-        // $company->gereeOgnoo = $req->gereeOgnoo;
-        // $company->hunHuch = $req->hunHuch;
-        // $company->mashinTehnik = $req->mashinTehnik;
-        // $company->save();
-        return $s;
+        return $str;
     }
 
 }
