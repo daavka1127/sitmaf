@@ -78,9 +78,6 @@
           @endforeach
 
       </div>
-      <div id="checkReq">
-
-      </div>
       <div class="clearfix"></div>
       <div class = "modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Хаах</button>

@@ -31,7 +31,7 @@ Route::post('/get/company/by/id', 'companyController@getCompanyByID');
 Route::post('/companies/store', 'companyController@store');
 Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
-
+//post bolgono storeworks
 Route::get('/companies/storeWorks', 'companyController@storeWorks');
 
 Route::get('/guitsetgel/new', 'GuitsetgelController@index')->name('home');

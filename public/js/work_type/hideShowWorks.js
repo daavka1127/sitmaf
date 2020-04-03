@@ -31,9 +31,8 @@ $(document).ready(function () {
             json: jsonObj
           },
           success:function(response){
-            $("#checkReq").append(response);
-              //alertify.alert(response);
-              //refresh();
+              alertify.alert(response);
+              refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;
