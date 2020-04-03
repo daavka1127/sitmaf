@@ -11,20 +11,29 @@ $(document).on('click', '[type=checkbox]', function(){
 $(document).ready(function () {
     $('button[class^="btnWorkTypeID"]').click(function () {
         var id = $(this).attr("btnworkid");
-        var inputs = $(".txtclass"+id);
 
-        alert(inputs);
+        jsonObj = [];
+        $.each($(".txtclass"+id), function( key, value ) {
+          var workID = $(this).attr("workID");
+          var value = $(this).val();
+          item = {}
+          item ["workTypeID"] = id;
+          item ["workID"] = workID;
+          item ["value"] = value;
+          jsonObj.push(item);
+
+        });
 
         $.ajax({
           type: 'GET',
           url: newWorksUrl,
           data: {
-            workTypeID:id,
-            inputs: inputs
+            json: jsonObj
           },
           success:function(response){
-              alertify.alert(response);
-              refresh();
+            $("#checkReq").append(response);
+              //alertify.alert(response);
+              //refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;

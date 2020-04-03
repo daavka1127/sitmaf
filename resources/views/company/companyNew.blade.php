@@ -61,7 +61,7 @@
                   @foreach ($works as $work)
                     <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
                       <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
-                      <input type="number" min="0" step="1" id="txtInput{{$worktype->id}}" name="input{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
+                      <input type="number" min="0" step="1" id="txtInput{{$worktype->id}}" workID="{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
                     </div>
                   @endforeach
                   @if (count($works) != 0)
@@ -72,6 +72,9 @@
               </div>
             </form>
           @endforeach
+
+      </div>
+      <div id="checkReq">
 
       </div>
       <div class="clearfix"></div>
