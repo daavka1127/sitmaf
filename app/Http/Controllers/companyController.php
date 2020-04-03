@@ -81,8 +81,20 @@ class companyController extends Controller
         $company->delete();
         return "Амжилттай устгалаа.";
     }
-    public function storeWorks(Request $req){
-        // $company = new company;
+    public function storeWorks(Request $req, $val, $worktype){
+
+        //$company = new company;
+
+        $s=0;
+
+        // $name = $req->input('name');
+
+        $input = $req->inputs->all();
+
+        foreach ($input as $key => $value) {
+            
+        }
+
         // $company->companyName = $req->companyName;
         // $company->heseg_id = $req->heseg_id;
         // $company->ajliinHeseg = $req->ajliinHeseg;
@@ -98,7 +110,7 @@ class companyController extends Controller
         // $company->hunHuch = $req->hunHuch;
         // $company->mashinTehnik = $req->mashinTehnik;
         // $company->save();
-        return $req->hunHuch;
+        return $s;
     }
 
 }

@@ -8,15 +8,33 @@ $(document).on('click', '[type=checkbox]', function(){
     }
 });
 
-// $(document).on('click', '[type=button]', function(){
-//     var id = $(this).attr("btnworkid");
-//     alert("aa"+id);
-// });
-
 $(document).ready(function () {
     $('button[class^="btnWorkTypeID"]').click(function () {
         var id = $(this).attr("btnworkid");
-        alert("aa"+id);
+        var inputs = $(".txtclass"+id);
+
+        alert(inputs);
+
+        $.ajax({
+          type: 'GET',
+          url: newWorksUrl,
+          data: {
+            workTypeID:id,
+            inputs: inputs
+          },
+          success:function(response){
+              alertify.alert(response);
+              refresh();
+          },
+          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+            var errors = jqXhr.responseJSON;
+            var errorsHtml = '';
+            $.each(errors['errors'], function (index, value) {
+                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+            });
+            alert(errorsHtml);
+          }
+        });
     });
 });
 

@@ -32,7 +32,7 @@ Route::post('/companies/store', 'companyController@store');
 Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
 
-Route::post('/companies/storeWorks', 'companyController@storeWorks');
+Route::get('/companies/storeWorks', 'companyController@storeWorks');
 
 Route::get('/guitsetgel/new', 'GuitsetgelController@index')->name('home');
 Route::post('/guitsetgel/new/get', 'GuitsetgelController@getCompanyToNew');
