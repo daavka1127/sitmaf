@@ -14,6 +14,18 @@
 // Route::get('/', function () {
 //     return view('home');
 // });
+
+Route::get("/test/table", function(){
+  return view("report.companyTableReport");
+});
+
+Route::get("/test/fixed/table", function(){
+  return view("report.testFixedTable");
+});
+Route::get("/test/plan/quantity/{comID}/{workID}", "planController@getPlanByWorkID");
+
+
+
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
