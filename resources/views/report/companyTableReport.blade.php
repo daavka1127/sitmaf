@@ -5,6 +5,14 @@
 
 
   </script>
+    <style type="text/css">
+        @media print
+        {
+        body * { visibility: hidden; }
+        .table-div * { visibility: visible; }
+        .table-div { position: absolute; top: 40px; left: 30px; }
+        }
+    </style>
   <style>
   .table-div{
     overflow:auto;
@@ -63,7 +71,10 @@
               <td>{{$works[0]->name}}</td>
               <td>{{$works[0]->hemjih_negj}}</td>
               @foreach ($companies as $company)
-                <td>1</td>
+                @php
+                  $planQuantity = \App\Http\Controllers\planController::getPlanByWorkID($company->id, $works[0]->id);
+                @endphp
+                <td>{{$planQuantity}}</td>
                 <td>2</td>
                 <td>3</td>
                 <td>4</td>
@@ -78,7 +89,10 @@
                 <td>{{$works[$i]->name}}</td>
                 <td>{{$works[$i]->hemjih_negj}}</td>
                 @foreach ($companies as $company)
-                  <td>1</td>
+                  @php
+                    $planQuantity = \App\Http\Controllers\planController::getPlanByWorkID($company->id, $works[$i]->id);
+                  @endphp
+                  <td>{{$planQuantity}}</td>
                   <td>2</td>
                   <td>3</td>
                   <td>4</td>

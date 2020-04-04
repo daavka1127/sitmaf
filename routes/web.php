@@ -22,6 +22,7 @@ Route::get("/test/table", function(){
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 });
+Route::get("/test/plan/quantity/{comID}/{workID}", "planController@getPlanByWorkID");
 
 
 
