@@ -186,7 +186,7 @@ min-width: 20em;
 <h2>Row Headers</h2>
 <div class="table-div">
   <table>
-    <caption id="HeadersCol">Books with a Fixed Row Header Column</caption>
+
     <thead>
       <tr>
         <th>Author</th>
@@ -199,7 +199,7 @@ min-width: 20em;
     <tbody>
       <tr>
         <th scope="row">Miguel De Cervantes</th>
-        <td>The Ingenious Gentleman Don Quixote of La Mancha</td>
+        <td >The Ingenious Gentleman Don Quixote of La Mancha</td>
         <td>1605</td>
         <td>9783125798502</td>
         <td>3125798507</td>
