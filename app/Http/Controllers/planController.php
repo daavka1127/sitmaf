@@ -10,14 +10,6 @@ use Yajra\DataTables\DataTables;
 
 class planController extends Controller
 {
-  public static function getPlanByWorkID($companiesID, $workID){
-      $plans = DB::table('tb_plan')
-      ->where('tb_plan.companyID', '=', $companiesID)
-      ->where('tb_plan.work_id', '=', $workID)
-      ->first();
-      return $plans->quantity;
-  }
-
   public function storePlanByWorkID($json, $comID)
   {
     foreach ($json as $key => $value) {
