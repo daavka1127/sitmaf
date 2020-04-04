@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\company;
+use App\Http\Controllers\planController;
+use App\plan;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -82,13 +84,26 @@ class companyController extends Controller
         return "Амжилттай устгалаа.";
     }
     public function storeWorks(Request $req){
+      $comID=0;
+      if($req->companyID == 0)
+      {
+        $company = new company;
+        $company->companyName = $req->companyName;
+        $company->heseg_id = $req->heseg_id;
+        $company->ajliinHeseg = $req->ajliinHeseg;
+        $company->gereeOgnoo = $req->gereeOgnoo;
+        $company->hunHuch = $req->hunHuch;
+        $company->mashinTehnik = $req->mashinTehnik;
+        $company->save();
+        $comID = $company->id;
+      }
+      else {
+        $comID = $req->companyID;
+      }
+      $planWork = new planController;
+      $planWork->storePlanByWorkID($req->json, $comID);
 
-        $str="";
-        foreach ($req->json as $key => $value) {
-            $str = $str . " " .  $value['workID'];
-        }
-
-        return $str;
+      return $comID;
     }
 
     // davaanyam uusegsen start

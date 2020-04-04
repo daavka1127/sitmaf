@@ -1,5 +1,4 @@
 {{-- START NEW COMPANY --}}
-<input type="hidden" name="companyID" value="0" />
 <div class="modal fade" id="newCompany">
   <div class="modal-dialog" style="width:80%;">
     <div class="modal-content">
@@ -13,6 +12,7 @@
         <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгж бүртгэл</strong></h2>
         <form id="frmNewCompany" action="{{ action('companyController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
           @csrf
+          <input type="hidden" id="companyID" name="companyID" value="0" />
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
             <input type="text" id="txtCompanyName" name="companyName" class="form-control" />
@@ -61,12 +61,12 @@
                   @foreach ($works as $work)
                     <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
                       <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
-                      <input type="number" min="0" step="1" id="txtInput{{$worktype->id}}" workID="{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
+                      <input type="number" min="0" step="1" workID="{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
                     </div>
                   @endforeach
                   @if (count($works) != 0)
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-                      <button id="btnWork" type="button" btnworkid="{{$worktype->id}}" class="btnWorkTypeID btn btn-success">Хадгалах</button>
+                      <button type="button" btnworkid="{{$worktype->id}}" class="btnWorkTypeID btn btn-success">Хадгалах</button>
                     </div>
                   @endif
               </div>
