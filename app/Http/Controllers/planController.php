@@ -62,4 +62,27 @@ class planController extends Controller
         // return $plans;
         return Response::json($plans);
     }
+
+    public function getPlanWorkTypeByCompany(Request $req){ //
+        $plans = DB::table('tb_plan')
+            ->join('tb_work_type', "tb_plan.work_type_id", "=", "tb_work_type.id")
+            ->select('tb_plan.work_type_id', "tb_work_type.name")
+            ->where('tb_plan.companyID', '=', $req->companyID)
+            ->groupBy('tb_plan.work_type_id', "tb_work_type.name")
+            ->get();
+        // return $plans;
+        return Response::json($plans);
+    }
+
+    public function getPlanWorksByWorkTypeID(Request $req){
+        $works = DB::table('tb_plan')
+          ->join('tb_work', "tb_plan.work_id", "=", "tb_work.id")
+          ->select('tb_plan.work_id', "tb_work.name", "tb_work.hemjih_negj", "tb_plan.quantity")
+          ->where('tb_plan.companyID', "=", $req->companyID)
+          ->where("tb_plan.work_type_id", "=", $req->work_type_id)
+          ->get();
+          return Response::json($works);
+    }
+
+    
 }

@@ -10,7 +10,7 @@
   .table-div{
     overflow:auto;
     width:100%;
-    height:500px;
+    height:550px;
     padding: 5px;
   }
   table{
@@ -85,7 +85,7 @@
     $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
   @endphp
 
-  <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2>
+  {{-- <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2> --}}
   <div class="table-div">
     <table border="1" class=" text-center" id="myTable">
       <thead >

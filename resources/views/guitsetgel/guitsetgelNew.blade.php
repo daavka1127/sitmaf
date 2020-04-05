@@ -28,71 +28,10 @@
             <input type="date" id="txtOgnoo" name="ognoo" class="form-control" required />
           </div>
 
-          <div class="clearfix"></div>
-          <h3 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h3>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт:</label> <label id="lbl_hursHuulalt" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан:</label> <label id="lbl_dalan" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал:</label> <label id="lbl_uhmal" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе:</label> <label  id="lbl_suuriinUy" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу:</label> <label id="lbl_shuuduu" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт:</label> <label id="lbl_uhmalHamgaalalt" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу:</label> <label id="lbl_uuliinShuuduu" class="newGuitsetgelText"></label>
-          </div>
-          <div class="clearfix"></div>
-          {{-- START HIIGDEH AJIL --}}
-          <h3 style="text-align:center;"><strong>Гүйцэтгэсэн ажил</strong></h3>
-
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtHursHuulalt" step="any" name="gHursHuulalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtDalan" step="any" name="gDalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtUhmal" step="any" name="gUhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtSuuriinUy" step="any" name="gSuuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtShuuduu" step="any" name="gShuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtUuliinShuuduu" step="any" name="gUuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END HIIGDEH AJIL --}}
 
 
-          <div class="col-md-6" id="error_message"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnPostNewGuitsetgel" type="submit" class="btn btn-success">Нэмэх</button>
-            </div>
-          </div>
+
+          <div class="col-md-12" id="CheckBoxes"></div>
           <div class="clearfix"></div>
         </form>
       </div>

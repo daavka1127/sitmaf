@@ -98,60 +98,60 @@ function emptyNewModal(){
   $("#cmbNewCompanyID").val('-1');
 }
 
-$(document).ready(function(){
-    $("#cmbNewCompanyID").change(function(){
-      $("#txtHursHuulalt").prop("disabled", false);
-      $("#txtDalan").prop("disabled", false);
-      $("#txtUhmal").prop("disabled", false);
-      $("#txtSuuriinUy").prop("disabled", false);
-      $("#txtShuuduu").prop("disabled", false);
-      $("#txtUhmaliinHamgaalalt").prop("disabled", false);
-      $("#txtUuliinShuuduu").prop("disabled", false);
-
-
-        var csrf = $('meta[name=csrf-token]').attr("content");
-        $.ajax({
-          type: 'POST',
-          url: getCompanyByID,
-          data: {
-              _token: csrf,
-              id : $("#cmbNewCompanyID").val()
-          },
-          success:function(response){
-              if(response[0].uuliinShuuduu == null)
-                $("#txtUuliinShuuduu").prop("disabled", true);
-              if(response[0].uhmaliinHamgaalalt == null)
-                $("#txtUhmaliinHamgaalalt").prop("disabled", true);
-              if(response[0].dalan == null)
-                $("#txtDalan").prop("disabled", true);
-              if(response[0].uhmal == null)
-                $("#txtUhmal").prop("disabled", true);
-              if(response[0].hursHuulalt == null)
-                $("#txtHursHuulalt").prop("disabled", true);
-              if(response[0].suuriinUy == null)
-                $("#txtSuuriinUy").prop("disabled", true);
-              if(response[0].shuuduu == null)
-                $("#txtShuuduu").prop("disabled", true);
-
-              $("#lbl_hursHuulalt").text(response[0].hursHuulalt);
-              $("#lbl_dalan").text(response[0].dalan);
-              $("#lbl_uhmal").text(response[0].uhmal);
-              $("#lbl_suuriinUy").text(response[0].suuriinUy);
-              $("#lbl_shuuduu").text(response[0].shuuduu);
-              $("#lbl_uhmalHamgaalalt").text(response[0].uhmaliinHamgaalalt);
-              $("#lbl_uuliinShuuduu").text(response[0].uuliinShuuduu);
-          },
-          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-            var errors = jqXhr.responseJSON;
-            var errorsHtml = '';
-            $.each(errors['errors'], function (index, value) {
-                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-            });
-            alert(errorsHtml);
-          }
-        });
-    });
-});
+// $(document).ready(function(){
+//     $("#cmbNewCompanyID").change(function(){
+//       $("#txtHursHuulalt").prop("disabled", false);
+//       $("#txtDalan").prop("disabled", false);
+//       $("#txtUhmal").prop("disabled", false);
+//       $("#txtSuuriinUy").prop("disabled", false);
+//       $("#txtShuuduu").prop("disabled", false);
+//       $("#txtUhmaliinHamgaalalt").prop("disabled", false);
+//       $("#txtUuliinShuuduu").prop("disabled", false);
+//
+//
+//         var csrf = $('meta[name=csrf-token]').attr("content");
+//         $.ajax({
+//           type: 'POST',
+//           url: getCompanyByID,
+//           data: {
+//               _token: csrf,
+//               id : $("#cmbNewCompanyID").val()
+//           },
+//           success:function(response){
+//               if(response[0].uuliinShuuduu == null)
+//                 $("#txtUuliinShuuduu").prop("disabled", true);
+//               if(response[0].uhmaliinHamgaalalt == null)
+//                 $("#txtUhmaliinHamgaalalt").prop("disabled", true);
+//               if(response[0].dalan == null)
+//                 $("#txtDalan").prop("disabled", true);
+//               if(response[0].uhmal == null)
+//                 $("#txtUhmal").prop("disabled", true);
+//               if(response[0].hursHuulalt == null)
+//                 $("#txtHursHuulalt").prop("disabled", true);
+//               if(response[0].suuriinUy == null)
+//                 $("#txtSuuriinUy").prop("disabled", true);
+//               if(response[0].shuuduu == null)
+//                 $("#txtShuuduu").prop("disabled", true);
+//
+//               $("#lbl_hursHuulalt").text(response[0].hursHuulalt);
+//               $("#lbl_dalan").text(response[0].dalan);
+//               $("#lbl_uhmal").text(response[0].uhmal);
+//               $("#lbl_suuriinUy").text(response[0].suuriinUy);
+//               $("#lbl_shuuduu").text(response[0].shuuduu);
+//               $("#lbl_uhmalHamgaalalt").text(response[0].uhmaliinHamgaalalt);
+//               $("#lbl_uuliinShuuduu").text(response[0].uuliinShuuduu);
+//           },
+//           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+//             var errors = jqXhr.responseJSON;
+//             var errorsHtml = '';
+//             $.each(errors['errors'], function (index, value) {
+//                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+//             });
+//             alert(errorsHtml);
+//           }
+//         });
+//     });
+// });
 
 
 $(document).ready(function(){

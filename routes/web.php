@@ -94,3 +94,9 @@ Route::post('/work/store', 'WorkController@store');
 Route::post('/work/update', 'WorkController@update');
 Route::post('/work/delete', 'WorkController@delete');
 //end Work table
+
+Route::get("/getPlanWorkType", "planController@getPlanWorkTypeByCompany");
+Route::get("/getPlanWork/company/work_type", "planController@getPlanWorksByWorkTypeID");
+
+Route::get("/execution/store", "ExecutionContoller@store");
+Route::post('/guitsetgel/getExecByCompany', "ExecutionContoller@getExecByCompany");
