@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\company;
+use App\Http\Controllers\planController;
+use App\plan;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -79,17 +81,51 @@ class companyController extends Controller
     public function delete(Request $req){
         $company = company::find($req->id);
         $company->delete();
+        $planWork = new planController;
+        $planWork->deletePlanByCompany($req->id);
         return "Амжилттай устгалаа.";
+
     }
     public function storeWorks(Request $req){
+      $comID=0;
+      if($req->companyID == 0)
+      {
+        $company = new company;
+        $company->companyName = $req->companyName;
+        $company->heseg_id = $req->heseg_id;
+        $company->ajliinHeseg = $req->ajliinHeseg;
+        $company->gereeOgnoo = $req->gereeOgnoo;
+        $company->hunHuch = $req->hunHuch;
+        $company->mashinTehnik = $req->mashinTehnik;
+        $company->save();
+        $comID = $company->id;
+      }
+      else {
+        $comID = $req->companyID;
+      }
+      $planWork = new planController;
+      $planWork->storePlanByWorkID($req->json, $comID);
 
-        $str="";
-        foreach ($req->json as $key => $value) {
-            $str = $str . " " .  $value['workID'];
-        }
-
-        return $str;
+      return $comID;
     }
+    public function updateWorks(Request $req)
+    {
+      $company = company::find($req->companyID);
+      $company->companyName = $req->companyName;
+      $company->heseg_id = $req->heseg_id;
+      $company->ajliinHeseg = $req->ajliinHeseg;
+      $company->gereeOgnoo = $req->gereeOgnoo;
+      $company->hunHuch = $req->hunHuch;
+      $company->mashinTehnik = $req->mashinTehnik;
+      $company->save();
+
+      $planWork = new planController;
+      $planWork->deletePlanByWorkTypeAndCompany($req->workTypeID, $req->companyID);
+      $planWork->storePlanByWorkID($req->json, $req->companyID);
+
+      return "Амжилттай заслаа.";
+    }
+
 
     // davaanyam uusegsen start
     public static function getCompany(){

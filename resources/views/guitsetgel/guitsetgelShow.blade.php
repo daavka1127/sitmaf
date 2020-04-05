@@ -16,6 +16,15 @@
     var getCompanyByID = "{{url("/get/company/by/id")}}";
     var editCompanyUrl = "{{url("/guitsetgel/update")}}";
     var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
+
+    var getPlanWorkTypeUrl = "{{url('/getPlanWorkType')}}";
+    var getPlanWorkUrl = "{{url('/getPlanWork/company/work_type')}}";
+    var executionStoreUrl = "{{url('/execution/store')}}";
+
+
+
+
+
     var dataRow = "";
     var updateRD = "";
     $(document).ready(function(){
@@ -63,6 +72,9 @@
   });
 </script>
 
+<script src="{{url('public/js/guitsetgel/executionNew.js')}}">
+
+</script>
 <div class="col-xs-12">
   <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгжүүд</strong></h2>
   <div class="row">

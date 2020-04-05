@@ -1,4 +1,4 @@
-{{-- START NEW COMPANY --}}
+{{-- START EDIT COMPANY --}}
 <div class="modal fade" id="modalEditCompany">
   <div class="modal-dialog" style="width:80%;">
     <div class="modal-content">
@@ -46,45 +46,42 @@
           <div class="clearfix"></div>
 
           {{-- START HIIGDEH AJIL --}}
-          <h5 style="text-align:center;"><strong>Хийгдэх ажил</strong></h5>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtEditHursHuulalt" step="any" name="hursHuulalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtEditDalan" step="any" name="dalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtEditUhmal" step="any" name="uhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtEditSuuriinUy" step="any" name="suuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtEditShuuduu" step="any" name="shuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtEditUhmaliinHamgaalalt" step="any" name="uhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtEditUuliinShuuduu" step="any" name="uuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END HIIGDEH AJIL --}}
-
-
-          <div class="col-md-6" id="error_message"></div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
-              <button id="btnEditPostCompany" type="submit" class="btn btn-success">Засах</button>
+          <h4 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h4>
+          @php
+            $worktypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
+          @endphp
+          @foreach ($worktypes as $worktype)
+            <div class="col-md-12">
+                <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$worktype->id}}" id="editCheckBoxes{{$worktype->id}}">  {{$worktype->name}}</label>
             </div>
-          </div>
+
+              <div class="col-md-12 vision"  style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="editWorktypeid{{$worktype->id}}">
+                @php
+                  $works = \App\Http\Controllers\WorkController::getCompactWorks($worktype->id);
+                  $i=0;
+                @endphp
+
+                  @foreach ($works as $work)
+                    <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
+                      <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
+                      <input type="number" min="0" step="1" value="" workID="{{$work->id}}" id="editTxtWork{{$work->id}}" class="editTxtclass{{$worktype->id}} form-control input-sm" />
+                    </div>
+
+                    @php $i++; @endphp
+                    @if ($i%6 == 0)
+                        <div class="clearfix"></div>
+                    @endif
+
+                  @endforeach
+                  @if (count($works) != 0)
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                      <button type="button" btnworkid="{{$worktype->id}}" class="editBtnWorkTypeID btn btn-success">Засах</button>
+                    </div>
+                  @endif
+              </div>
+
+          @endforeach
+          <div class="col-md-6" id="error_message"></div>
           <div class="clearfix"></div>
         </form>
       </div>

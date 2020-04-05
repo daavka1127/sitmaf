@@ -45,6 +45,8 @@ Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
 //post bolgono storeworks
 Route::get('/companies/storeWorks', 'companyController@storeWorks');
+Route::get('/companies/updateWorks', 'companyController@updateWorks');
+Route::get('/get/plans/by/companyID', 'planController@getPlanByCompany');
 
 Route::get('/guitsetgel/new', 'ExecutionContoller@executionShow')->name('home');
 Route::post('/guitsetgel/new/get', 'GuitsetgelController@getCompanies');
@@ -92,3 +94,9 @@ Route::post('/work/store', 'WorkController@store');
 Route::post('/work/update', 'WorkController@update');
 Route::post('/work/delete', 'WorkController@delete');
 //end Work table
+
+Route::get("/getPlanWorkType", "planController@getPlanWorkTypeByCompany");
+Route::get("/getPlanWork/company/work_type", "planController@getPlanWorksByWorkTypeID");
+
+Route::get("/execution/store", "ExecutionContoller@store");
+Route::post('/guitsetgel/getExecByCompany', "ExecutionContoller@getExecByCompany");

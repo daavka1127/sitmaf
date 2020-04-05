@@ -29,64 +29,66 @@
           </div>
 
           <div class="clearfix"></div>
-          <h3 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h3>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт:</label> <label id="lbl_ehursHuulalt" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан:</label> <label id="lbl_edalan" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал:</label> <label id="lbl_euhmal" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе:</label> <label  id="lbl_esuuriinUy" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу:</label> <label id="lbl_eshuuduu" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт:</label> <label id="lbl_euhmalHamgaalalt" class="newGuitsetgelText"></label>
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу:</label> <label id="lbl_euuliinShuuduu" class="newGuitsetgelText"></label>
-          </div>
-          <div class="clearfix"></div>
+          <script type="text/javascript">
 
-          {{-- START HIIGDEH AJIL --}}
-          <h3 style="text-align:center;"><strong>Гүйцэтгэсэн ажил</strong></h3>
-          <div class="form-group col-md-3 text-left">
-            <label>Хөрс хуулалт </label>
-            <input type="number" min="0" id="txtEditGHursHuulalt" step="any" name="gHursHuulalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Далан </label>
-            <input type="number" min="0" id="txtEditGDalan" step="any" name="gDalan" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмал </label>
-            <input type="number" min="0" id="txtEditGUhmal" step="any" name="gUhmal" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Суурийн үе </label>
-            <input type="number" min="0" id="txtEditGSuuriinUy" step="any" name="gSuuriinUy" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Шуудуу </label>
-            <input type="number" min="0" id="txtEditGShuuduu" step="any" name="gShuuduu" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ухмалын хамгаалалт </label>
-            <input type="number" min="0" id="txtEditGUhmaliinHamgaalalt" step="any" name="gUhmaliinHamgaalalt" class="form-control" />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Уулын шуудуу </label>
-            <input type="number" min="0" id="txtEditGUuliinShuuduu" step="any" name="gUuliinShuuduu" class="form-control" />
-          </div>
-          <div class="clearfix"></div>
-          {{-- END HIIGDEH AJIL --}}
+          var getExecByCompany = "{{url("/guitsetgel/getExecByCompany")}}";
+          var execEditRow = "";
+              $(document).ready(function(){
+                $('#editExecTable').DataTable( {
+                    "language": {
+                        "lengthMenu": "_MENU_ мөрөөр харах",
+                        "zeroRecords": "Хайлт илэрцгүй байна",
+                        "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
+                        "infoEmpty": "Хайлт илэрцгүй",
+                        "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
+                        "sSearch": "Хайх: ",
+                        "paginate": {
+                          "previous": "Өмнөх",
+                          "next": "Дараахи"
+                        }
+                    },
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax":{
+                             "url": getExecByCompany,
+                             "dataType": "json",
+                             "type": "POST",
+                             "data":{
+                                  comID: dataRow["id"],
+                                  _token: "{{ csrf_token() }}"
+                                }
+                           },
+                    "columns": [
+                        { data: "id", name: "id" },
+                        { data: "workTypeID", name: "workTypeID"},
+                        { data: "workID", name: "workID"},
+                        { data: "date", name: "date"},
+                        { data: "execution", name: "execution" }
 
-
+                      ]
+                });
+              });
+              $(document).ready(function(){
+              $('#editExecTable tbody').on( 'click', 'tr', function () {
+                  var currow = $(this).closest('tr');
+                  $('#editExecTable tbody tr').css("background-color", "white");
+                  $(this).closest('tr').css("background-color", "yellow");
+                  execEditRow = $('#editExecTable').DataTable().row(currow).data();
+                  // alert(dataRow["companyName"]);
+                });
+              });
+          </script>
+          <table id="editExecTable" class="table table-striped table-bordered" style="width:100%;">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Ажлын төрөл</th>
+                      <th>Хийх ажил</th>
+                      <th>Огноо</th>
+                      <th>Гүйцэтгэл</th>
+                  </tr>
+              </thead>
+          </table>
           <div class="col-md-6" id="error_message"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
