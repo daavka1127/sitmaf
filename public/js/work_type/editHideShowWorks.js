@@ -51,11 +51,13 @@ $(document).ready(function () {
         $.each($(".editTxtclass"+id), function( key, value ) {
           var workID = $(this).attr("workID");
           var value = $(this).val();
-          item = {}
-          item ["workTypeID"] = id;
-          item ["workID"] = workID;
-          item ["value"] = value;
-          jsonObj.push(item);
+          if(value != ""){
+            item = {}
+            item ["workTypeID"] = id;
+            item ["workID"] = workID;
+            item ["value"] = value;
+            jsonObj.push(item);
+          }
 
         });
 
@@ -86,6 +88,12 @@ $(document).ready(function () {
             isInsert = false;
         }
         if(isInsert == false){return;}
+
+        if(jsonObj.length == 0){
+          alertify.error("Хамгийн багадаа нэг төлөвлөсөн ажил оруулна уу!!!");
+          return;
+        }
+
         $.ajax({
           type: 'GET',
           url: editWorksUrl,

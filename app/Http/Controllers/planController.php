@@ -52,7 +52,19 @@ class planController extends Controller
     }
 
     public static function getSumPlanQuantity($companiesID, $workTypeID){
-        // $plans =
+        $plans = DB::table('tb_plan')
+            ->where('tb_plan.companyID', '=', $companiesID)
+            ->where('tb_plan.work_type_id', '=', $workTypeID)
+            ->sum('quantity');
+        return $plans;
+    }
+
+    public static function getCompanyPlanCountByWorkType($companyID, $workTypeID){
+        $planCount = DB::table('tb_plan')
+            ->where('companyID', '=', $companyID)
+            ->where('work_type_id', '=', $workTypeID)
+            ->get();
+        return $planCount->count();
     }
 
     public function getPlanByCompany(Request $req){
@@ -84,5 +96,5 @@ class planController extends Controller
           return Response::json($works);
     }
 
-    
+
 }

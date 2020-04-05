@@ -30,16 +30,20 @@ $(document).ready(function(){
 $(document).ready(function () {
     $('button[class^="btnWorkTypeID"]').click(function () {
         var id = $(this).attr("btnworkid");
+        alert("A");
+        alert($("#txtCompanyName").val());
 
         jsonObj = [];
         $.each($(".txtclass"+id), function( key, value ) {
           var workID = $(this).attr("workID");
           var value = $(this).val();
-          item = {}
-          item ["workTypeID"] = id;
-          item ["workID"] = workID;
-          item ["value"] = value;
-          jsonObj.push(item);
+          if(value != ""){
+            item = {}
+            item ["workTypeID"] = id;
+            item ["workID"] = workID;
+            item ["value"] = value;
+            jsonObj.push(item);
+          }
 
         });
 
@@ -65,6 +69,10 @@ $(document).ready(function () {
         }
         if($("#txtMashinTehnik").val() == ""){
           alertify.error("Машин техник оруулна уу.");
+          return;
+        }
+        if(jsonObj.length == 0){
+          alertify.error("Хамгийн багадаа нэг төлөвлөсөн ажил оруулна уу!!!");
           return;
         }
 
