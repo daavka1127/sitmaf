@@ -12,7 +12,7 @@
 
 <script>
     var newCompanyUrl = "{{url("/guitsetgel/store")}}";
-    var getCompaniesUrl = "{{url("/guitsetgel/new/get")}}";
+    var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
     var getCompanyByID = "{{url("/get/company/by/id")}}";
     var editCompanyUrl = "{{url("/guitsetgel/update")}}";
     var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
@@ -44,23 +44,11 @@
                  },
           "columns": [
               { data: "id", name: "id" },
-              { data: "companyID", name: "companyID", visible:false},
               { data: "companyName", name: "companyName"},
-              { data: "gHursHuulalt", name: "gHursHuulalt"},
-              { data: "gDalan", name: "gDalan" },
-              { data: "gUhmal", name: "gUhmal" },
-              { data: "gSuuriinUy", name: "gSuuriinUy" },
-              { data: "gShuuduu", name: "gShuuduu" },
-              { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
-              { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-              { data: "ognoo", name: "ognoo" },
-              { data: "hursHuulalt", name: "hursHuulalt", visible:false},
-              { data: "dalan", name: "dalan", visible:false},
-              { data: "uhmal", name: "uhmal", visible:false},
-              { data: "suuriinUy", name: "suuriinUy", visible:false},
-              { data: "shuuduu", name: "shuuduu", visible:false},
-              { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
-              { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false}
+              { data: "ajliinHeseg", name: "ajliinHeseg"},
+              { data: "hunHuch", name: "hunHuch"},
+              { data: "mashinTehnik", name: "mashinTehnik"},
+              { data: "gereeOgnoo", name: "gereeOgnoo" }
             ]
       });
   });
@@ -82,23 +70,11 @@
           <thead>
               <tr>
                   <th>ID</th>
-                  <th></th>
                   <th>Аж ахуй нэгжийн нэр</th>
-                  <th>Хөрс хуулалт</th>
-                  <th>Далан</th>
-                  <th>Ухмал</th>
-                  <th>Суурийн үе</th>
-                  <th>Шуудуу</th>
-                  <th>Ухмалын хамгаалалт</th>
-                  <th>Уулын шуудуу</th>
+                  <th>Ажлийн хэсэг</th>
+                  <th>Хүн хүч</th>
+                  <th>Машин техник</th>
                   <th>Огноо</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
               </tr>
           </thead>
       </table>

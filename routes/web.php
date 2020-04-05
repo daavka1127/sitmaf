@@ -22,7 +22,7 @@ Route::get("/test/table", function(){
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 });
-Route::get("/test/plan/quantity/{comID}/{workID}", "planController@getPlanByWorkID");
+Route::get("/test/{comID}/{workID}", "ExecutionContoller@getExecutionAllCompanyIDworkID");
 
 
 
@@ -46,8 +46,8 @@ Route::post('/companies/delete', 'companyController@delete');
 //post bolgono storeworks
 Route::get('/companies/storeWorks', 'companyController@storeWorks');
 
-Route::get('/guitsetgel/new', 'GuitsetgelController@index')->name('home');
-Route::post('/guitsetgel/new/get', 'GuitsetgelController@getCompanyToNew');
+Route::get('/guitsetgel/new', 'ExecutionContoller@executionShow')->name('home');
+Route::post('/guitsetgel/new/get', 'GuitsetgelController@getCompanies');
 Route::post('/guitsetgel/store', 'GuitsetgelController@store');
 Route::post('/guitsetgel/update', 'GuitsetgelController@update');
 Route::post('/guitsetgel/delete', 'GuitsetgelController@delete');

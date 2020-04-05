@@ -119,16 +119,40 @@ th{
               <td >{{$works[0]->hemjih_negj}}</td>
               @foreach ($companies as $company)
                 @php
-                  $planQuantity = \App\Http\Controllers\planController::getPlanByWorkID($company->id, $works[0]->id);
+                  $planAndExecutions = \App\Http\Controllers\ExecutionContoller::getExecutionAllCompanyIDworkID($company->id, $works[0]->id);
+                  $planQuantity = 0;
+                  $percent2019 = 0;
+                  $totalExec2019 = 0;
+                  $totalExecAll = 0;
+                  $lastExec = 0;
+                  $lastexec2020 = 0;
+                  $totalPercent = 0;
+                  foreach ($planAndExecutions as $planAndExecution) {
+                      $planQuantity = $planAndExecution->planQuantity;
+                      $percent2019 = $planAndExecution->percent2019;
+                      $totalExec2019 = $planAndExecution->totalExec2019;
+                      $totalExecAll = $planAndExecution->totalExecAll;
+                      $lastExec = $planAndExecution->lastExec;
+                      $lastexec2020 = $planAndExecution->lastexec2020;
+                      $totalPercent = $planAndExecution->totalPercent;
+                  }
+                  // $planQuantity = \App\Http\Controllers\planController::getPlanByWorkID($company->id, $works[0]->id);
+                  // $executionPercent2019 = \App\Http\Controllers\ExecutionContoller::getExecutionPercentByWorkID2019($company->id, $works[0]->id);
+                  // $execution2019 = \App\Http\Controllers\ExecutionContoller::getExecution2019($company->id, $works[0]->id);
                 @endphp
                 <td>{{$planQuantity}}</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
+                <td>{{round($percent2019, 2)}}</td>
+                <td>{{round($planQuantity-$totalExec2019, 2)}}</td>
+                <td>{{round($totalExecAll - $lastExec, 2)}}</td>
+                <td>{{round($lastExec, 2)}}</td>
+                <td>{{round($lastexec2020, 2)}}</td>
+                @if(($planQuantity*(1-$percent2019*0.01)) == 0)
+                  <td>0</td>
+                  <td>0</td>
+                @else
+                  <td>{{round($lastexec2020*100/$planQuantity, 2)}}</td>
+                  <td>{{round($lastexec2020*100/$planQuantity + $percent2019, 2)}}</td>
+                @endif
               @endforeach
             </tr>
             @for ($i=1; $i < $works->count(); $i++)
@@ -137,16 +161,40 @@ th{
                 <td>{{$works[$i]->hemjih_negj}}</td>
                 @foreach ($companies as $company)
                   @php
-                    $planQuantity = \App\Http\Controllers\planController::getPlanByWorkID($company->id, $works[$i]->id);
+                    $planAndExecutions = \App\Http\Controllers\ExecutionContoller::getExecutionAllCompanyIDworkID($company->id, $works[$i]->id);
+                    $planQuantity = 0;
+                    $percent2019 = 0;
+                    $totalExec2019 = 0;
+                    $totalExecAll = 0;
+                    $lastExec = 0;
+                    $lastexec2020 = 0;
+                    $totalPercent = 0;
+                    foreach ($planAndExecutions as $planAndExecution) {
+                        $planQuantity = $planAndExecution->planQuantity;
+                        $percent2019 = $planAndExecution->percent2019;
+                        $totalExec2019 = $planAndExecution->totalExec2019;
+                        $totalExecAll = $planAndExecution->totalExecAll;
+                        $lastExec = $planAndExecution->lastExec;
+                        $lastexec2020 = $planAndExecution->lastexec2020;
+                        $totalPercent = $planAndExecution->totalPercent;
+                    }
+                    // $planQuantity = \App\Http\Controllers\planController::getPlanByWorkID($company->id, $works[$i]->id);
+                    // $executionPercent2019 = \App\Http\Controllers\ExecutionContoller::getExecutionPercentByWorkID2019($company->id, $works[$i]->id);
+                    // $execution2019 = \App\Http\Controllers\ExecutionContoller::getExecution2019($company->id, $works[$i]->id);
                   @endphp
                   <td>{{$planQuantity}}</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>5</td>
-                  <td>6</td>
-                  <td>7</td>
-                  <td>8</td>
+                  <td>{{round($percent2019, 2)}}</td>
+                  <td>{{round($planQuantity-$totalExec2019, 2)}}</td>
+                  <td>{{round($totalExecAll - $lastExec, 2)}}</td>
+                  <td>{{round($lastExec, 2)}}</td>
+                  <td>{{round($lastexec2020, 2)}}</td>
+                  @if(($planQuantity*(1-$percent2019*0.01)) == 0)
+                    <td>0</td>
+                    <td>0</td>
+                  @else
+                    <td>{{round($lastexec2020*100/$planQuantity, 2)}}</td>
+                    <td>{{round($lastexec2020*100/$planQuantity + $percent2019, 2)}}</td>
+                  @endif
                 @endforeach
               </tr>
             @endfor
@@ -154,14 +202,55 @@ th{
               <td>Нийт</td>
               <td></td>
               @foreach ($companies as $company)
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
+                @php
+                  $sumPlanAndExecs = \App\Http\Controllers\ExecutionContoller::getSumAndAvgExecPlan($company->id, $workType->id);
+
+                  $sumPlanQuantity = 0;
+                  $totalSumExec2019 = 0;
+                  $totalSumExec = 0;
+                  $lastSumExect = 0;
+                  $sumExec2020 = 0;
+                  foreach ($sumPlanAndExecs as $sumPlanAndExec) {
+                      $sumPlanQuantity = $sumPlanAndExec->sumPlanQuantity;
+                      $totalSumExec2019 = $sumPlanAndExec->totalSumExec2019;
+                      $totalSumExec = $sumPlanAndExec->totalSumExec;
+                      $lastSumExect = $sumPlanAndExec->lastSumExect;
+                      $sumExec2020 = $sumPlanAndExec->sumExec2020;
+                  }
+
+
+                  // $sumPlanQuantity = \App\Http\Controllers\planController::getSumPlanQuantity($company->id, $workType->id);
+                  $AvgExecutionPercent2019 = \App\Http\Controllers\ExecutionContoller::getExecutionWorkTypePercentAvg2019($company->id, $workType->id);
+
+                  if($AvgExecutionPercent2019 == 0){
+                    $totalExec2020 = $sumPlanQuantity;
+                  }
+                  else{
+                    $totalExec2020 = $sumPlanQuantity - ($sumPlanQuantity * $AvgExecutionPercent2019/100);
+                  }
+              @endphp
+                <td>{{round($sumPlanQuantity, 2)}}</td>
+                @if($sumPlanQuantity>0)
+                  <td>{{round($totalSumExec2019*100/$sumPlanQuantity, 2)}}</td>
+                @else
+                  <td>0</td>
+                @endif
+                <td>{{round($sumPlanQuantity - $totalSumExec2019, 2)}}</td>
+                <td>{{round($totalSumExec-$lastSumExect,2)}}</td>
+                <td>{{round($lastSumExect, 2)}}</td>
+                <td>{{round($sumExec2020, 2)}}</td>
+                @if($sumExec2020 == 0)
+                  <td>0</td>
+                @else
+                  <td>{{round($sumExec2020*100/$sumPlanQuantity, 2)}}</td>
+                @endif
+                @if($sumPlanQuantity == 0)
+                  <td>0</td>
+                @else
+                  <td>{{round($totalSumExec2019*100/$sumPlanQuantity+$sumExec2020*100/$sumPlanQuantity, 2)}}</td>
+                @endif
+
+                <td></td>
               @endforeach
             </tr>
         @endforeach
