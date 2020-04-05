@@ -258,8 +258,6 @@
                 @else
                   <td>{{round($totalSumExec2019*100/$sumPlanQuantity+$sumExec2020*100/$sumPlanQuantity, 2)}}</td>
                 @endif
-
-                <td></td>
               @endforeach
             </tr>
         @endforeach
