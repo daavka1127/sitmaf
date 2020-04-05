@@ -45,6 +45,7 @@
           </div>
           </form>
           <div class="clearfix"></div>
+          <h4 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h4>
           @php
             $worktypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
           @endphp
@@ -52,18 +53,23 @@
             <div class="col-md-12">
                 <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$worktype->id}}" id="checkBoxes{{$worktype->id}}">  {{$worktype->name}}</label>
             </div>
-            <form id="saveWorks{{$worktype->id}}" class="saveWorks" action="{{ action('companyController@storeWorks')}}" method="post" workTypeID = "{{$worktype->id}}">
-              <div class="col-md-12" style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$worktype->id}}">
+
+              <div class="col-md-12 vision"  style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$worktype->id}}">
                 @php
                   $works = \App\Http\Controllers\WorkController::getCompactWorks($worktype->id);
+                  $i=0;
                 @endphp
 
                   @foreach ($works as $work)
                     <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
                       <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
                       <input type="number" min="0" step="1" workID="{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
-
                     </div>
+                    @php $i++; @endphp
+                    @if ($i%6 == 0)
+                        <div class="clearfix"></div>
+                    @endif
+
                   @endforeach
                   @if (count($works) != 0)
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
@@ -71,7 +77,7 @@
                     </div>
                   @endif
               </div>
-            </form>
+
           @endforeach
 
       </div>

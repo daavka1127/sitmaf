@@ -1,16 +1,29 @@
+
 $(document).on('click', '[type=checkbox]', function(){
     var id = $(this).attr("workTypeId");
     if($(this).is(':checked')){
-        $("#worktypeid" + id).show();
+        $("#worktypeid" + id).css("display","block");
     }
     else{
-        $("#worktypeid" + id).hide();
+        $("#worktypeid" + id).css("display","none");
     }
 });
 
 $(document).ready(function(){
   $("#newCompany").on('hide.bs.modal', function(){
-    alert('The modal is about to be hidden.');
+    $(".modal-body").each(function(){
+      $(this).find(':input').val("");
+    });
+
+    $(".modal-body").each(function(){
+      $(this).find(':checked').prop('disabled', false);
+      $(this).find(':checked').prop('checked', false);
+    });
+
+    $(".vision").css("display","none");
+
+    $("#companyID").val("0");
+    $("#cmbHeseg").val("0");
   });
 });
 
@@ -30,9 +43,30 @@ $(document).ready(function () {
 
         });
 
-        var data =
-        // console.log($("#frmNewCompany").serializeObject());
-
+        if($("#txtCompanyName").val() == ""){
+          alertify.error("ААН-ийн нэр оруулна уу.");
+          return;
+        }
+        if($("#cmbHeseg").val() == "0"){
+          alertify.error("Хэсгийг сонгоно уу.");
+          return;
+        }
+        if($("#txtAjliinHeseg").val() == ""){
+          alertify.error("Ажлын хэсгийг оруулна уу.");
+          return;
+        }
+        if($("#txtGereeOgnoo").val() == ""){
+          alertify.error("Огноог оруулна уу.");
+          return;
+        }
+        if($("#txtHunHuch").val() == ""){
+          alertify.error("Хүн хүчийг оруулна уу.");
+          return;
+        }
+        if($("#txtMashinTehnik").val() == ""){
+          alertify.error("Машин техник оруулна уу.");
+          return;
+        }
 
         $.ajax({
           type: 'GET',
@@ -49,8 +83,9 @@ $(document).ready(function () {
           },
           success:function(response){
               $("#companyID").val(response);
-              alertify.alert("Амжилттай.."+response);
-              refresh();
+              alertify.alert("Амжилттай хадгаллаа.");
+              $("#worktypeid"+id).css("display","none");
+              $("#checkBoxes"+id).prop("disabled", true);
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;

@@ -13,11 +13,14 @@
 <script>
     var newCompanyUrl = "{{url("/companies/store")}}";
     var newWorksUrl = "{{url("/companies/storeWorks")}}";
+    var editWorksUrl = "{{url('/companies/updateWorks')}}";
     var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
     var editCompanyUrl = "{{url("/companies/update")}}";
     var deleteCompanyUrl = "{{url("/companies/delete")}}";
-    
+    var getPlansByCompanyIDurl = "{{url("/get/plans/by/companyID")}}";
+
     var dataRow = "";
+
     $(document).ready(function(){
       $('#datatable').DataTable( {
           "language": {
@@ -109,6 +112,7 @@
   @endif
   <script src="{{url('public/js/company/company.js')}}"></script>
   <script src="{{url('public/js/work_type/hideShowWorks.js')}}"></script>
+  <script src="{{url('public/js/work_type/editHideShowWorks.js')}}"></script>
   @include('company.companyNew')
   @include('company.companyEdit')
 </div>

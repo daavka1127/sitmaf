@@ -81,7 +81,10 @@ class companyController extends Controller
     public function delete(Request $req){
         $company = company::find($req->id);
         $company->delete();
+        $planWork = new planController;
+        $planWork->deletePlanByCompany($req->id);
         return "Амжилттай устгалаа.";
+
     }
     public function storeWorks(Request $req){
       $comID=0;
@@ -105,6 +108,24 @@ class companyController extends Controller
 
       return $comID;
     }
+    public function updateWorks(Request $req)
+    {
+      $company = company::find($req->companyID);
+      $company->companyName = $req->companyName;
+      $company->heseg_id = $req->heseg_id;
+      $company->ajliinHeseg = $req->ajliinHeseg;
+      $company->gereeOgnoo = $req->gereeOgnoo;
+      $company->hunHuch = $req->hunHuch;
+      $company->mashinTehnik = $req->mashinTehnik;
+      $company->save();
+
+      $planWork = new planController;
+      $planWork->deletePlanByWorkTypeAndCompany($req->workTypeID, $req->companyID);
+      $planWork->storePlanByWorkID($req->json, $req->companyID);
+
+      return "Амжилттай заслаа.";
+    }
+
 
     // davaanyam uusegsen start
     public static function getCompany(){
