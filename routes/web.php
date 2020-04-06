@@ -18,6 +18,10 @@
 Route::get("/test/table", function(){
   return view("report.companyTableReport");
 });
+Route::get('/generate/html', 'reportController@generateHtml');
+Route::get('/show/html', function(){
+  return view('report.viewHtml');
+});
 
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
@@ -43,13 +47,13 @@ Route::post('/get/company/by/id', 'companyController@getCompanyByID');
 Route::post('/companies/store', 'companyController@store');
 Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
+Route::post('/company/get', 'companyController@getCompanies');
 //post bolgono storeworks
 Route::get('/companies/storeWorks', 'companyController@storeWorks');
 Route::get('/companies/updateWorks', 'companyController@updateWorks');
 Route::get('/get/plans/by/companyID', 'planController@getPlanByCompany');
 
 Route::get('/guitsetgel/new', 'ExecutionContoller@executionShow')->name('home');
-Route::post('/guitsetgel/new/get', 'GuitsetgelController@getCompanies');
 Route::post('/guitsetgel/store', 'GuitsetgelController@store');
 Route::post('/guitsetgel/update', 'GuitsetgelController@update');
 Route::post('/guitsetgel/delete', 'GuitsetgelController@delete');

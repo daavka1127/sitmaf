@@ -1,6 +1,4 @@
-@extends('layouts.layout_main')
 
-@section('content')
   <script>
 
 
@@ -264,6 +262,3 @@
     	</tbody>
     </table>
   </div>
-
-
-@endsection

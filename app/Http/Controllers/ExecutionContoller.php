@@ -22,17 +22,6 @@ class ExecutionContoller extends Controller
         return view('guitsetgel.guitsetgelShow', compact('companies'));
     }
 
-    public function getCompanies(){
-      $companies = DB::table('tb_companies')
-          ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
-          ->select('tb_companies.*', 'tb_heseg.name')
-          ->orderBy('tb_companies.heseg_id', 'asc')
-          ->orderBy('tb_companies.companyName', 'asc')
-          ->get();
-      return DataTables::of($companies)
-            ->make(true);
-    }
-
     public static function getExecutionPercentByWorkID2019($companyID, $workID){
         $executions = DB::table('tb_execution')
             ->where('companyID', '=', $companyID)

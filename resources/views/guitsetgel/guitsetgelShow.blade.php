@@ -12,18 +12,17 @@
 
 <script>
     var newCompanyUrl = "{{url("/guitsetgel/store")}}";
-    var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
+
     var getCompanyByID = "{{url("/get/company/by/id")}}";
     var editCompanyUrl = "{{url("/guitsetgel/update")}}";
     var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
 
+    var getCompaniesUrl = "{{url("/company/get")}}";
     var getPlanWorkTypeUrl = "{{url('/getPlanWorkType')}}";
     var getPlanWorkUrl = "{{url('/getPlanWork/company/work_type')}}";
     var executionStoreUrl = "{{url('/execution/store')}}";
 
-
-
-
+    var generateReportUrl = "{{url('/generate/html')}}";
 
     var dataRow = "";
     var updateRD = "";
@@ -75,6 +74,15 @@
 <script src="{{url('public/js/guitsetgel/executionNew.js')}}">
 
 </script>
+
+<div class="col-md-12">
+  <div id="divGenerateReport">
+    <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
+    <input type="button" class="btn btn-primary btn-sm" name="" id="btnGenerateReport" value="Тайлан бодох" />
+  </div>
+  <span style="color:green;" id="generateReportAlert"></span>
+</div>
+
 <div class="col-xs-12">
   <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгжүүд</strong></h2>
   <div class="row">
@@ -101,6 +109,7 @@
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
   <script src="{{url('public/js/guitsetgel/guitsetgel.js')}}"></script>
+  <script src="{{url('public/js/guitsetgel/executionReportGenerate.js')}}"></script>
   @include('guitsetgel.guitsetgelNew')
   @include('guitsetgel.guitsetgelEdit')
 </div>

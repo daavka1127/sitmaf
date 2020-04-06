@@ -14,7 +14,7 @@
     var newCompanyUrl = "{{url("/companies/store")}}";
     var newWorksUrl = "{{url("/companies/storeWorks")}}";
     var editWorksUrl = "{{url('/companies/updateWorks')}}";
-    var getCompaniesUrl = "{{url("/companies/new/get/company")}}";
+    var getCompaniesUrl = "{{url("/company/get")}}";
     var editCompanyUrl = "{{url("/companies/update")}}";
     var deleteCompanyUrl = "{{url("/companies/delete")}}";
     var getPlansByCompanyIDurl = "{{url("/get/plans/by/companyID")}}";
@@ -38,7 +38,7 @@
           "processing": true,
           "serverSide": true,
           "ajax":{
-                   "url": "{{url('/companies/new/get/company')}}",
+                   "url": "{{url('/company/get')}}",
                    "dataType": "json",
                    "type": "POST",
                    "data":{
@@ -46,21 +46,12 @@
                       }
                  },
           "columns": [
-              { data: "id", name: "id" },
-              { data: "companyName", name: "companyName"},
-              { data: "heseg_id", name: "heseg_id"},
-              { data: "ajliinHeseg", name: "ajliinHeseg"},
-              { data: "gereeOgnoo", name: "gereeOgnoo" },
-              { data: "hunHuch", name: "hunHuch" },
-              { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "mashinTehnik", name: "mashinTehnik", visible:false },
-              { data: "hursHuulalt", name: "hursHuulalt" },
-              { data: "dalan", name: "dalan" },
-              { data: "uhmal", name: "uhmal" },
-              { data: "suuriinUy", name: "suuriinUy" },
-              { data: "shuuduu", name: "shuuduu" },
-              { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt" },
-              { data: "uuliinShuuduu", name: "uuliinShuuduu" }
+            { data: "id", name: "id" },
+            { data: "companyName", name: "companyName"},
+            { data: "ajliinHeseg", name: "ajliinHeseg"},
+            { data: "hunHuch", name: "hunHuch"},
+            { data: "mashinTehnik", name: "mashinTehnik"},
+            { data: "gereeOgnoo", name: "gereeOgnoo" }
             ]
       });
   });
@@ -81,21 +72,12 @@
       <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>Аж ахуй нэгжийн нэр</th>
-                  <th>Хэсэг</th>
-                  <th>Ажлын хэсэг</th>
-                  <th>Ажил эхэлсэн /гэрээ байгуулсан/ огноо</th>
-                  <th>Хүн хүч</th>
-                  <th>Газар шорооны ажлын машин, техник</th>
-                  <th>Гүйцэтгэлийн хувь</th>
-                  <th>Хөрс хуулалт</th>
-                  <th>Далан</th>
-                  <th>Ухмал</th>
-                  <th>Суурийн үе</th>
-                  <th>Шуудуу</th>
-                  <th>Ухмалын хамгаалалт</th>
-                  <th>Уулын шуудуу</th>
+                <th>ID</th>
+                <th>Аж ахуй нэгжийн нэр</th>
+                <th>Ажлийн хэсэг</th>
+                <th>Хүн хүч</th>
+                <th>Машин техник</th>
+                <th>Огноо</th>
               </tr>
           </thead>
       </table>

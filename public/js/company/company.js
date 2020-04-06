@@ -25,21 +25,12 @@ function refresh(){
                       }
                  },
           "columns": [
-              { data: "id", name: "id" },
-              { data: "companyName", name: "companyName"},
-              { data: "heseg_id", name: "heseg_id"},
-              { data: "ajliinHeseg", name: "ajliinHeseg"},
-              { data: "gereeOgnoo", name: "gereeOgnoo" },
-              { data: "hunHuch", name: "hunHuch" },
-              { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "mashinTehnik", name: "mashinTehnik", visible:false },
-              { data: "hursHuulalt", name: "hursHuulalt" },
-              { data: "dalan", name: "dalan" },
-              { data: "uhmal", name: "uhmal" },
-              { data: "suuriinUy", name: "suuriinUy" },
-              { data: "shuuduu", name: "shuuduu" },
-              { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt" },
-              { data: "uuliinShuuduu", name: "uuliinShuuduu" }
+            { data: "id", name: "id" },
+            { data: "companyName", name: "companyName"},
+            { data: "ajliinHeseg", name: "ajliinHeseg"},
+            { data: "hunHuch", name: "hunHuch"},
+            { data: "mashinTehnik", name: "mashinTehnik"},
+            { data: "gereeOgnoo", name: "gereeOgnoo" }
             ]
       }).ajax.reload();
 }

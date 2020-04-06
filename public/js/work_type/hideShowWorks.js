@@ -94,6 +94,7 @@ $(document).ready(function () {
               alertify.alert("Амжилттай хадгаллаа.");
               $("#worktypeid"+id).css("display","none");
               $("#checkBoxes"+id).prop("disabled", true);
+              refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;

@@ -92,6 +92,8 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
         alertify.alert(response);
         $("#worktypeid"+id).css("display","none");
         $("#checkBoxes"+id).prop("disabled", true);
+        $("#divGenerateReport").show();
+        $("#generateReportAlert").html("");
     },
     error: function(jqXhr, json, errorThrown){// this are default for ajax errors
       var errors = jqXhr.responseJSON;
