@@ -154,138 +154,112 @@ function emptyNewModal(){
 // });
 
 
-$(document).ready(function(){
-    $("#btnEditGuitsetgel").click(function(){
-      $("#txtEditGHursHuulalt").prop("disabled", false);
-      $("#txtEditGDalan").prop("disabled", false);
-      $("#txtEditGUhmal").prop("disabled", false);
-      $("#txtEditGSuuriinUy").prop("disabled", false);
-      $("#txtEditGShuuduu").prop("disabled", false);
-      $("#txtEditGUhmaliinHamgaalalt").prop("disabled", false);
-      $("#txtEditGUuliinShuuduu").prop("disabled", false);
 
-        $("#txtEditGID").val(dataRow["id"]);
-        $("#cmbEditGCompany").val(dataRow["companyID"]);
-        $("#txtEditOgnoo").val(dataRow["ognoo"]);
-        $("#txtEditGHursHuulalt").val(dataRow["gHursHuulalt"]);
-        $("#txtEditGDalan").val(dataRow["gDalan"]);
-        $("#txtEditGUhmal").val(dataRow["gUhmal"]);
-        $("#txtEditGSuuriinUy").val(dataRow["gSuuriinUy"]);
-        $("#txtEditGShuuduu").val(dataRow["gShuuduu"]);
-        $("#txtEditGUhmaliinHamgaalalt").val(dataRow["gUhmaliinHamgaalalt"]);
-        $("#txtEditGUuliinShuuduu").val(dataRow["gUuliinShuuduu"]);
-        if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
-        else{$('#modalEditGuitsetgel').modal('show');}
+// function disableEditInputs(){
+//   var csrf = $('meta[name=csrf-token]').attr("content");
+//   $.ajax({
+//     type: 'POST',
+//     url: getCompanyByID,
+//     data: {
+//         _token: csrf,
+//         id : $("#cmbEditGCompany").val()
+//     },
+//     success:function(response){
+//         if(response[0].uuliinShuuduu == null)
+//           $("#txtEditGUuliinShuuduu").prop("disabled", true);
+//         if(response[0].uhmaliinHamgaalalt == null)
+//           $("#txtEditGUhmaliinHamgaalalt").prop("disabled", true);
+//         if(response[0].dalan == null)
+//           $("#txtEditGDalan").prop("disabled", true);
+//         if(response[0].uhmal == null)
+//           $("#txtEditGUhmal").prop("disabled", true);
+//         if(response[0].hursHuulalt == null)
+//           $("#txtEditGHursHuulalt").prop("disabled", true);
+//         if(response[0].suuriinUy == null)
+//           $("#txtEditGSuuriinUy").prop("disabled", true);
+//         if(response[0].shuuduu == null)
+//           $("#txtEditGShuuduu").prop("disabled", true);
+//
+//           $("#lbl_ehursHuulalt").text(response[0].hursHuulalt);
+//           $("#lbl_edalan").text(response[0].dalan);
+//           $("#lbl_euhmal").text(response[0].uhmal);
+//           $("#lbl_esuuriinUy").text(response[0].suuriinUy);
+//           $("#lbl_eshuuduu").text(response[0].shuuduu);
+//           $("#lbl_euhmalHamgaalalt").text(response[0].uhmaliinHamgaalalt);
+//           $("#lbl_euuliinShuuduu").text(response[0].uuliinShuuduu);
+//     },
+//     error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+//       var errors = jqXhr.responseJSON;
+//       var errorsHtml = '';
+//       $.each(errors['errors'], function (index, value) {
+//           errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+//       });
+//       alert(errorsHtml);
+//     }
+//   });
+// }
 
-        disableEditInputs();
-
-    });
-});
-function disableEditInputs(){
-  var csrf = $('meta[name=csrf-token]').attr("content");
-  $.ajax({
-    type: 'POST',
-    url: getCompanyByID,
-    data: {
-        _token: csrf,
-        id : $("#cmbEditGCompany").val()
-    },
-    success:function(response){
-        if(response[0].uuliinShuuduu == null)
-          $("#txtEditGUuliinShuuduu").prop("disabled", true);
-        if(response[0].uhmaliinHamgaalalt == null)
-          $("#txtEditGUhmaliinHamgaalalt").prop("disabled", true);
-        if(response[0].dalan == null)
-          $("#txtEditGDalan").prop("disabled", true);
-        if(response[0].uhmal == null)
-          $("#txtEditGUhmal").prop("disabled", true);
-        if(response[0].hursHuulalt == null)
-          $("#txtEditGHursHuulalt").prop("disabled", true);
-        if(response[0].suuriinUy == null)
-          $("#txtEditGSuuriinUy").prop("disabled", true);
-        if(response[0].shuuduu == null)
-          $("#txtEditGShuuduu").prop("disabled", true);
-
-          $("#lbl_ehursHuulalt").text(response[0].hursHuulalt);
-          $("#lbl_edalan").text(response[0].dalan);
-          $("#lbl_euhmal").text(response[0].uhmal);
-          $("#lbl_esuuriinUy").text(response[0].suuriinUy);
-          $("#lbl_eshuuduu").text(response[0].shuuduu);
-          $("#lbl_euhmalHamgaalalt").text(response[0].uhmaliinHamgaalalt);
-          $("#lbl_euuliinShuuduu").text(response[0].uuliinShuuduu);
-    },
-    error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-      var errors = jqXhr.responseJSON;
-      var errorsHtml = '';
-      $.each(errors['errors'], function (index, value) {
-          errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-      });
-      alert(errorsHtml);
-    }
-  });
-}
-
-$(document).ready(function(){
-    $("#btnEditPostGuitsetgel").click(function(e){
-        e.preventDefault();
-        var isInsert = true;
-        if($("#cmbEditGCompany").val()==""||$("#cmbEditGCompany").val()==null){
-            alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditOgnoo").val()==""||$("#txtEditOgnoo").val()==null){
-            alertify.error("Oгноо оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if(isInsert == false){return;}
-        $.ajax({
-          type: 'POST',
-          url: editCompanyUrl,
-          data: $("#frmEditGuitsetgel").serialize(),
-          success:function(response){
-              alertify.alert(response);
-              $('#modalEditGuitsetgel').modal('hide');
-              dataRow = "";
-              refresh();
-          },
-          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-            var errors = jqXhr.responseJSON;
-            var errorsHtml = '';
-            $.each(errors['errors'], function (index, value) {
-                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-            });
-            alert(errorsHtml);
-          }
-        });
-    });
-});
-
-$(document).ready(function(){
-    $("#btnDeleteGuitsetgel").click(function(){
-        if(dataRow == ""){
-            alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
-            return;
-        }
-
-        alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
-          if (e) {
-            var csrf = $('meta[name=csrf-token]').attr("content");
-            $.ajax({
-                type: 'POST',
-                url: deleteCompanyUrl,
-                data: {_token: csrf, id : dataRow['id']},
-                success:function(response){
-                    alertify.alert(response);
-                    refresh();
-                    dataRow="";
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
-                }
-            })
-          } else {
-              alertify.error('Устгах үйлдэл цуцлагдлаа.');
-          }
-        });
-    });
-});
+// $(document).ready(function(){
+//     $("#btnEditPostGuitsetgel").click(function(e){
+//         e.preventDefault();
+//         var isInsert = true;
+//         if($("#cmbEditGCompany").val()==""||$("#cmbEditGCompany").val()==null){
+//             alertify.error("Аж ахуйн нэгжийн нэр оруулаагүй байна!!!");
+//             isInsert = false;
+//         }
+//         if($("#txtEditOgnoo").val()==""||$("#txtEditOgnoo").val()==null){
+//             alertify.error("Oгноо оруулаагүй байна!!!");
+//             isInsert = false;
+//         }
+//         if(isInsert == false){return;}
+//         $.ajax({
+//           type: 'POST',
+//           url: editCompanyUrl,
+//           data: $("#frmEditGuitsetgel").serialize(),
+//           success:function(response){
+//               alertify.alert(response);
+//               $('#modalEditGuitsetgel').modal('hide');
+//               dataRow = "";
+//               refresh();
+//           },
+//           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+//             var errors = jqXhr.responseJSON;
+//             var errorsHtml = '';
+//             $.each(errors['errors'], function (index, value) {
+//                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+//             });
+//             alert(errorsHtml);
+//           }
+//         });
+//     });
+// });
+//
+// $(document).ready(function(){
+//     $("#btnDeleteGuitsetgel").click(function(){
+//         if(dataRow == ""){
+//             alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
+//             return;
+//         }
+//
+//         alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
+//           if (e) {
+//             var csrf = $('meta[name=csrf-token]').attr("content");
+//             $.ajax({
+//                 type: 'POST',
+//                 url: deleteCompanyUrl,
+//                 data: {_token: csrf, id : dataRow['id']},
+//                 success:function(response){
+//                     alertify.alert(response);
+//                     refresh();
+//                     dataRow="";
+//                 },
+//                 error: function(XMLHttpRequest, textStatus, errorThrown) {
+//                     alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
+//                 }
+//             })
+//           } else {
+//               alertify.error('Устгах үйлдэл цуцлагдлаа.');
+//           }
+//         });
+//     });
+// });
