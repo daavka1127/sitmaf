@@ -117,7 +117,6 @@
   <div class="text-left">
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGuitsetgelModal">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditGuitsetgel">Засах</button>
-      <button type="button" class="btn btn-danger" id="btnDeleteGuitsetgel">Устгах</button>
   </div>
 
 

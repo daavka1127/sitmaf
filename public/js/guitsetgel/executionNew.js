@@ -77,7 +77,7 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
     return;
   }
   if(jsonObj.length == 0){
-    alertify.alert("adsadas");
+    alertify.alert("Хамгийн багадаа нэг өгөгдөл оруулна уу.");
     return;
   }
   $.ajax({
@@ -90,10 +90,13 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
     },
     success:function(response){
         alertify.alert(response);
-        $("#worktypeid"+id).css("display","none");
-        $("#checkBoxes"+id).prop("disabled", true);
-        $("#divGenerateReport").show();
-        $("#generateReportAlert").html("");
+        if(response != "Тухайн өдрийн ажлын гүйцэтгэл бүртгэгдсэн байна.")
+        {
+          $("#worktypeid"+id).css("display","none");
+          $("#checkBoxes"+id).prop("disabled", true);
+          $("#divGenerateReport").show();
+          $("#generateReportAlert").html("");
+        }
     },
     error: function(jqXhr, json, errorThrown){// this are default for ajax errors
       var errors = jqXhr.responseJSON;

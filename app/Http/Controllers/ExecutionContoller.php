@@ -130,18 +130,32 @@ class ExecutionContoller extends Controller
 
 
   public function store(Request $req){
-
+    $res = "";
     foreach ($req->json as $key => $value) {
-      $execution = new execution;
-      $execution->companyID = $req->companyID;
-      $execution->work_type_id = $value['workTypeID'];
-      $execution->work_id = $value['workID'];
-      $execution->execution = $value['value'];
-      $execution->date = $req->createDate;
-      $execution->percent = $this->getPercent($value['value'], $req->companyID, $value['workID']);
-      $execution->save();
+      $check = DB::table("tb_execution")
+        ->where("companyID", "=", $req->companyID)
+        ->where("work_type_id","=",$value['workTypeID'])
+        ->where("work_id","=",$value['workID'])
+        ->where("date","=",$req->createDate)
+        ->get();
+
+        if($check->count() == 0){
+          $execution = new execution;
+          $execution->companyID = $req->companyID;
+          $execution->work_type_id = $value['workTypeID'];
+          $execution->work_id = $value['workID'];
+          $execution->execution = $value['value'];
+          $execution->date = $req->createDate;
+          $execution->percent = $this->getPercent($value['value'], $req->companyID, $value['workID']);
+          $execution->save();
+          $res = "Амжилттай хадгаллаа";
+        }
+        else {
+          $res = "Тухайн өдрийн ажлын гүйцэтгэл бүртгэгдсэн байна.";
+        }
+
     }
-    return "Амжилттай хадгаллаа";
+    return $res;
 
   }
 
