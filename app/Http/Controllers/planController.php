@@ -11,6 +11,10 @@ use Response;
 
 class planController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     public function storePlanByWorkID($json, $comID)
     {
       foreach ($json as $key => $value) {
