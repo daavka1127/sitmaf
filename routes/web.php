@@ -15,6 +15,9 @@
 //     return view('home');
 // });
 
+
+
+// dadaa REPORT
 Route::get("/test/table", function(){
   return view("report.companyTableReport");
 });
@@ -27,7 +30,10 @@ Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 });
 Route::get("/test/{comID}/{workID}", "ExecutionContoller@getExecutionAllCompanyIDworkID");
-
+Route::get("/report/print", function(){
+  return view('report.printReport');
+});
+// dadaa REPORT
 
 
 Route::get('/', 'HomeController@index');
