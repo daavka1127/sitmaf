@@ -81,9 +81,9 @@ class ExecutionContoller extends Controller
         $sumAllExecution = DB::table('tb_plan')
             ->select(
               DB::raw("(SELECT `quantity` FROM `tb_plan` WHERE `companyID`=$companiesID AND `work_id`=$workID) as planQuantity"),
-              DB::raw("(SELECT `percent` FROM `tb_execution` WHERE `companyID`=$companiesID AND `work_id`=$workID AND
-                  date=(SELECT MAX(date) FROM `tb_execution` WHERE `companyID`=$companiesID AND `work_id`=$workID AND
-                  date LIKE '2019%' )) as percent2019"),
+              DB::raw("((SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID`=$companiesID AND `work_id`=$workID AND
+                  date LIKE '2019%')*100/(SELECT `quantity` FROM `tb_plan` WHERE `companyID`=$companiesID AND `work_id`=$workID))
+                  as percent2019"),
               DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID`=$companiesID AND `work_id`=$workID AND
                   date LIKE '2019%') as totalExec2019"),
               DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID`=$companiesID AND `work_id`=$workID) as totalExecAll"),
@@ -113,7 +113,7 @@ class ExecutionContoller extends Controller
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
                     AND `date`= ( SELECT MAX(`date`) FROM `tb_execution` )) as lastSumExect"),
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
-                    AND `date` LIKE '2020%') as sumExec2020"),
+                    AND `date` LIKE '2020%') as sumExec2020")
             )
             ->where('id', '=', $companyID)
             ->get();
