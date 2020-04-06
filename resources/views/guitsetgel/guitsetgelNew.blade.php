@@ -28,9 +28,6 @@
             <input type="date" id="txtOgnoo" name="ognoo" class="form-control" required />
           </div>
 
-
-
-
           <div class="col-md-12" id="CheckBoxes"></div>
           <div class="clearfix"></div>
         </form>
