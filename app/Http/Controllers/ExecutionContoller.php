@@ -141,6 +141,19 @@ class ExecutionContoller extends Controller
 
   }
 
+  public function execDelete(Request $req){
+      $exec = execution::find($req->id);
+      $exec->delete();
+      return "Амжилттай устгалаа.";
+  }
+
+  public function execUpdate(Request $req){
+      $exec = execution::find($req->execRowID);
+      $exec->execution = $req->editExec;
+      $exec->save();
+      return "Амжилттай хадгаллаа.";
+  }
+
   public function getPercent($val, $comID, $workID){
     $getPlan = DB::table("tb_plan")
       ->where("companyID", "=", $comID)
@@ -163,7 +176,7 @@ class ExecutionContoller extends Controller
     $exec = DB::table("tb_execution")
       ->join("tb_work", "tb_execution.work_id", "=","tb_work.id")
       ->join("tb_work_type", "tb_execution.work_type_id", "=", "tb_work_type.id")
-      ->select("tb_execution.execution", "tb_execution.date","tb_work.name","tb_work_type.name")
+      ->select("tb_execution.id","tb_execution.execution", "tb_execution.date","tb_work.name as workName","tb_work_type.name as workTypeName")
       ->where("companyID", "=", $req->comID)
       ->get();
       return DataTables::of($exec)

@@ -21,8 +21,19 @@
     var getPlanWorkTypeUrl = "{{url('/getPlanWorkType')}}";
     var getPlanWorkUrl = "{{url('/getPlanWork/company/work_type')}}";
     var executionStoreUrl = "{{url('/execution/store')}}";
+    var executionUpdateUrl = "{{url('/execution/execUpdate')}}";
+    var executionDeleteUrl = "{{url('/execution/execDelete')}}";
+
 
     var generateReportUrl = "{{url('/generate/html')}}";
+
+    var csrf = "{{ csrf_token() }}";
+
+    var getExecByCompany = "{{url("/guitsetgel/getExecByCompany")}}";
+    var execEditRow = "";
+
+
+
 
     var dataRow = "";
     var updateRD = "";
@@ -66,12 +77,14 @@
         $('#datatable tbody tr').css("background-color", "white");
         $(this).closest('tr').css("background-color", "yellow");
         dataRow = $('#datatable').DataTable().row(currow).data();
-        // alert(dataRow["companyName"]);
       });
   });
+
 </script>
 
-<script src="{{url('public/js/guitsetgel/executionNew.js')}}">
+<script src="{{url('public/js/guitsetgel/executionNew.js')}}"></script>
+<script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script>
+
 
 </script>
 
@@ -100,11 +113,14 @@
       </table>
 
   </div>
+
   <div class="text-left">
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGuitsetgelModal">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditGuitsetgel">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteGuitsetgel">Устгах</button>
   </div>
+
+
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
