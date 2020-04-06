@@ -12,6 +12,10 @@ use Yajra\DataTables\DataTables;
 class ExecutionContoller extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     public function executionShow(){
         $companies = DB::table('tb_companies')
             ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')

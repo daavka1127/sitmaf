@@ -13,6 +13,11 @@ use Redirect;
 class WorktypeController extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+  
   public function getWorkType() // get json table
   {
     $work_type = DB::table('tb_work_type')->get();

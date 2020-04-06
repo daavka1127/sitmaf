@@ -8,6 +8,10 @@ use DB;
 
 class guitsetgelChartController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     public function getCompaniesChart(Request $req){
         if($req->id>0 && $req->id<4){
             $companies = DB::table('tb_companies')
