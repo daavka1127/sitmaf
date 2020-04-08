@@ -73,7 +73,7 @@ Route::post('/hunHuch/store', 'hunHuchController@store');
 Route::post('/hunHuch/update', 'hunHuchController@update');
 Route::post('/hunHuch/delete', 'hunHuchController@delete');
 
-Route::get('/chart/byDate/{id}', 'GuitsetgelController@chartByDateShow');
+Route::get('/chart/byDate/{id}/{workType}', 'GuitsetgelController@chartByDateShow');
 // Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
 Route::get('/chart/all/{id}', 'guitsetgelChartController@chartAlljqChart');
 // Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
@@ -113,3 +113,14 @@ Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 
 Route::post('/guitsetgel/getExecByCompany', "ExecutionContoller@getExecByCompany");
+
+// workType Visible start
+Route::get('workType/visible', "WorktypeController@visibleShowBlade");
+Route::get('workType/visibleChange', "WorktypeController@ChangeWorkTypeVisible");
+Route::get('workType/getCheck', "WorktypeController@getWorkTypeVisible");
+Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
+
+
+
+
+// workType Visible end

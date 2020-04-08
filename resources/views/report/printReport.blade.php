@@ -5,6 +5,7 @@
   <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
   <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " />
 
+<<<<<<< HEAD
   <script src="{{url('/public/js/printReport/printReport.js')}} "></script>
 @php
   $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
@@ -25,6 +26,8 @@
     </div>
   @endforeach
 </div>
+=======
+>>>>>>> 8fdb187a367dda2aeb2b1e47848ad5b195ba0e0d
 
   <h5 class="text-center"><strong>ТАВАНТОЛГОЙ-ЗҮҮНБАЯН ЧИГЛЭЛИЙН 416.165  КМ ТӨМӨР ЗАМЫН ШУГАМЫН ДООД БҮТЦИЙН ГАЗАР ШОРООНЫ АЖЛЫН МЭДЭЭ</strong></h5>
 
@@ -39,8 +42,13 @@
       $companies = \App\Http\Controllers\companyController::getCompanyByHeseg($heseg->id);
     @endphp
     <h6 class="text-left">{{$heseg->name}}</h6>
+<<<<<<< HEAD
     <div class="scrollable-table">
     <table id="davaa" border="1" class="table table-striped table-header-rotated">
+=======
+
+    <table border="1" class="">
+>>>>>>> 8fdb187a367dda2aeb2b1e47848ad5b195ba0e0d
       <thead>
         <tr>
           <th>Мэдээ агуулга</th>
@@ -53,7 +61,7 @@
           <th>Мэдээ агуулга</th>
           <th>Мэдээ агуулга</th>
           @foreach ($companies as $company)
-            <th class="rotate-45"><div><span>{{$company->companyName}}</span></div></th>
+            <th class="verticalTD"><div class="rotate">{{$company->companyName}}</div></th>
             {{-- <th class="rotate">{{$company->companyName}}</th> --}}
           @endforeach
         </tr>
@@ -150,7 +158,7 @@
         </tr>
       </tbody>
     </table>
-    <div>
+
   @endforeach
 
 @endsection

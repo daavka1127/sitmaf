@@ -118,73 +118,73 @@ class GuitsetgelController extends Controller
         return view('chart.guitsetgelAllChart', compact('companies'));
     }
 
-    public function chartByDateShow($companyID){
-        $datas = DB::table('tb_guitsetgel')
-        ->where('companyID','=',$companyID)->get();
+    public function chartByDateShow($companyID, $workTypeID){
+        $datas = DB::table('tb_execution')
+          ->join("tb_work","tb_execution.work_id","=","tb_work.id")
+          ->select('tb_execution.work_id', 'tb_work.name as nameExec', 'tb_execution.companyID',
+                  'tb_execution.work_type_id', DB::raw('SUM(tb_execution.execution) as execution'))
+          ->where('companyID', '=', $companyID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->groupBy('work_id','tb_work.name','tb_execution.companyID', 'tb_execution.work_type_id')
+          ->get();
 
+        $planDatas = DB::table('tb_plan');
 
-          $guitsetgel = DB::table('tb_guitsetgel')
-            ->join('tb_companies', 'tb_guitsetgel.companyID', '=','tb_companies.id')
-            ->select('tb_guitsetgel.*','tb_companies.hursHuulalt','tb_companies.dalan','tb_companies.uhmal','tb_companies.suuriinUy','tb_companies.shuuduu','tb_companies.uhmaliinHamgaalalt','tb_companies.uuliinShuuduu')
-            ->where('tb_guitsetgel.companyID', '=', $companyID)
-            ->orderBy('tb_guitsetgel.ognoo', 'desc')
-            ->first();
 
         $companies = DB::table('tb_companies')->get();
-        //return $guitsetgel->hursHuulalt;
-        return view('chart.showCharts', compact('datas', 'companies', 'companyID', 'guitsetgel'));
+        // //return $guitsetgel->hursHuulalt;
+         return view('chart.showCharts', compact('datas', 'companies', 'companyID', 'workTypeID'));
+    }
+    public static function getWorkExecution($companyID, $work_id)
+    {
+        $datas = DB::table('tb_execution')
+        ->where('companyID','=',$companyID)
+        ->where('work_id', '=', $work_id)
+        ->orderBy('date', 'desc')
+        ->get();
+
+        return $datas;
+    }
+    public static function getSumWorkExecution($companyID, $work_id)
+    {
+      $datas = DB::table('tb_execution')
+      ->join('tb_work', 'tb_execution.work_id', '=', 'tb_work.id')
+      ->select(DB::raw('SUM(tb_execution.execution) as execution'), 'tb_work.name as workName')
+      ->where('tb_execution.companyID','=',$companyID)
+      ->where('tb_execution.work_id', '=', $work_id)
+      ->groupBy('tb_work.name')
+      ->first();
+
+      return $datas;
     }
 
     public static function getGuitsetgelHuvi($companyID){
-        $guitsetgel = DB::table('tb_guitsetgel')
-            ->where('companyID', '=', $companyID)
-            ->orderBy('ognoo', 'desc')
-            ->first();
-        $company = DB::table('tb_companies')
-            ->where('id', '=', $companyID)
-            ->first();
-        $guitsetgelHursHuulalt = null;
-        $guitsetgelDalan = null;
-        $guitsetgelUhmal = null;
-        $guitsetgelSuuriinUy = null;
-        $guitsetgelShuuduu = null;
-        $guitsetgelUhmaliinHamgaalalt = null;
-        $guitsetgelUuliinShuuduu = null;
-        $dundaj = null;
-        $i=0;
-        if($guitsetgel == null){
-          return 0;
-        }
-        if($company->hursHuulalt != null && $guitsetgel->gHursHuulalt != null){
-            $guitsetgelHursHuulalt = $guitsetgel->gHursHuulalt * 100 / $company->hursHuulalt;
-            $i++;
-        }
-        if($company->dalan != null && $guitsetgel->gDalan != null){
-            $guitsetgelDalan = $guitsetgel->gDalan * 100 / $company->dalan;
-            $i++;
-        }
-        if($company->uhmal != null && $guitsetgel->gUhmal != null){
-            $guitsetgelUhmal = $guitsetgel->gUhmal * 100 / $company->uhmal;
-            $i++;
-        }
-        if($company->suuriinUy != null && $guitsetgel->gSuuriinUy != null){
-            $guitsetgelSuuriinUy = $guitsetgel->gSuuriinUy * 100 / $company->suuriinUy;
-            $i++;
-        }
-        if($company->shuuduu != null && $guitsetgel->gShuuduu != null){
-            $guitsetgelShuuduu = $guitsetgel->gShuuduu * 100 / $company->shuuduu;
-            $i++;
-        }
-        if($company->uhmaliinHamgaalalt != null && $guitsetgel->gUhmaliinHamgaalalt != null){
-            $guitsetgelUhmaliinHamgaalalt = $guitsetgel->gUhmaliinHamgaalalt * 100 / $company->uhmaliinHamgaalalt;
-            $i++;
-        }
-        if($company->uuliinShuuduu != null && $guitsetgel->gUuliinShuuduu != null){
-            $guitsetgelUuliinShuuduu = $guitsetgel->gUuliinShuuduu * 100 / $company->uuliinShuuduu;
-            $i++;
-        }
-        $dundaj = ($guitsetgelHursHuulalt + $guitsetgelDalan + $guitsetgelUhmal + $guitsetgelSuuriinUy + $guitsetgelShuuduu + $guitsetgelUhmaliinHamgaalalt + $guitsetgelUuliinShuuduu)/$i;
-        return $dundaj;
+
+
+          $plan = DB::table("tb_plan")
+            ->where("companyID","=",$companyID)
+            ->sum("quantity");
+          $exec = DB::table("tb_execution")
+            ->where("companyID","=",$companyID)
+            ->sum("execution");
+
+          $execPercent = 0;
+            if($plan != 0)
+              $execPercent = ($exec*100/$plan);
+
+        return $execPercent;
+    }
+
+    public static function getPlans($comID, $workTypeID)
+    {
+      $plans = DB::table('tb_plan')
+        ->join('tb_work', 'tb_work.id', '=', 'tb_plan.work_id')
+        ->select('tb_plan.*', 'tb_work.name as workName')
+        ->where('tb_plan.companyID', '=', $comID)
+        ->where('tb_plan.work_type_id', '=', $workTypeID)
+        ->get();
+        // dd($plans);
+        return $plans;
     }
 
     public static function generalChart($hesegID){
