@@ -182,7 +182,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Зэвсэгт хүчний программ хангажийн төв Ахлах дэслэгч Б.Даваабат
+            Зэвсэгт хүчний программ хангажийн төв. &copy;2020
           </div>
           <div class="clearfix"></div>
         </footer>
