@@ -70,13 +70,16 @@
     <div class="clearfix"></div>
 
     @include('chart.chartByTorol')
-
-    <div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #fff"></div>
-    <div class="clearfix"></div>
-    <br>
     <div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Гүйцэтгэл /үзүүлэлтээр/</div>
     <div class="clearfix"></div>
     <div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    </br>
+    <div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #fff;" ></div>
+    <div class="clearfix"></div>
+
+
+
+
   @else
     <div class="clearfix"></div>
     <div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Өгөгдөл ороогүй</div>
