@@ -113,3 +113,14 @@ Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 
 Route::post('/guitsetgel/getExecByCompany', "ExecutionContoller@getExecByCompany");
+
+// workType Visible start
+Route::get('workType/visible', "WorktypeController@visibleShowBlade");
+Route::get('workType/visibleChange', "WorktypeController@ChangeWorkTypeVisible");
+Route::get('workType/getCheck', "WorktypeController@getWorkTypeVisible");
+Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
+
+
+
+
+// workType Visible end
