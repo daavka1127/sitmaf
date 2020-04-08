@@ -15,24 +15,36 @@ $(document).ready(function(){
     var workID = $(this).attr("workId");
     if($(this).is(':checked')){
         // alert("checked");
-        $("#prev" + workID).show();
-        $("#report" + workID).show();
+        $(".table1 #prev" + workID).show();
+        $(".table1 #report" + workID).show();
+        $(".table2 #prev" + workID).show();
+        $(".table2 #report" + workID).show();
+        $(".table3 #prev" + workID).show();
+        $(".table3 #report" + workID).show();
+        $(".allTable #prev" + workID).show();
+        $(".allTable #report" + workID).show();
     }
     else{
         // alert("unchecked");
-        $("#prev" + workID).hide();
-        $("#report" + workID).hide();
+        $(".table1 #prev" + workID).hide();
+        $(".table1 #report" + workID).hide();
+        $(".table2 #prev" + workID).hide();
+        $(".table2 #report" + workID).hide();
+        $(".table3 #prev" + workID).hide();
+        $(".table3 #report" + workID).hide();
+        $(".allTable #prev" + workID).hide();
+        $(".allTable #report" + workID).hide();
     }
   });
 });
 
-$(document).ready(function(){
-  $("#davaa").rowspanizer({
-    vertical_align: 'middle',
-    columns: [0,1]
-  });
-unmergeRow();
-});
+// $(document).ready(function(){
+//   $("#davaa").rowspanizer({
+//     vertical_align: 'middle',
+//     columns: [0,1]
+//   });
+// unmergeRow();
+// });
 
 
 function unmergeRow(){

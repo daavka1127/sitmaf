@@ -272,4 +272,30 @@ class ExecutionContoller extends Controller
           ->make(true);
   }
 
+  public static function getLastExecutionByHeseg($hesegID, $workID){
+    $lastExecs = DB::table("tb_execution")
+        ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+        ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
+        ->where('tb_companies.heseg_id', '=', $hesegID)
+        ->where('tb_execution.date', '=', DB::raw('(SELECT MAX(`date`) FROM `tb_execution` WHERE tb_execution.work_id = ' . $workID . ')'))
+        ->get();
+    foreach ($lastExecs as $lastExec) {
+      $lastExec1 = $lastExec->lastExec;
+    }
+    return $lastExec1;
+  }
+
+  public static function getAllExecutionByHeseg($hesegID, $workID){
+    $lastExecs = DB::table("tb_execution")
+        ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+        ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
+        ->where('tb_companies.heseg_id', '=', $hesegID)
+        ->where('tb_execution.work_id', '=', $workID)
+        ->get();
+    foreach ($lastExecs as $lastExec) {
+      $lastExec1 = $lastExec->lastExec;
+    }
+    return $lastExec1;
+  }
+
 }

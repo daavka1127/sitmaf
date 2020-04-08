@@ -1,17 +1,38 @@
-@extends('layouts.layout_main')
+@extends('layouts.layout_print')
 
 @section('content')
 
   <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
   <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " />
 
-<<<<<<< HEAD
   <script src="{{url('/public/js/printReport/printReport.js')}} "></script>
 @php
   $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
 @endphp
 
-<div class="row">
+<style>
+
+@media print {
+  /* body * {
+    visibility: hidden;
+  } */
+
+
+   #onlyPrint {
+    visibility: visible;
+    width: 100%;
+  }
+  #hideRowBeforPrint{
+    display: none;
+  }
+
+  #clear{
+    display: none;
+  }
+}
+</style>
+
+<div class="row" id="hideRowBeforPrint">
   @foreach ($workTypes as $workType)
     <div class="col-md-12">
         <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$workType->id}}" id="checkWorkType{{$workType->id}}">  {{$workType->name}}</label>
@@ -26,29 +47,34 @@
     </div>
   @endforeach
 </div>
-=======
->>>>>>> 8fdb187a367dda2aeb2b1e47848ad5b195ba0e0d
+<div id="onlyPrint">
 
   <h5 class="text-center"><strong>ТАВАНТОЛГОЙ-ЗҮҮНБАЯН ЧИГЛЭЛИЙН 416.165  КМ ТӨМӨР ЗАМЫН ШУГАМЫН ДООД БҮТЦИЙН ГАЗАР ШОРООНЫ АЖЛЫН МЭДЭЭ</strong></h5>
 
 
-  <h6 class="text-right">2020 оны  03 дугаар сарын 29-ний өдрөөс 04 дүгээр сарын 03-ний өдөр</h6>
   @php
     $hesegs = \App\Http\Controllers\HesegController::getHeseg();
+    $j=0;
   @endphp
 
   @foreach ($hesegs as $heseg)
+    <div class="row">
     @php
       $companies = \App\Http\Controllers\companyController::getCompanyByHeseg($heseg->id);
+      $j++;
+      if($j == 3){
+        $widthNumber = 9;
+      }
+      else{
+        $widthNumber = 12;
+      }
     @endphp
     <h6 class="text-left">{{$heseg->name}}</h6>
-<<<<<<< HEAD
-    <div class="scrollable-table">
-    <table id="davaa" border="1" class="table table-striped table-header-rotated">
-=======
 
-    <table border="1" class="">
->>>>>>> 8fdb187a367dda2aeb2b1e47848ad5b195ba0e0d
+
+    {{-- <table id="davaa" border="1" class="table table-striped table-header-rotated"> --}}
+  <div class="col-md-{{$widthNumber}}">
+    <table border="1" class="table{{$heseg->id}}">
       <thead>
         <tr>
           <th>Мэдээ агуулга</th>
@@ -158,7 +184,114 @@
         </tr>
       </tbody>
     </table>
+    </div>
+    {{-- end first div --}}
+    @if($j==3)
+      <div class="clearfix" id="clear"></div>
+      <div class="col-md-3">
+        <table  border="1" class="allTable">
+          <thead>
+            <tr>
+              <th colspan="{{$hesegs->count()+3}}">МЭДЭЭНИЙ ТОВЧОО</th>
+            </tr>
+            <tr>
+              <th colspan="2"></th>
+              @foreach ($hesegs as $heseg1)
+                <th>{{$heseg1->name}}</th>
+              @endforeach
+              <th>Бүгд</th>
+            </tr>
+            <tr>
+              <th colspan="2">Хариуцах ПК-ийн байршил</th>
+              @foreach ($hesegs as $heseg1)
+                <th>{{$heseg1->ajliinHeseg}}</th>
+              @endforeach
+              <th></th>
+            </tr>
+            <tr>
+              <th colspan="2">Батлагдсан тоо хэмжээ /м.куб/</th>
+              @foreach ($hesegs as $heseg1)
+                @php
+                  $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id);
+                @endphp
+                @if ($plan == null || $plan == "")
+                  <th>0</th>
+                @else
+                  <th>{{round($plan, 2)}}</th>
+                @endif
+              @endforeach
+              <th></th>
+            </tr>
+            <tr>
+              <th colspan="2">2019 оны гүйцэтгэл /хувь/</th>
+              @foreach ($hesegs as $heseg1)
+              @php
+                $per2019 = \App\Http\Controllers\planController::getExecPercent2019($heseg1->id);
+                $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id);
+              @endphp
+                @if ($plan == null || $plan == "")
+                  <th>0</th>
+                @else
+                  <th>{{round($per2019*100/$plan, 2)}}</th>
+                @endif
+              @endforeach
+              <th></th>
+            </tr>
+            <tr>
+              <th colspan="2">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</th>
+              @foreach ($hesegs as $heseg1)
+                @php
+                  $per2019 = \App\Http\Controllers\planController::getExecPercent2019($heseg1->id);
+                  $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id);
+                @endphp
+                <th>{{$plan-$per2019}}</th>
+              @endforeach
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @php
+              $works = \App\Http\Controllers\WorkController::getWorksAll($company->id);
+            @endphp
+            @foreach ($works as $work)
+              <tr class="{{$work->work_type_id}}" id="prev{{$work->id}}">
+                <td>{{$work->name}}</td>
+                <td>Өмнөх тайл бүгд</td>
+                @php
+                  $heseg1s = \App\Http\Controllers\HesegController::getHeseg();
+                @endphp
+                @foreach ($heseg1s as $heseg1)
+                  @php
+                    $allExec = \App\Http\Controllers\ExecutionContoller::getAllExecutionByHeseg($heseg1->id, $work->id);
+                    $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecutionByHeseg($heseg1->id, $work->id);
+                  @endphp
+                  <td>{{$allExec-$lastExec}}</td>
+                @endforeach
+                <td></td>
+              </tr>
+              <tr class="{{$work->work_type_id}}" id="report{{$work->id}}">
+                <td>{{$work->name}}</td>
+                <td>Тайлант үеийн</td>
+                @php
+                  $heseg1s = \App\Http\Controllers\HesegController::getHeseg();
+                @endphp
+                @foreach ($heseg1s as $heseg1)
+                  @php
+                    $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecutionByHeseg($heseg1->id, $work->id);
+                  @endphp
+                  <td>{{$lastExec}}</td>
+                @endforeach
+                <td></td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    @endif
 
+  </div>
+  {{-- end row div --}}
   @endforeach
 
+  </div>
 @endsection

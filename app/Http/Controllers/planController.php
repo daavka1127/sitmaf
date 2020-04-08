@@ -107,5 +107,31 @@ class planController extends Controller
         return $sumPlan;
     }
 
+    public static function getPlanSections($hesegID){
+      $plans = DB::table("tb_plan")
+          ->join('tb_companies', 'tb_plan.companyID', '=', 'tb_companies.id')
+          ->select(DB::raw("SUM(tb_plan.quantity) as quantity"))
+          ->where('tb_companies.heseg_id','=', $hesegID)
+          ->get();
+      foreach ($plans as $plan) {
+        $plan1 = $plan->quantity;
+      }
+      return $plan1;
+    }
+
+    public static function getExecPercent2019($hesegID){
+        $execution2019 = DB::table("tb_execution")
+            ->join("tb_companies", 'tb_execution.companyID', '=', 'tb_companies.id')
+            ->select(DB::raw("SUM(tb_execution.execution) as execution2019"))
+            ->where('tb_execution.date', 'LIKE', "2019%")
+            ->where('tb_companies.heseg_id', '=', $hesegID)
+            ->get();
+        foreach ($execution2019 as $pizda) {
+          $execution2019P = $pizda->execution2019;
+        }
+        // return $plan;
+        return $execution2019P;
+    }
+
 
 }

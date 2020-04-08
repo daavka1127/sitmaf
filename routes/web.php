@@ -20,19 +20,19 @@
 // dadaa REPORT
 Route::get("/test/table", function(){
   return view("report.companyTableReport");
-});
-Route::get('/generate/html', 'reportController@generateHtml');
+})->middleware('auth');
 Route::get('/show/html', function(){
   return view('report.viewHtml');
-});
-
+})->middleware('auth');
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
-});
-Route::get("/test/{comID}/{workID}", "ExecutionContoller@previousReportExecutionByComIdWorkID");
+})->middleware('auth');
 Route::get("/report/print", function(){
   return view('report.printReport');
-});
+})->middleware('auth');
+Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
+Route::get("/test/{comID}/{workID}", "ExecutionContoller@previousReportExecutionByComIdWorkID");
+Route::get('/generate/html', 'reportController@generateHtml');
 // dadaa REPORT
 
 

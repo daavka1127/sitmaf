@@ -8,6 +8,8 @@ use App\Http\Requests;
 use Image;
 use App\ImageModel;
 use DB;
+use Response;
+use Illuminate\Support\Facades\Validator;
 
 class ImageController extends Controller
 {
@@ -30,9 +32,16 @@ class ImageController extends Controller
 
     public function resizeImagePost(Request $request)
     {
-        $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $rules = array('image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048');
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails())
+        {
+            return Response::json(array(
+                'success' => 'errorValidate',
+                'errors' => $validator->getMessageBag()->toArray()
+            )); // 400 being the HTTP code for an invalid request.
+        }
 
         $image = $request->file('image');
         $input['imagename'] = $image->getClientOriginalName().time().'.'.$image->extension();
@@ -51,8 +60,10 @@ class ImageController extends Controller
         // $image->title = $request->title;
         $image->save();
 
-        return back()
-            ->with('success','Image Upload successful')
-            ->with('imageName',$input['imagename']);
+        $alert[] = array(
+          'success'=>"success",
+          'msg'=>"Амжилттай хадгаллаа!!!"
+        );
+        return Response::json($alert);
     }
 }

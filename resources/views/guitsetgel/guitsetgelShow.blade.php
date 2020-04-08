@@ -91,7 +91,7 @@
 <div class="col-md-12">
   <div id="divGenerateReport">
     <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
-    <input type="button" class="btn btn-primary btn-sm" name="" id="btnGenerateReport" value="Тайлан бодох" />
+    <input type="button" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
   </div>
   <span style="color:green;" id="generateReportAlert"></span>
 </div>

@@ -9,13 +9,13 @@
     <link href="{{url('public/css/zam_login.css')}}" rel="stylesheet">
 
     <link rel="icon" type="image/x-icon" href="{{url('public/images/gsmaf_logo.ico')}}"/>
-
+    <!-- jQuery -->
+    <script src="{{url('public/vendors/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
     <script src="{{url('public/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <link href="{{url('public/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
-    <!-- jQuery -->
-    <script src="{{url('public/vendors/jquery/dist/jquery.min.js')}}"></script>
+
 
     <!--Zagvarlag alert-->
     <link rel="stylesheet" href="{{ asset('public/z-alert/css/alertify.core.css') }}" />
