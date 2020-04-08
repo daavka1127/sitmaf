@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\planController;
+use Illuminate\Support\Facades\Auth;
 use App\execution;
 use DB;
 use Yajra\DataTables\DataTables;
@@ -17,13 +18,26 @@ class ExecutionContoller extends Controller
       $this->middleware('auth');
   }
     public function executionShow(){
-        $companies = DB::table('tb_companies')
-            ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
-            ->select('tb_companies.*', 'tb_heseg.name')
-            ->orderBy('tb_companies.heseg_id', 'asc')
-            ->orderBy('tb_companies.companyName', 'asc')
-            ->get();
+
+        if(Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 ){
+          $hesegID = Auth::user()->heseg_id;
+          $companies = DB::table('tb_companies')
+              ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
+              ->select('tb_companies.*', 'tb_heseg.name')
+              ->where("tb_companies.heseg_id", "=", $hesegID)
+              ->orderBy('tb_companies.heseg_id', 'asc')
+              ->orderBy('tb_companies.companyName', 'asc')
+              ->get();
         return view('guitsetgel.guitsetgelShow', compact('companies'));
+        }else{
+          $companies = DB::table('tb_companies')
+              ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
+              ->select('tb_companies.*', 'tb_heseg.name')
+              ->orderBy('tb_companies.heseg_id', 'asc')
+              ->orderBy('tb_companies.companyName', 'asc')
+              ->get();
+          return view('guitsetgel.guitsetgelShow', compact('companies'));
+        }
     }
 
     public static function getExecutionPercentByWorkID2019($companyID, $workID){

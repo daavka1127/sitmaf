@@ -37,6 +37,7 @@
           },
           "processing": true,
           "serverSide": true,
+          "stateSave": true,
           "ajax":{
                    "url": "{{url('/company/get')}}",
                    "dataType": "json",
@@ -46,7 +47,9 @@
                       }
                  },
           "columns": [
-            { data: "id", name: "id" },
+            { data: "id", name: "id",  render: function (data, type, row, meta) {
+          return meta.row + meta.settings._iDisplayStart + 1;
+      }  },
             { data: "companyName", name: "companyName"},
             { data: "ajliinHeseg", name: "ajliinHeseg"},
             { data: "hunHuch", name: "hunHuch"},
@@ -61,7 +64,6 @@
         $('#datatable tbody tr').css("background-color", "white");
         $(this).closest('tr').css("background-color", "yellow");
         dataRow = $('#datatable').DataTable().row(currow).data();
-        // alert(dataRow["companyName"]);
       });
   });
 </script>
@@ -85,9 +87,17 @@
 
   </div>
   <div class="text-left">
+    @if(Auth::user()->heseg_id != 4 )
+      @if (Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 )
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
+      @endif
+    @endif
+    @if(Auth::user()->heseg_id == 5 )
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditCompany">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteCompany">Устгах</button>
+    @endif
+
   </div>
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
@@ -95,6 +105,7 @@
   <script src="{{url('public/js/company/company.js')}}"></script>
   <script src="{{url('public/js/work_type/hideShowWorks.js')}}"></script>
   <script src="{{url('public/js/work_type/editHideShowWorks.js')}}"></script>
+
   @include('company.companyNew')
   @include('company.companyEdit')
 </div>

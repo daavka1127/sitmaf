@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\company;
 use App\Http\Controllers\planController;
 use App\plan;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Yajra\DataTables\DataTables;
 
@@ -17,14 +18,44 @@ class companyController extends Controller
     }
 
     public function getCompanies(){
-      $companies = DB::table('tb_companies')
-          ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
-          ->select('tb_companies.*', 'tb_heseg.name')
-          ->orderBy('tb_companies.heseg_id', 'asc')
-          ->orderBy('tb_companies.companyName', 'asc')
-          ->get();
-      return DataTables::of($companies)
-            ->make(true);
+      if(Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 ){
+        $hesegID = Auth::user()->heseg_id;
+        $companies = DB::table('tb_companies')
+            ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
+            ->select('tb_companies.*', 'tb_heseg.name')
+            ->where("tb_companies.heseg_id", "=", $hesegID)
+            ->orderBy('tb_companies.heseg_id', 'asc')
+            ->orderBy('tb_companies.companyName', 'asc')
+            ->get();
+        return DataTables::of($companies)
+              ->make(true);
+      }else{
+        $companies = DB::table('tb_companies')
+            ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
+            ->select('tb_companies.*', 'tb_heseg.name')
+            ->orderBy('tb_companies.heseg_id', 'asc')
+            ->orderBy('tb_companies.companyName', 'asc')
+            ->get();
+        return DataTables::of($companies)
+              ->make(true);
+      }
+    }
+
+    public static function getHesegID(){
+        $hesegID = Auth::user()->heseg_id;
+        if(Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 ){
+          $tbHeseg = DB::table('tb_heseg')
+              ->where("tb_heseg.id", "=", $hesegID)
+              ->get();
+              return $tbHeseg;
+        }else{
+          $tbHeseg = DB::table('tb_heseg')
+              ->get();
+              return $tbHeseg;
+        }
+
+
+
     }
 
     public function showSlider(){

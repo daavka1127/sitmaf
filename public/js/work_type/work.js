@@ -27,8 +27,11 @@ function refresh(){
                     }
                },
         "columns": [
-          { data: "id", name: "id" },
+          { data: "id", name: "id",  render: function (data, type, row, meta) {
+        return meta.row + meta.settings._iDisplayStart + 1;
+    } },
           { data: "work_type_id", name: "work_type_id"},
+          { data: "workTypeID", name: "workTypeID", visible:false},
           { data: "name", name: "name"},
           { data: "hemjih_negj", name: "hemjih_negj"}
           ]
@@ -66,8 +69,11 @@ $(document).ready(function(){
                   }
              },
       "columns": [
-          { data: "id", name: "id" },
+          { data: "id", name: "id",  render: function (data, type, row, meta) {
+        return meta.row + meta.settings._iDisplayStart + 1;
+    } },
           { data: "work_type_id", name: "work_type_id"},
+          { data: "workTypeID", name: "workTypeID", visible:false},
           { data: "name", name: "name"},
           { data: "hemjih_negj", name: "hemjih_negj"}
         ]
@@ -127,7 +133,7 @@ $(document).ready(function(){
 
   $("#btnEditWorkType").click(function(){
     $("#txtEditWorkTypeID").val(dataRow["id"]);
-    $("#ecmbWorkTypeID").val(dataRow["work_type_id"]);
+    $("#ecmbWorkTypeID").val(dataRow["workTypeID"]);
     $("#ework_type_id").val(dataRow["name"]);
     $("#ework_hemjih_negj").val(dataRow["hemjih_negj"]);
       if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}

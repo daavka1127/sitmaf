@@ -16,6 +16,7 @@ function refresh(){
           },
           "processing": true,
           "serverSide": true,
+          "stateSave": true,
           "ajax":{
                    "url": getCompaniesUrl,
                    "dataType": "json",
@@ -25,7 +26,9 @@ function refresh(){
                       }
                  },
           "columns": [
-            { data: "id", name: "id" },
+            { data: "id", name: "id",  render: function (data, type, row, meta) {
+          return meta.row + meta.settings._iDisplayStart + 1;
+      } },
             { data: "companyName", name: "companyName"},
             { data: "ajliinHeseg", name: "ajliinHeseg"},
             { data: "hunHuch", name: "hunHuch"},

@@ -47,7 +47,9 @@ function refreshExecEdit(comID){
                   }
              },
       "columns": [
-          { data: "id", name: "id" },
+          { data: "id", name: "id",  render: function (data, type, row, meta) {
+        return meta.row + meta.settings._iDisplayStart + 1;
+    } },
           { data: "workTypeName", name: "workTypeName"},
           { data: "workName", name: "workName"},
           { data: "date", name: "date"},

@@ -62,7 +62,9 @@
                       }
                  },
           "columns": [
-              { data: "id", name: "id" },
+              { data: "id", name: "id",  render: function (data, type, row, meta) {
+            return meta.row + meta.settings._iDisplayStart + 1;
+        } },
               { data: "companyName", name: "companyName"},
               { data: "ajliinHeseg", name: "ajliinHeseg"},
               { data: "hunHuch", name: "hunHuch"},
@@ -115,10 +117,17 @@
   </div>
 
   <div class="text-left">
+    @if(Auth::user()->heseg_id != 4 )
+      @if (Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 )
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGuitsetgelModal">Нэмэх</button>
+      @endif
+    @endif
+    @if(Auth::user()->heseg_id == 5 )
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGuitsetgelModal">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditGuitsetgel">Засах</button>
+    @endif
   </div>
-
+    <div class="clearfix"></div>
 
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}

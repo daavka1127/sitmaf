@@ -26,7 +26,9 @@ function refresh(){
                       }
                  },
           "columns": [
-            { data: "id", name: "id" },
+            { data: "id", name: "id",  render: function (data, type, row, meta) {
+          return meta.row + meta.settings._iDisplayStart + 1;
+      }   },
             { data: "companyID", name: "companyID", visible:false},
             { data: "companyName", name: "companyName"},
             { data: "gHursHuulalt", name: "gHursHuulalt"},

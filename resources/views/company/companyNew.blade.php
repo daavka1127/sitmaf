@@ -19,12 +19,14 @@
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Хэсэг <span class="red-required">*</span> </label>
+            @php
+              $getTbHeseg = \App\Http\Controllers\companyController::getHesegID();
+            @endphp
             <select class="form-control" id="cmbHeseg" name="heseg_id">
-              <option value="0">Сонгоно уу</option>
-              <option value="1">Зүүнбаян чиглэл I хэсэг</option>
-              <option value="2">Мандах чиглэл II хэсэг</option>
-              <option value="3">Цогтцэций чиглэл III чиглэл</option>
-              <option value="4">Бүх аж ахуйн нэгжээр</option>
+              @foreach ($getTbHeseg as $tbHeseg)
+                <option value="{{$tbHeseg->id}}">{{$tbHeseg->name}}</option>
+              @endforeach
+
             </select>
           </div>
           <div class="form-group col-md-3 text-left">

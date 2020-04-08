@@ -27,7 +27,9 @@ function refresh(){
                     }
                },
         "columns": [
-            { data: "id", name: "id" },
+            { data: "id", name: "id",  render: function (data, type, row, meta) {
+          return meta.row + meta.settings._iDisplayStart + 1;
+      } },
             { data: "name", name: "name"}
           ]
     }).ajax.reload();
@@ -63,7 +65,9 @@ $(document).ready(function(){
                   }
              },
       "columns": [
-          { data: "id", name: "id" },
+          { data: "id", name: "id",  render: function (data, type, row, meta) {
+        return meta.row + meta.settings._iDisplayStart + 1;
+    } },
           { data: "name", name: "name"}
         ]
   });
@@ -73,7 +77,7 @@ $(document).ready(function(){
       $('#datatable_workType tbody tr').css("background-color", "white");
       $(this).closest('tr').css("background-color", "yellow");
       dataRow = $('#datatable_workType').DataTable().row(currow).data();
-      // alert(dataRow["companyName"]);
+      
     });
 
 

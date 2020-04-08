@@ -19,14 +19,18 @@ class WorkController extends Controller
   }
     public function getWorkType() // get json table
     {
-      $work_type = DB::table('tb_work')->get();
+      $work_type = DB::table('tb_work')
+        ->join("tb_work_type",  "tb_work.work_type_id", "=", "tb_work_type.id")
+        ->select("tb_work.id", "tb_work_type.name as work_type_id", "tb_work.work_type_id as workTypeID","tb_work.name", "tb_work.hemjih_negj")
+        ->get();
       return DataTables::of($work_type)
           ->make(true);
       // return view('work.work_type.work_type_show', compact("work_type"));
     }
     public function work_typeShow()
     {
-      $work_type = DB::table('tb_work_type')->get();
+      $work_type = DB::table('tb_work_type')
+        ->get();
       return view('work.work.work_show', compact('work_type'));
     }
 
@@ -60,6 +64,7 @@ class WorkController extends Controller
     public static function getCompactWorks($worktype)
     {
       $works = DB::table('tb_work')
+
           ->where("work_type_id", "=", $worktype)
           ->get();
       return $works;
