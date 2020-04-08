@@ -23,6 +23,9 @@ class ExecutionContoller extends Controller
             ->orderBy('tb_companies.heseg_id', 'asc')
             ->orderBy('tb_companies.companyName', 'asc')
             ->get();
+
+            //dd($companies);
+
         return view('guitsetgel.guitsetgelShow', compact('companies'));
     }
 
@@ -232,6 +235,13 @@ class ExecutionContoller extends Controller
 
   public function execDelete(Request $req){
       $exec = execution::find($req->id);
+      $exec->delete();
+      return "Амжилттай устгалаа.";
+  }
+
+  public function execDeleteByCompany($comID){
+      $exec = DB::table("tb_execution")
+        ->where('companyID', '=', $comID);
       $exec->delete();
       return "Амжилттай устгалаа.";
   }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\company;
 use App\Http\Controllers\planController;
+use App\Http\Controllers\ExecutionContoller;
 use App\plan;
 use DB;
 use Yajra\DataTables\DataTables;
@@ -94,6 +95,10 @@ class companyController extends Controller
         $company->delete();
         $planWork = new planController;
         $planWork->deletePlanByCompany($req->id);
+
+        $exec = new ExecutionContoller;
+        $exec->execDeleteByCompany($req->id);
+
         return "Амжилттай устгалаа.";
 
     }

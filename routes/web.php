@@ -59,7 +59,7 @@ Route::get('/companies/storeWorks', 'companyController@storeWorks');
 Route::get('/companies/updateWorks', 'companyController@updateWorks');
 Route::get('/get/plans/by/companyID', 'planController@getPlanByCompany');
 
-Route::get('/guitsetgel/new', 'ExecutionContoller@executionShow')->name('home');
+Route::get('/guitsetgel/new', 'ExecutionContoller@executionShow');
 Route::post('/guitsetgel/store', 'GuitsetgelController@store');
 Route::post('/guitsetgel/update', 'GuitsetgelController@update');
 Route::post('/guitsetgel/delete', 'GuitsetgelController@delete');
