@@ -10,7 +10,7 @@
           });
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
-            //$("#cmbWorkType").val("0");
+            $("#cmbWorkType").val("0");
           });
           $("#cmbWorkType").change(function(){
             window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" +$("#cmbWorkType").val();

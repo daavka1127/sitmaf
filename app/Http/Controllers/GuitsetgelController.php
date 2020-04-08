@@ -140,7 +140,7 @@ class GuitsetgelController extends Controller
         $datas = DB::table('tb_execution')
         ->where('companyID','=',$companyID)
         ->where('work_id', '=', $work_id)
-        ->orderBy('date', 'desc')
+        ->orderBy('date', 'asc')
         ->get();
 
         return $datas;

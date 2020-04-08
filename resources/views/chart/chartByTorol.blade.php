@@ -31,7 +31,12 @@ window.onload = function () {
             foreach ($plans as $plan) {
               $exec = App\Http\Controllers\GuitsetgelController::getSumWorkExecution($companyID, $plan->work_id);
               if($exec != "")
-                echo "{ y: 100 * $exec->execution/$plan->quantity, label: \"$plan->workName\" },";
+                if(100 * $exec->execution/$plan->quantity > 100)
+                  echo "{ y: 100, label: \"$plan->workName\" },";
+                else
+                  echo "{ y: 100 * $exec->execution/$plan->quantity, label: \"$plan->workName\" },";  // code...
+
+
               else
                 echo "{ y: 0, label: \"$plan->workName\" },";
             }
@@ -51,7 +56,7 @@ window.onload = function () {
               $exec = App\Http\Controllers\GuitsetgelController::getSumWorkExecution($companyID, $plan->work_id);
               if($exec != "")
                 if(100 * $exec->execution/$plan->quantity > 100)
-                  echo "{ y: 83, label: \"$plan->workName\" },";
+                  echo "{ y: 0, label: \"$plan->workName\" },";
                 else {
                   echo "{ y: 100- 100*$exec->execution/$plan->quantity, label: \"$plan->workName\" },";
                 }
