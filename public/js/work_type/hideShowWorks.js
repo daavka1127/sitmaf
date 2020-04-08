@@ -30,8 +30,6 @@ $(document).ready(function(){
 $(document).ready(function () {
     $('button[class^="btnWorkTypeID"]').click(function () {
         var id = $(this).attr("btnworkid");
-        alert("A");
-        alert($("#txtCompanyName").val());
 
         jsonObj = [];
         $.each($(".txtclass"+id), function( key, value ) {
@@ -61,14 +59,6 @@ $(document).ready(function () {
         }
         if($("#txtGereeOgnoo").val() == ""){
           alertify.error("Огноог оруулна уу.");
-          return;
-        }
-        if($("#txtHunHuch").val() == ""){
-          alertify.error("Хүн хүчийг оруулна уу.");
-          return;
-        }
-        if($("#txtMashinTehnik").val() == ""){
-          alertify.error("Машин техник оруулна уу.");
           return;
         }
         if(jsonObj.length == 0){

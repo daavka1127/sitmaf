@@ -19,11 +19,13 @@ class ImageController extends Controller
     public function resizeImage()
     {
         $images = DB::table('tb_images')->get();
+        // return $images;
         return view('imagesView.resizeImage', compact('images'));
     }
 
     public function newImageShow(){
-        return view('imagesView.imageNew');
+        // return view('imagesView.imageNew');
+        return view('imagesView.ajaxImageTool');
     }
 
     public function resizeImagePost(Request $request)
@@ -33,7 +35,7 @@ class ImageController extends Controller
         ]);
 
         $image = $request->file('image');
-        $input['imagename'] = time().'.'.$image->extension();
+        $input['imagename'] = $image->getClientOriginalName().time().'.'.$image->extension();
 
         $destinationPath = public_path('/thumbnail');
         $img = Image::make($image->path());
@@ -46,7 +48,7 @@ class ImageController extends Controller
 
         $image = new ImageModel;
         $image->url = $input['imagename'];
-        $image->title = $request->title;
+        // $image->title = $request->title;
         $image->save();
 
         return back()

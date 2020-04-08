@@ -18,7 +18,7 @@
             <select name='companyID' class="form-control" id="cmbNewCompanyID">
               <option value="-1">Сонгоно уу.</option>
               @foreach ($companies as $company)
-                  <option value="{{$company->id}}">{{$company->companyName}}</option>
+                  <option value="{{$company->id}}">{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
               @endforeach
 
             </select>

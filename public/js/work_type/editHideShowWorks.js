@@ -79,14 +79,6 @@ $(document).ready(function () {
             alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
             isInsert = false;
         }
-        if($("#txtEditHunHuch").val()==""||$("#txtEditHunHuch").val()==null){
-            alertify.error("Хүн хүч оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditMashinTehnik").val()==""||$("#txtEditMashinTehnik").val()==null){
-            alertify.error("Ажлын машин техник оруулаагүй байна!!!");
-            isInsert = false;
-        }
         if(isInsert == false){return;}
 
         if(jsonObj.length == 0){

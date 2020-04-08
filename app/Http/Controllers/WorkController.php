@@ -61,6 +61,14 @@ class WorkController extends Controller
     {
       $works = DB::table('tb_work')
           ->where("work_type_id", "=", $worktype)
+          ->orderBy('work_type_id', 'ASC')
+          ->get();
+      return $works;
+    }
+
+    public static function getWorksAll(){
+      $works = DB::table('tb_work')
+          ->orderBy('work_type_id', 'ASC')
           ->get();
       return $works;
     }

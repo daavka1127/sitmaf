@@ -24,7 +24,6 @@
               <option value="1">Зүүнбаян чиглэл I хэсэг</option>
               <option value="2">Мандах чиглэл II хэсэг</option>
               <option value="3">Цогтцэций чиглэл III чиглэл</option>
-              <option value="4">Бүх аж ахуйн нэгжээр</option>
             </select>
           </div>
           <div class="form-group col-md-3 text-left">
@@ -36,11 +35,11 @@
             <input type="date" id="txtGereeOgnoo" name="gereeOgnoo" class="form-control" required />
           </div>
           <div class="form-group col-md-3 text-left">
-            <label>Хүн хүч <span class="red-required">*</span> </label>
+            <label>Хүн хүч </label>
             <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
           </div>
           <div class="form-group col-md-3 text-left">
-            <label>Ажлын машин техник <span class="red-required">*</span> </label>
+            <label>Ажлын машин техник </label>
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div>
           </form>

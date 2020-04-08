@@ -26,6 +26,52 @@ class ExecutionContoller extends Controller
         return view('guitsetgel.guitsetgelShow', compact('companies'));
     }
 
+    public static function previousReportExecutionByComIdWorkID($comID, $workID){
+        $allExecution = DB::table("tb_companies")
+            ->select(
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID) as allExecution"),
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID AND
+                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+            )
+            ->where('id', '=', $comID)
+            ->first();
+            return $allExecution->allExecution - $allExecution->lastExecution;
+    }
+
+    public static function getLastExecByComIdWorkID($comID, $workID){
+        $lastExec = DB::table("tb_companies")
+            ->select(
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID AND
+                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+            )
+            ->where('id', '=', $comID)
+            ->first();
+        return $lastExec->lastExecution;
+    }
+
+    public static function previousReportExecutionByComId($comID){
+        $allExecution = DB::table("tb_companies")
+            ->select(
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID) as allExecution"),
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND
+                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+            )
+            ->where('id', '=', $comID)
+            ->first();
+            return $allExecution->allExecution - $allExecution->lastExecution;
+    }
+
+    public static function getLastExecByComId($comID){
+        $lastExec = DB::table("tb_companies")
+            ->select(
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND
+                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+            )
+            ->where('id', '=', $comID)
+            ->first();
+        return $lastExec->lastExecution;
+    }
+
     public static function getExecutionPercentByWorkID2019($companyID, $workID){
         $executions = DB::table('tb_execution')
             ->where('companyID', '=', $companyID)
@@ -37,6 +83,31 @@ class ExecutionContoller extends Controller
             $exec = $execution->percent;
         }
         return $exec;
+    }
+
+    public static function getExecutionPercentByCompany2019($comID){
+        $sumPlan = DB::table("tb_plan")
+            ->where('companyID', '=', $comID)
+            ->sum('quantity');
+        $sumExecution = DB::table("tb_execution")
+            ->where('companyID', '=', $comID)
+            ->where('date', 'like', '2019%')
+            ->sum('execution');
+        if($sumPlan == 0)
+          return "";
+        else
+          return round($sumExecution*100/$sumPlan, 2);
+    }
+
+    public static function getSumExecutionByCompany2020($comID){
+        $sumPlan = DB::table("tb_plan")
+            ->where('companyID', '=', $comID)
+            ->sum('quantity');
+        $sumExecution = DB::table("tb_execution")
+            ->where('companyID', '=', $comID)
+            ->where('date', 'like', '2019%')
+            ->sum('execution');
+        return $sumPlan - $sumExecution;
     }
 
     public static function getExecution2019($companyID, $workID){

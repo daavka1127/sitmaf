@@ -29,7 +29,7 @@ Route::get('/show/html', function(){
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 });
-Route::get("/test/{comID}/{workID}", "ExecutionContoller@getExecutionAllCompanyIDworkID");
+Route::get("/test/{comID}/{workID}", "ExecutionContoller@previousReportExecutionByComIdWorkID");
 Route::get("/report/print", function(){
   return view('report.printReport');
 });

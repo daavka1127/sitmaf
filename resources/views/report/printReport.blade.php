@@ -5,84 +5,26 @@
   <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
   <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " />
 
+  <script src="{{url('/public/js/printReport/printReport.js')}} "></script>
+@php
+  $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
+@endphp
 
-<style media="screen">
-
-
-
-th {
-    border-collapse:collapse;
-
-    width:100px;
-    /* height: auto; */
-    line-height: 30px;
-    /* padding-bottom: 0px;
-    padding-left: 5px;
-    padding-right: 5px; */
-    text-align: center;
-    font-weight: 2px;
-}
-
-
-.table-header-rotated th.row-header{
-  width: auto;
-
-}
-
-.table-header-rotated td{
-  width: 40px;
-  border-top: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.table-header-rotated th.rotate-45{
-  height: 80px;
-  width: 40px;
-  min-width: 40px;
-  max-width: 40px;
-  position: relative;
-  vertical-align: bottom;
-  padding: 0;
-  font-size: 12px;
-  line-height: 0.8;
-}
-
-.table-header-rotated th.rotate-45 > div{
-  position: relative;
-  top: 0px;
-  left: 40px; /* 80 * tan(45) / 2 = 40 where 80 is the height on the cell and 45 is the transform angle*/
-  height: 100%;
-  -ms-transform:skew(-45deg,0deg);
-  -moz-transform:skew(-45deg,0deg);
-  -webkit-transform:skew(-45deg,0deg);
-  -o-transform:skew(-45deg,0deg);
-  transform:skew(-45deg,0deg);
-  overflow: hidden;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-top: 1px solid #dddddd;
-}
-
-.table-header-rotated th.rotate-45 span {
-  -ms-transform:skew(45deg,0deg) rotate(315deg);
-  -moz-transform:skew(45deg,0deg) rotate(315deg);
-  -webkit-transform:skew(45deg,0deg) rotate(315deg);
-  -o-transform:skew(45deg,0deg) rotate(315deg);
-  transform:skew(45deg,0deg) rotate(315deg);
-  position: absolute;
-  bottom: 30px; /* 40 cos(45) = 28 with an additional 2px margin*/
-  left: -25px; /*Because it looked good, but there is probably a mathematical link here as well*/
-  display: inline-block;
-  // width: 100%;
-  width: 85px; /* 80 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
-  text-align: left;
-  // white-space: nowrap; /*whether to display in one line or not*/
-}
-</style>
-
+<div class="row">
+  @foreach ($workTypes as $workType)
+    <div class="col-md-12">
+        <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$workType->id}}" id="checkWorkType{{$workType->id}}">  {{$workType->name}}</label>
+    </div>
+    <div class="col-md-12 vision" style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$workType->id}}">
+      @php
+        $works = \App\Http\Controllers\WorkController::getCompactWorks($workType->id);
+      @endphp
+      @foreach ($works as $work)
+        <label class="checkbox-inline"><input type="checkbox" class="checkWork" workId="{{$work->id}}" id="checkWork{{$work->id}}" checked>  {{$work->name}}</label>
+      @endforeach
+    </div>
+  @endforeach
+</div>
 
   <h5 class="text-center"><strong>ТАВАНТОЛГОЙ-ЗҮҮНБАЯН ЧИГЛЭЛИЙН 416.165  КМ ТӨМӨР ЗАМЫН ШУГАМЫН ДООД БҮТЦИЙН ГАЗАР ШОРООНЫ АЖЛЫН МЭДЭЭ</strong></h5>
 
@@ -98,19 +40,115 @@ th {
     @endphp
     <h6 class="text-left">{{$heseg->name}}</h6>
     <div class="scrollable-table">
-    <table  class="table table-striped table-header-rotated">
+    <table id="davaa" border="1" class="table table-striped table-header-rotated">
       <thead>
         <tr>
-          <th rowspan="2">Мэдээ агуулга</th>
+          <th>Мэдээ агуулга</th>
+          <th>Мэдээ агуулга</th>
+          <th>Мэдээ агуулга</th>
           <th colspan="{{$companies->count()}}">Ажил гүйцэтгэх Зэвсэгт хүчний анги, туслан гүйцэтгэгч аж ахуйн нэгж байгууллага</th>
         </tr>
         <tr>
+          <th>Мэдээ агуулга</th>
+          <th>Мэдээ агуулга</th>
+          <th>Мэдээ агуулга</th>
           @foreach ($companies as $company)
             <th class="rotate-45"><div><span>{{$company->companyName}}</span></div></th>
             {{-- <th class="rotate">{{$company->companyName}}</th> --}}
           @endforeach
         </tr>
       </thead>
+      <tbody>
+        <tr>
+          <td>Ерөнхий мэдээлэл</td>
+          <td colspan="2">Хариуцах ПК-ийн байршил</td>
+          @foreach ($companies as $company)
+            <th class="rotate-45"><div><span>{{$company->ajliinHeseg}}</span></div></th>
+          @endforeach
+        </tr>
+        <tr>
+          <td>Ерөнхий мэдээлэл</td>
+          <td colspan="2"> Батлагдсан тоо хэмжээ /м.куб/</td>
+          @foreach ($companies as $company)
+            @php
+              $sumPlan = \App\Http\Controllers\planController::getSumPlanCompany($company->id);
+            @endphp
+            <th class="rotate-45"><div><span>{{$sumPlan}}</span></div></th>
+          @endforeach
+        </tr>
+        <tr>
+          <td>Ерөнхий мэдээлэл</td>
+          <td colspan="2">2019 оны гүйцэтгэл /хувь/</td>
+          @foreach ($companies as $company)
+            @php
+              $percent2019 = \App\Http\Controllers\ExecutionContoller::getExecutionPercentByCompany2019($company->id);
+            @endphp
+            <th class="rotate-45"><div><span>{{$percent2019}}</span></div></th>
+          @endforeach
+        </tr>
+        <tr>
+          <td>Ерөнхий мэдээлэл</td>
+          <td colspan="2">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</td>
+          @foreach ($companies as $company)
+            @php
+              $execution2020 = \App\Http\Controllers\ExecutionContoller::getSumExecutionByCompany2020($company->id);
+            @endphp
+            <th class="rotate-45"><div><span>{{$execution2020}}</span></div></th>
+          @endforeach
+        </tr>
+        @php
+          $works = \App\Http\Controllers\WorkController::getWorksAll($company->id);
+        @endphp
+
+        @for($i=0; $i<$works->count(); $i++)
+          <tr class="{{$works[$i]->work_type_id}}" id="prev{{$works[$i]->id}}">
+            <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
+            <td>{{$works[$i]->name}}</td>
+            <td>Өмнөх тайлангийн бүгд</td>
+            @foreach ($companies as $company)
+              @php
+                $previousReportExecution = \App\Http\Controllers\ExecutionContoller::previousReportExecutionByComIdWorkID($company->id, $works[$i]->id);
+              @endphp
+              <td>{{$previousReportExecution}}</td>
+            @endforeach
+          </tr>
+          <tr class="{{$works[$i]->work_type_id}}" id="report{{$works[$i]->id}}">
+            <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
+            <td>{{$works[$i]->name}}</td>
+            <td>Тайлант үеийн</td>
+            @foreach ($companies as $company)
+              @php
+                $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecByComIdWorkID($company->id, $works[$i]->id);
+              @endphp
+              <td>{{$lastExec}}</td>
+            @endforeach
+          </tr>
+        @endfor
+
+
+        <tr>
+          <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
+          <td>Бүгд</td>
+          <td>Өмнөх тайлангийн бүгд</td>
+          @foreach ($companies as $company)
+            @php
+              $previousReportExecution = \App\Http\Controllers\ExecutionContoller::previousReportExecutionByComId($company->id);
+            @endphp
+            <td>{{$previousReportExecution}}</td>
+          @endforeach
+        </tr>
+        <tr>
+          <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
+          <td>Бүгд</td>
+          <td>Тайлант үеийн</td>
+          @foreach ($companies as $company)
+            @php
+              $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecByComId($company->id);
+            @endphp
+            <td>{{$lastExec}}</td>
+          @endforeach
+        </tr>
+      </tbody>
     </table>
     <div>
   @endforeach

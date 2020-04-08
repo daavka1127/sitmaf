@@ -100,5 +100,12 @@ class planController extends Controller
           return Response::json($works);
     }
 
+    public static function getSumPlanCompany($comID){
+        $sumPlan = DB::table('tb_plan')
+            ->where('companyID', '=', $comID)
+            ->sum('quantity');
+        return $sumPlan;
+    }
+
 
 }
