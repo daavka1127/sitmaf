@@ -87,13 +87,10 @@
 <script src="{{url('public/js/guitsetgel/executionNew.js')}}"></script>
 <script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script>
 
-
-</script>
-
 <div class="col-md-12">
   <div id="divGenerateReport">
     <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
-    <input type="button" class="btn btn-primary btn-sm" name="" id="btnGenerateReport" value="Тайлан бодох" />
+    <input type="button" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
   </div>
   <span style="color:green;" id="generateReportAlert"></span>
 </div>
@@ -132,7 +129,7 @@
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-  <script src="{{url('public/js/guitsetgel/guitsetgel.js')}}"></script>
+  {{-- <script src="{{url('public/js/guitsetgel/guitsetgel.js')}}"></script> --}}
   <script src="{{url('public/js/guitsetgel/executionReportGenerate.js')}}"></script>
   @include('guitsetgel.guitsetgelNew')
   @include('guitsetgel.guitsetgelEdit')

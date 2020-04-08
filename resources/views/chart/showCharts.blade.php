@@ -4,17 +4,19 @@
   <div class="row">
     <script>
       $(document).ready(function(){
-          $("#cmbCompany").change(function(){
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val();
-          });
-      });
-    </script>
-    <script>
-      $(document).ready(function(){
           $("#cmbHeseg").change(function(){
+              $(".divWorkType").css("display","none");
               window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
           });
+          $("#cmbCompany").change(function(){
+            $(".divWorkType").css("display","block");
+            $("#cmbWorkType").val("0");
+          });
+          $("#cmbWorkType").change(function(){
+            window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" +$("#cmbWorkType").val();
+          });
       });
+
     </script>
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
@@ -39,6 +41,22 @@
         @endforeach
       </select>
     </div>
+    <div class="divWorkType col-md-4">
+      <label>Хийгдэж буй ажлын төрөл</label>
+      <select class="form-control" id="cmbWorkType">
+        <option value="0">Сонгоно уу</option>
+        @php
+          $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
+        @endphp
+        @foreach ($workTypes as $workType)
+          @if ($workTypeID == $workType->id)
+            <option value="{{$workType->id}}" selected>{{$workType->name}}</option>
+          @else
+            <option value="{{$workType->id}}">{{$workType->name}}</option>
+          @endif
+        @endforeach
+      </select>
+    </div>
   </div>
   <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
   <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">
@@ -47,20 +65,24 @@
   <br>
 
   @if(count($datas) > 0)
-@include('chart.chartByDate')
-<div class="clearfix"></div>
 
-@include('chart.chartByTorol')
+    @include('chart.chartByDate')
+    <div class="clearfix"></div>
 
-<div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #fff"></div>
-<div class="clearfix"></div>
-<br>
-<div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Гүйцэтгэл /үзүүлэлтээр/</div>
-<div class="clearfix"></div>
-<div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-@else
-  <div class="clearfix"></div>
-  <div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Өгөгдөл ороогүй</div>
-  <div class="clearfix"></div>
-@endif
+    @include('chart.chartByTorol')
+    <div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Гүйцэтгэл /үзүүлэлтээр/</div>
+    <div class="clearfix"></div>
+    <div id="chartContainer123" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+    </br>
+    <div id="jqChart" style="height: 370px; max-width: 920px; margin: 0px auto; background-color: #fff;" ></div>
+    <div class="clearfix"></div>
+
+
+
+
+  @else
+    <div class="clearfix"></div>
+    <div style="color: black; font-size: 20px; font-weight: bold" class="col-md-12 col-md-offset-5">Өгөгдөл ороогүй</div>
+    <div class="clearfix"></div>
+  @endif
 @endsection

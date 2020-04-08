@@ -8,9 +8,10 @@ $(document).ready(function(){
             type:'get',
             url:generateReportUrl,
             success:function(res){
-                $("#divGenerateReport").hide();
-                clearTimeout();
-                $("#generateReportAlert").html("<strong>Тайлан бодож дууслаа.</strong>");
+                // $("#divGenerateReport").hide();
+                // clearTimeout();
+                // $("#generateReportAlert").html("<strong>Тайлан бодож дууслаа.</strong>");
+                window.location.replace($("#btnGenerateReport").attr('data-url'));
             }
         });
     });

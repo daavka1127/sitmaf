@@ -38,11 +38,11 @@
             <input type="date" id="txtGereeOgnoo" name="gereeOgnoo" class="form-control" required />
           </div>
           <div class="form-group col-md-3 text-left">
-            <label>Хүн хүч <span class="red-required">*</span> </label>
+            <label>Хүн хүч </label>
             <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
           </div>
           <div class="form-group col-md-3 text-left">
-            <label>Ажлын машин техник <span class="red-required">*</span> </label>
+            <label>Ажлын машин техник </label>
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div>
           </form>

@@ -7,7 +7,7 @@ $(document).ready(function(){
         }
         refreshExecEdit(dataRow["id"]);
         $('#modalEditGuitsetgel').modal('show');
-
+        $('.printCompanyName').text(dataRow['companyName']);
 
     });
 });

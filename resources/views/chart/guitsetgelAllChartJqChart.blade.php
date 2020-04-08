@@ -17,7 +17,7 @@
 
                       categories: [
                         @foreach ($companiesChart as $company)
-                            '{{$company->companyName}}',
+                            '{!!$company->companyName!!}',
                         @endforeach
                         ],
                       labels: {
@@ -49,13 +49,19 @@
     <script>
       $(document).ready(function(){
           $("#cmbCompany").change(function(){
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val();
+            $(".divWorkType").css("display","block");
+            $("#cmbWorkType").val("0");
+          });
+
+          $("#cmbWorkType").change(function(){
+            window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
       });
     </script>
     <script>
       $(document).ready(function(){
           $("#cmbHeseg").change(function(){
+              $(".divWorkType").css("display","none");
               window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
           });
       });
@@ -92,6 +98,19 @@
         <option value="0">Сонгоно уу</option>
         @foreach ($companies as $company)
             <option value="{{$company->id}}">{{$company->companyName}}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="divWorkType col-md-4" style="display:none;">
+      <label>Хийгдэж буй ажлын төрөл</label>
+      <select class="form-control" id="cmbWorkType">
+        <option value="0">Сонгоно уу</option>
+        @php
+          $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
+        @endphp
+
+        @foreach ($workTypes as $workType)
+            <option value="{{$workType->id}}">{{$workType->name}}</option>
         @endforeach
       </select>
     </div>
@@ -153,7 +172,7 @@
   <div class="clearfix"></div>
   <br>
   <div>
-      <div id="jqChart" style="height: 500px;" class="col-md-12"></div>
+      <div id="jqChart" style="height: 650px;" class="col-md-12"></div>
   </div>
 <div class="clearfix"></div>
 <br>

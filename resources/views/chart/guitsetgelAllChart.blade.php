@@ -6,13 +6,14 @@
     <script>
       $(document).ready(function(){
           $("#cmbCompany").change(function(){
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val();
+            $("#cmbWorkType").css("display","block");
           });
       });
     </script>
     <script>
       $(document).ready(function(){
           $("#cmbHeseg").change(function(){
+              $("#cmbWorkType").css("display","none");
               window.location.href = "{{url('/chart/all')}}";
           });
       });
@@ -33,6 +34,19 @@
         <option value="0">Сонгоно уу</option>
         @foreach ($companies as $company)
             <option value="{{$company->id}}">{{$company->companyName}}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="col-md-4" style="display: none;">
+      <label>Хийгдэж буй ажлын төрлөөр харах</label>
+      <select class="form-control" id="cmbWorkType">
+        <option value="0">Сонгоно уу</option>
+        @php
+          $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
+        @endphp
+
+        @foreach ($workTypes as $workType)
+            <option value="{{$workType->id}}">{{$workType->name}}</option>
         @endforeach
       </select>
     </div>

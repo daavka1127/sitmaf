@@ -2,6 +2,8 @@ $(document).ready(function(){
     $("#btnEditCompany").click(function(){
       alert(dataRow["companyName"]);
         $("#txtEditID").val(dataRow["id"]);
+
+        //console.log(dataRow["companyName"].split('&quot;'));
         $("#txtEditCompanyName").val(dataRow["companyName"]);
         $("#cmbEditHeseg").val(dataRow["heseg_id"]);
         $("#txtEditAjliinHeseg").val(dataRow["ajliinHeseg"]);
@@ -78,14 +80,6 @@ $(document).ready(function () {
         }
         if($("#txtEditGereeOgnoo").val()==""||$("#txtEditGereeOgnoo").val()==null){
             alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditHunHuch").val()==""||$("#txtEditHunHuch").val()==null){
-            alertify.error("Хүн хүч оруулаагүй байна!!!");
-            isInsert = false;
-        }
-        if($("#txtEditMashinTehnik").val()==""||$("#txtEditMashinTehnik").val()==null){
-            alertify.error("Ажлын машин техник оруулаагүй байна!!!");
             isInsert = false;
         }
         if(isInsert == false){return;}
