@@ -37,6 +37,7 @@ class guitsetgelChartController extends Controller
     }
 
     public function chartAlljqChart($hesegID){
+
         if($hesegID == 0 ){
             $companiesChart = DB::table('tb_companies')
                 ->get();
@@ -52,6 +53,7 @@ class guitsetgelChartController extends Controller
         }
         $companies = DB::table('tb_companies')
             ->get();
+
         return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'companies', 'hesegID'));
     }
 }

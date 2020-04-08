@@ -12,107 +12,27 @@ $(document).ready(function () {
                     }
                 ],
                 series: [
-
+                  @foreach ($datas as $data)
                     {
                         type: 'line',
-                        title: 'Хөрс хуулалт',
+                        title: '{{$data->nameExec}}',
                         data: [
-                          @foreach ($datas as $data)
+
                           @php
-                            $date = explode("-",$data->ognoo);
+                            $works = App\Http\Controllers\GuitsetgelController::getWorkExecution($data->companyID, $data->work_id);
                           @endphp
-                          @if($data->gHursHuulalt != null)
-                          [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gHursHuulalt}}],
-                          @endif
-                          @endforeach
+                            @foreach ($works as $work)
+                              @php
+                                $date = explode("-",$work->date);
+                              @endphp
+                              @if($work->execution != null)
+                              [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$work->execution}}],
+                              @endif
+                            @endforeach
                         ]
                     },
-                    {
-                        type: 'line',
-                        title: 'Далан',
-                        data: [
-                          @foreach ($datas as $data)
-                        @php
-                          $date = explode("-",$data->ognoo);
-                        @endphp
-                        @if($data->gDalan != null)
-                        [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gDalan}}],
-                        @endif
-                        @endforeach
-                      ]
-                    },
-                    {
-                        type: 'line',
-                        title: 'Ухмал',
-                        data: [
-                          @foreach ($datas as $data)
-                        @php
-                          $date = explode("-",$data->ognoo);
-                        @endphp
-                        @if($data->gUhmal != null)
-                        [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gUhmal}}],
-                        @endif
-                        @endforeach
-                      ]
-                    },
-                    {
-                        type: 'line',
-                        title: 'Суурийн үе',
-                        data: [
-                          @foreach ($datas as $data)
-                        @php
-                          $date = explode("-",$data->ognoo);
-                        @endphp
-                        @if($data->gSuuriinUy != null)
-                        [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gSuuriinUy}}],
+                    @endforeach
 
-                        @endif
-                        @endforeach
-                      ]
-                    },
-                    {
-                        type: 'line',
-                        title: 'Шуудуу',
-                        data: [
-                          @foreach ($datas as $data)
-                        @php
-                          $date = explode("-",$data->ognoo);
-                        @endphp
-                        @if($data->gShuuduu != null)
-                        [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gShuuduu}}],
-
-                        @endif
-                        @endforeach
-                      ]
-                    },
-                    {
-                        type: 'line',
-                        title: 'Ухмалын хамгаалалт',
-                        data: [
-                          @foreach ($datas as $data)
-                        @php
-                          $date = explode("-",$data->ognoo);
-                        @endphp
-                        @if($data->gUhmaliinHamgaalalt != null)
-                        [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gUhmaliinHamgaalalt}}],
-                        @endif
-                        @endforeach
-                      ]
-                    },
-                    {
-                        type: 'line',
-                        title: 'Уулын шуудуу',
-                        data: [
-                          @foreach ($datas as $data)
-                        @php
-                          $date = explode("-",$data->ognoo);
-                        @endphp
-                        @if($data->gUuliinShuuduu != null)
-                        [new Date({{$date[0]}}, {{$date[1]-1}}, {{$date[2]}}), {{$data->gUuliinShuuduu}}],
-                        @endif
-                        @endforeach
-                      ]
-                    }
                 ]
             });
         });
