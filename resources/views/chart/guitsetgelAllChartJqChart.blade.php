@@ -17,7 +17,7 @@
 
                       categories: [
                         @foreach ($companiesChart as $company)
-                            '{{$company->companyName}}',
+                            '{!!$company->companyName!!}',
                         @endforeach
                         ],
                       labels: {
@@ -172,7 +172,7 @@
   <div class="clearfix"></div>
   <br>
   <div>
-      <div id="jqChart" style="height: 500px;" class="col-md-12"></div>
+      <div id="jqChart" style="height: 650px;" class="col-md-12"></div>
   </div>
 <div class="clearfix"></div>
 <br>
