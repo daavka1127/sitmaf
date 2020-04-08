@@ -15,6 +15,9 @@
 //     return view('home');
 // });
 
+
+
+// dadaa REPORT
 Route::get("/test/table", function(){
   return view("report.companyTableReport");
 });
@@ -27,7 +30,10 @@ Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 });
 Route::get("/test/{comID}/{workID}", "ExecutionContoller@getExecutionAllCompanyIDworkID");
-
+Route::get("/report/print", function(){
+  return view('report.printReport');
+});
+// dadaa REPORT
 
 
 Route::get('/', 'HomeController@index');
@@ -107,3 +113,14 @@ Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 
 Route::post('/guitsetgel/getExecByCompany', "ExecutionContoller@getExecByCompany");
+
+// workType Visible start
+Route::get('workType/visible', "WorktypeController@visibleShowBlade");
+Route::get('workType/visibleChange', "WorktypeController@ChangeWorkTypeVisible");
+Route::get('workType/getCheck', "WorktypeController@getWorkTypeVisible");
+Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
+
+
+
+
+// workType Visible end
