@@ -1,4 +1,4 @@
-{{-- START NEW COMPANY --}}
+{{-- START EDIT COMPANY --}}
 <div class="modal fade" id="modalEditGuitsetgel">
   <div class="modal-dialog" style="width:80%;">
     <div class="modal-content">
@@ -14,11 +14,12 @@
           <div class="form-group col-md-3 text-center">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
             <input type="hidden" id="txtEditGID" name="id" class="form-control" />
-            <h4><label>{{$companies[0]->companyName}}</label></h4>
+            <h4><label class="printCompanyName"></label></h4>
 
           </div>
           <script type="text/javascript">
           $(document).ready(function(){
+
           $('#editExecTable tbody').on( 'click', 'tr', function () {
               var currow1 = $(this).closest('tr');
               $('#editExecTable tbody tr').css("background-color", "white");
@@ -29,7 +30,6 @@
               $("#work").val(execEditRow['workName']);
               $("#editDate").val(execEditRow['date']);
               $("#editExec").val(execEditRow['execution']);
-
 
             });
 
@@ -92,4 +92,4 @@
     </div>
   </div>
 </div>
-{{-- END NEW COMPANY --}}
+{{-- END EDIT COMPANY --}}

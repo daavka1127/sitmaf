@@ -1,11 +1,33 @@
 @extends('layouts.layout_main')
 @section('content')
+  {{-- <link rel="stylesheet" href="{{url('public/autoCompleteCombo/autoStyle.css')}}">
+	<link rel="stylesheet" href="{{url('public/autoCompleteCombo/base.jquery.css')}}">
+	<style>
+  	.custom-combobox {
+  		position: relative;
+  		display: inline-block;
+  	}
+  	.custom-combobox-toggle {
+  		position: absolute;
+  		top: 0;
+  		bottom: 0;
+  		margin-left: -1px;
+  		padding: 0;
+  	}
+  	.custom-combobox-input {
+  		margin: 0;
+  		padding: 5px 10px;
+  	}
+	</style>
+	<script src="{{url('public/autoCompleteCombo/autojquery.js')}}"></script>
+	<script src="{{url('public/autoCompleteCombo/autojquery-ui.js')}}"></script>
+	<script src="{{url('public/autoCompleteCombo/autoHeader.js')}}"></script> --}}
 
   <div class="clearfix"></div>
   <div class="row">
     <script>
       $(document).ready(function(){
-          $("#cmbCompany").change(function(){
+          $("#combobox").change(function(){
             $(".divWorkType").css("display","block");
               window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
@@ -29,6 +51,7 @@
         <option value="4">Бүх аж ахуйн нэгжээр</option>
       </select>
     </div>
+
     <div class="col-md-4">
       <label>Аж ахуйн нэгжээр харах</label>
       <select class="form-control" id="cmbCompany">
