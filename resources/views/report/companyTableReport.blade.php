@@ -76,12 +76,28 @@
     $(function() {
             $('#myTable').stickyTable({overflowy: true});
           });
+
+    $(document).ready(function(){
+      $("#btnPrintReport").click(function(){
+        window.location.replace("{{url("/report/print")}}");
+      });
+    });
     </script>
 
   @php
     $companies = \App\Http\Controllers\companyController::getCompany();
     $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
   @endphp
+  {{-- <div class="row">
+    <div class="col-md-4">
+      <select id="cmbWorkType" class="form-control" name="">
+        @foreach ($workTypes as $workType)
+          <option value="{{$workType->id}}">{{$workType->name}}</option>
+        @endforeach
+      </select>
+    </div>
+  </div> --}}
+  <input type="button" class="btn btn-primary" name="" value="Хэвлэх" id="btnPrintReport" />
 
   {{-- <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2> --}}
   <div class="table-div">

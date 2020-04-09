@@ -75,9 +75,27 @@
     $(function() {
             $('#myTable').stickyTable({overflowy: true});
           });
+
+    $(document).ready(function(){
+      $("#btnPrintReport").click(function(){
+        window.location.replace("http://localhost/zam/report/print");
+      });
+    });
     </script>
 
-  
+    <div class="row">
+    <div class="col-md-4">
+      <select id="cmbWorkType" class="" name="">
+                  <option value="11">Газар шорооны ажил</option>
+                  <option value="12">Хоолойн барилгын ажил</option>
+                  <option value="13">Зөрлөгийн барилгын ажил</option>
+                  <option value="14">Чулуу бутлах</option>
+                  <option value="15">Бетон үйлдвэр</option>
+              </select>
+    </div>
+  </div>
+  <input type="button" class="btn btn-primary" name="" value="Хэвлэх" id="btnPrintReport" />
+
   
   <div class="table-div">
     <table border="1" class=" text-center" id="myTable">
@@ -114,8 +132,6 @@
                       <th colspan="8" class="text-center">Дээд цэг ХХК</th>
                       <th colspan="8" class="text-center">Дээд цэг ХХК</th>
                       <th colspan="8" class="text-center">Зэвсэгт хүчний 340 дүгээр анги</th>
-                      <th colspan="8" class="text-center">Билэгт зам ХХК</th>
-                      <th colspan="8" class="text-center">Ирээдүйн ган зам ХХК</th>
                       <th colspan="8" class="text-center">Дарданговь ХХК</th>
                       <th colspan="8" class="text-center">Шаргын зам ХХК</th>
                       <th colspan="8" class="text-center">Шагайн зам ХХК</th>
@@ -124,8 +140,7 @@
                       <th colspan="8" class="text-center">Хүчит зам ХХК</th>
                       <th colspan="8" class="text-center">Сидар голд ХХК</th>
                       <th colspan="8" class="text-center">Их харгуйн зам ХХК</th>
-                      <th colspan="8" class="text-center">Хушингарын навч ХХК &lt;br/&gt; Амархаш ХХК нэгтгэл</th>
-                      <th colspan="8" class="text-center">Хушингарын навч ХХК &lt;br/&gt; Амархаш ХХК нэгтгэл</th>
+                      <th colspan="8" class="text-center">Хушингарын навч ХХК Амархаш ХХК нэгтгэл</th>
               		</tr>
         <tr class="naalt text-center">
           <th colspan="2" class="text-center columnFreeze">Хариуцах ПК-ийн байршил</th>
@@ -158,8 +173,6 @@
                       <th colspan="8" class="text-center">ПК256,520-ПК264  /7.48 км/</th>
                       <th colspan="8" class="text-center">ПК256,520-ПК264  /7.48 км/</th>
                       <th colspan="8" class="text-center">ПК264-ПК272   /8км/</th>
-                      <th colspan="8" class="text-center">ПК272-ПК274,320  /2.32 км/</th>
-                      <th colspan="8" class="text-center">ПК274,320-ПК275,720  /1.40 км/</th>
                       <th colspan="8" class="text-center">ПК282,920-ПК287,470  /4,487км/</th>
                       <th colspan="8" class="text-center">ПК350-ПК355  /5км/</th>
                       <th colspan="8" class="text-center">ПК355-ПК360  /5км/</th>
@@ -169,35 +182,10 @@
                       <th colspan="8" class="text-center">ПК375-ПК380  /5км</th>
                       <th colspan="8" class="text-center">ПК380-ПК384  /4км/</th>
                       <th colspan="8" class="text-center">бдлөоардлбоөар дл</th>
-                      <th colspan="8" class="text-center">йыбйыбйы</th>
               		</tr>
         <tr class="naalt ">
           <th class="text-center columnFreeze" >Мэдээний үзүүлэлт</th>
           <th class='text-center vertical columnFreeze' ><div class="rotate" >Хэмжих нэгж</div></th>
-                      <th class='text-center verticalTD' ><div class="rotate">Батлагдсан тоо хэмжээ</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2019 оны гүйцэтгэл /хувь/</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 онд гүйцэтгэх тоо хэмжээ</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Өмнөх тайлангийн бүгд</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Тайлант үеийн гүйцэтгэл</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 оны бүгд гүйцэтгэл</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 оны бүгд гүйцэтгэл /хувь/</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Нийт гүйцэтгэлийн хувь</div></th>
-                      <th class='text-center verticalTD' ><div class="rotate">Батлагдсан тоо хэмжээ</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2019 оны гүйцэтгэл /хувь/</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 онд гүйцэтгэх тоо хэмжээ</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Өмнөх тайлангийн бүгд</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Тайлант үеийн гүйцэтгэл</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 оны бүгд гүйцэтгэл</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 оны бүгд гүйцэтгэл /хувь/</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Нийт гүйцэтгэлийн хувь</div></th>
-                      <th class='text-center verticalTD' ><div class="rotate">Батлагдсан тоо хэмжээ</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2019 оны гүйцэтгэл /хувь/</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 онд гүйцэтгэх тоо хэмжээ</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Өмнөх тайлангийн бүгд</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Тайлант үеийн гүйцэтгэл</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 оны бүгд гүйцэтгэл</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">2020 оны бүгд гүйцэтгэл /хувь/</div></th>
-            <th class='text-center verticalTD' ><div class="rotate">Нийт гүйцэтгэлийн хувь</div></th>
                       <th class='text-center verticalTD' ><div class="rotate">Батлагдсан тоо хэмжээ</div></th>
             <th class='text-center verticalTD' ><div class="rotate">2019 оны гүйцэтгэл /хувь/</div></th>
             <th class='text-center verticalTD' ><div class="rotate">2020 онд гүйцэтгэх тоо хэмжээ</div></th>
@@ -805,38 +793,14 @@
                 <td>0</td>
                                   <td>0</td>
                   <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
                                                               <td>5643</td>
                 <td>0</td>
                 <td>5643</td>
+                <td>15000</td>
                 <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>10</td>
-                <td>0</td>
-                <td>10</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
+                <td>15000</td>
+                                  <td>265.82</td>
+                  <td>265.82</td>
                                           </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Далан барих</th>
@@ -1140,30 +1104,6 @@
                                                                       <td>0</td>
                   <td>0</td>
                   <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>10</td>
-                  <td>0</td>
-                  <td>10</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -1477,30 +1417,6 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Суурийн үе</th>
@@ -1508,30 +1424,6 @@
                                                     <td>508732</td>
                   <td>0</td>
                   <td>508732</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -2141,30 +2033,6 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Ухмалын хамгаалалт</th>
@@ -2172,30 +2040,6 @@
                                                     <td>277275</td>
                   <td>0</td>
                   <td>277275</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -2805,30 +2649,6 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                         <tr>
               <th>Нийт</th>
@@ -3129,38 +2949,14 @@
                 <td>0</td>
                                   <td>0</td>
                                                   <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
                                                               <td>5643</td>
                                   <td>0</td>
                                 <td>5643</td>
+                <td>15000</td>
                 <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>20</td>
-                                  <td>0</td>
-                                <td>20</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
+                <td>15000</td>
+                                  <td>265.82</td>
+                                                  <td>265.82</td>
                                           </tr>
                                 <tr class="naalt">
               <th rowspan="20" class='vertical'> <div class="vertical">Хоолойн барилгын ажил</div> </th>
@@ -3470,59 +3266,11 @@
                 <td>0</td>
                                   <td>0</td>
                   <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
                                           </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Хоолойн ул суурь нягтруулах</th>
                 <th class="text-center">м3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -4134,59 +3882,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Хоолойн ул суурь нягтруулах</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -4798,59 +4498,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Төмөрбетон суурь байгуулах</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -5462,59 +5114,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Хоолойн далбааны хэсэглэл цутгах</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -6126,59 +5730,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Урсгалын хэвгийг бульдозероор засах</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -6790,59 +6346,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Дөрвөлжин хоолойн их бие бетон цутгах</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -7454,59 +6962,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Дөрвөлжин хоолойн далавч хана цутгах</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -8118,59 +7578,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Буцаан дүүргэлт хийх</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -8782,59 +8194,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Далангийн хажуу налууг чулуугаар бэхлэх</th>
                 <th class="text-center">m3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -9446,59 +8810,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                         <tr>
               <th>Нийт</th>
               <th></th>
                                               <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
                                   <td>0</td>
                                 <td>0</td>
                 <td>0</td>
@@ -10111,59 +9427,11 @@
                 <td>0</td>
                                   <td>0</td>
                   <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
                                           </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Хэв хашмал зангидах</th>
                 <th class="text-center">м3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -10775,59 +10043,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Бетон хүлээн авах</th>
                 <th class="text-center">м3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -11439,59 +10659,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">Засал, чимэглэл</th>
                 <th class="text-center">м2</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -12103,59 +11275,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                         <tr>
               <th>Нийт</th>
               <th></th>
                                               <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
                                   <td>0</td>
                                 <td>0</td>
                 <td>0</td>
@@ -12768,59 +11892,11 @@
                 <td>0</td>
                                   <td>0</td>
                   <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
                                           </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">0.5-10 мм-ийн буталсан чулуу</th>
                 <th class="text-center">м3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -13432,30 +12508,6 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">40-60 мм-ийн балластын чулуу</th>
@@ -13764,59 +12816,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                         <tr>
               <th>Нийт</th>
               <th></th>
                                               <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
                                   <td>0</td>
                                 <td>0</td>
                 <td>0</td>
@@ -14429,30 +13433,6 @@
                 <td>0</td>
                                   <td>0</td>
                   <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
-                                                              <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                  <td>0</td>
                                           </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">В-20 маркын бетон</th>
@@ -14761,30 +13741,6 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">В-20 маркын бетон</th>
@@ -15093,59 +14049,11 @@
                   <td>0</td>
                                       <td>0</td>
                     <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
                                                 </tr>
                           <tr>
                 <th class="text-left" style="padding-left:5px;">В-20 маркын бетон</th>
                 <th class="text-center">м3</th>
                                                     <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                                      <td>0</td>
-                    <td>0</td>
-                                                                      <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
@@ -15454,30 +14362,6 @@
               <th>Нийт</th>
               <th></th>
                                               <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
-                                  <td>0</td>
-                                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                                  <td>0</td>
-                                                  <td>0</td>
-                                                              <td>0</td>
                                   <td>0</td>
                                 <td>0</td>
                 <td>0</td>

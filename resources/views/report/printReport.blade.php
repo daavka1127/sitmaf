@@ -73,34 +73,34 @@
 
 
     {{-- <table id="davaa" border="1" class="table table-striped table-header-rotated"> --}}
-  <div class="col-md-{{$widthNumber}}">
+  <div class="col-md-{{$widthNumber}} text-center">
     <table border="1" class="table{{$heseg->id}}">
       <thead>
-        <tr>
+        <tr class="text-left">
           <th>Мэдээ агуулга</th>
           <th>Мэдээ агуулга</th>
           <th>Мэдээ агуулга</th>
           <th colspan="{{$companies->count()}}">Ажил гүйцэтгэх Зэвсэгт хүчний анги, туслан гүйцэтгэгч аж ахуйн нэгж байгууллага</th>
         </tr>
-        <tr>
+        <tr class="text-left">
           <th>Мэдээ агуулга</th>
           <th>Мэдээ агуулга</th>
           <th>Мэдээ агуулга</th>
           @foreach ($companies as $company)
-            <th class="verticalTD"><div class="rotate">{{$company->companyName}}</div></th>
+            <th class="verticalTD  text-center"><div class="rotate">{{$company->companyName}}</div></th>
             {{-- <th class="rotate">{{$company->companyName}}</th> --}}
           @endforeach
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="text-left">
           <td>Ерөнхий мэдээлэл</td>
           <td colspan="2">Хариуцах ПК-ийн байршил</td>
           @foreach ($companies as $company)
-            <th class="rotate-45"><div><span>{{$company->ajliinHeseg}}</span></div></th>
+            <th class="rotate-45 text-center"><div><span>{{$company->ajliinHeseg}}</span></div></th>
           @endforeach
         </tr>
-        <tr>
+        <tr class="text-left">
           <td>Ерөнхий мэдээлэл</td>
           <td colspan="2"> Батлагдсан тоо хэмжээ /м.куб/</td>
           @foreach ($companies as $company)
@@ -110,7 +110,7 @@
             <th class="rotate-45"><div><span>{{$sumPlan}}</span></div></th>
           @endforeach
         </tr>
-        <tr>
+        <tr class="text-left">
           <td>Ерөнхий мэдээлэл</td>
           <td colspan="2">2019 оны гүйцэтгэл /хувь/</td>
           @foreach ($companies as $company)
@@ -120,7 +120,7 @@
             <th class="rotate-45"><div><span>{{$percent2019}}</span></div></th>
           @endforeach
         </tr>
-        <tr>
+        <tr class="text-left">
           <td>Ерөнхий мэдээлэл</td>
           <td colspan="2">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</td>
           @foreach ($companies as $company)
@@ -135,18 +135,18 @@
         @endphp
 
         @for($i=0; $i<$works->count(); $i++)
-          <tr class="{{$works[$i]->work_type_id}}" id="prev{{$works[$i]->id}}">
+          <tr class="{{$works[$i]->work_type_id}} text-left" id="prev{{$works[$i]->id}}">
             <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
             <td>{{$works[$i]->name}}</td>
-            <td>Өмнөх тайлангийн бүгд</td>
+            <td class="text-center">Өмнөх тайлангийн бүгд</td>
             @foreach ($companies as $company)
               @php
                 $previousReportExecution = \App\Http\Controllers\ExecutionContoller::previousReportExecutionByComIdWorkID($company->id, $works[$i]->id);
               @endphp
-              <td>{{$previousReportExecution}}</td>
+              <td class="text-center">{{$previousReportExecution}}</td>
             @endforeach
           </tr>
-          <tr class="{{$works[$i]->work_type_id}}" id="report{{$works[$i]->id}}">
+          <tr class="{{$works[$i]->work_type_id}} text-left" id="report{{$works[$i]->id}}">
             <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
             <td>{{$works[$i]->name}}</td>
             <td>Тайлант үеийн</td>
