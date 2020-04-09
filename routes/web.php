@@ -28,7 +28,7 @@ Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 })->middleware('auth');
 Route::get("/report/print", function(){
-  return view('report.printReport');
+  return view('report.printReport'); //123
 })->middleware('auth');
 Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
 Route::get("/test/{comID}/{workID}", "ExecutionContoller@previousReportExecutionByComIdWorkID");
