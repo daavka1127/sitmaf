@@ -195,6 +195,13 @@
       </div>
     </div>
 
+    {{-- Auto complete combo box --}}
+    {{-- <link rel="stylesheet" href="{{url('public/js/autoCompleteCombo/base.jquery.css')}}">
+    <script src="{{url('public/js/autoCompleteCombo/autojquery-ui.js')}}"></script>
+    <script src="{{url('public/js/autoCompleteCombo/autoHeader.js')}}"></script> --}}
+    {{-- End of Auto complete combo box --}}
+
+
     {{-- CHART JS --}}
     <script src="{{url('public/js/chart/jquery.canvasjs.min.js')}}"></script>
 
