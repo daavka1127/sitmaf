@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $("#btnEditCompany").click(function(){
-      alert(dataRow["companyName"]);
+      
         $("#txtEditID").val(dataRow["id"]);
 
         //console.log(dataRow["companyName"].split('&quot;'));
