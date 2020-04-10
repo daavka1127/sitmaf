@@ -37,14 +37,14 @@
             <label>Ажил эхэлсэн огноо <span class="red-required">*</span> </label>
             <input type="date" id="txtGereeOgnoo" name="gereeOgnoo" class="form-control" required />
           </div>
-          <div class="form-group col-md-3 text-left">
+          {{-- <div class="form-group col-md-3 text-left">
             <label>Хүн хүч </label>
             <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Ажлын машин техник </label>
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
-          </div>
+          </div> --}}
           </form>
           <div class="clearfix"></div>
           <h4 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h4>

@@ -2,14 +2,16 @@
 
 @section('content')
 
-  <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
-  <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " />
-
+  {{-- <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
+  <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " /> --}}
+  <script src="{{url('/public/js/row-merge/jquery.rowspanizer.min.js')}} "></script>
   <script src="{{url('/public/js/printReport/printReport.js')}} "></script>
 @php
   $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
 @endphp
-
+<script>
+    var workTypes = {!! json_encode($workTypes->toArray()) !!};
+</script>
 <style>
 
 @media print {
@@ -35,7 +37,7 @@
 <div class="row" id="hideRowBeforPrint">
   @foreach ($workTypes as $workType)
     <div class="col-md-12">
-        <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$workType->id}}" id="checkWorkType{{$workType->id}}">  {{$workType->name}}</label>
+        <label class="checkbox-inline"><input class="" name="radWorkType" type="radio" workTypeId="{{$workType->id}}" id="checkWorkType{{$workType->id}}">{{$workType->name}}</label>
     </div>
     <div class="col-md-12 vision" style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$workType->id}}">
       @php
@@ -46,6 +48,9 @@
       @endforeach
     </div>
   @endforeach
+  <div class="clearfix"></div>
+  <input type="button" name="" id="btnUnmerge" value="Unmerge hiiih" />
+  <input type="button" name="" id="btnMerge" value="Merge hiiih" />
 </div>
 <div id="onlyPrint">
 
@@ -77,15 +82,10 @@
     <table border="1" class="table{{$heseg->id}}">
       <thead>
         <tr class="text-left">
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
+          <th colspan="3" rowspan="2">Мэдээ агуулга</th>
           <th colspan="{{$companies->count()}}">Ажил гүйцэтгэх Зэвсэгт хүчний анги, туслан гүйцэтгэгч аж ахуйн нэгж байгууллага</th>
         </tr>
         <tr class="text-left">
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
           @foreach ($companies as $company)
             <th class="verticalTD  text-center"><div class="rotate">{{$company->companyName}}</div></th>
             {{-- <th class="rotate">{{$company->companyName}}</th> --}}
@@ -102,7 +102,7 @@
         </tr>
         <tr class="text-left">
           <td>Ерөнхий мэдээлэл</td>
-          <td colspan="2"> Батлагдсан тоо хэмжээ /м.куб/</td>
+          <td colspan="2">Батлагдсан тоо хэмжээ /м.куб/</td>
           @foreach ($companies as $company)
             @php
               $sumPlan = \App\Http\Controllers\planController::getSumPlanCompany($company->id);
@@ -135,7 +135,7 @@
         @endphp
 
         @for($i=0; $i<$works->count(); $i++)
-          <tr class="{{$works[$i]->work_type_id}} text-left" id="prev{{$works[$i]->id}}">
+          <tr class="{{$works[$i]->work_type_id}} workType text-left" id="prev{{$works[$i]->id}}">
             <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
             <td>{{$works[$i]->name}}</td>
             <td class="text-center">Өмнөх тайлангийн бүгд</td>
@@ -146,7 +146,7 @@
               <td class="text-center">{{$previousReportExecution}}</td>
             @endforeach
           </tr>
-          <tr class="{{$works[$i]->work_type_id}} text-left" id="report{{$works[$i]->id}}">
+          <tr class="{{$works[$i]->work_type_id}} workType text-left" id="report{{$works[$i]->id}}">
             <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
             <td>{{$works[$i]->name}}</td>
             <td>Тайлант үеийн</td>

@@ -20,6 +20,7 @@
 
     <!-- Bootstrap -->
     <link href="{{url('public/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link href="{{url('public/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- NProgress -->

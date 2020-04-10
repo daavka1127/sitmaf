@@ -17,4 +17,5 @@ class reportController extends Controller
               ->render()
       );
     }
+
 }

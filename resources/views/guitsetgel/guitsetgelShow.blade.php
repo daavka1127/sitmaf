@@ -96,7 +96,7 @@
 </div>
 
 <div class="col-xs-12">
-  <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгжүүд</strong></h2>
+  <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүд</strong></h2>
   <div class="row">
       <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
           <thead>
