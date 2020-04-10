@@ -9,6 +9,8 @@ use App\tbLog;
 use App\userLog;
 use DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Redirect;
 
 class logsController extends Controller
@@ -18,14 +20,27 @@ class logsController extends Controller
       $this->middleware('auth');
   }
 
-  public function insertTableLog(Req $req)
+  public function insertTableLog($ip, $userName, $actionName, $tbName, $value, $comment)
   {
-
+    $log = new tbLog;
+    $log->ipAddress = $ip;
+    $log->userName = $userName;
+    $log->actionName = $actionName;
+    $log->tableName = $tbName;
+    $log->value = $value;
+    $log->comment = $comment;
+    $log->dateTime = Carbon::now();
+    $log->save();
+    return "Амжилттай хадгаллаа.";
   }
 
-  public function insertUserLog(Req $req)
+  public function insertUserLog($ip)
   {
-
+    $userLog = new userLog;
+    $userLog->ipAddress = $ip;
+    $userLog->userName = Auth::user()->name;
+    $userLog->dateTime = Carbon::now();
+    $userLog->save();
   }
   public function index()
   {
@@ -42,6 +57,10 @@ class logsController extends Controller
   public function getUserLog()
   {
 
+  }
+
+  public function getIpTest(Request $req){
+    return $req->ip();
   }
 
 }
