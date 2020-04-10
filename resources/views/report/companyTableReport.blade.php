@@ -137,7 +137,7 @@
                 $works = \App\Http\Controllers\WorkController::getCompactWorks($workType->id);
             @endphp
             <tr class="naalt">
-              <th rowspan="{{$works->count()+1}}" class='vertical'> <div class="vertical">{{$workType->name}}</div> </th>
+              <th rowspan="{{$works->count()+1}}" class='vertical'> <div  class="vertical">{{$workType->name}}</div> </th>
               <th class="text-nowrap text-left" style="padding-left:5px;">{{$works[0]->name}}</th>
               <th class="text-center">{{$works[0]->hemjih_negj}}</th>
               @foreach ($companies as $company)
@@ -180,7 +180,7 @@
             </tr>
             @for ($i=1; $i < $works->count(); $i++)
               <tr>
-                <th class="text-left" style="padding-left:5px;">{{$works[$i]->name}}</th>
+                <th class="text-left" style="padding-left:5px;" >{{$works[$i]->name}}</th>
                 <th class="text-center">{{$works[$i]->hemjih_negj}}</th>
                 @foreach ($companies as $company)
                   @php

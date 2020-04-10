@@ -142,8 +142,6 @@ class companyController extends Controller
         $company->heseg_id = $req->heseg_id;
         $company->ajliinHeseg = $req->ajliinHeseg;
         $company->gereeOgnoo = $req->gereeOgnoo;
-        $company->hunHuch = $req->hunHuch;
-        $company->mashinTehnik = $req->mashinTehnik;
         $company->save();
         $comID = $company->id;
       }

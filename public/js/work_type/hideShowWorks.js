@@ -75,9 +75,7 @@ $(document).ready(function () {
             companyName: $("#txtCompanyName").val(),
             heseg_id: $("#cmbHeseg").val(),
             ajliinHeseg: $("#txtAjliinHeseg").val(),
-            gereeOgnoo: $("#txtGereeOgnoo").val(),
-            hunHuch: $("#txtHunHuch").val(),
-            mashinTehnik: $("#txtMashinTehnik").val()
+            gereeOgnoo: $("#txtGereeOgnoo").val()
           },
           success:function(response){
               $("#companyID").val(response);
