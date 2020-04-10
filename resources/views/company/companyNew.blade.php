@@ -10,7 +10,7 @@
 
       <div class="modal-body">
         <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгж бүртгэл</strong></h2>
-        <form id="frmNewCompany" action="{{ action('companyController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
+
           @csrf
           <input type="hidden" id="companyID" name="companyID" value="0" />
           <div class="form-group col-md-3 text-left">
@@ -45,7 +45,7 @@
             <label>Ажлын машин техник </label>
             <input type="number" min="0" step="1" id="txtMashinTehnik" name="mashinTehnik" class="form-control" required />
           </div> --}}
-          </form>
+
           <div class="clearfix"></div>
           <h4 style="text-align:center;"><strong>Төсөвлөсөн ажил</strong></h4>
           @php
@@ -64,7 +64,7 @@
 
                   @foreach ($works as $work)
                     <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
-                      <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
+                      <label style="font-size: 11px;" id="workName{{$work->id}}">{{$work->name}} /{{$work->hemjih_negj}}/</label>
                       <input type="number" min="0" step="1" workID="{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
                     </div>
                     @php $i++; @endphp

@@ -10,7 +10,7 @@
 
       <div class="modal-body">
         <h2 style="text-align:center;"><strong>Аж ахуйн нэгж засах</strong></h2>
-        <form id="frmEditCompany" action="{{ action('companyController@update')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
+
           @csrf
           <div class="form-group col-md-3 text-left">
             <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
@@ -65,7 +65,7 @@
 
                   @foreach ($works as $work)
                     <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
-                      <label style="font-size: 11px;">{{$work->name}} /{{$work->hemjih_negj}}/</label>
+                      <label style="font-size: 11px;" id="editWorkName{{$work->id}}">{{$work->name}} /{{$work->hemjih_negj}}/</label>
                       <input type="number" min="0" step="1" value="" workID="{{$work->id}}" id="editTxtWork{{$work->id}}" class="editTxtclass{{$worktype->id}} form-control input-sm" />
                     </div>
 
@@ -85,7 +85,7 @@
           @endforeach
           <div class="col-md-6" id="error_message"></div>
           <div class="clearfix"></div>
-        </form>
+
       </div>
       <div class="clearfix"></div>
       <div class = "modal-footer">

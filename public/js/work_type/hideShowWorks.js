@@ -34,11 +34,14 @@ $(document).ready(function () {
         jsonObj = [];
         $.each($(".txtclass"+id), function( key, value ) {
           var workID = $(this).attr("workID");
+          var workName = $("#workName"+workID).text();
           var value = $(this).val();
+
           if(value != ""){
             item = {}
             item ["workTypeID"] = id;
             item ["workID"] = workID;
+            item ["workName"] = workName;
             item ["value"] = value;
             jsonObj.push(item);
           }
@@ -67,7 +70,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-          type: 'GET',
+          type: 'post',
           url: newWorksUrl,
           data: {
             json:jsonObj,
@@ -75,7 +78,8 @@ $(document).ready(function () {
             companyName: $("#txtCompanyName").val(),
             heseg_id: $("#cmbHeseg").val(),
             ajliinHeseg: $("#txtAjliinHeseg").val(),
-            gereeOgnoo: $("#txtGereeOgnoo").val()
+            gereeOgnoo: $("#txtGereeOgnoo").val(),
+            _token: $('meta[name="csrf-token"]').attr('content')
           },
           success:function(response){
               $("#companyID").val(response);

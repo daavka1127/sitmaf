@@ -72,10 +72,6 @@
     <!------ Include the above in your HEAD tag ---------->
 
 
-    
-
-
-
     <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
     <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
     <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script>

@@ -3,7 +3,6 @@
 @section('content')
 
                 <h1 style="text-align:center;">Нэвтрэх хэсэг</h1>
-
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         @csrf
 

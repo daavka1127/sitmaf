@@ -82,7 +82,7 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>Цэс</h3>
+                {{-- <h3>Цэс</h3> --}}
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-bar-chart"></i>Тайлан график <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -119,15 +119,21 @@
                           <li><a href="{{url('/work/show')}}">Хийх ажилууд</a></li>
                         </ul>
                     </li>
+                    <div class="menu_section">
+                      <ul class="nav side-menu">
+                        <li><a href="{{url("/viewLog")}}"><i class="fa fa-eye-slash"></i> Үйлдлийн бүртгэл харах </a></li>
+                      </ul>
+                    </div>
                   @endif
 
                 </ul>
               </div>
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="{{url("/changePassword")}}"><i class="fa fa-unlock-alt"></i> Нууц үг солих <span class="fa fa-chevron-down"></span></a></li>
+                  <li><a href="{{url("/changePassword")}}"><i class="fa fa-unlock-alt"></i> Нууц үг солих </a></li>
                 </ul>
               </div>
+
 
             </div>
             <!-- /sidebar menu -->
