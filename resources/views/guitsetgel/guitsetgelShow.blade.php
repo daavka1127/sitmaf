@@ -24,9 +24,6 @@
     var executionUpdateUrl = "{{url('/execution/execUpdate')}}";
     var executionDeleteUrl = "{{url('/execution/execDelete')}}";
 
-
-    var generateReportUrl = "{{url('/generate/html')}}";
-
     var csrf = "{{ csrf_token() }}";
 
     var getExecByCompany = "{{url("/guitsetgel/getExecByCompany")}}";
@@ -90,7 +87,8 @@
 <div class="col-md-12">
   <div id="divGenerateReport">
     <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
-    <input type="button" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
+    <input type="date" name="datetimeReport" id="dateTime" value="" />
+    <input type="button" data-post-url="{{url('/generate/html')}}" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
   </div>
   <span style="color:green;" id="generateReportAlert"></span>
 </div>
@@ -137,21 +135,21 @@
 
 
 <!-- Datatables -->
-    <script src="{{url('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
-    <script src="{{url('public/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
-    <script src="{{url('public/vendors/jszip/dist/jszip.min.js')}}"></script>
-    <script src="{{url('public/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
-    <script src="{{url('public/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+<script src="{{url('public/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
+<script src="{{url('public/vendors/jszip/dist/jszip.min.js')}}"></script>
+<script src="{{url('public/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
+<script src="{{url('public/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
 
 
 @endsection

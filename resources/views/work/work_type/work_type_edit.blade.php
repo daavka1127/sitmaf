@@ -22,7 +22,7 @@
           </div>
           <div class="clearfix"></div>
           <div class = "modal-footer">
-            <button id="btnWorkTypeEdit" type="submit" class="btn btn-success">Нэмэх</button>
+            <button id="btnWorkTypeEdit" type="submit" class="btn btn-success">Засах</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Хаах</button>
           </div>
         </form>

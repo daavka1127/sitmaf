@@ -12,6 +12,7 @@ class reportController extends Controller
       $this->middleware('auth');
   }
     public function generateHtml(){
+      // $date = $req->date;
       File::put('test.html',
           view('report.companyTableReport')
               ->render()

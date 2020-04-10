@@ -45,22 +45,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $(".table1").rowspanizer({
-        vertical_align: 'middle',
-        columns: [0,1]
-    });
-    $(".table2").rowspanizer({
-        vertical_align: 'middle',
-        columns: [0,1]
-    });
-    $(".table3").rowspanizer({
-        vertical_align: 'middle',
-        columns: [0,1]
-    });
-    $(".allTable").rowspanizer({
-        vertical_align: 'middle',
-        columns: [0,1]
-    });
+merge();
 });
 
 $(document).ready(function(){
@@ -96,4 +81,23 @@ function unmerge(){
             $("<td>Мэдээний хугацаанд гүйцэтгэсэн</td>").insertBefore($('td:first', $(this)));
         }
     });
+}
+
+function merge(){
+  $(".table1").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
+  $(".table2").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
+  $(".table3").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
+  $(".allTable").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
 }
