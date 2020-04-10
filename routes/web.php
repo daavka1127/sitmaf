@@ -57,7 +57,7 @@ Route::post('/companies/update', 'companyController@update');
 Route::post('/companies/delete', 'companyController@delete');
 Route::post('/company/get', 'companyController@getCompanies');
 //post bolgono storeworks
-Route::get('/companies/storeWorks', 'companyController@storeWorks');
+
 Route::get('/companies/updateWorks', 'companyController@updateWorks');
 Route::get('/get/plans/by/companyID', 'planController@getPlanByCompany');
 
@@ -121,8 +121,8 @@ Route::get('workType/visible', "WorktypeController@visibleShowBlade");
 Route::get('workType/visibleChange', "WorktypeController@ChangeWorkTypeVisible");
 Route::get('workType/getCheck', "WorktypeController@getWorkTypeVisible");
 Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
-
-
-
-
 // workType Visible end
+
+//log view
+Route::get('/viewLog', 'logsController@index');
+Route::post('/logView/getTableLog', 'logsController@getTableLog');

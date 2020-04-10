@@ -67,7 +67,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-          type: 'GET',
+          type: 'post',
           url: newWorksUrl,
           data: {
             json:jsonObj,
@@ -77,7 +77,8 @@ $(document).ready(function () {
             ajliinHeseg: $("#txtAjliinHeseg").val(),
             gereeOgnoo: $("#txtGereeOgnoo").val(),
             hunHuch: $("#txtHunHuch").val(),
-            mashinTehnik: $("#txtMashinTehnik").val()
+            mashinTehnik: $("#txtMashinTehnik").val(),
+            _token: $('meta[name="csrf-token"]').attr('content')
           },
           success:function(response){
               $("#companyID").val(response);
