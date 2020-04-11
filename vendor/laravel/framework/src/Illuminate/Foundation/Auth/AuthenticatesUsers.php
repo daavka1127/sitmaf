@@ -5,6 +5,7 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\logsController;
 
 trait AuthenticatesUsers
 {
@@ -120,6 +121,8 @@ trait AuthenticatesUsers
     protected function authenticated(Request $request, $user)
     {
         //
+        $log = new logsController;
+        $log->insertUserLog($request->ip());
     }
 
     /**

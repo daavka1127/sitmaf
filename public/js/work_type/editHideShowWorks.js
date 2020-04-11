@@ -1,11 +1,11 @@
 $(document).ready(function(){
     $("#btnEditCompany").click(function(){
-      
+
         $("#txtEditID").val(dataRow["id"]);
 
         //console.log(dataRow["companyName"].split('&quot;'));
         $("#txtEditCompanyName").val(dataRow["companyName"]);
-        $("#cmbEditHeseg").val(dataRow["heseg_id"]);
+        $("#cmbHeseg").val(dataRow["heseg_id"]);
         $("#txtEditAjliinHeseg").val(dataRow["ajliinHeseg"]);
         $("#txtEditGereeOgnoo").val(dataRow["gereeOgnoo"]);
         $("#txtEditHunHuch").val(dataRow["hunHuch"]);
@@ -14,10 +14,11 @@ $(document).ready(function(){
         else{$('#modalEditCompany').modal('show');}
 
         $.ajax({
-          type: 'GET',
+          type: 'post',
           url: getPlansByCompanyIDurl,
           data: {
-            companyID:dataRow["id"]
+            companyID:dataRow["id"],
+            _token:$('meta[name="csrf-token"]').attr('content')
           },
           success:function(response){
               $.each(response, function(index, item){
@@ -34,6 +35,7 @@ $(document).ready(function(){
       $(this).find(':checked').prop('checked', false);
     });
     $(".vision").css("display","none");
+    dataRow = "";
   });
 });
 
@@ -53,11 +55,14 @@ $(document).ready(function () {
         jsonObj = [];
         $.each($(".editTxtclass"+id), function( key, value ) {
           var workID = $(this).attr("workID");
+          var workName = $("#editWorkName"+workID).text();
           var value = $(this).val();
+
           if(value != ""){
             item = {}
             item ["workTypeID"] = id;
             item ["workID"] = workID;
+            item ["workName"] = workName;
             item ["value"] = value;
             jsonObj.push(item);
           }
@@ -90,18 +95,19 @@ $(document).ready(function () {
         }
 
         $.ajax({
-          type: 'GET',
+          type: 'post',
           url: editWorksUrl,
           data: {
             json:jsonObj,
             workTypeID: id,
             companyID: dataRow["id"],
             companyName: $("#txtEditCompanyName").val(),
-            heseg_id: $("#cmbEditHeseg").val(),
+            heseg_id: $("#cmbHeseg").val(),
             ajliinHeseg: $("#txtEditAjliinHeseg").val(),
             gereeOgnoo: $("#txtEditGereeOgnoo").val(),
             hunHuch: $("#txtEditHunHuch").val(),
-            mashinTehnik: $("#txtEditMashinTehnik").val()
+            mashinTehnik: $("#txtEditMashinTehnik").val(),
+            _token: $('meta[name="csrf-token"]').attr('content')
           },
           success:function(response){
               alertify.alert(response);

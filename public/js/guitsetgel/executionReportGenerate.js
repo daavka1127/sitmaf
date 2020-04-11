@@ -6,7 +6,10 @@ $(document).ready(function(){
         // setTimeout(showGenerateReportAlert, 500);
         $.ajax({
             type:'get',
-            url:generateReportUrl,
+            url:$("#btnGenerateReport").attr('data-post-url'),
+            data:{
+              lastDate: $("#dateTime").val()
+            },
             success:function(res){
                 // $("#divGenerateReport").hide();
                 // clearTimeout();

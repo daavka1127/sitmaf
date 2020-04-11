@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\company;
 use App\Http\Controllers\planController;
+use App\Http\Controllers\logsController;
 use App\Http\Controllers\ExecutionContoller;
 use App\plan;
+use App\tbLog;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Yajra\DataTables\DataTables;
@@ -81,46 +83,6 @@ class companyController extends Controller
         return $company;
     }
 
-    public function store(Request $req){
-        $company = new company;
-        $company->companyName = $req->companyName;
-        $company->heseg_id = $req->heseg_id;
-        $company->ajliinHeseg = $req->ajliinHeseg;
-        $company->hursHuulalt = $req->hursHuulalt;
-        $company->dalan = $req->dalan;
-        $company->uhmal = $req->uhmal;
-        $company->suuriinUy = $req->suuriinUy;
-        $company->shuuduu = $req->shuuduu;
-        $company->uhmaliinHamgaalalt = $req->uhmaliinHamgaalalt;
-        $company->uuliinShuuduu = $req->uuliinShuuduu;
-        $company->niit = ($req->hursHuulalt + $req->dalan + $req->uhmal + $req->suuriinUy + $req->shuuduu + $req->uhmaliinHamgaalalt + $req->uuliinShuuduu);
-        $company->gereeOgnoo = $req->gereeOgnoo;
-        $company->hunHuch = $req->hunHuch;
-        $company->mashinTehnik = $req->mashinTehnik;
-        $company->save();
-        return "Амжилттай хадгаллаа.";
-    }
-
-    public function update(Request $req){
-        $company = company::find($req->id);
-        $company->companyName = $req->companyName;
-        $company->heseg_id = $req->heseg_id;
-        $company->ajliinHeseg = $req->ajliinHeseg;
-        $company->hursHuulalt = $req->hursHuulalt;
-        $company->dalan = $req->dalan;
-        $company->uhmal = $req->uhmal;
-        $company->suuriinUy = $req->suuriinUy;
-        $company->shuuduu = $req->shuuduu;
-        $company->uhmaliinHamgaalalt = $req->uhmaliinHamgaalalt;
-        $company->uuliinShuuduu = $req->uuliinShuuduu;
-        $company->niit = ($req->hursHuulalt + $req->dalan + $req->uhmal + $req->suuriinUy + $req->shuuduu + $req->uhmaliinHamgaalalt + $req->uuliinShuuduu);
-        $company->gereeOgnoo = $req->gereeOgnoo;
-        $company->hunHuch = $req->hunHuch;
-        $company->mashinTehnik = $req->mashinTehnik;
-        $company->save();
-        return "Амжилттай заслаа.";
-    }
-
     public function delete(Request $req){
         $company = company::find($req->id);
         $company->delete();
@@ -129,6 +91,9 @@ class companyController extends Controller
 
         $exec = new ExecutionContoller;
         $exec->execDeleteByCompany($req->id);
+
+        $log = new logsController;
+        $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл устгав", "Компани", $req->comName, "");
 
         return "Амжилттай устгалаа.";
 
@@ -142,16 +107,17 @@ class companyController extends Controller
         $company->heseg_id = $req->heseg_id;
         $company->ajliinHeseg = $req->ajliinHeseg;
         $company->gereeOgnoo = $req->gereeOgnoo;
-        $company->hunHuch = $req->hunHuch;
-        $company->mashinTehnik = $req->mashinTehnik;
         $company->save();
         $comID = $company->id;
+        $log = new logsController;
+        $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл оруулсан", "Компани", $req->companyName, "");
       }
       else {
         $comID = $req->companyID;
       }
       $planWork = new planController;
-      $planWork->storePlanByWorkID($req->json, $comID);
+      $planWork->storePlanByWorkID($req->json, $comID, $req->ip(), "add");
+
 
       return $comID;
     }
@@ -166,9 +132,13 @@ class companyController extends Controller
       $company->mashinTehnik = $req->mashinTehnik;
       $company->save();
 
+      $log = new logsController;
+      $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл зассан", "Компани",
+            $req->companyName.", ".$req->companyName.", ".$req->ajliinHeseg.", ".$req->gereeOgnoo, "");
+
       $planWork = new planController;
       $planWork->deletePlanByWorkTypeAndCompany($req->workTypeID, $req->companyID);
-      $planWork->storePlanByWorkID($req->json, $req->companyID);
+      $planWork->storePlanByWorkID($req->json, $req->companyID, $req->ip(), "edit");
 
       return "Амжилттай заслаа.";
     }

@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\plan;
 use DB;
+use App\Http\Controllers\logsController;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Response;
 
 class planController extends Controller
@@ -15,8 +18,9 @@ class planController extends Controller
   {
       $this->middleware('auth');
   }
-    public function storePlanByWorkID($json, $comID)
+    public function storePlanByWorkID($json, $comID, $ip, $type)
     {
+
       foreach ($json as $key => $value) {
 
           $plan = new plan;
@@ -25,6 +29,13 @@ class planController extends Controller
           $plan->work_id = $value['workID'];
           $plan->quantity = $value['value'];
           $plan->save();
+
+          $log = new logsController;
+          if($type == "add")
+            $log->insertTableLog($ip, Auth::user()->name, "Өгөгдөл оруулсан", "Төлөвлөгөө", $value['workName']." : ".$value['value'], "");
+          else
+            $log->insertTableLog($ip, Auth::user()->name, "Өгөгдөл зассан", "Төлөвлөгөө", $value['workName']." : ".$value['value'], "");
+
       }
     }
 
@@ -132,6 +143,8 @@ class planController extends Controller
         // return $plan;
         return $execution2019P;
     }
+
+
 
 
 }

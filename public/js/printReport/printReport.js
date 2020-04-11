@@ -1,5 +1,11 @@
-$(document).on('click', '[type=checkbox]', function(){
+$(document).on('change', '[type=radio]', function(){
     var id = $(this).attr("workTypeId");
+    $.each(workTypes, function(index, item){
+      $("#worktypeid" + item.id).css("display","none");
+      $("." + item.id).hide();
+      $('input:checkbox').prop('checked', true);
+    });
+    $("." + id).show();
     if($(this).is(':checked')){
         $("#worktypeid" + id).css("display","block");
         // $("."+id).show();
@@ -38,21 +44,60 @@ $(document).ready(function(){
   });
 });
 
-// $(document).ready(function(){
-//   $("#davaa").rowspanizer({
-//     vertical_align: 'middle',
-//     columns: [0,1]
-//   });
-// unmergeRow();
-// });
+$(document).ready(function(){
+merge();
+});
 
+$(document).ready(function(){
+    $("#btnUnmerge").click(function(){
+        unmerge();
+    });
 
-function unmergeRow(){
-  $("#davaa > tbody > tr").each(function(index, tr){
-      console.log(index);
-      console.log(tr);
-      $.each(tr, function(index, td){
-        console.log($(this).children('td:first').attr('rowspan'));
+    $("#btnMerge").click(function(){
+      alert("A");
+      $(".table1").rowspanizer({
+          vertical_align: 'middle',
+          columns: [0]
       });
+    });
+});
+
+function unmerge(){
+    // $(".table1 tbody tr td:first-child").each(function(index, item){
+    //     alert($(this).children('td').first().text());
+    // });
+    $(".table1 tbody tr").each(function(index, item){
+        var a = $('td:first', $(this)).text();
+        if(a == "Ерөнхий мэдээлэл"){
+            $('td:first', $(this)).removeAttr( "rowspan" );
+        }
+        else{
+            $("<td>Ерөнхий мэдээлэл</td>").insertBefore($('td:first', $(this)));
+        }
+        if(a == "Мэдээний хугацаанд гүйцэтгэсэн"){
+            $('td:first', $(this)).removeAttr( "rowspan" );
+        }
+        else{
+            $("<td>Мэдээний хугацаанд гүйцэтгэсэн</td>").insertBefore($('td:first', $(this)));
+        }
+    });
+}
+
+function merge(){
+  $(".table1").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
+  $(".table2").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
+  $(".table3").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
+  });
+  $(".allTable").rowspanizer({
+      vertical_align: 'middle',
+      columns: [0]
   });
 }

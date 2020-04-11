@@ -18,7 +18,7 @@
   </script>
   <script src="{{url('/public/js/work_type/work.js')}}"></script>
 
-  <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгжүүд</strong></h2>
+  <h2 style="text-align:center;"><strong>Хийх ажлууд</strong></h2>
   <div class="row">
       <table id="datatable_workType" class="table table-striped table-bordered" style="width:100%;">
           <thead>

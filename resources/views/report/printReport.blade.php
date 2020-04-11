@@ -2,14 +2,16 @@
 
 @section('content')
 
-  <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
-  <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " />
-
+  {{-- <script src="{{url('/public/js/davkaFreeze/jquery-stickytable.js')}} "></script>
+  <link rel="stylesheet" type="text/css" href=" {{url('/public/js/davkaFreeze/jquery-stickytable.css')}} " /> --}}
+  <script src="{{url('/public/js/row-merge/jquery.rowspanizer.min.js')}} "></script>
   <script src="{{url('/public/js/printReport/printReport.js')}} "></script>
 @php
   $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
 @endphp
-
+<script>
+    var workTypes = {!! json_encode($workTypes->toArray()) !!};
+</script>
 <style>
 
 @media print {
@@ -35,7 +37,7 @@
 <div class="row" id="hideRowBeforPrint">
   @foreach ($workTypes as $workType)
     <div class="col-md-12">
-        <label class="checkbox-inline"><input type="checkbox" workTypeId="{{$workType->id}}" id="checkWorkType{{$workType->id}}">  {{$workType->name}}</label>
+        <label class="checkbox-inline"><input class="" name="radWorkType" type="radio" workTypeId="{{$workType->id}}" id="checkWorkType{{$workType->id}}">{{$workType->name}}</label>
     </div>
     <div class="col-md-12 vision" style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid{{$workType->id}}">
       @php
@@ -46,6 +48,9 @@
       @endforeach
     </div>
   @endforeach
+  <div class="clearfix"></div>
+  <input type="button" name="" id="btnUnmerge" value="Unmerge hiiih" />
+  <input type="button" name="" id="btnMerge" value="Merge hiiih" />
 </div>
 <div id="onlyPrint">
 
@@ -77,15 +82,10 @@
     <table border="1" class="table{{$heseg->id}}">
       <thead>
         <tr class="text-left">
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
-          <th colspan="{{$companies->count()}}">Ажил гүйцэтгэх Зэвсэгт хүчний анги, туслан гүйцэтгэгч аж ахуйн нэгж байгууллага</th>
+          <th colspan="2" rowspan="2" class="text-center">Мэдээ агуулга</th>
+          <th colspan="{{$companies->count()}}" class="text-center">Ажил гүйцэтгэх Зэвсэгт хүчний анги, туслан гүйцэтгэгч аж ахуйн нэгж байгууллага</th>
         </tr>
         <tr class="text-left">
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
-          <th>Мэдээ агуулга</th>
           @foreach ($companies as $company)
             <th class="verticalTD  text-center"><div class="rotate">{{$company->companyName}}</div></th>
             {{-- <th class="rotate">{{$company->companyName}}</th> --}}
@@ -94,40 +94,40 @@
       </thead>
       <tbody>
         <tr class="text-left">
-          <td>Ерөнхий мэдээлэл</td>
-          <td colspan="2">Хариуцах ПК-ийн байршил</td>
+          {{-- <td>Ерөнхий мэдээлэл</td> --}}
+          <td colspan="2" class="text-center">Хариуцах ПК-ийн байршил</td>
           @foreach ($companies as $company)
             <th class="rotate-45 text-center"><div><span>{{$company->ajliinHeseg}}</span></div></th>
           @endforeach
         </tr>
         <tr class="text-left">
-          <td>Ерөнхий мэдээлэл</td>
-          <td colspan="2"> Батлагдсан тоо хэмжээ /м.куб/</td>
+          {{-- <td>Ерөнхий мэдээлэл</td> --}}
+          <td colspan="2" class="text-center">Батлагдсан тоо хэмжээ /м.куб/</td>
           @foreach ($companies as $company)
             @php
               $sumPlan = \App\Http\Controllers\planController::getSumPlanCompany($company->id);
             @endphp
-            <th class="rotate-45"><div><span>{{$sumPlan}}</span></div></th>
+            <th class="rotate-45 text-center"><div><span>{{$sumPlan}}</span></div></th>
           @endforeach
         </tr>
         <tr class="text-left">
-          <td>Ерөнхий мэдээлэл</td>
-          <td colspan="2">2019 оны гүйцэтгэл /хувь/</td>
+          {{-- <td>Ерөнхий мэдээлэл</td> --}}
+          <td colspan="2" class="text-center">2019 оны гүйцэтгэл /хувь/</td>
           @foreach ($companies as $company)
             @php
               $percent2019 = \App\Http\Controllers\ExecutionContoller::getExecutionPercentByCompany2019($company->id);
             @endphp
-            <th class="rotate-45"><div><span>{{$percent2019}}</span></div></th>
+            <th class="rotate-45 text-center"><div><span>{{$percent2019}}</span></div></th>
           @endforeach
         </tr>
         <tr class="text-left">
-          <td>Ерөнхий мэдээлэл</td>
-          <td colspan="2">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</td>
+          {{-- <td>Ерөнхий мэдээлэл</td> --}}
+          <td colspan="2" class="text-center">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</td>
           @foreach ($companies as $company)
             @php
               $execution2020 = \App\Http\Controllers\ExecutionContoller::getSumExecutionByCompany2020($company->id);
             @endphp
-            <th class="rotate-45"><div><span>{{$execution2020}}</span></div></th>
+            <th class="rotate-45 text-center"><div><span>{{$execution2020}}</span></div></th>
           @endforeach
         </tr>
         @php
@@ -135,9 +135,9 @@
         @endphp
 
         @for($i=0; $i<$works->count(); $i++)
-          <tr class="{{$works[$i]->work_type_id}} text-left" id="prev{{$works[$i]->id}}">
-            <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
-            <td>{{$works[$i]->name}}</td>
+          <tr class="{{$works[$i]->work_type_id}} workType text-left" id="prev{{$works[$i]->id}}">
+            {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
+            <td class="text-center">{{$works[$i]->name}}</td>
             <td class="text-center">Өмнөх тайлангийн бүгд</td>
             @foreach ($companies as $company)
               @php
@@ -146,40 +146,40 @@
               <td class="text-center">{{$previousReportExecution}}</td>
             @endforeach
           </tr>
-          <tr class="{{$works[$i]->work_type_id}} text-left" id="report{{$works[$i]->id}}">
-            <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
-            <td>{{$works[$i]->name}}</td>
-            <td>Тайлант үеийн</td>
+          <tr class="{{$works[$i]->work_type_id}} workType text-left" id="report{{$works[$i]->id}}">
+            {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
+            <td class="text-center">{{$works[$i]->name}}</td>
+            <td class="text-center">Тайлант үеийн</td>
             @foreach ($companies as $company)
               @php
                 $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecByComIdWorkID($company->id, $works[$i]->id);
               @endphp
-              <td>{{$lastExec}}</td>
+              <td class="text-center">{{$lastExec}}</td>
             @endforeach
           </tr>
         @endfor
 
 
         <tr>
-          <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
-          <td>Бүгд</td>
-          <td>Өмнөх тайлангийн бүгд</td>
+          {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
+          <td class="text-center">Бүгд</td>
+          <td class="text-center">Өмнөх тайлангийн бүгд</td>
           @foreach ($companies as $company)
             @php
               $previousReportExecution = \App\Http\Controllers\ExecutionContoller::previousReportExecutionByComId($company->id);
             @endphp
-            <td>{{$previousReportExecution}}</td>
+            <td class="text-center">{{$previousReportExecution}}</td>
           @endforeach
         </tr>
         <tr>
-          <td>Мэдээний хугацаанд гүйцэтгэсэн</td>
-          <td>Бүгд</td>
-          <td>Тайлант үеийн</td>
+          {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
+          <td class="text-center">Бүгд</td>
+          <td class="text-center">Тайлант үеийн</td>
           @foreach ($companies as $company)
             @php
               $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecByComId($company->id);
             @endphp
-            <td>{{$lastExec}}</td>
+            <td class="text-center">{{$lastExec}}</td>
           @endforeach
         </tr>
       </tbody>
@@ -192,59 +192,59 @@
         <table  border="1" class="allTable">
           <thead>
             <tr>
-              <th colspan="{{$hesegs->count()+3}}">МЭДЭЭНИЙ ТОВЧОО</th>
+              <th class="text-center" colspan="{{$hesegs->count()+3}}">МЭДЭЭНИЙ ТОВЧОО</th>
             </tr>
             <tr>
               <th colspan="2"></th>
               @foreach ($hesegs as $heseg1)
-                <th>{{$heseg1->name}}</th>
+                <th class="text-center">{{$heseg1->name}}</th>
               @endforeach
-              <th>Бүгд</th>
+              <th class="text-center">Бүгд</th>
             </tr>
             <tr>
-              <th colspan="2">Хариуцах ПК-ийн байршил</th>
+              <th class="text-center" colspan="2">Хариуцах ПК-ийн байршил</th>
               @foreach ($hesegs as $heseg1)
-                <th>{{$heseg1->ajliinHeseg}}</th>
+                <th class="text-center">{{$heseg1->ajliinHeseg}}</th>
               @endforeach
               <th></th>
             </tr>
             <tr>
-              <th colspan="2">Батлагдсан тоо хэмжээ /м.куб/</th>
+              <th class="text-center" colspan="2">Батлагдсан тоо хэмжээ /м.куб/</th>
               @foreach ($hesegs as $heseg1)
                 @php
                   $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id);
                 @endphp
                 @if ($plan == null || $plan == "")
-                  <th>0</th>
+                  <th class="text-center">0</th>
                 @else
-                  <th>{{round($plan, 2)}}</th>
+                  <th class="text-center">{{round($plan, 2)}}</th>
                 @endif
               @endforeach
               <th></th>
             </tr>
             <tr>
-              <th colspan="2">2019 оны гүйцэтгэл /хувь/</th>
+              <th class="text-center" colspan="2">2019 оны гүйцэтгэл /хувь/</th>
               @foreach ($hesegs as $heseg1)
               @php
                 $per2019 = \App\Http\Controllers\planController::getExecPercent2019($heseg1->id);
                 $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id);
               @endphp
                 @if ($plan == null || $plan == "")
-                  <th>0</th>
+                  <th class="text-center">0</th>
                 @else
-                  <th>{{round($per2019*100/$plan, 2)}}</th>
+                  <th class="text-center">{{round($per2019*100/$plan, 2)}}</th>
                 @endif
               @endforeach
               <th></th>
             </tr>
             <tr>
-              <th colspan="2">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</th>
+              <th class="text-center" colspan="2">2020 онд гүйцэтгэх тоо хэмжээ /м.куб/</th>
               @foreach ($hesegs as $heseg1)
                 @php
                   $per2019 = \App\Http\Controllers\planController::getExecPercent2019($heseg1->id);
                   $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id);
                 @endphp
-                <th>{{$plan-$per2019}}</th>
+                <th class="text-center">{{$plan-$per2019}}</th>
               @endforeach
               <th></th>
             </tr>
@@ -254,9 +254,9 @@
               $works = \App\Http\Controllers\WorkController::getWorksAll($company->id);
             @endphp
             @foreach ($works as $work)
-              <tr class="{{$work->work_type_id}}" id="prev{{$work->id}}">
-                <td>{{$work->name}}</td>
-                <td>Өмнөх тайл бүгд</td>
+              <tr class="{{$work->work_type_id}} text-center" class="{{$work->work_type_id}}" id="prev{{$work->id}}">
+                <td class="text-center">{{$work->name}}</td>
+                <td class="text-center">Өмнөх тайл бүгд</td>
                 @php
                   $heseg1s = \App\Http\Controllers\HesegController::getHeseg();
                 @endphp
@@ -265,13 +265,13 @@
                     $allExec = \App\Http\Controllers\ExecutionContoller::getAllExecutionByHeseg($heseg1->id, $work->id);
                     $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecutionByHeseg($heseg1->id, $work->id);
                   @endphp
-                  <td>{{$allExec-$lastExec}}</td>
+                  <td class="text-center">{{$allExec-$lastExec}}</td>
                 @endforeach
                 <td></td>
               </tr>
               <tr class="{{$work->work_type_id}}" id="report{{$work->id}}">
-                <td>{{$work->name}}</td>
-                <td>Тайлант үеийн</td>
+                <td class="text-center">{{$work->name}}</td>
+                <td class="text-center">Тайлант үеийн</td>
                 @php
                   $heseg1s = \App\Http\Controllers\HesegController::getHeseg();
                 @endphp
@@ -279,7 +279,7 @@
                   @php
                     $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecutionByHeseg($heseg1->id, $work->id);
                   @endphp
-                  <td>{{$lastExec}}</td>
+                  <td class="text-center">{{$lastExec}}</td>
                 @endforeach
                 <td></td>
               </tr>
