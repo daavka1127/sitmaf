@@ -92,8 +92,8 @@ class companyController extends Controller
         $exec = new ExecutionContoller;
         $exec->execDeleteByCompany($req->id);
 
-        // $log = new logsController;
-        // $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл устгав", "Компани", $req->companyName, "");
+        $log = new logsController;
+        $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл устгав", "Компани", $req->comName, "");
 
         return "Амжилттай устгалаа.";
 

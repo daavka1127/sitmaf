@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('#cmbNewCompanyID').change(function(){
-      $('#CheckBoxes').text("");
+    $('#CheckBoxes').text("");
     $.ajax({
       type:'get',
       url:getPlanWorkTypeUrl,
