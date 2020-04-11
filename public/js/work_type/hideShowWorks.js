@@ -24,6 +24,8 @@ $(document).ready(function(){
 
     $("#companyID").val("0");
     $("#cmbHeseg").val("0");
+
+    dataRow = "";
   });
 });
 

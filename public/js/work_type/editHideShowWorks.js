@@ -35,6 +35,7 @@ $(document).ready(function(){
       $(this).find(':checked').prop('checked', false);
     });
     $(".vision").css("display","none");
+    dataRow = "";
   });
 });
 

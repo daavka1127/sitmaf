@@ -48,10 +48,15 @@ $(document).ready(function(){
         alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
           if (e) {
             var csrf = $('meta[name=csrf-token]').attr("content");
+
             $.ajax({
                 type: 'POST',
                 url: deleteCompanyUrl,
-                data: {_token: csrf, id : dataRow['id']},
+                data: {
+                  _token: csrf,
+                  id : dataRow['id'],
+                  comName: dataRow['companyName']
+                },
                 success:function(response){
                     alertify.alert(response);
                     refresh();
