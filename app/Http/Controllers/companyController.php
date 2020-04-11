@@ -158,7 +158,7 @@ class companyController extends Controller
         return $companiesHeseg;
     }
 
-
+    
 
     // davaanyam uusegsen end
 

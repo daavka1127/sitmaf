@@ -108,7 +108,7 @@ Route::post('/work/delete', 'WorkController@delete');
 Route::get("/getPlanWorkType", "planController@getPlanWorkTypeByCompany");
 Route::get("/getPlanWork/company/work_type", "planController@getPlanWorksByWorkTypeID");
 
-Route::get("/execution/store", "ExecutionContoller@store");
+Route::post("/execution/store", "ExecutionContoller@store");
 Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 

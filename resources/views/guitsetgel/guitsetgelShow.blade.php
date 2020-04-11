@@ -30,8 +30,6 @@
     var execEditRow = "";
 
 
-
-
     var dataRow = "";
     var updateRD = "";
     $(document).ready(function(){

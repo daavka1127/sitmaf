@@ -8,17 +8,12 @@ $(document).ready(function(){
         refreshExecEdit(dataRow["id"]);
         $('#modalEditGuitsetgel').modal('show');
         $('.printCompanyName').text(dataRow['companyName']);
-
+        $('#hiddenCompanyName').text(dataRow['companyName']);
     });
 });
 
 function refreshExecEdit(comID){
-  // alert(dataRow["id"]); //comID
-  // $('#execRowID').text("");
-  // $('#workType').text("");
-  // $('#work').text("");
-  // $('#editDate').text("");
-  // $('#editExec').text("");
+
 
   $('#editExecTable').dataTable().fnDestroy();
   $('#editExecTable').DataTable( {
@@ -73,7 +68,14 @@ $(document).ready(function(){
         $.ajax({
           type: 'POST',
           url: executionUpdateUrl,
-          data: $("#frmEditExec").serialize(),
+          data: {
+            _token: $('meta[name=csrf-token]').attr("content"),
+            execRowID : execEditRow['id'],
+            editExec: execEditRow['execution'],
+            workName: execEditRow['workName'],
+            comName: dataRow['companyName'],
+            editDate: execEditRow['date']
+          },
           success:function(response){
               alertify.alert(response);
               $('#modalEditGuitsetgel').modal('hide');
@@ -105,7 +107,14 @@ $(document).ready(function(){
             $.ajax({
                 type: 'POST',
                 url: executionDeleteUrl,
-                data: {_token: csrf, id : execEditRow['id']},
+                data: {
+                  _token: csrf,
+                  id : execEditRow['id'],
+                  execution: execEditRow['execution'],
+                  workName: execEditRow['workName'],
+                  comName: dataRow['companyName'],
+                  editDate: execEditRow['date']
+                },
                 success:function(response){
                     alertify.alert(response);
                     refreshExecEdit(dataRow['id']);
@@ -114,8 +123,9 @@ $(document).ready(function(){
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
                 }
-            })
+            });
           } else {
+              // alert(dataRow["companyName"]);
               alertify.error('Устгах үйлдэл цуцлагдлаа.');
           }
         });
