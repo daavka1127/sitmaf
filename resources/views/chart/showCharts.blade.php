@@ -18,6 +18,12 @@
       });
 
     </script>
+
+    <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
+    <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
+    <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
+    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script>
+
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
@@ -29,17 +35,23 @@
       </select>
     </div>
     <div class="col-md-4">
-      <label>Аж ахуйн нэгжээр харах</label>
-      <select class="form-control" id="cmbCompany">
-        <option value="0">Сонгоно уу</option>
-        @foreach ($companies as $company)
-          @if($companyID == $company->id)
-            <option value="{{$company->id}}" selected>{{$company->companyName}}</option>
-          @else
-            <option value="{{$company->id}}">{{$company->companyName}}</option>
-          @endif
-        @endforeach
-      </select>
+
+
+          <div class="ui-widget">
+            <label>Аж ахуйн нэгжээр харах</label>
+            <select  id="cmbCompany">  {{-- cmbCompany --}}
+              <option value="0">Сонгоно уу</option>
+              @foreach ($companies as $company)
+                @if($companyID == $company->id)
+                  <option value="{{$company->id}}" selected>{{$company->companyName}}</option>
+                @else
+                  <option value="{{$company->id}}">{{$company->companyName}}</option>
+                @endif
+              @endforeach
+            </select>
+          </div>
+
+
     </div>
     <div class="divWorkType col-md-4">
       <label>Хийгдэж буй ажлын төрөл</label>

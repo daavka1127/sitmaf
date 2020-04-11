@@ -68,11 +68,11 @@
 
     <!-- SLIDER JS -->
 		<script src="{{url("public/dist/js/jquery.sliderPro.min.js")}}"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
     <!------ Include the above in your HEAD tag ---------->
 
 
-    
+
 
 
 
@@ -108,10 +108,10 @@
                 <label>Procedure: loool </label>
                 <select id="combobox">
                     <option></option>
-                    <option value="Ultrasound Knee Right">Ultrasound Knee Right</option>
-                    <option value="Ultrasound Knee Left">Ultrasound Knee Left</option>
-                    <option value="Ultrasound Forearm/Elbow Right">Ultrasound Forearm/  Elbow Right</option>
-                    <option value="Ultrasound Forearm/Elbow Left">Ultrasound Forearm/Elbow Left</option>
+                    <option value="1">Ultrasound Knee Right</option>
+                    <option value="2">Ultrasound Knee Left</option>
+                    <option value="3">Ultrasound Forearm/  Elbow Right</option>
+                    <option value="4">Ultrasound Forearm/Elbow Left</option>
                     <option value="MRI Knee Right">MRI Knee Right</option>
                     <option value="MRI Knee Left">MRI Knee Left</option>
                     <option value="MRI Forearm/Elbow Right">MRI Forearm/Elbow Right</option>

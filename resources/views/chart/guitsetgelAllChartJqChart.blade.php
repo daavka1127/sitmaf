@@ -60,7 +60,7 @@
     </script>
     <script>
       $(document).ready(function(){
-          $("#cmbHeseg").change(function(){
+          $("#cmbCompany").change(function(){
               $(".divWorkType").css("display","none");
               window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
           });
@@ -92,6 +92,12 @@
         @endif
       </select>
     </div>
+
+    {{-- <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
+    <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
+    <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
+    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script> --}}
+
     <div class="col-md-4">
       <label>Аж ахуйн нэгжээр харах</label>
       <select class="form-control" id="cmbCompany">

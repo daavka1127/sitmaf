@@ -2,7 +2,7 @@ $( function() {
 $.widget( "custom.combobox", {
 	_create: function() {
 		this.wrapper = $( "<span>" )
-			.addClass( "custom-combobox" )
+			.addClass( " custom-combobox" )
 			.insertAfter( this.element );
 
 		this.element.hide();
@@ -18,7 +18,8 @@ $.widget( "custom.combobox", {
 			.appendTo( this.wrapper )
 			.val( value )
 			.attr( "title", "" )
-			.addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+			.attr( "style", "width:80%; background-color: #fff; color: #000000; padding-left:5px; display:inline-block; border: 1px solid #cccccc;" )
+			.addClass( "form-control float-left custom-combobox-input ui-widget ui-widget-content ui-state-default" )
 			.autocomplete({
 				delay: 0,
 				minLength: 0,
@@ -48,9 +49,10 @@ $.widget( "custom.combobox", {
 
 		$( "<a>" )
 			.attr( "tabIndex", -1 )
-			.attr( "title", "Show All Items" )
 			.attr( "height", "" )
-			.tooltip()
+			.attr( "id", "changeAtag" )
+			.attr( "title", "Бүгдийг харах" )
+			.addClass( "float-right ui-button ui-widget custom-combobox-toggle ui-corner-right")
 			.appendTo( this.wrapper )
 			.button({
 				icons: {
@@ -59,7 +61,7 @@ $.widget( "custom.combobox", {
 				text: "false"
 			})
 			.removeClass( "ui-corner-all" )
-			.addClass( "custom-combobox-toggle ui-corner-right" )
+			.addClass( " custom-combobox-toggle ui-corner-right" )
 			.on( "mousedown", function() {
 				wasOpen = input.autocomplete( "widget" ).is( ":visible" );
 			})
@@ -130,8 +132,16 @@ $.widget( "custom.combobox", {
 	}
 });
 
-$( "#combobox" ).combobox();
+$( "#cmbCompany" ).combobox();
 $( "#toggle" ).on( "click", function() {
-	$( "#combobox" ).toggle();
+	$( "#cmbCompany" ).toggle();
 });
+$( "#cmbNewCompanyID" ).combobox();
+$( "#toggle" ).on( "click", function() {
+	$( "#cmbNewCompanyID" ).toggle();
+});
+
+//
+$('#changeAtag').append('<span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-button-icon-space"> </span>');
+
 } );

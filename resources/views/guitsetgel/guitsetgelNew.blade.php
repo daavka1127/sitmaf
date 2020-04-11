@@ -8,6 +8,11 @@
         <button type="button" class="close" data-dismiss="modal">X</button>
       </div>
 
+      <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
+      <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
+      <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
+      <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script>
+
       <div class="modal-body">
         <h2 style="text-align:center;"><strong>Аж ахуйн нэгжийн гүйцэтгэлийн бүртгэл</strong></h2>
         <form id="frmNewGuitsetgel" action="{{ action('GuitsetgelController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">

@@ -13,5 +13,5 @@ use Redirect;
 
 class logsController extends Controller
 {
-    //
+    
 }

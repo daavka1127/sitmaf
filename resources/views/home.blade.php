@@ -4,21 +4,30 @@
   <div class="clearfix"></div>
   <div class="row">
     <script>
+    var companyName="";
+    var companyID=-1;
+    $(document).on("click", '[class^="ui-menu-item"]', function(){
+        companyName = $(this).find(".ui-menu-item-wrapper").text();
+        companyID = $('#cmbCompany option').filter(function () { return $(this).html() == companyName; }).val();
+        $(".divWorkType").css("display","block");
+    });
       $(document).ready(function(){
-          $("#cmbCompany").change(function(){
-            $(".divWorkType").css("display","block");
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
-          });
+        $("#cmbWorkType").change(function(){
+         window.location.href = "{{url('/chart/byDate')}}/" + companyID + "/" + $("#cmbWorkType").val();
+        });
+
+        $("#cmbHeseg").change(function(){
+            window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
+        });
       });
+
     </script>
-    <script>
-      $(document).ready(function(){
-          $("#cmbHeseg").change(function(){
-            $(".divWorkType").css("display","none");
-              window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
-          });
-      });
-    </script>
+
+    {{-- Auto combo serach start css and js --}}
+    <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
+    <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
+    <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
+    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script>
 
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
@@ -40,6 +49,7 @@
         @endforeach
       </select>
     </div>
+
     <div class="divWorkType col-md-4" style="display: none;">
       <label>Хийгдэж буй ажлын төрөл</label>
       <select class="form-control" id="cmbWorkType">
@@ -52,6 +62,7 @@
         @endforeach
       </select>
     </div>
+
   </div>
 
   <div style="display:none;" id="loading" class="col-md-2 col-md-offset-5">
