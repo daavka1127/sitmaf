@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use File;
+use App\Http\Controllers\ReportTimeController;
 
 class reportController extends Controller
 {
@@ -11,10 +12,12 @@ class reportController extends Controller
   {
       $this->middleware('auth');
   }
-    public function generateHtml(){
-      // $date = $req->date;
+    public function generateHtml(Request $req){
+      $reportTime = new ReportTimeController;
+      $reportTime->updateDate($req->lastDate);
+      $date=$req->lastDate;
       File::put('test.html',
-          view('report.companyTableReport')
+          view('report.companyTableReport', compact("date"))
               ->render()
       );
     }
