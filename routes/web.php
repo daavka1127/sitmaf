@@ -124,3 +124,6 @@ Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
 //log view
 Route::get('/viewLog', 'logsController@index');
 Route::post('/logView/getTableLog', 'logsController@getTableLog');
+
+Route::post('/adminSee', 'adminController@getAdmin');
+Route::get('/adminView', 'adminController@adminView');

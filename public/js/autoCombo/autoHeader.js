@@ -18,7 +18,8 @@ $.widget( "custom.combobox", {
 			.appendTo( this.wrapper )
 			.val( value )
 			.attr( "title", "" )
-			.attr( "style", "width:80%; background-color: #fff; color: #000000; padding-left:5px; display:inline-block; border: 1px solid #cccccc;" )
+			.attr( "id", "inputID" )
+			.attr( "style", "width:95%; background-color: #fff; color: #000000; padding-left:5px; display:inline-block; border: 1px solid #cccccc;" )
 			.addClass( "form-control float-left custom-combobox-input ui-widget ui-widget-content ui-state-default" )
 			.autocomplete({
 				delay: 0,

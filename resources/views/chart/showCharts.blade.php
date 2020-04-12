@@ -2,27 +2,31 @@
 @section('content')
   <div class="clearfix"></div>
   <div class="row">
+
     <script>
       $(document).ready(function(){
-          $("#cmbHeseg").change(function(){
-              $(".divWorkType").css("display","none");
-              window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
-          });
+        $("#cmbHeseg").change(function(){
+          $(".divWorkType").css("display","none");
+            window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
+        });
+
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
-            $("#cmbWorkType").val("0");
+              // window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
           $("#cmbWorkType").change(function(){
-            window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" +$("#cmbWorkType").val();
+            // $(".divWorkType").css("display","block");
+              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
-      });
 
+      });
     </script>
 
-    <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
+
+    {{-- <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
     <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
     <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
-    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script>
+    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script> --}}
 
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
@@ -34,41 +38,41 @@
         <option value="4">Бүх аж ахуйн нэгжээр</option>
       </select>
     </div>
-    <div class="col-md-4">
-
-
-          <div class="ui-widget">
-            <label>Аж ахуйн нэгжээр харах</label>
-            <select  id="cmbCompany">  {{-- cmbCompany --}}
-              <option value="0">Сонгоно уу</option>
-              @foreach ($companies as $company)
-                @if($companyID == $company->id)
-                  <option value="{{$company->id}}" selected>{{$company->companyName}}</option>
-                @else
-                  <option value="{{$company->id}}">{{$company->companyName}}</option>
-                @endif
-              @endforeach
-            </select>
-          </div>
-
+    <div class="col-md-2">
 
     </div>
-    <div class="divWorkType col-md-4">
-      <label>Хийгдэж буй ажлын төрөл</label>
-      <select class="form-control" id="cmbWorkType">
-        <option value="0">Сонгоно уу</option>
-        @php
-          $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
-        @endphp
-        @foreach ($workTypes as $workType)
-          @if ($workTypeID == $workType->id)
-            <option value="{{$workType->id}}" selected>{{$workType->name}}</option>
-          @else
-            <option value="{{$workType->id}}">{{$workType->name}}</option>
-          @endif
-        @endforeach
-      </select>
+    <div class="col-md-5">
+      <div class="row">
+        <label>Аж ахуйн нэгжээр харах</label>
+        <select class="form-control"  id="cmbCompany">  {{-- cmbCompany --}}
+          <option value="0">Сонгоно уу</option>
+          @foreach ($companies as $company)
+            @if($companyID == $company->id)
+                <option value="{{$company->id}}" selected>{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
+            @else
+                <option value="{{$company->id}}">{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
+            @endif
+          @endforeach
+        </select>
+      </div>
+      <div class="divWorkType row">
+        <label>Хийгдэж буй ажлын төрөл</label>
+        <select class="form-control" id="cmbWorkType">
+          <option value="0">Сонгоно уу</option>
+          @php
+            $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
+          @endphp
+          @foreach ($workTypes as $workType)
+            @if ($workTypeID == $workType->id)
+              <option value="{{$workType->id}}" selected>{{$workType->name}}</option>
+            @else
+              <option value="{{$workType->id}}">{{$workType->name}}</option>
+            @endif
+          @endforeach
+        </select>
+      </div>
     </div>
+    
   </div>
   <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
   <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">

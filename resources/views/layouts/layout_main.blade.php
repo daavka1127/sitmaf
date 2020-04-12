@@ -111,6 +111,7 @@
                   @if(Auth::user()->heseg_id == 5 )
                     <li><a><i class="fa fa-user"></i>Админ эрх <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
+                        <li><a href="{{url('/adminView')}}">Админ эрх харах</a></li>
                         <li><a href="{{url('/register')}}">Админ нэмэх</a></li>
                         {{-- <li><a href="{{url('/admins')}}">Админ засах</a></li> --}}
                       </ul>

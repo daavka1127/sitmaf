@@ -1,30 +1,48 @@
 $(document).ready(function(){
-  $('#cmbNewCompanyID').change(function(){
-    $('#CheckBoxes').text("");
-    $.ajax({
-      type:'get',
-      url:getPlanWorkTypeUrl,
-      data: {
-        companyID:$('#cmbNewCompanyID').val()
-      },
-      success:function(response){
-        $.each(response, function(key, value){
-          //alert("key="+ key +" value=" + value.name);
-          $('#CheckBoxes').append('<div class="col-md-12">' +
-              '<label class="checkbox-inline">' +
-              '<input type="checkbox" workTypeId="'+value.work_type_id+'" id="checkBoxes'+value.work_type_id+'">  '+value.name+'' +
-              '</label></div>' +
-              '<div class="col-md-12 vision"  style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid'+value.work_type_id+'">'+
-              '</div>'
-              );
-        getWorks(value.work_type_id);
-        });
+    $("#btnAddGuitsetgel").click(function(){
 
-      }
+        if(dataRow == ""){
+          alertify.alert("Та засах мөрөө сонгоно уу!!!")
+          return;
+        }
+        // refreshExecEdit(dataRow["id"]);
+        $('#newGuitsetgelModal').modal('show');
+         $('#cmbNewCompanyName').text(dataRow['companyName']+" " + dataRow['ajliinHeseg']);
+         $('#cmbNewCompanyID').val(dataRow['id']);
+
+         $('#CheckBoxes').text("");
+         $.ajax({
+           type:'get',
+           url:getPlanWorkTypeUrl,
+           data: {
+             companyID:$('#cmbNewCompanyID').val()
+           },
+           success:function(response){
+             $.each(response, function(key, value){
+               //alert("key="+ key +" value=" + value.name);
+               $('#CheckBoxes').append('<div class="col-md-12">' +
+                   '<label class="checkbox-inline">' +
+                   '<input type="checkbox" workTypeId="'+value.work_type_id+'" id="checkBoxes'+value.work_type_id+'">  '+value.name+'' +
+                   '</label></div>' +
+                   '<div class="col-md-12 vision"  style="display:none; border: 1px solid grey; margin-top: 5px; border-radius: 5px; border-color: #d1cfcf;" id="worktypeid'+value.work_type_id+'">'+
+                   '</div>'
+                   );
+             getWorks(value.work_type_id);
+             });
+
+           }
+         });
+
+
     });
-
-  });
 });
+
+// $(document).ready(function(){
+//   $('#cmbNewCompanyID').change(function(){
+//
+//
+//   });
+// });
 
 function getWorks(workTypeID){
   $.ajax({
@@ -96,6 +114,7 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
           $("#checkBoxes"+id).prop("disabled", true);
           $("#divGenerateReport").show();
           $("#generateReportAlert").html("");
+          $('#newGuitsetgelModal').modal('hide');
         }
     },
     error: function(jqXhr, json, errorThrown){// this are default for ajax errors
