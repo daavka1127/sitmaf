@@ -10,6 +10,9 @@
       <link href="{{url('public/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
 
+      <link rel="stylesheet" href="{{url("public/date-time-picker/jquery.datetimepicker.css")}}">
+<script src="{{url("public/date-time-picker/jquery.datetimepicker.full.js")}}"></script>
+
 <script>
     var newCompanyUrl = "{{url("/guitsetgel/store")}}";
 
@@ -28,8 +31,6 @@
 
     var getExecByCompany = "{{url("/guitsetgel/getExecByCompany")}}";
     var execEditRow = "";
-
-
 
 
     var dataRow = "";
@@ -81,14 +82,37 @@
 
 </script>
 
+<script>
+    jQuery(document).ready(function () {
+         'use strict';
+        jQuery('#date').datetimepicker({
+        });
+    });
+</script>
+
 <script src="{{url('public/js/guitsetgel/executionNew.js')}}"></script>
 <script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script>
 
 <div class="col-md-12">
   <div id="divGenerateReport">
-    <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
-    <input type="date" name="datetimeReport" id="dateTime" value="" />
-    <input type="button" data-post-url="{{url('/generate/html')}}" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
+    <div class="border border-primary">
+      <div class="row">
+        <div class="col-md-6 text-right">
+          <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
+        </div>
+        <div class="col-md-4">
+          <div class='input-group date' >
+              <input type="datetime" name="date" id="date" value="" class="form-control"/>
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <input type="button" data-post-url="{{url('/generate/html')}}" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
+        </div>
+      </div>
+    </div>
   </div>
   <span style="color:green;" id="generateReportAlert"></span>
 </div>

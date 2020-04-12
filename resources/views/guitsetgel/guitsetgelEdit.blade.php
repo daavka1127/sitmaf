@@ -56,6 +56,7 @@
             <form id="frmEditExec" action="{{ action('ExecutionContoller@execUpdate')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
               @csrf
               <input type="hidden" name="execRowID" id="execRowID" value="">
+              <input type="hidden" name="hiddenCompanyName" id="hiddenCompanyName" value="">
               <div class="container">
                 <div class="col-md-2">
                   <label>Ажлын төрөл</label>
@@ -63,11 +64,11 @@
                 </div>
                 <div class="col-md-2">
                   <label>Хийх ажил</label>
-                  <input class="form-group" type="text"  id="work" value="" disabled/>
+                  <input class="form-group" type="text" name="work" id="work" value="" disabled/>
                 </div>
                 <div class="col-md-2">
                   <label>Огноо</label>
-                  <input class="form-group" type="text" id="editDate" value="" disabled/>
+                  <input class="form-group" type="text" name="editDate" id="editDate" value="" disabled/>
                 </div>
                 <div class="col-md-2">
                   <label>Гүйцэтгэл</label>

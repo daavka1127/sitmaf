@@ -49,7 +49,8 @@ class logsController extends Controller
 
   public function getTableLog()
   {
-    $tableLog = DB::table("tb_log")->get();
+    $tableLog = DB::table("tb_log")
+    ->orderBy('dateTime', 'desc')->get();
 
     return DataTables::of($tableLog)
           ->make(true);

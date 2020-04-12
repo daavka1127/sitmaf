@@ -56,7 +56,7 @@ function getWorks(workTypeID){
 
       $.each(response, function(key, val){
         $("#worktypeid"+workTypeID).append('<div class="form-group col-md-2 text-left" style="padding-top: 5px;">'+
-          '<label style="font-size: 11px;">'+val.name+' /'+val.hemjih_negj+'/ </br> Төлөвлөсөн:('+val.quantity+')</label>'+
+          '<label style="font-size: 11px;" id="workName'+val.work_id+'">'+val.name+' /'+val.hemjih_negj+'/ </br> Төлөвлөсөн:('+val.quantity+')</label>'+
           '<input type="number" min="0" step="1" workID="'+val.work_id+'" class="txtclass'+workTypeID+' form-control input-sm" />'+
           '</div>'
       );
@@ -73,16 +73,19 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
   var id = $(this).attr("btnworkid");
   jsonObj = [];
   $.each($(".txtclass"+id), function( key, value ) {
+
     var workID = $(this).attr("workID");
+    var workName = $("#workName"+workID).text();
     var value = $(this).val();
+
     if(value != ""){
       item = {}
       item ["workTypeID"] = id;
       item ["workID"] = workID;
+      item ["workName"] = workName;
       item ["value"] = value;
       jsonObj.push(item);
     }
-
   });
 
   // console.log(jsonObj);
@@ -99,12 +102,13 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
     return;
   }
   $.ajax({
-    type: 'GET',
+    type: 'post',
     url: executionStoreUrl,
     data: {
       json:jsonObj,
       companyID: $("#cmbNewCompanyID").val(),
-      createDate: $("#txtOgnoo").val()
+      createDate: $("#txtOgnoo").val(),
+      _token: $('meta[name="csrf-token"]').attr('content')
     },
     success:function(response){
         alertify.alert(response);

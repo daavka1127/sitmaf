@@ -38,6 +38,7 @@ $(document).ready(function(){
         { data: "userName", name: "userName"},
         { data: "actionName", name: "actionName"},
         { data: "tableName", name: "tableName"},
+        { data: "value", name: "value"},
         { data: "comment", name: "comment" },
         { data: "dateTime", name: "dateTime" }
       ]
@@ -56,6 +57,7 @@ $(document).ready(function(){
                 <th>Хэрэглэгч нэр</th>
                 <th>Үйлдэл</th>
                 <th>Хүснэгт</th>
+                <th>Утга</th>
                 <th>Тайлбар</th>
                 <th>Огноо</th>
               </tr>

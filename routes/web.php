@@ -32,7 +32,7 @@ Route::get("/report/print", function(){
 })->middleware('auth');
 Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
 Route::get("/test/{comID}/{workID}", "ExecutionContoller@previousReportExecutionByComIdWorkID");
-Route::get('/generate/html', 'reportController@generateHtml');
+Route::post('/generate/html', 'reportController@generateHtml');
 // dadaa REPORT
 Route::get("/autoCombo", function(){
   return view('autoCombo'); //123
@@ -108,7 +108,7 @@ Route::post('/work/delete', 'WorkController@delete');
 Route::get("/getPlanWorkType", "planController@getPlanWorkTypeByCompany");
 Route::get("/getPlanWork/company/work_type", "planController@getPlanWorksByWorkTypeID");
 
-Route::get("/execution/store", "ExecutionContoller@store");
+Route::post("/execution/store", "ExecutionContoller@store");
 Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 

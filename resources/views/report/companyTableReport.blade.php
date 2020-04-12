@@ -99,7 +99,8 @@
   </div> --}}
   <input type="button" class="btn btn-primary" name="" value="Хэвлэх" id="btnPrintReport" />
 
-  {{-- <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2> --}}
+  <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүдийн гүйцэтгэлийн тайлан</strong></h2>
+  <span class="text-right">{{$date}} өдрийн байдлаар</span>
   <div class="table-div">
     <table border="1" class=" text-center" id="myTable">
       <thead >
