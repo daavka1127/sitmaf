@@ -45,7 +45,16 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-merge();
+    merge();
+    $("table .workType").hide();
+    $.each(workTypes, function(index, item){
+      $("table ." + item.id).show();
+      $("#checkWorkType" + item.id).prop("checked", true);
+      $("#worktypeid" + item.id).css("display","block");
+      return false;
+    });
+
+    sumLastTable();
 });
 
 $(document).ready(function(){
@@ -101,3 +110,29 @@ function merge(){
       columns: [0]
   });
 }
+
+function sumLastTable(){
+    // alert($('.allTable #lastTablePlanRow .sum').length);
+    var sumPlan=0;
+    var sumExec2020=0;
+    var avgExec2019=0;
+    $('.allTable #lastTablePlanRow .sum').each(function(){
+        sumPlan += parseFloat($(this).text());
+        $('#lastTableSumPlan').html(sumPlan);
+    });
+    $('.allTable #lastTableExec2020Row .sum').each(function(){
+        sumExec2020 += parseFloat($(this).text());
+        $('#lastTableSumExec2020').html(sumExec2020);
+    });
+    avgExec2019 = parseFloat((sumPlan-sumExec2020)*100/sumPlan);
+    $("#lastTableSumExecPercent2019").html(avgExec2019 + "%");
+}
+
+$(document).ready(function(){
+    $("#btnPrint").click(function(){
+        window.print();
+    });
+    if(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())){
+       // alert('I am chrome');
+      }
+});

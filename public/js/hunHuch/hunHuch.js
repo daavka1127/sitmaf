@@ -16,6 +16,7 @@ function refresh(){
           },
           "processing": true,
           "serverSide": true,
+          "order": [[ 6, "desc" ], [ 3, "asc" ]],
           "ajax":{
                    "url": getHunHuchUrl,
                    "dataType": "json",

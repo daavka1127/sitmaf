@@ -20,6 +20,10 @@ class reportController extends Controller
           view('report.companyTableReport', compact("date"))
               ->render()
       );
+      File::put('print.html',
+          view('report.printReport', compact("date"))
+              ->render()
+      );
     }
 
 }

@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="icon" type="image/x-icon" href="{{url('public/images/gsmaf_logo.ico')}}"/>
 
-    <title>Төмөр замын ажлын мэдээлэл</title>
+    <title>Төмөр замын бүтээн байгуулалтын статик үзүүлэлтийг хянах веб программ</title>
 
     <link href="{{url('public/css/zam_styles.css')}}" rel="stylesheet">
 
@@ -95,7 +95,7 @@
                     <ul class="nav child_menu">
                       <li><a href="{{url('/companies/new')}}">Аж ахуйн нэгж нэмэх</a></li>
                       <li><a href="{{url('/guitsetgel/new')}}">Гүйцэтгэл нэмэх</a></li>
-                      {{-- <li><a href="{{url('/hunHuch/new')}}">Хүн, хүч нэмэх</a></li> --}}
+                      <li><a href="{{url('/hunHuch/new')}}">Хүн, хүч нэмэх</a></li>
                       <li><a href="{{url('/image/new')}}">Зураг оруулах</a></li>
                     </ul>
                   </li>
@@ -193,7 +193,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Зэвсэгт хүчний программ хангажийн төв. &copy;2020
+            Зэвсэгт хүчний программ хангамжийн төв. &copy;2020
           </div>
           <div class="clearfix"></div>
         </footer>

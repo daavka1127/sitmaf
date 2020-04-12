@@ -79,7 +79,8 @@
 
     $(document).ready(function(){
       $("#btnPrintReport").click(function(){
-        window.location.replace("{{url("/report/print")}}");
+        // window.location.replace("{{url("/report/print")}}");
+        window.location.replace("{{url("print.html")}}");
       });
     });
     </script>

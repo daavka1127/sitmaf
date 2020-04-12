@@ -45,7 +45,7 @@ class ExecutionContoller extends Controller
             ->select(
                 DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID) as allExecution"),
                 DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID AND
-                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+                `date` BETWEEN (SELECT `startDate` FROM `tb_reporttime` WHERE `id`=1) AND (SELECT `endDate` FROM `tb_reporttime` WHERE `id`=1)) as lastExecution")
             )
             ->where('id', '=', $comID)
             ->first();
@@ -56,7 +56,7 @@ class ExecutionContoller extends Controller
         $lastExec = DB::table("tb_companies")
             ->select(
                 DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID AND
-                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+                `date` BETWEEN (SELECT `startDate` FROM `tb_reporttime` WHERE `id`=1) AND (SELECT `endDate` FROM `tb_reporttime` WHERE `id`=1)) as lastExecution")
             )
             ->where('id', '=', $comID)
             ->first();
@@ -68,7 +68,7 @@ class ExecutionContoller extends Controller
             ->select(
                 DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID) as allExecution"),
                 DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND
-                `date`= ( SELECT MAX(`date`) FROM `tb_execution`)) as lastExecution")
+                `date` BETWEEN (SELECT `startDate` FROM `tb_reporttime` WHERE `id`=1) AND (SELECT `endDate` FROM `tb_reporttime` WHERE `id`=1)) as lastExecution")
             )
             ->where('id', '=', $comID)
             ->first();
@@ -299,7 +299,8 @@ class ExecutionContoller extends Controller
         ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
         ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
         ->where('tb_companies.heseg_id', '=', $hesegID)
-        ->where('tb_execution.date', '=', DB::raw('(SELECT MAX(`date`) FROM `tb_execution` WHERE tb_execution.work_id = ' . $workID . ')'))
+        ->where('tb_execution.work_id', '=', $workID)
+        ->whereBetween('tb_execution.date', [DB::raw('(SELECT `startDate` FROM `tb_reporttime` WHERE id=1)'), DB::raw('(SELECT `endDate` FROM `tb_reporttime` WHERE id=1)')])
         ->get();
     foreach ($lastExecs as $lastExec) {
       $lastExec1 = $lastExec->lastExec;
@@ -320,4 +321,30 @@ class ExecutionContoller extends Controller
     return $lastExec1;
   }
 
+  public static function getAllExecByHeseg($hesegID){
+      $allHesegExecs = DB::table('tb_execution')
+          ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+          ->select(DB::raw("SUM(tb_execution.execution) as allExec"))
+          ->where('tb_companies.heseg_id', '=', $hesegID)
+          ->get();
+      foreach ($allHesegExecs as $allHesegExec) {
+        $allExecHeseg = $allHesegExec->allExec;
+      }
+      return $allExecHeseg;
+  }
+
+  public static function getAllExecPercent(){
+      $sumPlan = DB::table('tb_plan')
+          ->sum('quantity');
+      $sumExec = DB::table('tb_execution')
+          ->sum('execution');
+      return $sumExec*100/$sumPlan;
+  }
+
+  public static function getAllExecByCompany($comID){
+      $allExecCompany = DB::table('tb_execution')
+          ->where('companyID', '=', $comID)
+          ->sum('execution');
+      return $allExecCompany;
+  }
 }

@@ -31,7 +31,7 @@ Route::get("/report/print", function(){
   return view('report.printReport'); //123
 })->middleware('auth');
 Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
-Route::get("/test/{comID}/{workID}", "ExecutionContoller@previousReportExecutionByComIdWorkID");
+Route::get("/test/{hesegID}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
 Route::post('/generate/html', 'reportController@generateHtml');
 // dadaa REPORT
 Route::get("/autoCombo", function(){

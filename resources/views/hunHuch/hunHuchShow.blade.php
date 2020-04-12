@@ -32,6 +32,7 @@
           },
           "processing": true,
           "serverSide": true,
+          "order": [[ 6, "desc" ], [ 3, "asc" ]],
           "ajax":{
                    "url": "{{url('/hunHuch/new/get')}}",
                    "dataType": "json",
@@ -44,6 +45,7 @@
               { data: "id", name: "id" },
               { data: "companyName", name: "companyName"},
               { data: "companyID", name: "companyID", visible:false},
+              { data: "ajliinHeseg", name: "ajliinHeseg"},
               { data: "hunHuch", name: "hunHuch" },
               { data: "mashinTehnik", name: "mashinTehnik" },
               { data: "ognoo", name: "ognoo" }
@@ -62,7 +64,7 @@
 </script>
 
 <div class="col-xs-12">
-  <h2 style="text-align:center;"><strong>Бүртгэгдсэн аж ахуйн нэгжүүд</strong></h2>
+  <h2 style="text-align:center;"><strong>Хүн хүч нэмэх</strong></h2>
   <div class="row">
       <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
           <thead>
@@ -70,6 +72,7 @@
                   <th>ID</th>
                   <th>Аж ахуй нэгжийн нэр</th>
                   <th></th>
+                  <th>Ажлын хэсэг</th>
                   <th>Хүн хүч</th>
                   <th>Газар шорооны ажлын машин, техник</th>
                   <th>Огноо</th>

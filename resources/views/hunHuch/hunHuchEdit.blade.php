@@ -17,7 +17,7 @@
             <input type="hidden" id="hideEditHunHuchID" name="id" value=""/>
             <select class="form-control" name="companyID" id="cmbEditCompanyID" disabled>
                 @foreach ($companies as $company)
-                    <option value="{{$company->id}}">{{$company->companyName}}</option>
+                    <option value="{{$company->id}}">{{$company->companyName}}	&nbsp;	&nbsp; =>	&nbsp;	&nbsp;   {{$company->ajliinHeseg}}</option>
                 @endforeach
             </select>
           </div>

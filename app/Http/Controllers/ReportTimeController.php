@@ -16,4 +16,11 @@ class ReportTimeController extends Controller
         $reportTime->endDate = $date;
         $reportTime->save();
     }
+
+    public static function getLastDate(){
+        $reportTime = ReportTime::find(1);
+        $splitStartDate = explode(' ',$reportTime->startDate);
+        $splitEndDate = explode(' ',$reportTime->endDate);
+        return $splitStartDate[0] . '&' . $splitEndDate[0];
+    }
 }

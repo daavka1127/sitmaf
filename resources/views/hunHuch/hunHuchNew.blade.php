@@ -16,7 +16,7 @@
             <label>Аж ахуйн нэгж <span class="red-required">*</span> </label>
             <select class="form-control" name="companyID" id="cmbCompanyID">
                 @foreach ($companies as $company)
-                    <option value="{{$company->id}}">{{$company->companyName}}</option>
+                    <option value="{{$company->id}}">{{$company->companyName}}	&nbsp;	&nbsp; =>	&nbsp;	&nbsp;   {{$company->ajliinHeseg}}</option>
                 @endforeach
             </select>
           </div>

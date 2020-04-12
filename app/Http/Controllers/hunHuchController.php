@@ -17,23 +17,26 @@ class hunHuchController extends Controller
     }
 
     public function index(){
-        if(Auth::user()->heseg_id == 0){
-            $companies = DB::table('tb_companies')->get();
+        if(Auth::user()->heseg_id == 5){
+            $companies = DB::table('tb_companies')
+                ->orderby('ajliinHeseg', 'ASC')
+                ->get();
         }else{
             $companies = DB::table('tb_companies')
                 ->where('tb_companies.heseg_id', '=', Auth::user()->heseg_id)
+                ->orderby('ajliinHeseg', 'ASC')
                 ->get();
         }
         return view('hunHuch.hunHuchShow', compact('companies'));
     }
 
     public function getHunHuchToNew(){
-        if(Auth::user()->heseg_id == 0){
+        if(Auth::user()->heseg_id == 5){
             $hunHuchs = DB::table('tb_hunhuch')
                 ->join('tb_companies', 'tb_hunhuch.companyID', '=', 'tb_companies.id')
-                ->select('tb_hunhuch.*', 'tb_companies.companyName')
+                ->select('tb_hunhuch.*', 'tb_companies.companyName', 'tb_companies.ajliinHeseg')
+                ->orderby('tb_hunhuch.ognoo', 'DESC')
                 ->orderby('tb_companies.companyName', 'ASC')
-                ->orderby('tb_hunhuch.ognoo', 'ASC')
                 ->get();
         }
         else{
@@ -41,8 +44,8 @@ class hunHuchController extends Controller
                 ->join('tb_companies', 'tb_hunhuch.companyID', '=', 'tb_companies.id')
                 ->select('tb_hunhuch.*', 'tb_companies.companyName')
                 ->where('tb_companies.heseg_id', '=', Auth::user()->heseg_id)
+                ->orderby('tb_hunhuch.ognoo', 'DESC')
                 ->orderby('tb_companies.companyName', 'ASC')
-                ->orderby('tb_hunhuch.ognoo', 'ASC')
                 ->get();
         }
         return DataTables::of($hunHuchs)
