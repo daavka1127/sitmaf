@@ -127,3 +127,5 @@ Route::post('/logView/getTableLog', 'logsController@getTableLog');
 
 Route::post('/adminSee', 'adminController@getAdmin');
 Route::get('/adminView', 'adminController@adminView');
+Route::post('/admin/adminUpdate', 'adminController@adminUpdate');
+Route::post("/admin/delete", "adminController@delete");

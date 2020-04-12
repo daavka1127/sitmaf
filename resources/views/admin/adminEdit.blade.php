@@ -9,30 +9,33 @@
       </div>
 
       <div class="modal-body">
-
-
-
-
             <div class="clearfix"></div>
-            <form id="frmEditExec" action="{{ action('ExecutionContoller@execUpdate')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
+            <form id="frmEditAdmin" action="{{ action('adminController@adminUpdate')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
               @csrf
-              <input type="hidden" name="execRowID" id="adminRowID" value="">
+              <input type="hidden" name="adminRowID" id="adminRowID" value="">
               <div class="container">
                 <div class="col-md-6">
                   <label>Нэр</label>
-                  <input class="form-control" type="text" id="name" value="" />
+                  <input class="form-control" type="text" name="name" id="name" value="" />
                 </div>
                 <div class="col-md-6">
                   <label>Цахим хаяг</label>
-                  <input class="form-control" type="text"  id="email" value="" />
+                  <input class="form-control" type="text" name="email" id="email" value="" />
                 </div>
                 <div class="col-md-6">
                   <label>Нууц үг</label>
-                  <input class="form-control" type="text" id="pass" value="" />
+                  <input class="form-control" type="text" name="pass" id="pass" value="" />
                 </div>
                 <div class="col-md-6">
                   <label>хандах эрх</label>
-                  <input class="form-control" type="text"  id="access" value=""/>
+                  <select class="form-control" name="heseg" id="access">
+                    <option value="1">Зүүнбаян чиглэл  I хэсэг</option>
+                    <option value="2">Мандах чиглэл II хэсэг</option>
+                    <option value="3">Цогтцэций чиглэл III хэсэг</option>
+                    <option value="4">Зөвхөн хардаг</option>
+                    <option value="5">Мастер</option>
+                  </select>
+
                 </div>
               </div>
 
@@ -42,7 +45,7 @@
       </div>
       <div class="clearfix"></div>
       <div class = "modal-footer">
-          <button id="btnEditPostGuitsetgel" type="button" class="btn btn-success">Засах</button>
+          <button id="btnEditPostAdmin" type="button" class="btn btn-success">Засах</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Хаах</button>
       </div>
 

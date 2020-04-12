@@ -14,17 +14,10 @@
     var getadminUrl = "{{url("/adminSee")}}";
 
     // var executionStoreUrl = "{{url('/execution/store')}}";
-    // var executionUpdateUrl = "{{url('/execution/execUpdate')}}";
+    var adminUpdateUrl = "{{url('/admin/adminUpdate')}}";
     // var executionDeleteUrl = "{{url('/execution/execDelete')}}";
-
     var csrf = "{{ csrf_token() }}";
-
-
     var execEditRow = "";
-
-
-
-
     var dataRow = "";
     var updateRD = "";
     $(document).ready(function(){
@@ -48,7 +41,7 @@
                    "dataType": "json",
                    "type": "POST",
                    "data":{
-                        _token: "{{ csrf_token() }}"
+                        _token: $('meta[name="csrf-token"]').attr('content')
                       }
                  },
           "columns": [
@@ -58,7 +51,8 @@
               { data: "name", name: "name"},
               { data: "email", name: "email"},
               { data: "password", name: "password"},
-              { data: "heseg_id", name: "heseg_id" }
+              { data: "heseg_id", name: "heseg_id", visible:false },
+              { data: "heseg_name", name: "heseg_name" }
             ]
       });
   });
@@ -87,6 +81,7 @@
                   <th>Нэр</th>
                   <th>Цахим хаяг</th>
                   <th>Нууц үг</th>
+                  <th></th>
                   <th>хандах эрх</th>
               </tr>
           </thead>
@@ -98,6 +93,7 @@
     @if(Auth::user()->heseg_id == 5 )
       <button type="button" class="btn btn-success"  id="btnAddadmin">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditAdmin">Засах</button>
+      <button type="button" delete-url="{{url("/admin/delete")}}" class="btn btn-danger" id="btnDeleteAdmin">Устгах</button>
     @endif
   </div>
     <div class="clearfix"></div>
