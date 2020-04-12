@@ -76,4 +76,36 @@ class hunHuchController extends Controller
         $hunHuch->delete();
         return "Амжилттай устгалаа.";
     }
+
+    public static function getHumanByCompany($companyID){
+        $huns = DB::table("tb_hunhuch")
+            ->where("companyID", "=", $companyID)
+            ->orderBy("ognoo", "DESC")
+            ->get();
+        if($huns->count() == 0){
+            return "";
+        }
+        else{
+            foreach ($huns as $hun) {
+                $huna = $hun->hunHuch;
+            }
+            return $huna;
+        }
+    }
+
+    public static function getCarByCompany($companyID){
+        $huns = DB::table("tb_hunhuch")
+            ->where("companyID", "=", $companyID)
+            ->orderBy("ognoo", "DESC")
+            ->get();
+        if($huns->count() == 0){
+            return "";
+        }
+        else{
+            foreach ($huns as $hun) {
+                $cars = $hun->mashinTehnik;
+            }
+            return $cars;
+        }
+    }
 }

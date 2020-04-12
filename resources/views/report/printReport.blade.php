@@ -165,6 +165,28 @@
           @endphp
           <th>{{$plan-$per2019}}</th>
         </tr>
+        <tr class="text-center">
+          {{-- <td>Ерөнхий мэдээлэл</td> --}}
+          <td colspan="2" class="text-center">Хүн</td>
+          @foreach ($companies as $company)
+            @php
+              $hun = \App\Http\Controllers\hunHuchController::getHumanByCompany($company->id);
+            @endphp
+            <th class="rotate-45 text-center"><div><span>{{$hun}}</span></div></th>
+          @endforeach
+          <th></th>
+        </tr>
+        <tr class="text-center">
+          {{-- <td>Ерөнхий мэдээлэл</td> --}}
+          <td colspan="2" class="text-center">Машин техник</td>
+          @foreach ($companies as $company)
+            @php
+              $car = \App\Http\Controllers\hunHuchController::getCarByCompany($company->id);
+            @endphp
+            <th class="rotate-45 text-center"><div><span>{{$car}}</span></div></th>
+          @endforeach
+          <th></th>
+        </tr>
         @php
           $works = \App\Http\Controllers\WorkController::getWorksAll($company->id);
         @endphp
