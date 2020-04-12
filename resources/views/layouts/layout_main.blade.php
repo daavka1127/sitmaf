@@ -91,6 +91,7 @@
                       <li><a href="{{url('/show/html')}}">Гүйцэтгэл хүснэгтээр</a></li>
                     </ul>
                   </li>
+                  @if(Auth::user()->heseg_id != 4 )
                   <li><a><i class="fa fa-plus-square"></i> Өгөгдөл оруулах <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{url('/companies/new')}}">Аж ахуйн нэгж нэмэх</a></li>
@@ -99,6 +100,7 @@
                       <li><a href="{{url('/image/new')}}">Зураг оруулах</a></li>
                     </ul>
                   </li>
+                  @endif
                   <li><a><i class="fa fa-camera"></i>Зураг <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{url('/resizeImage')}}">Зургийн цомог</a></li>
@@ -109,6 +111,7 @@
                   @if(Auth::user()->heseg_id == 5 )
                     <li><a><i class="fa fa-user"></i>Админ эрх <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
+                        <li><a href="{{url('/adminView')}}">Админ эрх харах</a></li>
                         <li><a href="{{url('/register')}}">Админ нэмэх</a></li>
                         {{-- <li><a href="{{url('/admins')}}">Админ засах</a></li> --}}
                       </ul>

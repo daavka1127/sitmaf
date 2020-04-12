@@ -1,104 +1,104 @@
-function refresh(){
-
-    var csrf = $('meta[name=csrf-token]').attr("content");
-    $('#datatable').dataTable().fnDestroy();
-      $('#datatable').DataTable( {
-          "language": {
-              "lengthMenu": "_MENU_ мөрөөр харах",
-              "zeroRecords": "Хайлт илэрцгүй байна",
-              "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
-              "infoEmpty": "Хайлт илэрцгүй",
-              "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
-              "sSearch": "Хайх: ",
-              "paginate": {
-                "previous": "Өмнөх",
-                "next": "Дараахи"
-              }
-          },
-          "processing": true,
-          "serverSide": true,
-          "ajax":{
-                   "url": getCompaniesUrl,
-                   "dataType": "json",
-                   "type": "POST",
-                   "data":{
-                        _token: csrf
-                      }
-                 },
-          "columns": [
-            { data: "id", name: "id",  render: function (data, type, row, meta) {
-          return meta.row + meta.settings._iDisplayStart + 1;
-      }   },
-            { data: "companyID", name: "companyID", visible:false},
-            { data: "companyName", name: "companyName"},
-            { data: "gHursHuulalt", name: "gHursHuulalt"},
-            { data: "gDalan", name: "gDalan" },
-            { data: "gUhmal", name: "gUhmal" },
-            { data: "gSuuriinUy", name: "gSuuriinUy" },
-            { data: "gShuuduu", name: "gShuuduu" },
-            { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
-            { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-            { data: "ognoo", name: "ognoo" },
-            { data: "hursHuulalt", name: "hursHuulalt", visible:false},
-            { data: "dalan", name: "dalan", visible:false},
-            { data: "uhmal", name: "uhmal", visible:false},
-            { data: "suuriinUy", name: "suuriinUy", visible:false},
-            { data: "shuuduu", name: "shuuduu", visible:false},
-            { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
-            { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false},
-            ]
-      }).ajax.reload();
-}
-
-$(document).ready(function(){
-    $("#btnPostNewGuitsetgel").click(function(e){
-        e.preventDefault();
-        var isInsert = true;
-        if($("#cmbNewCompanyID").val()=="-1"||$("#cmbNewCompanyID").val()==null){
-            alertify.error("Аж ахуйн нэгжийг сонгоно уу.");
-            isInsert = false;
-        }
-        if($("#txtOgnoo").val()==""||$("#txtOgnoo").val()==null){
-            alertify.error("Oгноо оруулаагүй байна!");
-            isInsert = false;
-        }
-
-        if(isInsert == false) { return; }
-
-        $.ajax({
-          type: 'POST',
-          url: newCompanyUrl,
-          data: $("#frmNewGuitsetgel").serialize(),
-          success:function(response){
-              alertify.alert(response);
-              emptyNewModal();
-              refresh();
-          },
-          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-            var errors = jqXhr.responseJSON;
-            var errorsHtml = '';
-            $.each(errors['errors'], function (index, value) {
-                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-            });
-            alert(errorsHtml);
-          }
-        });
-    });
-});
-
-
-function emptyNewModal(){
-  $("#txtCompanyName").val("");
-  $("#txtOgnoo").val("");
-  $("#txtHursHuulalt").val("");
-  $("#txtDalan").val("");
-  $("#txtUhmal").val("");
-  $("#txtSuuriinUy").val("");
-  $("#txtShuuduu").val("");
-  $("#txtUhmaliinHamgaalalt").val("");
-  $("#txtUuliinShuuduu").val("");
-  $("#cmbNewCompanyID").val('-1');
-}
+// function refresh(){
+//
+//     var csrf = $('meta[name=csrf-token]').attr("content");
+//     $('#datatable').dataTable().fnDestroy();
+//       $('#datatable').DataTable( {
+//           "language": {
+//               "lengthMenu": "_MENU_ мөрөөр харах",
+//               "zeroRecords": "Хайлт илэрцгүй байна",
+//               "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
+//               "infoEmpty": "Хайлт илэрцгүй",
+//               "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
+//               "sSearch": "Хайх: ",
+//               "paginate": {
+//                 "previous": "Өмнөх",
+//                 "next": "Дараахи"
+//               }
+//           },
+//           "processing": true,
+//           "serverSide": true,
+//           "ajax":{
+//                    "url": getCompaniesUrl,
+//                    "dataType": "json",
+//                    "type": "POST",
+//                    "data":{
+//                         _token: csrf
+//                       }
+//                  },
+//           "columns": [
+//             { data: "id", name: "id",  render: function (data, type, row, meta) {
+//           return meta.row + meta.settings._iDisplayStart + 1;
+//       }   },
+//             { data: "companyID", name: "companyID", visible:false},
+//             { data: "companyName", name: "companyName"},
+//             { data: "gHursHuulalt", name: "gHursHuulalt"},
+//             { data: "gDalan", name: "gDalan" },
+//             { data: "gUhmal", name: "gUhmal" },
+//             { data: "gSuuriinUy", name: "gSuuriinUy" },
+//             { data: "gShuuduu", name: "gShuuduu" },
+//             { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
+//             { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
+//             { data: "ognoo", name: "ognoo" },
+//             { data: "hursHuulalt", name: "hursHuulalt", visible:false},
+//             { data: "dalan", name: "dalan", visible:false},
+//             { data: "uhmal", name: "uhmal", visible:false},
+//             { data: "suuriinUy", name: "suuriinUy", visible:false},
+//             { data: "shuuduu", name: "shuuduu", visible:false},
+//             { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
+//             { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false},
+//             ]
+//       }).ajax.reload();
+// }
+//
+// $(document).ready(function(){
+//     $("#btnPostNewGuitsetgel").click(function(e){
+//         e.preventDefault();
+//         var isInsert = true;
+//         if($("#cmbNewCompanyID").val()=="-1"||$("#cmbNewCompanyID").val()==null){
+//             alertify.error("Аж ахуйн нэгжийг сонгоно уу.");
+//             isInsert = false;
+//         }
+//         if($("#txtOgnoo").val()==""||$("#txtOgnoo").val()==null){
+//             alertify.error("Oгноо оруулаагүй байна!");
+//             isInsert = false;
+//         }
+//
+//         if(isInsert == false) { return; }
+//
+//         $.ajax({
+//           type: 'POST',
+//           url: newCompanyUrl,
+//           data: $("#frmNewGuitsetgel").serialize(),
+//           success:function(response){
+//               alertify.alert(response);
+//               emptyNewModal();
+//               refresh();
+//           },
+//           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+//             var errors = jqXhr.responseJSON;
+//             var errorsHtml = '';
+//             $.each(errors['errors'], function (index, value) {
+//                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+//             });
+//             alert(errorsHtml);
+//           }
+//         });
+//     });
+// });
+//
+//
+// function emptyNewModal(){
+//   $("#txtCompanyName").val("");
+//   $("#txtOgnoo").val("");
+//   $("#txtHursHuulalt").val("");
+//   $("#txtDalan").val("");
+//   $("#txtUhmal").val("");
+//   $("#txtSuuriinUy").val("");
+//   $("#txtShuuduu").val("");
+//   $("#txtUhmaliinHamgaalalt").val("");
+//   $("#txtUuliinShuuduu").val("");
+//   $("#cmbNewCompanyID").val('-1');
+// }
 
 // $(document).ready(function(){
 //     $("#cmbNewCompanyID").change(function(){

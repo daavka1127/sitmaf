@@ -108,7 +108,7 @@ Route::post('/work/delete', 'WorkController@delete');
 Route::get("/getPlanWorkType", "planController@getPlanWorkTypeByCompany");
 Route::get("/getPlanWork/company/work_type", "planController@getPlanWorksByWorkTypeID");
 
-Route::get("/execution/store", "ExecutionContoller@store");
+Route::post("/execution/store", "ExecutionContoller@store");
 Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 
@@ -124,3 +124,6 @@ Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
 //log view
 Route::get('/viewLog', 'logsController@index');
 Route::post('/logView/getTableLog', 'logsController@getTableLog');
+
+Route::post('/adminSee', 'adminController@getAdmin');
+Route::get('/adminView', 'adminController@adminView');

@@ -5,18 +5,20 @@
   <div class="row">
     <script>
       $(document).ready(function(){
+        $("#cmbHeseg").change(function(){
+          $(".divWorkType").css("display","none");
+            window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
+        });
+
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
+              // window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
+          });
+          $("#cmbWorkType").change(function(){
+            // $(".divWorkType").css("display","block");
               window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
-      });
-    </script>
-    <script>
-      $(document).ready(function(){
-          $("#cmbHeseg").change(function(){
-            $(".divWorkType").css("display","none");
-              window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
-          });
+
       });
     </script>
 
@@ -31,27 +33,34 @@
       </select>
     </div>
 
-    <div class="col-md-4">
-      <label>Аж ахуйн нэгжээр харах</label>
-      <select class="form-control" id="cmbCompany">
-        <option value="0">Сонгоно уу</option>
-        @foreach ($companies as $company)
-            <option value="{{$company->id}}">{{$company->companyName}}</option>
-        @endforeach
-      </select>
+    <div class="col-md-2">
+
     </div>
-    <div class="divWorkType col-md-4" style="display: none;">
-      <label>Хийгдэж буй ажлын төрөл</label>
-      <select class="form-control" id="cmbWorkType">
-        <option value="0">Сонгоно уу</option>
-        @php
-          $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
-        @endphp
-        @foreach ($workTypes as $workType)
-            <option value="{{$workType->id}}">{{$workType->name}}</option>
-        @endforeach
-      </select>
+
+    <div class="col-md-5">
+      <div class="row">
+        <label>Аж ахуйн нэгжээр харах</label>
+        <select class="form-control" id="cmbCompany">
+          <option value="0">Сонгоно уу</option>
+          @foreach ($companies as $company)
+                <option value="{{$company->id}}">{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
+          @endforeach
+        </select>
+      </div>
+      <div class="divWorkType row" style="display: none;" >
+        <label>Хийгдэж буй ажлын төрөл</label>
+        <select class="form-control" id="cmbWorkType">
+          <option value="0">Сонгоно уу</option>
+          @php
+            $workTypes = App\Http\Controllers\WorktypeController::getCompactWorkType();
+          @endphp
+          @foreach ($workTypes as $workType)
+              <option value="{{$workType->id}}">{{$workType->name}}</option>
+          @endforeach
+        </select>
+      </div>
     </div>
+
   </div>
 
   <div style="display:none;" id="loading" class="col-md-2 col-md-offset-5">

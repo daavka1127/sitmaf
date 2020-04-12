@@ -10,33 +10,25 @@
       <link href="{{url('public/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
 
-      <link rel="stylesheet" href="{{url("public/date-time-picker/jquery.datetimepicker.css")}}">
-<script src="{{url("public/date-time-picker/jquery.datetimepicker.full.js")}}"></script>
-
 <script>
-    var newCompanyUrl = "{{url("/guitsetgel/store")}}";
+    var getadminUrl = "{{url("/adminSee")}}";
 
-    var getCompanyByID = "{{url("/get/company/by/id")}}";
-    var editCompanyUrl = "{{url("/guitsetgel/update")}}";
-    var deleteCompanyUrl = "{{url("/guitsetgel/delete")}}";
-
-    var getCompaniesUrl = "{{url("/company/get")}}";
-    var getPlanWorkTypeUrl = "{{url('/getPlanWorkType')}}";
-    var getPlanWorkUrl = "{{url('/getPlanWork/company/work_type')}}";
-    var executionStoreUrl = "{{url('/execution/store')}}";
-    var executionUpdateUrl = "{{url('/execution/execUpdate')}}";
-    var executionDeleteUrl = "{{url('/execution/execDelete')}}";
+    // var executionStoreUrl = "{{url('/execution/store')}}";
+    // var executionUpdateUrl = "{{url('/execution/execUpdate')}}";
+    // var executionDeleteUrl = "{{url('/execution/execDelete')}}";
 
     var csrf = "{{ csrf_token() }}";
 
-    var getExecByCompany = "{{url("/guitsetgel/getExecByCompany")}}";
+
     var execEditRow = "";
+
+
 
 
     var dataRow = "";
     var updateRD = "";
     $(document).ready(function(){
-      $('#datatable').DataTable( {
+      $('#datatableAdmin').DataTable( {
           "language": {
               "lengthMenu": "_MENU_ мөрөөр харах",
               "zeroRecords": "Хайлт илэрцгүй байна",
@@ -52,7 +44,7 @@
           "processing": true,
           "serverSide": true,
           "ajax":{
-                   "url": getCompaniesUrl,
+                   "url": getadminUrl,
                    "dataType": "json",
                    "type": "POST",
                    "data":{
@@ -63,72 +55,39 @@
               { data: "id", name: "id",  render: function (data, type, row, meta) {
             return meta.row + meta.settings._iDisplayStart + 1;
         } },
-              { data: "companyName", name: "companyName"},
-              { data: "ajliinHeseg", name: "ajliinHeseg"},
-              { data: "hunHuch", name: "hunHuch"},
-              { data: "mashinTehnik", name: "mashinTehnik"},
-              { data: "gereeOgnoo", name: "gereeOgnoo" }
+              { data: "name", name: "name"},
+              { data: "email", name: "email"},
+              { data: "password", name: "password"},
+              { data: "heseg_id", name: "heseg_id" }
             ]
       });
   });
   $(document).ready(function(){
-    $('#datatable tbody').on( 'click', 'tr', function () {
+    $('#datatableAdmin tbody').on( 'click', 'tr', function () {
         var currow = $(this).closest('tr');
-        $('#datatable tbody tr').css("background-color", "white");
+        $('#datatableAdmin tbody tr').css("background-color", "white");
         $(this).closest('tr').css("background-color", "yellow");
-        dataRow = $('#datatable').DataTable().row(currow).data();
+        dataRow = $('#datatableAdmin').DataTable().row(currow).data();
       });
   });
 
 </script>
 
-<script>
-    jQuery(document).ready(function () {
-         'use strict';
-        jQuery('#date').datetimepicker({
-        });
-    });
-</script>
+<script src="{{url('public/js/admin/admin.js')}}"></script>
+{{-- <script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script> --}}
 
-<script src="{{url('public/js/guitsetgel/executionNew.js')}}"></script>
-<script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script>
-
-<div class="col-md-12">
-  <div id="divGenerateReport">
-    <div class="border border-primary">
-      <div class="row">
-        <div class="col-md-6 text-right">
-          <strong style="color:red;">Гүйцэтгэл хадгалж дууссан бол тайлан бодох товч дарна уу!!! ==>></strong>
-        </div>
-        <div class="col-md-4">
-          <div class='input-group date' >
-              <input type="datetime" name="date" id="date" value="" class="form-control"/>
-              <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <input type="button" data-post-url="{{url('/generate/html')}}" class="btn btn-primary btn-sm" name="" data-url="{{url('/show/html')}}" id="btnGenerateReport" value="Тайлан бодох" />
-        </div>
-      </div>
-    </div>
-  </div>
-  <span style="color:green;" id="generateReportAlert"></span>
-</div>
 
 <div class="col-xs-12">
   <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүд</strong></h2>
   <div class="row">
-      <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
+      <table id="datatableAdmin" class="table table-striped table-bordered" style="width:100%;">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>Аж ахуй нэгжийн нэр</th>
-                  <th>Ажлийн хэсэг</th>
-                  <th>Хүн хүч</th>
-                  <th>Машин техник</th>
-                  <th>Огноо</th>
+                  <th>№</th>
+                  <th>Нэр</th>
+                  <th>Цахим хаяг</th>
+                  <th>Нууц үг</th>
+                  <th>хандах эрх</th>
               </tr>
           </thead>
       </table>
@@ -136,14 +95,9 @@
   </div>
 
   <div class="text-left">
-    @if(Auth::user()->heseg_id != 4 )
-      @if (Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 )
-            <button type="button" class="btn btn-success" id="btnAddGuitsetgel">Нэмэх</button>
-      @endif
-    @endif
     @if(Auth::user()->heseg_id == 5 )
-      <button type="button" class="btn btn-success"  id="btnAddGuitsetgel">Нэмэх</button>
-      <button type="button" class="btn btn-warning" id="btnEditGuitsetgel">Засах</button>
+      <button type="button" class="btn btn-success"  id="btnAddadmin">Нэмэх</button>
+      <button type="button" class="btn btn-warning" id="btnEditAdmin">Засах</button>
     @endif
   </div>
     <div class="clearfix"></div>
@@ -151,12 +105,20 @@
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-  {{-- <script src="{{url('public/js/guitsetgel/guitsetgel.js')}}"></script> --}}
-  <script src="{{url('public/js/guitsetgel/executionReportGenerate.js')}}"></script>
-  @include('guitsetgel.guitsetgelNew')
-  @include('guitsetgel.guitsetgelEdit')
-</div>
 
+  @include('guitsetgel.guitsetgelNew')
+  @include('admin.adminEdit')
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#btnAddadmin").click(function(){
+        window.location.href = "{{url('/register')}}/";
+  });
+
+
+});
+
+</script>
 
 <!-- Datatables -->
 <script src="{{url('public/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>

@@ -8,7 +8,9 @@ use App\Http\Controllers\planController;
 use Illuminate\Support\Facades\Auth;
 use App\execution;
 use DB;
+use App\Http\Controllers\logsController;
 use Yajra\DataTables\DataTables;
+
 
 class ExecutionContoller extends Controller
 {
@@ -235,19 +237,37 @@ class ExecutionContoller extends Controller
           $execution->percent = $this->getPercent($value['value'], $req->companyID, $value['workID']);
           $execution->save();
           $res = "Амжилттай хадгаллаа";
+
+
+          $log = new logsController;
+          $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл оруулсан", "Гүйцэтгэл",
+            explode("м3",$value['workName'])[0]." : ".$value['value'], "".$this->getCompanyName($req->companyID)."  огноо: ".$req->createDate);
         }
         else {
           $res = "Тухайн өдрийн ажлын гүйцэтгэл бүртгэгдсэн байна.";
         }
-
     }
     return $res;
-
   }
+
+  public function getCompanyName($comID)
+  {
+    $company = DB::table('tb_companies')
+      ->where('id','=',$comID)
+    ->first();
+    return $company->companyName;
+  }
+
+
 
   public function execDelete(Request $req){
       $exec = execution::find($req->id);
       $exec->delete();
+
+      $log = new logsController;
+      $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл устгав", "Гүйцэтгэл",
+        $req->workName." : ".$req->execution , "".$req->comName);
+
       return "Амжилттай устгалаа.";
   }
 
@@ -262,6 +282,11 @@ class ExecutionContoller extends Controller
       $exec = execution::find($req->execRowID);
       $exec->execution = $req->editExec;
       $exec->save();
+
+      $log = new logsController;
+      $log->insertTableLog($req->ip(), Auth::user()->name, "Өгөгдөл засав", "Гүйцэтгэл",
+        $req->workName." : ".$req->editExec , "".$req->comName." огноо: ".$req->editDate);
+
       return "Амжилттай хадгаллаа.";
   }
 

@@ -1,6 +1,6 @@
 
 {{-- START NEW COMPANY --}}
-<div class="modal fade" id="newGuitsetgelModal">
+<div class="modal fade" id="newGuitsetgelModal" tabindex="-1">
   <div class="modal-dialog" style="width:80%;">
     <div class="modal-content">
 
@@ -13,16 +13,18 @@
         <h2 style="text-align:center;"><strong>Аж ахуйн нэгжийн гүйцэтгэлийн бүртгэл</strong></h2>
         <form id="frmNewGuitsetgel" action="{{ action('GuitsetgelController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
           @csrf
-          <div class="form-group col-md-3 text-left">
-            <label>Аж ахуйн нэгжийн нэр <span class="red-required">*</span> </label>
+          <div class="form-group col-md-7 text-left">
+            <label>Аж ахуйн нэгжийн нэр <span class="red-required"></span> </label>
             <input type="hidden" id="txtEditID" name="id" class="form-control" />
-            <select name='companyID' class="form-control" id="cmbNewCompanyID">
+            <h3 id="cmbNewCompanyName"></h3>
+              <input  type="hidden" class="form-control" name="companyID" value="" id="cmbNewCompanyID">
+            {{-- <select name='companyID' class="form-control" id="cmbNewCompanyID">
               <option value="-1">Сонгоно уу.</option>
               @foreach ($companies as $company)
                   <option value="{{$company->id}}">{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
               @endforeach
 
-            </select>
+            </select> --}}
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Огноо <span class="red-required">*</span> </label>
