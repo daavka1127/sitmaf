@@ -2,6 +2,9 @@
 
 @section('content')
 
-
-<?php include 'test.html'; ?>
+@if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4)
+  <?php include 'heseg' . Auth::user()->heseg_id . '.html'; ?>
+@else
+<?php include 'all.html'; ?>
+@endif
 @endsection
