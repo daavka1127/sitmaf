@@ -86,7 +86,6 @@
     </script>
 
   @php
-    $companies = \App\Http\Controllers\companyController::getCompany();
     $workTypes = \App\Http\Controllers\WorktypeController::getCompactWorkType();
   @endphp
   {{-- <div class="row">

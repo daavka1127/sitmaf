@@ -44,6 +44,28 @@ class companyController extends Controller
       }
     }
 
+    public function getCompaniesJson(){
+      if(Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 ){
+        $hesegID = Auth::user()->heseg_id;
+        $companies = DB::table('tb_companies')
+            ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
+            ->select('tb_companies.*', 'tb_heseg.name')
+            ->where("tb_companies.heseg_id", "=", $hesegID)
+            ->orderBy('tb_companies.heseg_id', 'asc')
+            ->orderBy('tb_companies.companyName', 'asc')
+            ->get();
+        return response()->json($companies);
+      }else{
+        $companies = DB::table('tb_companies')
+            ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
+            ->select('tb_companies.*', 'tb_heseg.name')
+            ->orderBy('tb_companies.heseg_id', 'asc')
+            ->orderBy('tb_companies.companyName', 'asc')
+            ->get();
+        return response()->json($companies);
+      }
+    }
+
     public static function getHesegID(){
         $hesegID = Auth::user()->heseg_id;
         if(Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 ){
@@ -158,7 +180,7 @@ class companyController extends Controller
         return $companiesHeseg;
     }
 
-    
+
 
     // davaanyam uusegsen end
 

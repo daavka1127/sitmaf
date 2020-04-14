@@ -88,7 +88,7 @@
                     <ul class="nav child_menu">
                       <li><a href="{{url('/home')}}">Гүйцэтгэлийн график</a></li>
                       {{-- <li><a href="{{url('/report/table')}}">Гүйцэтгэл хүснэгтээр</a></li> --}}
-                      <li><a href="{{url('/show/html')}}">Гүйцэтгэл хүснэгтээр</a></li>
+                          <li><a href="{{url('/show/html')}}">Гүйцэтгэл хүснэгтээр</a></li>
                     </ul>
                   </li>
                   @if(Auth::user()->heseg_id != 4 )
