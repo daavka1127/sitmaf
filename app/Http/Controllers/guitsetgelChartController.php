@@ -56,4 +56,11 @@ class guitsetgelChartController extends Controller
 
         return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'companies', 'hesegID'));
     }
+
+    public static function getLastGenrateDate(){
+      $getDate = DB::table('tb_reporttime')
+          ->where("id", "=", 1)
+          ->get();
+          return $getDate;
+    }
 }

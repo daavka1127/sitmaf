@@ -124,6 +124,18 @@
 
   </div>
   <br>
+  <div class="row">
+    <div class="col-md-4">
+      @php
+        $getDate = App\Http\Controllers\guitsetgelChartController::getLastGenrateDate();
+        foreach ($getDate as $date) {
+        $dd =  $date->endDate;
+        }
+        // $dd = explode("&", $getDate);
+        echo "<p>".$dd." өдрийн байдлаар</p>";
+      @endphp
+    </div>
+  </div>
   <div class="clearfix"></div>
   <script>
   window.onload = function () {

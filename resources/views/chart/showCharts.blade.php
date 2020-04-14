@@ -71,8 +71,21 @@
           @endforeach
         </select>
       </div>
+
     </div>
-    
+
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @php
+        $getDate = App\Http\Controllers\guitsetgelChartController::getLastGenrateDate();
+        foreach ($getDate as $date) {
+        $dd =  $date->endDate;
+        }
+        // $dd = explode("&", $getDate);
+        echo "<p>".$dd." өдрийн байдлаар</p>";
+      @endphp
+    </div>
   </div>
   <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
   <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">
