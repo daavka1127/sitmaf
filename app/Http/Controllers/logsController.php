@@ -55,9 +55,13 @@ class logsController extends Controller
     return DataTables::of($tableLog)
           ->make(true);
   }
-  public function getUserLog()
+  public function userTableLog()
   {
+    $tableLog = DB::table("tb_userlog")
+    ->orderBy('dateTime', 'desc')->get();
 
+    return DataTables::of($tableLog)
+          ->make(true);
   }
 
   public function getIpTest(Request $req){

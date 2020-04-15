@@ -113,12 +113,13 @@ class GuitsetgelController extends Controller
         return "Амжилттай устгалаа.";
     }
 
-    public function chartAllShow(){
-        $companies = DB::table('tb_companies')->get();
-        return view('chart.guitsetgelAllChart', compact('companies'));
-    }
+    // хэрэглэгдэхгүй байгаа функц
+    // public function chartAllShow(){
+    //     $companies = DB::table('tb_companies')->get();
+    //     return view('chart.guitsetgelAllChart', compact('companies'));
+    // }
 
-    public function chartByDateShow($companyID, $workTypeID){
+    public function chartByDateShow($hesegID,$companyID, $workTypeID){
         $datas = DB::table('tb_execution')
           ->join("tb_work","tb_execution.work_id","=","tb_work.id")
           ->select('tb_execution.work_id', 'tb_work.name as nameExec', 'tb_execution.companyID',
@@ -128,12 +129,12 @@ class GuitsetgelController extends Controller
           ->groupBy('work_id','tb_work.name','tb_execution.companyID', 'tb_execution.work_type_id')
           ->get();
 
-        $planDatas = DB::table('tb_plan');
+        //$planDatas = DB::table('tb_plan');
 
-
-        $companies = DB::table('tb_companies')->get();
+        $companiesChart = DB::table('tb_companies')
+            ->where('heseg_id', '=', $hesegID)->get();
         // //return $guitsetgel->hursHuulalt;
-         return view('chart.showCharts', compact('datas', 'companies', 'companyID', 'workTypeID'));
+         return view('chart.showCharts', compact('datas', 'companiesChart', 'companyID', 'workTypeID'));
     }
     public static function getWorkExecution($companyID, $work_id)
     {
@@ -160,19 +161,18 @@ class GuitsetgelController extends Controller
 
     public static function getGuitsetgelHuvi($companyID){
 
+      $plan = DB::table("tb_plan")
+        ->where("companyID","=",$companyID)
+        ->sum("quantity");
+      $exec = DB::table("tb_execution")
+        ->where("companyID","=",$companyID)
+        ->sum("execution");
 
-          $plan = DB::table("tb_plan")
-            ->where("companyID","=",$companyID)
-            ->sum("quantity");
-          $exec = DB::table("tb_execution")
-            ->where("companyID","=",$companyID)
-            ->sum("execution");
+      $execPercent = 0;
+        if($plan != 0)
+          $execPercent = ($exec*100/$plan);
 
-          $execPercent = 0;
-            if($plan != 0)
-              $execPercent = ($exec*100/$plan);
-
-        return $execPercent;
+      return $execPercent;
     }
 
     public static function getPlans($comID, $workTypeID)

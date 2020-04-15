@@ -12,30 +12,57 @@
 
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
-              // window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
           $("#cmbWorkType").change(function(){
             // $(".divWorkType").css("display","block");
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
+              window.location.href = "{{url('/chart/byDate')}}/"+ {{Auth::user()->heseg_id}}+ "/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
 
       });
     </script>
 
 
-    {{-- <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
-    <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
-    <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
-    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script> --}}
-
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
-        <option value="0">Сонгоно уу</option>
-        <option value="1">Зүүнбаян чиглэл I хэсэг</option>
-        <option value="2">Мандах чиглэл II хэсэг</option>
-        <option value="3">Цогтцэций чиглэл III чиглэл</option>
-        <option value="4">Бүх аж ахуйн нэгжээр</option>
+        @php
+          echo '<option value="0">Сонгоно уу</option>';
+            switch (Auth::user()->heseg_id) {
+              case 1:
+                echo '<option value="1" >Зүүнбаян чиглэл I хэсэг</option>';
+                if(Auth::user()->heseg_id == 1)
+                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
+                break;
+              case 2:
+                echo '<option value="2">Мандах чиглэл II хэсэг</option>';
+                if(Auth::user()->heseg_id == 2)
+                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
+                break;
+              case 3:
+                echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
+                if(Auth::user()->heseg_id == 3)
+                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
+                break;
+
+              default:
+                if(Auth::user()->heseg_id == 1)
+                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
+                else
+                  echo '<option value="1">Зүүнбаян чиглэл I хэсэг</option>';
+
+                if(Auth::user()->heseg_id == 2)
+                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
+                else
+                  echo '<option value="2">Мандах чиглэл II хэсэг</option>';
+
+                if(Auth::user()->heseg_id == 3)
+                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
+                else
+                  echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
+                echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
+                break;
+            }
+        @endphp
       </select>
     </div>
     <div class="col-md-2">
@@ -46,7 +73,7 @@
         <label>Аж ахуйн нэгжээр харах</label>
         <select class="form-control"  id="cmbCompany">  {{-- cmbCompany --}}
           <option value="0">Сонгоно уу</option>
-          @foreach ($companies as $company)
+          @foreach ($companiesChart as $company)
             @if($companyID == $company->id)
                 <option value="{{$company->id}}" selected>{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
             @else
@@ -71,8 +98,25 @@
           @endforeach
         </select>
       </div>
+
     </div>
-    
+
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @php
+        $getDate = App\Http\Controllers\guitsetgelChartController::getLastGenrateDate();
+        foreach ($getDate as $date) {
+        $dd =  $date->endDate;
+        }
+        // $dd = explode("&", $getDate);
+        echo "<p>".$dd." өдрийн байдлаар</p>";
+      @endphp
+    </div>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5211e565193f39f5ec08b20c81b1a4d0935b6379
   </div>
   <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
   <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">

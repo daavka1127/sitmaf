@@ -38,11 +38,7 @@ class guitsetgelChartController extends Controller
 
     public function chartAlljqChart($hesegID){
 
-        if($hesegID == 0 ){
-            $companiesChart = DB::table('tb_companies')
-                ->get();
-        }
-        else if($hesegID > 0 && $hesegID < 4){
+        if($hesegID > 0 && $hesegID < 4){
             $companiesChart = DB::table('tb_companies')
                 ->where('heseg_id', '=', $hesegID)
                 ->get();
@@ -54,6 +50,13 @@ class guitsetgelChartController extends Controller
         $companies = DB::table('tb_companies')
             ->get();
 
-        return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'companies', 'hesegID'));
+        return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'hesegID'));
+    }
+
+    public static function getLastGenrateDate(){
+      $getDate = DB::table('tb_reporttime')
+          ->where("id", "=", 1)
+          ->get();
+          return $getDate;
     }
 }

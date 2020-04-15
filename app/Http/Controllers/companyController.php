@@ -169,6 +169,7 @@ class companyController extends Controller
     // davaanyam uusegsen start
     public static function getCompany(){
         $companies = DB::table('tb_companies')
+        // ->where("heseg_id", "=", Auth::user()->heseg_id)
         ->get();
         return $companies;
     }

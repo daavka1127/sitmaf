@@ -174,6 +174,8 @@ trait AuthenticatesUsers
     protected function loggedOut(Request $request)
     {
         //
+        $log = new logsController;
+        $log->insertUserLog($request->ip());
     }
 
     /**
