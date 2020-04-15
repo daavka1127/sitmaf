@@ -91,7 +91,7 @@
                           <li><a href="{{url('/show/html')}}">Гүйцэтгэл хүснэгтээр</a></li>
                     </ul>
                   </li>
-                  @if(Auth::user()->heseg_id != 4 )
+                  @if(Auth::user()->heseg_id != 4)
                   <li><a><i class="fa fa-plus-square"></i> Өгөгдөл оруулах <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{url('/companies/new')}}">Аж ахуйн нэгж нэмэх</a></li>

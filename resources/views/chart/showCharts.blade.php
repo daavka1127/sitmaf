@@ -7,11 +7,13 @@
       $(document).ready(function(){
         $("#cmbHeseg").change(function(){
           $(".divWorkType").css("display","none");
-            window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
+            if($("#cmbHeseg").val() > 0)
+              window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
         });
 
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
+            $("#cmbWorkType").val('0');
           });
           $("#cmbWorkType").change(function(){
             // $(".divWorkType").css("display","block");
@@ -25,49 +27,23 @@
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
-        @php
-          echo '<option value="0">Сонгоно уу</option>';
-            switch (Auth::user()->heseg_id) {
-              case 1:
-                echo '<option value="1" >Зүүнбаян чиглэл I хэсэг</option>';
-                if(Auth::user()->heseg_id == 1)
-                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
-                break;
-              case 2:
-                echo '<option value="2">Мандах чиглэл II хэсэг</option>';
-                if(Auth::user()->heseg_id == 2)
-                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
-                break;
-              case 3:
-                echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
-                if(Auth::user()->heseg_id == 3)
-                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
-                break;
-
-              default:
-                if(Auth::user()->heseg_id == 1)
-                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
-                else
-                  echo '<option value="1">Зүүнбаян чиглэл I хэсэг</option>';
-
-                if(Auth::user()->heseg_id == 2)
-                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
-                else
-                  echo '<option value="2">Мандах чиглэл II хэсэг</option>';
-
-                if(Auth::user()->heseg_id == 3)
-                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
-                else
-                  echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
-                echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
-                break;
-            }
-        @endphp
+        <option value="0">Сонгоно уу</option>
+        @foreach ($hesegs as $heseg)
+            @if($heseg->id == $hesegID)
+              <option value="{{$heseg->id}}" selected>{{$heseg->name}}</option>
+            @else
+              <option value="{{$heseg->id}}">{{$heseg->name}}</option>
+            @endif
+        @endforeach
+        @if(Auth::user()->heseg_id > 3)
+        <option value="4">Бүх хэсгээр харах</option>
+      @endif
       </select>
     </div>
-    <div class="col-md-2">
 
+    <div class="col-md-2">
     </div>
+
     <div class="col-md-5">
       <div class="row">
         <label>Аж ахуйн нэгжээр харах</label>
@@ -113,10 +89,7 @@
         echo "<p>".$dd." өдрийн байдлаар</p>";
       @endphp
     </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 5211e565193f39f5ec08b20c81b1a4d0935b6379
   </div>
   <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
   <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">

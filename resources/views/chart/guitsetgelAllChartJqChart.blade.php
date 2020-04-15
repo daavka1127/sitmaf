@@ -16,7 +16,7 @@
                       location: 'bottom',
 
                       categories: [
-                        @foreach ($companiesChart as $company)
+                        @foreach ($hesegCompanies as $company)
                             '{!!$company->companyName!!}',
                         @endforeach
                         ],
@@ -31,7 +31,7 @@
 										title: 'Гүйцэтгэлийн хувь',
                       type: 'column',
                       data: [
-                        @foreach ($companiesChart as $company)
+                        @foreach ($hesegCompanies as $company)
                         @php
                           $dundaj = App\Http\Controllers\GuitsetgelController::getGuitsetgelHuvi($company->id);
                         @endphp
@@ -50,6 +50,7 @@
       $(document).ready(function(){
         $("#cmbHeseg").change(function(){
           $(".divWorkType").css("display","none");
+          if($("#cmbHeseg").val() > 0)
             window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
         });
 
@@ -66,51 +67,21 @@
 
 
     </script>
-    {{-- <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
-    <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
-    <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
-    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script> --}}
+
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
-        @php
-          echo '<option value="0">Сонгоно уу</option>';
-            switch (Auth::user()->heseg_id) {
-              case 1:
-                echo '<option value="1" >Зүүнбаян чиглэл I хэсэг</option>';
-                if($hesegID == 1)
-                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
-                break;
-              case 2:
-                echo '<option value="2">Мандах чиглэл II хэсэг</option>';
-                if($hesegID == 2)
-                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
-                break;
-              case 3:
-                echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
-                if($hesegID == 3)
-                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
-                break;
-
-              default:
-                if($hesegID == 1)
-                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
-                else
-                  echo '<option value="1">Зүүнбаян чиглэл I хэсэг</option>';
-
-                if($hesegID == 2)
-                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
-                else
-                  echo '<option value="2">Мандах чиглэл II хэсэг</option>';
-
-                if($hesegID == 3)
-                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
-                else
-                  echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
-                echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
-                break;
-            }
-        @endphp
+        <option value="0">Сонгоно уу</option>
+        @foreach ($hesegs as $heseg)
+            @if($heseg->id == $hesegID)
+              <option value="{{$heseg->id}}" selected>{{$heseg->name}}</option>
+            @else
+              <option value="{{$heseg->id}}">{{$heseg->name}}</option>
+            @endif
+        @endforeach
+        @if(Auth::user()->heseg_id > 3)
+        <option value="4">Бүх хэсгээр харах</option>
+      @endif
       </select>
 
     </div>

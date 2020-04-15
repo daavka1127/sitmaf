@@ -34,13 +34,26 @@ class logsController extends Controller
     return "Амжилттай хадгаллаа.";
   }
 
-  public function insertUserLog($ip)
+  public function insertUserLog($ip, $session)
   {
     $userLog = new userLog;
     $userLog->ipAddress = $ip;
     $userLog->userName = Auth::user()->name;
     $userLog->dateTime = Carbon::now();
+    $userLog->userSession = $session;
     $userLog->save();
+  }
+  public function updateUserLog($ip, $session)
+  {
+    //dd($session);
+    $userLog = DB::table('tb_userlog')
+              ->where('userSession','=', $session)
+              ->update(['loggedOutTime' => Carbon::now()]);
+
+    // $userLog = userLog::where('userSession', $session);
+    // $userLog->loggedOutTime = Carbon::now();
+    // $userLog->save();
+
   }
   public function index()
   {

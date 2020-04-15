@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\guitsetgel;
 use DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
+
 
 class GuitsetgelController extends Controller
 {
@@ -119,7 +121,7 @@ class GuitsetgelController extends Controller
     //     return view('chart.guitsetgelAllChart', compact('companies'));
     // }
 
-    public function chartByDateShow($hesegID,$companyID, $workTypeID){
+    public function chartByDateShow($hesegID, $companyID, $workTypeID){
         $datas = DB::table('tb_execution')
           ->join("tb_work","tb_execution.work_id","=","tb_work.id")
           ->select('tb_execution.work_id', 'tb_work.name as nameExec', 'tb_execution.companyID',
@@ -129,12 +131,24 @@ class GuitsetgelController extends Controller
           ->groupBy('work_id','tb_work.name','tb_execution.companyID', 'tb_execution.work_type_id')
           ->get();
 
-        //$planDatas = DB::table('tb_plan');
+        if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4){
+          $hesegs = DB::table('tb_heseg')
+              ->where('id', '=', Auth::user()->heseg_id)
+              ->get();
+        }
+        else{
+            $hesegs = DB::table('tb_heseg')->get();
+        }
 
-        $companiesChart = DB::table('tb_companies')
-            ->where('heseg_id', '=', $hesegID)->get();
-        // //return $guitsetgel->hursHuulalt;
-         return view('chart.showCharts', compact('datas', 'companiesChart', 'companyID', 'workTypeID'));
+
+        //$planDatas = DB::table('tb_plan');
+        if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4)
+          $companiesChart = DB::table('tb_companies')
+            ->where('heseg_id', '=', Auth::user()->heseg_id)->get();
+        else {
+          $companiesChart = DB::table('tb_companies')->get();
+        }
+         return view('chart.showCharts', compact('datas', 'companiesChart', 'companyID', 'workTypeID', 'hesegID', 'hesegs'));
     }
     public static function getWorkExecution($companyID, $work_id)
     {

@@ -55,7 +55,12 @@
                   echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
                 else
                   echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
-                echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
+
+                if($hesegID > 3)
+                  echo '<option value="4" selected>Бүх аж ахуйн нэгжээр</option>';
+                else {
+                  echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
+                }
                 break;
             }
         @endphp
@@ -85,7 +90,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  
+
 <script>
 window.onload = function () {
 

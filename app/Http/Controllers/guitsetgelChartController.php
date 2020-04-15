@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\guitsetgel;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class guitsetgelChartController extends Controller
 {
@@ -37,20 +38,35 @@ class guitsetgelChartController extends Controller
     }
 
     public function chartAlljqChart($hesegID){
+        if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4){
+          $hesegs = DB::table('tb_heseg')
+              ->where('id', '=', Auth::user()->heseg_id)
+              ->get();
+        }
+        else{
+            $hesegs = DB::table('tb_heseg')->get();
+        }
 
-        if($hesegID > 0 && $hesegID < 4){
+        if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4){
             $companiesChart = DB::table('tb_companies')
-                ->where('heseg_id', '=', $hesegID)
+                ->where('heseg_id', '=', Auth::user()->heseg_id)
                 ->get();
         }
         else{
             $companiesChart = DB::table('tb_companies')
                 ->get();
         }
-        $companies = DB::table('tb_companies')
-            ->get();
 
-        return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'hesegID'));
+        if($hesegID != 4)
+          $hesegCompanies = DB::table('tb_companies')
+            ->where('heseg_id', '=', $hesegID)
+            ->get();
+        else {
+          $hesegCompanies = DB::table('tb_companies')
+              ->get();
+        }
+
+        return view('chart.guitsetgelAllChartJqChart', compact('companiesChart', 'hesegID', 'hesegs', 'hesegCompanies'));
     }
 
     public static function getLastGenrateDate(){
