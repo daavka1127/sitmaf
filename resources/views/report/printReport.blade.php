@@ -15,6 +15,7 @@
 <script>
     var workTypes = {!! json_encode($workTypes->toArray()) !!};
     var companies = {!! json_encode($companies1->toArray()) !!};
+    var workType = {{$workTypeID}};
 </script>
 <style>
 
@@ -59,7 +60,7 @@
   {{-- <input type="button" name="" id="btnUnmerge" value="Unmerge hiiih" />
   <input type="button" name="" id="btnMerge" value="Merge hiiih" /> --}}
   <div class="col-md-12 col-md-offset-5">
-    <input type="button" class="btn btn-primary" name="" id="btnPrint" value="Хэвлэх">
+    <input type="button" class="btn btn-primary" redurl="{{url("/report/print")}}/" name="" id="btnPrint" value="Хэвлэх">
   </div>
 
 </div>
@@ -80,7 +81,7 @@
   <p class="text-right"><h6 class="text-right">{{$splitStartDate[0]}} оны {{$splitStartDate[1]}} сарын {{$splitStartDate[2]}} өдрөөс {{$splitEndDate[0]}} оны {{$splitEndDate[1]}} сарын {{$splitEndDate[2]}} өдрийн тайлан</h6></p>
 
   @php
-    $hesegs = \App\Http\Controllers\HesegController::getHeseg();
+    $hesegs = \App\Http\Controllers\HesegController::getHesegByAdmin();
     $j=0;
   @endphp
 
@@ -226,15 +227,38 @@
           </tr>
         @endforeach
 
+        <tr>
+          {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
+          <td class="text-center">Бүгд</td>
+          <td class="text-center">Өмнөх тайлангийн нийт бүгд</td>
+          @foreach ($companies as $company)
+            @php
+              $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByReportTime($company->id, $workTypeID);
+              $allReportExecution = \App\Http\Controllers\ExecutionContoller::getAllExecByCompany($company->id, $workTypeID);
+            @endphp
+            <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{$allReportExecution-$lastExec}}</td>
+          @endforeach
+          @php
+            $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg->id, $workTypeID);
+            $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExecByHeseg($heseg->id, $workTypeID);
+          @endphp
+          <td>{{$allExecByHeseg-$lastExec}}</td>
+        </tr>
 
         <tr>
           {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
           <td class="text-center">Бүгд</td>
           <td class="text-center">Тайлант үеийн нийт</td>
           @foreach ($companies as $company)
-            <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{$previousReportExecution}}</td>
+            @php
+              $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByReportTime($company->id, $workTypeID);
+            @endphp
+            <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{$lastExec}}</td>
           @endforeach
-          <td></td>
+          @php
+            $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg->id, $workTypeID);
+          @endphp
+          <td>{{$lastExec}}</td>
         </tr>
         <tr>
           {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
@@ -242,9 +266,9 @@
           <td class="text-center">Тоо /м.куб/</td>
           @foreach ($companies as $company)
             @php
-              $previousReportExecution = \App\Http\Controllers\ExecutionContoller::getAllExecByCompany($company->id, $workTypeID);
+              $allReportExecution = \App\Http\Controllers\ExecutionContoller::getAllExecByCompany($company->id, $workTypeID);
             @endphp
-            <td class="text-center">{{$previousReportExecution}}</td>
+            <td class="text-center">{{$allReportExecution}}</td>
           @endforeach
           @php
             $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExecByHeseg($heseg->id, $workTypeID);
@@ -280,6 +304,11 @@
     </table>
     </div>
     {{-- end first div --}}
+
+
+
+
+
     @if($j==3)
       <div class="clearfix" id="clear"></div>
       <div class="col-md-3">
@@ -302,7 +331,7 @@
               @endforeach
               <th></th>
             </tr>
-            <tr id="lastTablePlanRow">
+            <tr id="lastTablePlanRow" class="text-center">
               <th class="text-center" colspan="2">Батлагдсан тоо хэмжээ /м.куб/</th>
               @foreach ($hesegs as $heseg1)
                 @php
@@ -372,6 +401,37 @@
                 <td></td>
               </tr>
             @endforeach
+              <tr class="text-center">
+                <td>Бүгд</td>
+                <td>Өмнөх тайлангийн нийт бүгд</td>
+                @php
+                  $sumPreviousExecOfHesegs=0;
+                @endphp
+                @foreach ($heseg1s as $heseg1)
+                  @php
+                    $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExecByHeseg($heseg1->id, $workTypeID);
+                    $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg1->id, $workTypeID);
+                    $sumPreviousExecOfHesegs = $sumPreviousExecOfHesegs + ($allExecByHeseg-$lastExec);
+                  @endphp
+                  <td>{{$allExecByHeseg-$lastExec}}</td>
+                @endforeach
+                <td>{{$sumPreviousExecOfHesegs}}</td>
+              </tr>
+              <tr class="text-center">
+                <td>Бүгд</td>
+                <td>Тайлант үеийн</td>
+                @php
+                  $sumLastExecOfHesegs=0;
+                @endphp
+                @foreach ($heseg1s as $heseg1)
+                  @php
+                    $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg1->id, $workTypeID);
+                    $sumLastExecOfHesegs = $sumLastExecOfHesegs + $lastExec;
+                  @endphp
+                  <td>{{$lastExec}}</td>
+                @endforeach
+                <td>{{$sumLastExecOfHesegs}}</td>
+              </tr>
               <tr class="allSumLastTable text-center">
                 <td>Бүгд</td>
                 <td>Тоо /м.куб/</td>
@@ -402,7 +462,7 @@
                   @endif
                 @endforeach
                 @php
-                  $allExecPercent = \App\Http\Controllers\ExecutionContoller::getAllExecPercent();
+                  $allExecPercent = \App\Http\Controllers\ExecutionContoller::getAllExecPercent($workTypeID);
                 @endphp
                 <td>{{round($allExecPercent, 2)}}%</td>
               </tr>

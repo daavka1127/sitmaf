@@ -364,10 +364,12 @@ class ExecutionContoller extends Controller
       return $allExecHeseg;
   }
 
-  public static function getAllExecPercent(){
+  public static function getAllExecPercent($workTypeID){
       $sumPlan = DB::table('tb_plan')
+          ->where('work_type_id', '=', $workTypeID)
           ->sum('quantity');
       $sumExec = DB::table('tb_execution')
+          ->where('work_type_id', '=', $workTypeID)
           ->sum('execution');
       return $sumExec*100/$sumPlan;
   }
@@ -381,10 +383,38 @@ class ExecutionContoller extends Controller
   }
 
   public static function getAllExecByWorkTypeID($workTypeID){
-    $allExecCompany = DB::table('tb_execution')
-        ->where('companyID', '=', $comID)
-        ->where('work_type_id', '=', $workTypeID)
-        ->sum('execution');
-    return $allExecCompany;
+      $allExecCompany = DB::table('tb_execution')
+          ->where('companyID', '=', $comID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->sum('execution');
+      return $allExecCompany;
+  }
+
+  public static function getAllExecByReportTime($companyID, $workTypeID){
+      $reportTimeExecs = DB::table('tb_execution')
+          ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
+          ->where('companyID', '=', $companyID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->whereBetween('tb_execution.date', [DB::raw('(SELECT `startDate` FROM `tb_reporttime` WHERE id=1)'), DB::raw('(SELECT `endDate` FROM `tb_reporttime` WHERE id=1)')])
+          ->get();
+      $reportTimeExec1 = 0;
+      foreach($reportTimeExecs as $reportTimeExec){
+          $reportTimeExec1 = $reportTimeExec->lastExec;
+      }
+      return $reportTimeExec1;
+  }
+
+  public static function getAllExecByHesegReportTime($hesegID, $workTypeID){
+      $execs = DB::table("tb_execution")
+          ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+          ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
+          ->where('tb_companies.heseg_id', '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->whereBetween('tb_execution.date', [DB::raw('(SELECT `startDate` FROM `tb_reporttime` WHERE id=1)'), DB::raw('(SELECT `endDate` FROM `tb_reporttime` WHERE id=1)')])
+          ->get();
+      foreach($execs as $exec){
+          $exec1 = $exec->lastExec;
+      }
+      return $exec1;
   }
 }
