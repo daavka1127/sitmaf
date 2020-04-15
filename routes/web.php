@@ -27,11 +27,11 @@ Route::get('/show/html', function(){
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 })->middleware('auth');
-Route::get("/report/print", function(){
-  return view('report.printReport'); //123
+Route::get("/report/print/{workTypeID}", function($workTypeID){
+  return view('report.printReport', compact("workTypeID")); //123
 })->middleware('auth');
 Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
-Route::get("/test/{hesegID}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
+Route::get("/test", "companyController@getCompaniesJson");
 Route::post('/generate/html', 'reportController@generateHtml');
 // dadaa REPORT
 Route::get("/autoCombo", function(){

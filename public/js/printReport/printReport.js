@@ -136,3 +136,17 @@ $(document).ready(function(){
        // alert('I am chrome');
       }
 });
+
+
+// function thinkTable(tableIndex, workTypeID){
+//     $.each(companies, function(index, item){
+//         var sumReportExec=0;
+//         var sumPlan = "";
+//         console.log($(".table" + tableIndex + " tr th").find('.allPlan').length);
+//         // $('.table' + tableIndex + ' tr').each(function(){
+//         //     var sumPlan = $(this).find(".colComID" + item.id + ", .allPlan").html();
+//         //     console.log(sumPlan);
+//         // });
+//         // $('.colComID' + item.id + ', .sumReportExec' + workTypeID).html("sumPlan");
+//     });
+// }

@@ -101,12 +101,14 @@ class ExecutionContoller extends Controller
         return $exec;
     }
 
-    public static function getExecutionPercentByCompany2019($comID){
+    public static function getExecutionPercentByCompany2019($comID, $workTypeID){
         $sumPlan = DB::table("tb_plan")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->sum('quantity');
         $sumExecution = DB::table("tb_execution")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->where('date', 'like', '2019%')
             ->sum('execution');
         if($sumPlan == 0)
@@ -115,12 +117,14 @@ class ExecutionContoller extends Controller
           return round($sumExecution*100/$sumPlan, 2);
     }
 
-    public static function getSumExecutionByCompany2020($comID){
+    public static function getSumExecutionByCompany2020($comID, $workTypeID){
         $sumPlan = DB::table("tb_plan")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->sum('quantity');
         $sumExecution = DB::table("tb_execution")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->where('date', 'like', '2019%')
             ->sum('execution');
         return $sumPlan - $sumExecution;
@@ -346,11 +350,12 @@ class ExecutionContoller extends Controller
     return $lastExec1;
   }
 
-  public static function getAllExecByHeseg($hesegID){
+  public static function getAllExecByHeseg($hesegID, $workTypeID){
       $allHesegExecs = DB::table('tb_execution')
           ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
           ->select(DB::raw("SUM(tb_execution.execution) as allExec"))
           ->where('tb_companies.heseg_id', '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
           ->get();
       foreach ($allHesegExecs as $allHesegExec) {
         $allExecHeseg = $allHesegExec->allExec;
@@ -366,10 +371,19 @@ class ExecutionContoller extends Controller
       return $sumExec*100/$sumPlan;
   }
 
-  public static function getAllExecByCompany($comID){
+  public static function getAllExecByCompany($comID, $workTypeID){
       $allExecCompany = DB::table('tb_execution')
           ->where('companyID', '=', $comID)
+          ->where('work_type_id', '=', $workTypeID)
           ->sum('execution');
       return $allExecCompany;
+  }
+
+  public static function getAllExecByWorkTypeID($workTypeID){
+    $allExecCompany = DB::table('tb_execution')
+        ->where('companyID', '=', $comID)
+        ->where('work_type_id', '=', $workTypeID)
+        ->sum('execution');
+    return $allExecCompany;
   }
 }
