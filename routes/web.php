@@ -73,11 +73,11 @@ Route::post('/hunHuch/store', 'hunHuchController@store');
 Route::post('/hunHuch/update', 'hunHuchController@update');
 Route::post('/hunHuch/delete', 'hunHuchController@delete');
 
-Route::get('/chart/byDate/{id}/{workType}', 'GuitsetgelController@chartByDateShow');
+Route::get('/chart/byDate/{hesegID}/{id}/{workType}', 'GuitsetgelController@chartByDateShow');
 // Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
 Route::get('/chart/all/{id}', 'guitsetgelChartController@chartAlljqChart');
 // Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
-Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
+//Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
 Route::get('/chart/all/horizontal', 'guitsetgelChartController@getCompaniesChartHorizontal');
 Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
 Route::get('/average/chart/{id}', 'GuitsetgelController@generalChart');
@@ -124,6 +124,8 @@ Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
 //log view
 Route::get('/viewLog', 'logsController@index');
 Route::post('/logView/getTableLog', 'logsController@getTableLog');
+Route::post('/logView/userTableLog', 'logsController@userTableLog');
+
 
 Route::post('/adminSee', 'adminController@getAdmin');
 Route::get('/adminView', 'adminController@adminView');

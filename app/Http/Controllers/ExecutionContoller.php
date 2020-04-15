@@ -203,7 +203,8 @@ class ExecutionContoller extends Controller
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
                     AND date LIKE '2019%') as totalSumExec2019"),
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
-                    AND `date`= ( SELECT MAX(`date`) FROM `tb_execution` )) as lastSumExect"),
+                    AND `date` BETWEEN (SELECT startDate FROM `tb_reporttime` WHERE id=1) AND (SELECT endDate FROM `tb_reporttime` WHERE id=1))
+                    as lastSumExect"),
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
                     AND `date` LIKE '2020%') as sumExec2020")
             )

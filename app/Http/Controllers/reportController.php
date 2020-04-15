@@ -17,7 +17,7 @@ class reportController extends Controller
     public function generateHtml(Request $req){
       $reportTime = new ReportTimeController;
       $reportTime->updateDate($req->lastDate);
-      $date=$req->lastDate;
+      $date = $req->lastDate;
       $companies = DB::table('tb_companies')
       ->get();
       if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4){

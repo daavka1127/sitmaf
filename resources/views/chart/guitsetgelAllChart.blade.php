@@ -21,11 +21,44 @@
     <div class="col-md-4">
       <label>Аж ахуйн нэгж</label>
       <select class="form-control" id="cmbHeseg">
-        <option value="0">Сонгоно уу</option>
-        <option value="1">Зүүнбаян чиглэл I хэсэг</option>
-        <option value="2">Мандах чиглэл II хэсэг</option>
-        <option value="3">Цогтцэций чиглэл III чиглэл</option>
-        <option value="4">Бүх аж ахуйн нэгжээр</option>
+        @php
+          echo '<option value="0">Сонгоно уу</option>';
+            switch (Auth::user()->heseg_id) {
+              case 1:
+                echo '<option value="1" >Зүүнбаян чиглэл I хэсэг</option>';
+                if(Auth::user()->heseg_id == 1)
+                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
+                break;
+              case 2:
+                echo '<option value="2">Мандах чиглэл II хэсэг</option>';
+                if(Auth::user()->heseg_id == 2)
+                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
+                break;
+              case 3:
+                echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
+                if(Auth::user()->heseg_id == 3)
+                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
+                break;
+
+              default:
+                if(Auth::user()->heseg_id == 1)
+                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
+                else
+                  echo '<option value="1">Зүүнбаян чиглэл I хэсэг</option>';
+
+                if(Auth::user()->heseg_id == 2)
+                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
+                else
+                  echo '<option value="2">Мандах чиглэл II хэсэг</option>';
+
+                if(Auth::user()->heseg_id == 3)
+                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
+                else
+                  echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
+                echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
+                break;
+            }
+        @endphp
       </select>
     </div>
     <div class="col-md-4">

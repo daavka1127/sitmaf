@@ -55,14 +55,16 @@
 
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
-              // window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
+
           });
           $("#cmbWorkType").change(function(){
             // $(".divWorkType").css("display","block");
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
+              window.location.href = "{{url('/chart/byDate')}}/" + {{Auth::user()->heseg_id}} + "/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
 
       });
+
+
     </script>
     {{-- <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
     <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
@@ -71,28 +73,46 @@
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
-        <option value="0">Сонгоно уу</option>
-        @if($hesegID == 1)
-            <option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>
-        @else
-            <option value="1">Зүүнбаян чиглэл I хэсэг</option>
-        @endif
-        @if($hesegID == 2)
-            <option value="2" selected>Мандах чиглэл II хэсэг</option>
-        @else
-            <option value="2">Мандах чиглэл II хэсэг</option>
-        @endif
-        @if($hesegID == 3)
-            <option value="3" selected>Цогтцэций чиглэл III чиглэл</option>
-        @else
-            <option value="3">Цогтцэций чиглэл III чиглэл</option>
-        @endif
-        @if($hesegID == 4)
-            <option value="4" selected>Бүх аж ахуйн нэгжээр</option>
-        @else
-            <option value="4">Бүх аж ахуйн нэгжээр</option>
-        @endif
+        @php
+          echo '<option value="0">Сонгоно уу</option>';
+            switch (Auth::user()->heseg_id) {
+              case 1:
+                echo '<option value="1" >Зүүнбаян чиглэл I хэсэг</option>';
+                if($hesegID == 1)
+                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
+                break;
+              case 2:
+                echo '<option value="2">Мандах чиглэл II хэсэг</option>';
+                if($hesegID == 2)
+                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
+                break;
+              case 3:
+                echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
+                if($hesegID == 3)
+                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
+                break;
+
+              default:
+                if($hesegID == 1)
+                  echo '<option value="1" selected>Зүүнбаян чиглэл I хэсэг</option>';
+                else
+                  echo '<option value="1">Зүүнбаян чиглэл I хэсэг</option>';
+
+                if($hesegID == 2)
+                  echo '<option value="2" selected>Мандах чиглэл II хэсэг</option>';
+                else
+                  echo '<option value="2">Мандах чиглэл II хэсэг</option>';
+
+                if($hesegID == 3)
+                  echo '<option value="3" selected>Цогтцэций чиглэл III чиглэл</option>';
+                else
+                  echo '<option value="3">Цогтцэций чиглэл III чиглэл</option>';
+                echo '<option value="4">Бүх аж ахуйн нэгжээр</option>';
+                break;
+            }
+        @endphp
       </select>
+
     </div>
     <div class="col-md-2">
 
@@ -102,8 +122,8 @@
         <label>Аж ахуйн нэгжээр харах</label>
         <select class="form-control" id="cmbCompany">
           <option value="0">Сонгоно уу</option>
-          @foreach ($companies as $company)
-              <option value="{{$company->id}}">{{$company->companyName}}</option>
+          @foreach ($companiesChart as $company)
+              <option value="{{$company->id}}">{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
           @endforeach
         </select>
       </div>
