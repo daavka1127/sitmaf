@@ -12,10 +12,7 @@
 
 <script>
     var getadminUrl = "{{url("/adminSee")}}";
-
-    // var executionStoreUrl = "{{url('/execution/store')}}";
     var adminUpdateUrl = "{{url('/admin/adminUpdate')}}";
-    // var executionDeleteUrl = "{{url('/execution/execDelete')}}";
     var csrf = "{{ csrf_token() }}";
     var execEditRow = "";
     var dataRow = "";
@@ -52,7 +49,8 @@
               { data: "email", name: "email"},
               { data: "password", name: "password"},
               { data: "heseg_id", name: "heseg_id", visible:false },
-              { data: "heseg_name", name: "heseg_name" }
+              { data: "heseg_name", name: "heseg_name" },
+              { data: "edit", name: "edit" }
             ]
       });
   });
@@ -82,7 +80,8 @@
                   <th>Цахим хаяг</th>
                   <th>Нууц үг</th>
                   <th></th>
-                  <th>хандах эрх</th>
+                  <th>Xандах эрх</th>
+                  <th>Өгөгдөл засах</th>
               </tr>
           </thead>
       </table>

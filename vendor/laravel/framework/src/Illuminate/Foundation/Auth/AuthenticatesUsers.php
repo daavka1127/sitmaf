@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\logsController;
+use Session;
 
 trait AuthenticatesUsers
 {
@@ -122,7 +123,7 @@ trait AuthenticatesUsers
     {
         //
         $log = new logsController;
-        $log->insertUserLog($request->ip());
+        $log->insertUserLog($request->ip(), session()->getId());
     }
 
     /**
@@ -158,6 +159,9 @@ trait AuthenticatesUsers
      */
     public function logout(Request $request)
     {
+      $log = new logsController;
+      $log->updateUserLog($request->ip(), session()->getId());
+
         $this->guard()->logout();
 
         $request->session()->invalidate();
@@ -174,8 +178,6 @@ trait AuthenticatesUsers
     protected function loggedOut(Request $request)
     {
         //
-        $log = new logsController;
-        $log->insertUserLog($request->ip());
     }
 
     /**

@@ -18,7 +18,7 @@
 
 
 // dadaa REPORT
-Route::get("/test/table", function(){
+Route::post("/test/table", function(){
   return view("report.companyTableReport");
 })->middleware('auth');
 Route::get('/show/html', function(){

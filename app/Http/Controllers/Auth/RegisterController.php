@@ -63,11 +63,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $checkbox = "";
+        // if(isset($data['edit'])){
+        //   $checkbox = "on";
+        // }
+        // else{
+        //   $checkbox = "off";
+        // }
+      // return $data['edit'];
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'heseg_id' => $data['heseg'],
+            'edit' => $data['edit']
         ]);
     }
 }
