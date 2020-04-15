@@ -18,8 +18,8 @@
 
 
 // dadaa REPORT
-Route::post("/test/table", function(){
-  return view("report.companyTableReport1");
+Route::post("/test/table1", function(){
+  return view("report.companyTableReport");
 })->middleware('auth');
 Route::get('/show/html', function(){
   return view('report.viewHtml');
@@ -79,7 +79,7 @@ Route::get('/chart/all/{id}', 'guitsetgelChartController@chartAlljqChart');
 // Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
 //Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
 Route::get('/chart/all/horizontal', 'guitsetgelChartController@getCompaniesChartHorizontal');
-// Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
+Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
 Route::get('/average/chart/{id}', 'GuitsetgelController@generalChart');
 Route::get('/report/table', 'GuitsetgelController@getCompanyGuitsetgelTable');
 Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable');
