@@ -1,6 +1,19 @@
 $(document).on('change', '[type=radio]', function(){
     var id = $(this).attr("workTypeId");
-    window.location.replace($("#btnPrint").attr("redurl") + id);
+    $.each(workTypes, function(index, item){
+      $("#worktypeid" + item.id).css("display","none");
+      $("." + item.id).hide();
+      $('input:checkbox').prop('checked', true);
+    });
+    $("." + id).show();
+    if($(this).is(':checked')){
+        $("#worktypeid" + id).css("display","block");
+        // $("."+id).show();
+    }
+    else{
+        $("#worktypeid" + id).css("display","none");
+        // $("."+id).hide();
+    }
 });
 
 $(document).ready(function(){
@@ -33,12 +46,12 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     merge();
-    // $("table .workType").hide(); Work type-aar n arilgaad bgam shig bn bas
+    $("table .workType").hide();
     $.each(workTypes, function(index, item){
-      if(item.id == workType){
-        $("#checkWorkType" + item.id).prop("checked", true);
-        $("#worktypeid" + item.id).css("display","block");
-      }
+      $("table ." + item.id).show();
+      $("#checkWorkType" + item.id).prop("checked", true);
+      $("#worktypeid" + item.id).css("display","block");
+      return false;
     });
 
     sumLastTable();
@@ -111,7 +124,7 @@ function sumLastTable(){
         sumExec2020 += parseFloat($(this).text());
         $('#lastTableSumExec2020').html(sumExec2020);
     });
-    avgExec2019 = parseFloat((sumPlan-sumExec2020)*100/sumPlan).toFixed(2);
+    avgExec2019 = parseFloat((sumPlan-sumExec2020)*100/sumPlan);
     $("#lastTableSumExecPercent2019").html(avgExec2019 + "%");
 }
 
