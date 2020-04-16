@@ -87,10 +87,12 @@
   </div>
   <div class="text-left">
 
-    @if(Auth::user()->heseg_id == 5 || Auth::user()->edit == 'on')
+    @if(Auth::user()->heseg_id == 5)
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditCompany">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteCompany">Устгах</button>
+    @elseif (Auth::user()->heseg_id == 5 || Auth::user()->edit == 'on')
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
     @endif
 
   </div>
