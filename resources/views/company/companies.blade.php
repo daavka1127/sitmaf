@@ -2,7 +2,6 @@
 
 @section('content')
 
-
   <!-- Datatables -->
       <link href="{{url('public/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('public/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
@@ -87,12 +86,8 @@
 
   </div>
   <div class="text-left">
-    @if(Auth::user()->heseg_id != 4 )
-      @if (Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 )
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
-      @endif
-    @endif
-    @if(Auth::user()->heseg_id == 5 )
+
+    @if(Auth::user()->heseg_id == 5 || Auth::user()->edit == 'on')
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCompany">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditCompany">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteCompany">Устгах</button>

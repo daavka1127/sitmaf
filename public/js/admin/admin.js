@@ -5,16 +5,18 @@ $(document).ready(function(){
         alertify.alert("Та засах мөрөө сонгоно уу!!!")
         return;
       }
-      // refreshExecEdit(dataRow["id"]);
+
       $('#modalEditAdmin').modal('show');
       $("#adminRowID").val(dataRow['id']);
       $("#name").val(dataRow['name']);
       $("#email").val(dataRow['email']);
       $("#access").val(dataRow['heseg_id']);
-
-       // $('#cmbNewCompanyName').text(dataRow['companyName']+" " + dataRow['ajliinHeseg']);
-       // $('#cmbNewCompanyID').val(dataRow['id']);
-
+      if(dataRow['edit'] == 'on')
+      {
+        $("#edit").prop("checked", true);
+      }
+      else
+        $("#edit").prop("checked", false);
 
   });
 
@@ -90,10 +92,44 @@ function refresh(){
             { data: "email", name: "email"},
             { data: "password", name: "passsword"},
             { data: "heseg_id", name: "heseg_id", visible:false },
-            { data: "heseg_name", name: "heseg_name" }
+            { data: "heseg_name", name: "heseg_name" },
+            { data: "edit", name: "edit" }
           ]
     }).ajax.reload();
 }
+
+
+  $(document).ready(function(){
+    $("#access").change(function(){
+      if($(this).val() == 5)
+      {
+        $("#edit").prop('checked',true);
+        $("#edit").attr('disabled',true);
+        $("#hideCheck").val("on");
+      }
+      else if($(this).val() == 4)
+      {
+        $("#edit").prop('checked',false);
+        $("#edit").attr('disabled',true);
+        $("#hideCheck").val("off");
+      }
+      else {
+        $("#edit").prop('checked',false);
+        $("#edit").attr('disabled',false);
+      }
+
+    });
+    $('#edit').change(function() {
+        if(this.checked) {
+            $("#hideCheck").val("on");
+        }
+        else {
+            $("#hideCheck").val("off");
+        }
+    });
+
+  });
+
 
 $(document).ready(function(){
   $("#btnDeleteAdmin").click(function(){

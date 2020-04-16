@@ -27,7 +27,7 @@
                   <input class="form-control" type="text" name="pass" id="pass" value="" />
                 </div>
                 <div class="col-md-6">
-                  <label>хандах эрх</label>
+                  <label>Хандах эрх</label>
                   <select class="form-control" name="heseg" id="access">
                     <option value="1">Зүүнбаян чиглэл  I хэсэг</option>
                     <option value="2">Мандах чиглэл II хэсэг</option>
@@ -36,6 +36,13 @@
                     <option value="5">Мастер</option>
                   </select>
 
+                </div>
+                <div class="col-md-6">
+
+                </div>
+                <input type="hidden" name="edit" value="off" id="hideCheck" />
+                <div class="col-md-6">
+                    <label class="checkbox-inline" style="padding-top: 10px;"><input type="checkbox" id="edit"> Өгөгдөл нэмэх </label>
                 </div>
               </div>
 

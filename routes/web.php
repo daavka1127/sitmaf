@@ -18,7 +18,7 @@
 
 
 // dadaa REPORT
-Route::get("/test/table", function(){
+Route::post("/test/table1", function(){
   return view("report.companyTableReport");
 })->middleware('auth');
 Route::get('/show/html', function(){
@@ -27,11 +27,11 @@ Route::get('/show/html', function(){
 Route::get("/test/fixed/table", function(){
   return view("report.testFixedTable");
 })->middleware('auth');
-Route::get("/report/print", function(){
-  return view('report.printReport'); //123
+Route::get("/report/print/{workTypeID}", function($workTypeID){
+  return view('report.printReport', compact("workTypeID")); //123
 })->middleware('auth');
 Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
-Route::get("/test/{hesegID}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
+Route::get("/test", "companyController@getCompaniesJson");
 Route::post('/generate/html', 'reportController@generateHtml');
 // dadaa REPORT
 Route::get("/autoCombo", function(){
@@ -73,13 +73,13 @@ Route::post('/hunHuch/store', 'hunHuchController@store');
 Route::post('/hunHuch/update', 'hunHuchController@update');
 Route::post('/hunHuch/delete', 'hunHuchController@delete');
 
-Route::get('/chart/byDate/{id}/{workType}', 'GuitsetgelController@chartByDateShow');
+Route::get('/chart/byDate/{hesegID}/{id}/{workType}', 'GuitsetgelController@chartByDateShow');
 // Route::get('/chart/all', 'GuitsetgelController@chartAllShow');
 Route::get('/chart/all/{id}', 'guitsetgelChartController@chartAlljqChart');
 // Route::get('/chart/react', 'guitsetgelChartController@chartAllReact');
-Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
+//Route::get('/chart/jqchart', 'guitsetgelChartController@chartAlljqChart');
 Route::get('/chart/all/horizontal', 'guitsetgelChartController@getCompaniesChartHorizontal');
-Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
+// Route::get('/test/{id}', 'GuitsetgelController@getGuitsetgelHuvi');
 Route::get('/average/chart/{id}', 'GuitsetgelController@generalChart');
 Route::get('/report/table', 'GuitsetgelController@getCompanyGuitsetgelTable');
 Route::get('/report/table/test/{id}', 'GuitsetgelController@getGuitsetgelTable');
@@ -124,6 +124,8 @@ Route::get('works/checkStroe', "WorktypeController@ChangeWorksVisible");
 //log view
 Route::get('/viewLog', 'logsController@index');
 Route::post('/logView/getTableLog', 'logsController@getTableLog');
+Route::post('/logView/userTableLog', 'logsController@userTableLog');
+
 
 Route::post('/adminSee', 'adminController@getAdmin');
 Route::get('/adminView', 'adminController@adminView');

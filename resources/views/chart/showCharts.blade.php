@@ -7,46 +7,49 @@
       $(document).ready(function(){
         $("#cmbHeseg").change(function(){
           $(".divWorkType").css("display","none");
-            window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
+            if($("#cmbHeseg").val() > 0)
+              window.location.href = "{{url('/chart/all')}}/" + $("#cmbHeseg").val();
         });
 
           $("#cmbCompany").change(function(){
             $(".divWorkType").css("display","block");
-              // window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
+            $("#cmbWorkType").val('0');
           });
           $("#cmbWorkType").change(function(){
             // $(".divWorkType").css("display","block");
-              window.location.href = "{{url('/chart/byDate')}}/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
+              window.location.href = "{{url('/chart/byDate')}}/"+ {{Auth::user()->heseg_id}}+ "/" + $("#cmbCompany").val() + "/" + $("#cmbWorkType").val();
           });
 
       });
     </script>
 
 
-    {{-- <link rel="stylesheet" href="{{url("public/js/autoCombo/base.jquery.css")}}">
-    <link rel="stylesheet" href="{{url("public/js/autoCombo/autoComboStyle.css")}}">
-    <script src="{{url("public/js/autoCombo/autojquery-ui.js")}}"></script>
-    <script src="{{url("public/js/autoCombo/autoHeader.js")}}"></script> --}}
-
     <div class="col-md-4">
       <label>Хэсгээр харах</label>
       <select class="form-control" id="cmbHeseg">
         <option value="0">Сонгоно уу</option>
-        <option value="1">Зүүнбаян чиглэл I хэсэг</option>
-        <option value="2">Мандах чиглэл II хэсэг</option>
-        <option value="3">Цогтцэций чиглэл III чиглэл</option>
-        <option value="4">Бүх аж ахуйн нэгжээр</option>
+        @foreach ($hesegs as $heseg)
+            @if($heseg->id == $hesegID)
+              <option value="{{$heseg->id}}" selected>{{$heseg->name}}</option>
+            @else
+              <option value="{{$heseg->id}}">{{$heseg->name}}</option>
+            @endif
+        @endforeach
+        @if(Auth::user()->heseg_id > 3)
+        <option value="4">Бүх хэсгээр харах</option>
+      @endif
       </select>
     </div>
-    <div class="col-md-2">
 
+    <div class="col-md-2">
     </div>
+
     <div class="col-md-5">
       <div class="row">
         <label>Аж ахуйн нэгжээр харах</label>
         <select class="form-control"  id="cmbCompany">  {{-- cmbCompany --}}
           <option value="0">Сонгоно уу</option>
-          @foreach ($companies as $company)
+          @foreach ($companiesChart as $company)
             @if($companyID == $company->id)
                 <option value="{{$company->id}}" selected>{{$company->companyName}}-><strong>{{$company->ajliinHeseg}}</strong></option>
             @else
@@ -86,6 +89,7 @@
         echo "<p>".$dd." өдрийн байдлаар</p>";
       @endphp
     </div>
+
   </div>
   <link href="{{url('public/jqChart/jqstyles.css')}}" rel="stylesheet">
   <link href="{{url('public/jqChart/jquery.jqChart.css')}}" rel="stylesheet">

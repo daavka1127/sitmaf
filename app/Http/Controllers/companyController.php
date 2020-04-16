@@ -44,7 +44,7 @@ class companyController extends Controller
       }
     }
 
-    public function getCompaniesJson(){
+    public static function getCompaniesJson(){
       if(Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 ){
         $hesegID = Auth::user()->heseg_id;
         $companies = DB::table('tb_companies')
@@ -54,7 +54,7 @@ class companyController extends Controller
             ->orderBy('tb_companies.heseg_id', 'asc')
             ->orderBy('tb_companies.companyName', 'asc')
             ->get();
-        return response()->json($companies);
+        return $companies;
       }else{
         $companies = DB::table('tb_companies')
             ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
@@ -62,7 +62,7 @@ class companyController extends Controller
             ->orderBy('tb_companies.heseg_id', 'asc')
             ->orderBy('tb_companies.companyName', 'asc')
             ->get();
-        return response()->json($companies);
+        return $companies;
       }
     }
 

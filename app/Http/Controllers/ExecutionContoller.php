@@ -101,12 +101,14 @@ class ExecutionContoller extends Controller
         return $exec;
     }
 
-    public static function getExecutionPercentByCompany2019($comID){
+    public static function getExecutionPercentByCompany2019($comID, $workTypeID){
         $sumPlan = DB::table("tb_plan")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->sum('quantity');
         $sumExecution = DB::table("tb_execution")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->where('date', 'like', '2019%')
             ->sum('execution');
         if($sumPlan == 0)
@@ -115,12 +117,14 @@ class ExecutionContoller extends Controller
           return round($sumExecution*100/$sumPlan, 2);
     }
 
-    public static function getSumExecutionByCompany2020($comID){
+    public static function getSumExecutionByCompany2020($comID, $workTypeID){
         $sumPlan = DB::table("tb_plan")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->sum('quantity');
         $sumExecution = DB::table("tb_execution")
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->where('date', 'like', '2019%')
             ->sum('execution');
         return $sumPlan - $sumExecution;
@@ -203,7 +207,8 @@ class ExecutionContoller extends Controller
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
                     AND date LIKE '2019%') as totalSumExec2019"),
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
-                    AND `date`= ( SELECT MAX(`date`) FROM `tb_execution` )) as lastSumExect"),
+                    AND `date` BETWEEN (SELECT startDate FROM `tb_reporttime` WHERE id=1) AND (SELECT endDate FROM `tb_reporttime` WHERE id=1))
+                    as lastSumExect"),
                 DB::raw("(SELECT SUM(`execution`) FROM tb_execution WHERE `companyID`=$companyID AND `work_type_id`=$workTypeID
                     AND `date` LIKE '2020%') as sumExec2020")
             )
@@ -346,11 +351,12 @@ class ExecutionContoller extends Controller
     return $lastExec1;
   }
 
-  public static function getAllExecByHeseg($hesegID){
+  public static function getAllExecByHeseg($hesegID, $workTypeID){
       $allHesegExecs = DB::table('tb_execution')
           ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
           ->select(DB::raw("SUM(tb_execution.execution) as allExec"))
           ->where('tb_companies.heseg_id', '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
           ->get();
       foreach ($allHesegExecs as $allHesegExec) {
         $allExecHeseg = $allHesegExec->allExec;
@@ -358,18 +364,57 @@ class ExecutionContoller extends Controller
       return $allExecHeseg;
   }
 
-  public static function getAllExecPercent(){
+  public static function getAllExecPercent($workTypeID){
       $sumPlan = DB::table('tb_plan')
+          ->where('work_type_id', '=', $workTypeID)
           ->sum('quantity');
       $sumExec = DB::table('tb_execution')
+          ->where('work_type_id', '=', $workTypeID)
           ->sum('execution');
       return $sumExec*100/$sumPlan;
   }
 
-  public static function getAllExecByCompany($comID){
+  public static function getAllExecByCompany($comID, $workTypeID){
       $allExecCompany = DB::table('tb_execution')
           ->where('companyID', '=', $comID)
+          ->where('work_type_id', '=', $workTypeID)
           ->sum('execution');
       return $allExecCompany;
+  }
+
+  public static function getAllExecByWorkTypeID($workTypeID){
+      $allExecCompany = DB::table('tb_execution')
+          ->where('companyID', '=', $comID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->sum('execution');
+      return $allExecCompany;
+  }
+
+  public static function getAllExecByReportTime($companyID, $workTypeID){
+      $reportTimeExecs = DB::table('tb_execution')
+          ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
+          ->where('companyID', '=', $companyID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->whereBetween('tb_execution.date', [DB::raw('(SELECT `startDate` FROM `tb_reporttime` WHERE id=1)'), DB::raw('(SELECT `endDate` FROM `tb_reporttime` WHERE id=1)')])
+          ->get();
+      $reportTimeExec1 = 0;
+      foreach($reportTimeExecs as $reportTimeExec){
+          $reportTimeExec1 = $reportTimeExec->lastExec;
+      }
+      return $reportTimeExec1;
+  }
+
+  public static function getAllExecByHesegReportTime($hesegID, $workTypeID){
+      $execs = DB::table("tb_execution")
+          ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+          ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
+          ->where('tb_companies.heseg_id', '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->whereBetween('tb_execution.date', [DB::raw('(SELECT `startDate` FROM `tb_reporttime` WHERE id=1)'), DB::raw('(SELECT `endDate` FROM `tb_reporttime` WHERE id=1)')])
+          ->get();
+      foreach($execs as $exec){
+          $exec1 = $exec->lastExec;
+      }
+      return $exec1;
   }
 }

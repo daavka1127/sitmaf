@@ -93,6 +93,7 @@
 <script src="{{url('public/js/guitsetgel/executionNew.js')}}"></script>
 <script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script>
 
+@if(Auth::user()->edit == 'on')
 <div class="col-md-12">
   <div id="divGenerateReport">
     <div class="border border-primary">
@@ -116,7 +117,7 @@
   </div>
   <span style="color:green;" id="generateReportAlert"></span>
 </div>
-
+@endif
 <div class="col-xs-12">
   <h2 style="text-align:center;"><strong>Аж ахуйн нэгжүүд</strong></h2>
   <div class="row">
@@ -136,12 +137,8 @@
   </div>
 
   <div class="text-left">
-    @if(Auth::user()->heseg_id != 4 )
-      @if (Auth::user()->heseg_id >= 1 && Auth::user()->heseg_id <= 3 )
-            <button type="button" class="btn btn-success" id="btnAddGuitsetgel">Нэмэх</button>
-      @endif
-    @endif
-    @if(Auth::user()->heseg_id == 5 )
+    
+    @if(Auth::user()->heseg_id == 5 || Auth::user()->edit == 'on')
       <button type="button" class="btn btn-success"  id="btnAddGuitsetgel">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditGuitsetgel">Засах</button>
     @endif

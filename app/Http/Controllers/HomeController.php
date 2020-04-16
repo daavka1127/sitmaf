@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Session;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,7 @@ class HomeController extends Controller
 
     public function dadaa()
     {
-        
+
     }
 
     /**
@@ -31,7 +32,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $companies = DB::table('tb_companies')->get();
+      if(Auth::user()->heseg_id > 0 && Auth::user()->heseg_id < 4)
+        {
+          $companies = DB::table('tb_companies')
+            ->where('heseg_id','=',Auth::user()->heseg_id)
+            ->get();
+        }
+        else{
+          $companies = DB::table('tb_companies')->get();
+        }
         return view('home', compact('companies'));
     }
 
@@ -40,7 +49,7 @@ class HomeController extends Controller
     }
 
     public function changePassword(Request $request){
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        if (!(Hash::check($request->get('current-password'),Auth::user()->password))) {
             // The passwords matches
             return redirect()->back()->with("error","Таны хуучин нууц үг буруу байна.");
         }

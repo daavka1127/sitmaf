@@ -111,18 +111,20 @@ class planController extends Controller
           return Response::json($works);
     }
 
-    public static function getSumPlanCompany($comID){
+    public static function getSumPlanCompany($comID, $workTypeID){
         $sumPlan = DB::table('tb_plan')
             ->where('companyID', '=', $comID)
+            ->where('work_type_id', '=', $workTypeID)
             ->sum('quantity');
         return $sumPlan;
     }
 
-    public static function getPlanSections($hesegID){
+    public static function getPlanSections($hesegID, $workTypeID){
       $plans = DB::table("tb_plan")
           ->join('tb_companies', 'tb_plan.companyID', '=', 'tb_companies.id')
           ->select(DB::raw("SUM(tb_plan.quantity) as quantity"))
           ->where('tb_companies.heseg_id','=', $hesegID)
+          ->where('tb_plan.work_type_id','=', $workTypeID)
           ->get();
       foreach ($plans as $plan) {
         $plan1 = $plan->quantity;
@@ -130,12 +132,13 @@ class planController extends Controller
       return $plan1;
     }
 
-    public static function getExecPercent2019($hesegID){
+    public static function getExecPercent2019($hesegID, $workTypeID){
         $execution2019 = DB::table("tb_execution")
             ->join("tb_companies", 'tb_execution.companyID', '=', 'tb_companies.id')
             ->select(DB::raw("SUM(tb_execution.execution) as execution2019"))
             ->where('tb_execution.date', 'LIKE', "2019%")
             ->where('tb_companies.heseg_id', '=', $hesegID)
+            ->where('tb_execution.work_type_id', '=', $workTypeID)
             ->get();
         foreach ($execution2019 as $pizda) {
           $execution2019P = $pizda->execution2019;
