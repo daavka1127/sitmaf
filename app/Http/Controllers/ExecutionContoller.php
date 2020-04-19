@@ -45,9 +45,11 @@ class ExecutionContoller extends Controller
     public static function previousReportExecutionByComIdWorkID($comID, $workID){
         $allExecution = DB::table("tb_companies")
             ->select(
-                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID) as allExecution"),
                 DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID AND
-                `date` BETWEEN (SELECT `startDate` FROM `tb_reporttime` WHERE `id`=1) AND (SELECT `endDate` FROM `tb_reporttime` WHERE `id`=1)) as lastExecution")
+                `date` LIKE '2020%') as allExecution"),
+                DB::raw("(SELECT SUM(`execution`) FROM `tb_execution` WHERE `companyID` = $comID AND `work_id` = $workID AND
+                `date` BETWEEN (SELECT `startDate` FROM `tb_reporttime` WHERE `id`=1) AND (SELECT `endDate` FROM `tb_reporttime` WHERE `id`=1))
+                as lastExecution")
             )
             ->where('id', '=', $comID)
             ->first();
@@ -338,12 +340,13 @@ class ExecutionContoller extends Controller
     return $lastExec1;
   }
 
-  public static function getAllExecutionByHeseg($hesegID, $workID){
+  public static function getAllExecution2020ByHeseg($hesegID, $workID){
     $lastExecs = DB::table("tb_execution")
         ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
         ->select(DB::raw("SUM(tb_execution.execution) as lastExec"))
         ->where('tb_companies.heseg_id', '=', $hesegID)
         ->where('tb_execution.work_id', '=', $workID)
+        ->where('tb_execution.date', 'like', '2020%')
         ->get();
     foreach ($lastExecs as $lastExec) {
       $lastExec1 = $lastExec->lastExec;
@@ -351,12 +354,13 @@ class ExecutionContoller extends Controller
     return $lastExec1;
   }
 
-  public static function getAllExecByHeseg($hesegID, $workTypeID){
+  public static function getAllExec2020ByHeseg($hesegID, $workTypeID){
       $allHesegExecs = DB::table('tb_execution')
           ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
           ->select(DB::raw("SUM(tb_execution.execution) as allExec"))
           ->where('tb_companies.heseg_id', '=', $hesegID)
           ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->where('tb_execution.date', 'like', '2020%')
           ->get();
       foreach ($allHesegExecs as $allHesegExec) {
         $allExecHeseg = $allHesegExec->allExec;
@@ -378,6 +382,15 @@ class ExecutionContoller extends Controller
       $allExecCompany = DB::table('tb_execution')
           ->where('companyID', '=', $comID)
           ->where('work_type_id', '=', $workTypeID)
+          ->sum('execution');
+      return $allExecCompany;
+  }
+
+  public static function getAllExec2020ByCompany($comID, $workTypeID){
+      $allExecCompany = DB::table('tb_execution')
+          ->where('companyID', '=', $comID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->where('date', 'LIKE', '2020%')
           ->sum('execution');
       return $allExecCompany;
   }
@@ -416,5 +429,111 @@ class ExecutionContoller extends Controller
           $exec1 = $exec->lastExec;
       }
       return $exec1;
+  }
+
+  public static function getAllExecPercent2020($companyID, $workTypeID){
+      $exec2020 = DB::table("tb_execution")
+          ->where("companyID", '=', $companyID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->where('date', 'like', '2020%')
+          ->sum("execution");
+      $exec2019 = DB::table("tb_execution")
+          ->where("companyID", '=', $companyID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->where('date', 'like', '2019%')
+          ->sum("execution");
+      $plan = DB::table("tb_plan")
+          ->where("companyID", '=', $companyID)
+          ->where('work_type_id', '=', $workTypeID)
+          ->sum("quantity");
+      $plan2020 = $plan - $exec2019;
+      if($plan2020 <= 0){
+          return 0;
+      }
+      else{
+          return $exec2020*100/$plan2020;
+      }
+  }
+
+  public static function getAllHesegExecPercent2020($hesegID, $workTypeID){
+      $exec2020 = DB::table("tb_execution")
+          ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+          ->where("tb_companies.heseg_id", '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->where('tb_execution.date', 'like', '2020%')
+          ->sum("tb_execution.execution");
+      $exec2019 = DB::table("tb_execution")
+          ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+          ->where("tb_companies.heseg_id", '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->where('tb_execution.date', 'like', '2019%')
+          ->sum("tb_execution.execution");
+      $plan = DB::table("tb_plan")
+          ->join('tb_companies', 'tb_plan.companyID', '=', 'tb_companies.id')
+          ->where("tb_companies.heseg_id", '=', $hesegID)
+          ->where('tb_plan.work_type_id', '=', $workTypeID)
+          ->sum("tb_plan.quantity");
+      $plan2020 = $plan - $exec2019;
+      if($plan2020 <= 0){
+          return 0;
+      }
+      else{
+          return $exec2020*100/$plan2020;
+      }
+  }
+
+  public static function getAllExecByHeseg($hesegID, $workTypeID){
+      $allExec = DB::table("tb_execution")
+          ->join('tb_companies', 'tb_execution.companyID', '=', 'tb_companies.id')
+          ->where('tb_companies.heseg_id', '=', $hesegID)
+          ->where('tb_execution.work_type_id', '=', $workTypeID)
+          ->sum("execution");
+
+      return $allExec;
+  }
+
+  public static function getSumExec2020ByCompany($companyID, $workTypeID){
+    $prevExec = DB::table("tb_execution")
+        ->where('companyID', '=', $companyID)
+        ->where('work_type_id', '=', $workTypeID)
+        ->where('date', 'LIKE', '2020%')
+        ->sum('execution');
+    return $prevExec;
+  }
+
+  public static function getAllHesegExec2020Percent($workTypeID){
+      $plan = DB::table("tb_plan")
+          ->where('work_type_id', '=', $workTypeID)
+          ->sum("quantity");
+      $exec2019 = DB::table('tb_execution')
+          ->where('work_type_id', '=', $workTypeID)
+          ->where('date', 'LIKE', '2019%')
+          ->sum('execution');
+      $exec2020 = DB::table('tb_execution')
+          ->where('work_type_id', '=', $workTypeID)
+          ->where('date', 'LIKE', '2020%')
+          ->sum('execution');
+      $plan2020 = $plan - $exec2019;
+      if($plan2020 <= 0){
+          return 0;
+      }
+      else{
+          return $exec2020*100/$plan2020;
+      }
+  }
+
+  public static function getAllHesegExecPercent($workTypeID){
+      $plan = DB::table("tb_plan")
+          ->where('work_type_id', '=', $workTypeID)
+          ->sum("quantity");
+      $exec = DB::table('tb_execution')
+          ->where('work_type_id', '=', $workTypeID)
+          ->sum('execution');
+      if($plan <= 0){
+          return 0;
+      }
+      else{
+          return $exec*100/$plan;
+      }
   }
 }
