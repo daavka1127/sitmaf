@@ -1,8 +1,6 @@
 @extends('layouts.layout_main')
 
 @section('content')
-
-
   <!-- Datatables -->
       <link href="{{url('public/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('public/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
@@ -15,7 +13,12 @@
     var getHunHuchUrl = "{{url("/hunHuch/new/get")}}";
     var editHunHuchUrl = "{{url("/hunHuch/update")}}";
     var deleteHunHuchUrl = "{{url("/hunHuch/delete")}}";
+
+    var getOneCompanyHunHuchUrl = "{{url("/hunHuch/getOneCompanyHunhuch")}}";
+    var editOneCompanyHunHuchUrl = "{{url("/hunHuch/editOneCompanyHunhuch")}}";
     var dataRow = "";
+    var hunhuchEditRow = "";
+    var csrf = "{{ csrf_token() }}";
     $(document).ready(function(){
       $('#datatable').DataTable( {
           "language": {
@@ -34,9 +37,9 @@
           "serverSide": true,
           "order": [[ 6, "desc" ], [ 3, "asc" ]],
           "ajax":{
-                   "url": "{{url('/hunHuch/new/get')}}",
+                   "url": getHunHuchUrl,
                    "dataType": "json",
-                   "type": "POST",
+                   "type": "get",
                    "data":{
                         _token: "{{ csrf_token() }}"
                       }
@@ -44,7 +47,7 @@
           "columns": [
               { data: "id", name: "id" },
               { data: "companyName", name: "companyName"},
-              { data: "companyID", name: "companyID", visible:false},
+              { data: "companyID", name: "companyID"},
               { data: "ajliinHeseg", name: "ajliinHeseg"},
               { data: "hunHuch", name: "hunHuch" },
               { data: "mashinTehnik", name: "mashinTehnik" },
@@ -62,6 +65,8 @@
       });
   });
 </script>
+<script src="{{url('public/js/hunHuch/hunHuch.js')}}"></script>
+<script src="{{url('public/js/hunHuch/hunhuchEditModal.js')}}"></script>
 
 <div class="col-xs-12">
   <h2 style="text-align:center;"><strong>Хүн хүч нэмэх</strong></h2>
@@ -83,14 +88,16 @@
 
   </div>
   <div class="text-left">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newHunHuchModal">Нэмэх</button>
+    @if(Auth::user()->heseg_id == 5)
+      <button type="button" class="btn btn-success"  id="btnAddHunhuch">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditHunHuch">Засах</button>
       <button type="button" class="btn btn-danger" id="btnDeleteHunHuch">Устгах</button>
+    @endif
   </div>
   @if ($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-  <script src="{{url('public/js/hunHuch/hunHuch.js')}}"></script>
+  {{-- <script src="{{url('public/js/hunHuch/hunHuchNew.js')}}"></script> --}}
   @include('hunHuch.hunHuchNew')
   @include('hunHuch.hunHuchEdit')
 </div>

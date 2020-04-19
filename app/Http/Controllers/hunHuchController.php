@@ -52,6 +52,25 @@ class hunHuchController extends Controller
             ->make(true);
     }
 
+    public function getOneCompanyHunhuch(Request $req){
+      $exec = DB::table("tb_hunhuch")
+        ->join('tb_companies', 'tb_hunhuch.companyID', '=', 'tb_companies.id')
+        ->select('tb_hunhuch.*', 'tb_companies.companyName')
+        ->where("tb_hunhuch.companyID", "=", $req->comID)
+        ->get();
+        return DataTables::of($exec)
+            ->make(true);
+    }
+
+    public function editOneCompanyHunhuch(Request $req){
+      $hunhuchEdit = hunHuch::find($req->hunhuchRowID);
+      $hunhuchEdit->hunHuch = $req->hunhuchEditRow;
+      $hunhuchEdit->mashinTehnik = $req->texnikEditRow;
+      $hunhuchEdit->ognoo = $req->ognooEditRow;
+      $hunhuchEdit->save();
+      return "Амжилттай заслаа.";
+    }
+
     public function store(Request $req){
         $hunHuch = new hunHuch;
         $hunHuch->companyID = $req->companyID;

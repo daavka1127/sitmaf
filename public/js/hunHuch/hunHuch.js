@@ -1,49 +1,60 @@
-function refresh(){
+function hunhuchRefresh(){
     var csrf = $('meta[name=csrf-token]').attr("content");
     $('#datatable').dataTable().fnDestroy();
-      $('#datatable').DataTable( {
-          "language": {
-              "lengthMenu": "_MENU_ мөрөөр харах",
-              "zeroRecords": "Хайлт илэрцгүй байна",
-              "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
-              "infoEmpty": "Хайлт илэрцгүй",
-              "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
-              "sSearch": "Хайх: ",
-              "paginate": {
-                "previous": "Өмнөх",
-                "next": "Дараахи"
-              }
-          },
-          "processing": true,
-          "serverSide": true,
-          "order": [[ 6, "desc" ], [ 3, "asc" ]],
-          "ajax":{
-                   "url": getHunHuchUrl,
-                   "dataType": "json",
-                   "type": "POST",
-                   "data":{
-                        _token: csrf
-                      }
-                 },
-          "columns": [
-              { data: "id", name: "id" },
-              { data: "companyName", name: "companyName"},
-              { data: "companyID", name: "companyID", visible:false},
-              { data: "hunHuch", name: "hunHuch" },
-              { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "ognoo", name: "ognoo" }
-            ]
-      }).ajax.reload();
+    $('#datatable').DataTable( {
+        "language": {
+            "lengthMenu": "_MENU_ мөрөөр харах",
+            "zeroRecords": "Хайлт илэрцгүй байна",
+            "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
+            "infoEmpty": "Хайлт илэрцгүй",
+            "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
+            "sSearch": "Хайх: ",
+            "paginate": {
+              "previous": "Өмнөх",
+              "next": "Дараахи"
+            }
+        },
+        "processing": true,
+        "serverSide": true,
+        "order": [[ 6, "desc" ], [ 3, "asc" ]],
+        "ajax":{
+                 "url": getHunHuchUrl,
+                 "dataType": "json",
+                 "type": "get",
+                 "data":{
+                      _token: "{{ csrf_token() }}"
+                    }
+               },
+        "columns": [
+            { data: "id", name: "id" },
+            { data: "companyName", name: "companyName"},
+            { data: "companyID", name: "companyID"},
+            { data: "ajliinHeseg", name: "ajliinHeseg"},
+            { data: "hunHuch", name: "hunHuch" },
+            { data: "mashinTehnik", name: "mashinTehnik" },
+            { data: "ognoo", name: "ognoo" }
+          ]
+    }).ajax.reload();
+      // }).ajax.reload();
 }
 
 $(document).ready(function(){
+  $("#btnAddHunhuch").click(function(){
+    // alert(dataRow['companyID']);
+      if(dataRow == ""){
+        alertify.alert("Та засах мөрөө сонгоно уу!!!")
+        return;
+      }
+      $('#newHunHuchModal').modal('show');
+       $('#cmbNewCompanyName').text(dataRow['companyName']+" " + dataRow['ajliinHeseg']);
+       $('#cmbCompanyID').val(dataRow['companyID']);
+
+  });
+
     $("#btnNewPostHunHuch").click(function(e){
         e.preventDefault();
         var isInsert = true;
-        if($("#cmbCompanyID").val()=="0"){
-            alertify.error("Аж ахуйн нэгж сонгоогүй байна!!!");
-            isInsert = false;
-        }
+
         if($("#txtHunHuch").val()==""||$("#txtHunHuch").val()==null){
             alertify.error("Хүн хүчийн тоогоо оруулна уу!!!");
             isInsert = false;
@@ -64,7 +75,7 @@ $(document).ready(function(){
           success:function(response){
               alertify.alert(response);
               emptyNewModal();
-              refresh();
+              hunhuchRefresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;
@@ -86,19 +97,6 @@ function emptyNewModal(){
   $("#txtOgnoo").val("");
 }
 
-
-$(document).ready(function(){
-    $("#btnEditHunHuch").click(function(){
-        $("#hideEditHunHuchID").val(dataRow["id"]);
-        $("#cmbEditCompanyID").val(dataRow["companyID"]);
-        $("#txtEditHunHuch").val(dataRow["hunHuch"]);
-        $("#txtEditMashinTehnik").val(dataRow["mashinTehnik"]);
-        $("#txtEditOgnoo").val(dataRow["ognoo"]);
-        if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
-        else{$('#editHunHuchModal').modal('show');}
-
-    });
-});
 
 
 $(document).ready(function(){
@@ -128,7 +126,7 @@ $(document).ready(function(){
           data: $("#frmEditHunHuch").serialize(),
           success:function(response){
               alertify.alert(response);
-              refresh();
+              hunhuchRefresh();
               dataRow = "";
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
@@ -159,7 +157,7 @@ $(document).ready(function(){
                 data: {_token: csrf, id : dataRow['id']},
                 success:function(response){
                     alertify.alert(response);
-                    refresh();
+                    hunhuchRefresh();
                     dataRow="";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {

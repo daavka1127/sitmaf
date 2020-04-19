@@ -13,12 +13,8 @@
         <form id="frmNewHunHuch" action="{{ action('hunHuchController@store')}}" method="post" data-parsley-validate class="form-horizontal form-label-left">
           @csrf
           <div class="form-group col-md-3 text-left">
-            <label>Аж ахуйн нэгж <span class="red-required">*</span> </label>
-            <select class="form-control" name="companyID" id="cmbCompanyID">
-                @foreach ($companies as $company)
-                    <option value="{{$company->id}}">{{$company->companyName}}	&nbsp;	&nbsp; =>	&nbsp;	&nbsp;   {{$company->ajliinHeseg}}</option>
-                @endforeach
-            </select>
+            <h3 id="cmbNewCompanyName"></h3>
+              <input  type="hidden" class="form-control" name="companyID" value="" id="cmbCompanyID">
           </div>
           <div class="form-group col-md-3 text-left">
             <label>Хүн хүч <span class="red-required">*</span> </label>
