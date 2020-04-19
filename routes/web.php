@@ -30,7 +30,7 @@ Route::get("/test/fixed/table", function(){
 Route::get("/report/print/{workTypeID}", function($workTypeID){
   return view('report.printReport', compact("workTypeID")); //123
 })->middleware('auth');
-Route::get("/pizda/{id}/{workID}", "ExecutionContoller@getLastExecutionByHeseg");
+Route::get("/pizda/{workTypeID}", "ExecutionContoller@getAllHesegExec2020Percent");
 Route::get("/test", "companyController@getCompaniesJson");
 Route::post('/generate/html', 'reportController@generateHtml');
 // dadaa REPORT

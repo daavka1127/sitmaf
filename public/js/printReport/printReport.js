@@ -111,7 +111,7 @@ function sumLastTable(){
         sumExec2020 += parseFloat($(this).text());
         $('#lastTableSumExec2020').html(sumExec2020);
     });
-    avgExec2019 = parseFloat((sumPlan-sumExec2020)*100/sumPlan).toFixed(2);
+    avgExec2019 = parseFloat((sumPlan-sumExec2020)*100/sumPlan).toFixed(1);
     $("#lastTableSumExecPercent2019").html(avgExec2019 + "%");
 }
 
