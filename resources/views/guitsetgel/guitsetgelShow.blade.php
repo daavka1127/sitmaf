@@ -137,10 +137,14 @@
   </div>
 
   <div class="text-left">
-    
-    @if(Auth::user()->heseg_id == 5 || Auth::user()->edit == 'on')
+
+    @if(Auth::user()->heseg_id == 5)
       <button type="button" class="btn btn-success"  id="btnAddGuitsetgel">Нэмэх</button>
       <button type="button" class="btn btn-warning" id="btnEditGuitsetgel">Засах</button>
+
+    @elseif (Auth::user()->heseg_id == 5 || Auth::user()->edit == 'on')
+      <button type="button" class="btn btn-success"  id="btnAddGuitsetgel">Нэмэх</button>
+
     @endif
   </div>
     <div class="clearfix"></div>
