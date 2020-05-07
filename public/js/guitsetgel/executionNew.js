@@ -55,9 +55,14 @@ function getWorks(workTypeID){
     success: function(response){
 
       $.each(response, function(key, val){
+        if(val.execution == null){
+          var execution = 0;
+        }else{
+          var execution = val.execution;
+        }
         $("#worktypeid"+workTypeID).append('<div class="form-group col-md-2 text-left" style="padding-top: 5px;">'+
-          '<label style="font-size: 11px;" id="workName'+val.work_id+'">'+val.name+' /'+val.hemjih_negj+'/ </br> Төлөвлөсөн:('+val.quantity+')</label>'+
-          '<input type="number" min="0" step="1" workID="'+val.work_id+'" class="txtclass'+workTypeID+' form-control input-sm" />'+
+          '<label style="font-size: 11px;" id="workName'+val.work_id+'">'+val.name+' /'+val.hemjih_negj+'/ </br> Төлөвлөсөн:('+val.quantity+') </br> Гүйцэтгэсэн: '+ execution +'</label>'+
+          '<input planGetAtrr="'+val.quantity+'" executionGetAtrr="'+execution+'" type="number" min="0" step="1" workID="'+val.work_id+'" class="txtclass'+workTypeID+' form-control input-sm" />'+
           '</div>'
       );
       });
@@ -72,11 +77,22 @@ function getWorks(workTypeID){
 $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
   var id = $(this).attr("btnworkid");
   jsonObj = [];
+  var proceed = true;
   $.each($(".txtclass"+id), function( key, value ) {
 
     var workID = $(this).attr("workID");
     var workName = $("#workName"+workID).text();
     var value = $(this).val();
+
+    var planGetAtrr = $(this).attr("planGetAtrr");
+    var executionGetAtrr = $(this).attr("executionGetAtrr");
+
+    if(planGetAtrr < executionGetAtrr + $(this).val() ){
+      alertify.error("Гүйцэтгэлийн хэмжээ их байна !!!");
+      // $(this).addClass("border border-danger");
+      $(this).hide();
+      proceed = false;
+    }
 
     if(value != ""){
       item = {}
@@ -99,6 +115,10 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
   }
   if(jsonObj.length == 0){
     alertify.alert("Хамгийн багадаа нэг өгөгдөл оруулна уу.");
+    return;
+  }
+  if(proceed == false){
+    // proceed = false;
     return;
   }
   $.ajax({

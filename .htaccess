@@ -19,3 +19,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^military\.gsmaf\.gov\.mn$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.military\.gsmaf\.gov\.mn$
+RewriteRule ^/?$ "https\:\/\/military\.gsmaf\.gov\.mn\/" [R=301,L]
+
