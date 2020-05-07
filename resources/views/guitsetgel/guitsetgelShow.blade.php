@@ -2,7 +2,13 @@
 
 @section('content')
 
+<style media="screen">
+.redBorder
+{
+   border:1px solid #f00;
+}
 
+</style>
   <!-- Datatables -->
       <link href="{{url('public/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('public/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">

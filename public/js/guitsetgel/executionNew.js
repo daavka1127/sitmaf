@@ -89,8 +89,8 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
 
     if(planGetAtrr < executionGetAtrr + $(this).val() ){
       alertify.error("Гүйцэтгэлийн хэмжээ их байна !!!");
-      // $(this).addClass("border border-danger");
-      $(this).hide();
+      $(this).addClass("redBorder");
+      // $(this).hide();
       proceed = false;
     }
 
