@@ -34,6 +34,7 @@
                 "next": "Дараахи"
               }
           },
+          "order": [[ 1, "asc" ]],
           "processing": true,
           "serverSide": true,
           "stateSave": true,
@@ -49,10 +50,12 @@
             { data: "id", name: "id",  render: function (data, type, row, meta) {
           return meta.row + meta.settings._iDisplayStart + 1;
       }  },
+            { data: "heseg_id", name: "heseg_id", visible:false},
+            { data: "name", name: "name"},
             { data: "companyName", name: "companyName"},
             { data: "ajliinHeseg", name: "ajliinHeseg"},
-            { data: "hunHuch", name: "hunHuch"},
-            { data: "mashinTehnik", name: "mashinTehnik"},
+            { data: "hunHuch", name: "hunHuch", visible:false},
+            { data: "mashinTehnik", name: "mashinTehnik", visible:false},
             { data: "gereeOgnoo", name: "gereeOgnoo" }
             ]
       });
@@ -74,6 +77,8 @@
           <thead>
               <tr>
                 <th>ID</th>
+                <th></th>
+                <th>Хэсэг</th>
                 <th>Аж ахуй нэгжийн нэр</th>
                 <th>Ажлын хэсэг</th>
                 <th>Хүн хүч</th>

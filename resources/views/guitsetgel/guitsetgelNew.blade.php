@@ -30,6 +30,14 @@
             <label>Огноо <span class="red-required">*</span> </label>
             <input type="date" id="txtOgnoo" name="ognoo" class="form-control" required />
           </div>
+          <div class="clearfix"></div>
+          <div class="form-group col-md-12 text-left ">
+            <h5>
+              <label id="batlagsanTooHenjeeAdd" ></label>
+
+            </h5>
+          </div>
+
 
           <div class="col-md-12" id="CheckBoxes"></div>
           <div class="clearfix"></div>

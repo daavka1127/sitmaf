@@ -35,7 +35,6 @@
           },
           "processing": true,
           "serverSide": true,
-          "order": [[ 6, "desc" ], [ 3, "asc" ]],
           "ajax":{
                    "url": getHunHuchUrl,
                    "dataType": "json",
@@ -45,13 +44,15 @@
                       }
                  },
           "columns": [
+              {
+                  "class":          "details-control",
+                  "orderable":      false,
+                  "data":           null,
+                  "defaultContent": ""
+              },
               { data: "id", name: "id" },
               { data: "companyName", name: "companyName"},
-              { data: "companyID", name: "companyID"},
-              { data: "ajliinHeseg", name: "ajliinHeseg"},
-              { data: "hunHuch", name: "hunHuch" },
-              { data: "mashinTehnik", name: "mashinTehnik" },
-              { data: "ognoo", name: "ognoo" }
+              { data: "ajliinHeseg", name: "ajliinHeseg"}
             ]
       });
   });
@@ -74,13 +75,10 @@
       <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
           <thead>
               <tr>
+                  <th></th>
                   <th>ID</th>
                   <th>Аж ахуй нэгжийн нэр</th>
-                  <th></th>
                   <th>Ажлын хэсэг</th>
-                  <th>Хүн хүч</th>
-                  <th>Газар шорооны ажлын машин, техник</th>
-                  <th>Огноо</th>
               </tr>
           </thead>
       </table>

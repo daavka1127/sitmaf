@@ -25,7 +25,7 @@ class companyController extends Controller
         $hesegID = Auth::user()->heseg_id;
         $companies = DB::table('tb_companies')
             ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
-            ->select('tb_companies.*', 'tb_heseg.name')
+            ->select('tb_companies.*', 'tb_heseg.name', 'tb_heseg.id as hesegID')
             ->where("tb_companies.heseg_id", "=", $hesegID)
             ->orderBy('tb_companies.heseg_id', 'asc')
             ->orderBy('tb_companies.companyName', 'asc')
@@ -35,7 +35,7 @@ class companyController extends Controller
       }else{
         $companies = DB::table('tb_companies')
             ->join('tb_heseg', 'tb_companies.heseg_id', '=', 'tb_heseg.id')
-            ->select('tb_companies.*', 'tb_heseg.name')
+            ->select('tb_companies.*', 'tb_heseg.name', 'tb_heseg.id as hesegID')
             ->orderBy('tb_companies.heseg_id', 'asc')
             ->orderBy('tb_companies.companyName', 'asc')
             ->get();

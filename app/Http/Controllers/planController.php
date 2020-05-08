@@ -148,6 +148,14 @@ class planController extends Controller
         return $execution2019P;
     }
 
+    public function getSumPlanByComID(Request $req){
+      $plan = DB::table("tb_plan")
+          ->where("companyID", "=", $req->comID)
+          ->sum("quantity");
+
+          return $plan;
+    }
+
 
 
 

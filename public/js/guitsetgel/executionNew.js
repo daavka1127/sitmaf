@@ -10,6 +10,19 @@ $(document).ready(function(){
          $('#cmbNewCompanyName').text(dataRow['companyName']+" " + dataRow['ajliinHeseg']);
          $('#cmbNewCompanyID').val(dataRow['id']);
 
+         $.ajax({
+           type:"post",
+           url:getBtoohemjee,
+           data:{
+             _token: $("meta[name='csrf-token']").attr("content"),
+             comID: dataRow['id']
+           },
+           success:function(response){
+             // alertify.alert(response);
+             $("#batlagsanTooHenjeeAdd").text("Батлагдсан тоо хэмжээ: "+response);
+           }
+         });
+
          $('#CheckBoxes').text("");
          $.ajax({
            type:'get',
@@ -79,15 +92,21 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
   jsonObj = [];
   var proceed = true;
   $.each($(".txtclass"+id), function( key, value ) {
-
+    $(this).removeClass("redBorder");
     var workID = $(this).attr("workID");
     var workName = $("#workName"+workID).text();
-    var value = $(this).val();
+    if($(this).val() == ""){
+      var value = 0;
+    }else{
+      var value = parseFloat($(this).val());
+    }
 
-    var planGetAtrr = $(this).attr("planGetAtrr");
-    var executionGetAtrr = $(this).attr("executionGetAtrr");
-
-    if(planGetAtrr < executionGetAtrr + $(this).val() ){
+    var planGetAtrr = parseFloat($(this).attr("planGetAtrr"));
+    var executionGetAtrr = parseFloat($(this).attr("executionGetAtrr"));
+      // $(this).addClass("redBorder");
+      var allExec = executionGetAtrr + value;
+      // alert(allExec);
+    if(planGetAtrr < allExec ){
       alertify.error("Гүйцэтгэлийн хэмжээ их байна !!!");
       $(this).addClass("redBorder");
       // $(this).hide();

@@ -319,7 +319,7 @@ class ExecutionContoller extends Controller
     $exec = DB::table("tb_execution")
       ->join("tb_work", "tb_execution.work_id", "=","tb_work.id")
       ->join("tb_work_type", "tb_execution.work_type_id", "=", "tb_work_type.id")
-      ->select("tb_execution.id","tb_execution.execution", "tb_execution.date","tb_work.name as workName","tb_work_type.name as workTypeName")
+      ->select("tb_execution.id","tb_execution.execution", "tb_execution.date","tb_work.name as workName","tb_work_type.name as workTypeName", "tb_execution.work_id")
       ->where("companyID", "=", $req->comID)
       ->get();
       return DataTables::of($exec)
@@ -535,5 +535,26 @@ class ExecutionContoller extends Controller
       else{
           return $exec*100/$plan;
       }
+  }
+
+  public function getOtherExec(Request $req){
+      $execs = DB::table('tb_execution')
+          ->where('id', '!=', $req->id)
+          ->where('companyID', '=', $req->companyID)
+          ->where('work_id', '=', $req->workID)
+          ->sum('execution');
+      $plans = DB::table('tb_plan')
+          ->where('companyID', '=', $req->companyID)
+          ->where('work_id', '=', $req->workID)
+          ->get();
+      $plan1 = 0;
+      foreach($plans as $plan){
+         $plan1 = $plan->quantity;
+      }
+      $array = array(
+          'plan' => $plan1,
+          'exec' => $execs
+      );
+      return json_encode($array);
   }
 }

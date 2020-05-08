@@ -113,7 +113,7 @@
             <th class="verticalTD  text-center"><div class="rotate">{{$company->companyName}}</div></th>
             {{-- <th class="rotate">{{$company->companyName}}</th> --}}
           @endforeach
-          <th rowspan="3">Бүгд</th>
+          <th class="text-center" rowspan="3">Бүгд</th>
         </tr>
       </thead>
       <tbody>
@@ -123,7 +123,7 @@
           @foreach ($companies as $company)
             <th class="rotate-45 text-center"><div><span>{{$company->ajliinHeseg}}</span></div></th>
           @endforeach
-          <th>{{$heseg->ajliinHeseg}}</th>
+          <th class="text-center">{{$heseg->ajliinHeseg}}</th>
         </tr>
         <tr class="text-left">
           {{-- <td>Ерөнхий мэдээлэл</td> --}}
@@ -137,7 +137,7 @@
           @php
             $plan = \App\Http\Controllers\planController::getPlanSections($heseg->id, $workTypeID);
           @endphp
-          <th>{{round($plan, 1)}}</th>
+          <th class="text-center">{{round($plan, 1)}}</th>
         </tr>
         <tr class="text-left">
           {{-- <td>Ерөнхий мэдээлэл</td> --}}
@@ -153,9 +153,9 @@
             $plan = \App\Http\Controllers\planController::getPlanSections($heseg->id, $workTypeID);
           @endphp
           @if ($plan == 0)
-            <th>0%</th>
+            <th class="text-center">0%</th>
           @else
-            <th>{{round($per2019*100/$plan, 1)}}%</th>
+            <th class="text-center">{{round($per2019*100/$plan, 1)}}%</th>
           @endif
         </tr>
         <tr class="text-left">
@@ -171,7 +171,7 @@
           $per2019 = \App\Http\Controllers\planController::getExecPercent2019($heseg->id, $workTypeID);
           $plan = \App\Http\Controllers\planController::getPlanSections($heseg->id, $workTypeID);
           @endphp
-          <th>{{round($plan-$per2019, 1)}}</th>
+          <th class="text-center">{{round($plan-$per2019, 1)}}</th>
         </tr>
         <tr class="text-center">
           {{-- <td>Ерөнхий мэдээлэл</td> --}}
@@ -182,7 +182,7 @@
             @endphp
             <th class="rotate-45 text-center"><div><span>{{$hun}}</span></div></th>
           @endforeach
-          <th></th>
+          <th class="text-center"></th>
         </tr>
         <tr class="text-center">
           {{-- <td>Ерөнхий мэдээлэл</td> --}}
@@ -193,7 +193,7 @@
             @endphp
             <th class="rotate-45 text-center"><div><span>{{$car}}</span></div></th>
           @endforeach
-          <th></th>
+          <th class="text-center"></th>
         </tr>
 
         @foreach($works as $work)
@@ -205,13 +205,17 @@
               @php
                 $previousReportExecution = \App\Http\Controllers\ExecutionContoller::previousReportExecutionByComIdWorkID($company->id, $work->id);
               @endphp
-              <td class="colComID{{$company->id}} previousExec{{$work->work_type_id}} text-center">{{round($previousReportExecution, 1)}}</td>
+              @if($previousReportExecution == 0)
+                <td class="colComID{{$company->id}} previousExec{{$work->work_type_id}} text-center"></td>
+              @else
+                <td class="colComID{{$company->id}} previousExec{{$work->work_type_id}} text-center">{{round($previousReportExecution, 1)}}</td>
+              @endif
             @endforeach
             @php
               $previousReportExecution = \App\Http\Controllers\ExecutionContoller::getLastExecutionByHeseg($heseg->id, $work->id);
               $allExec = \App\Http\Controllers\ExecutionContoller::getAllExecution2020ByHeseg($heseg->id, $work->id);
             @endphp
-            <td>{{round($allExec - $previousReportExecution, 1)}}</td>
+            <td class="text-center">{{round($allExec - $previousReportExecution, 1)}}</td>
           </tr>
           <tr class="{{$work->work_type_id}} workType text-left" id="report{{$work->id}}">
             {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
@@ -221,9 +225,13 @@
               @php
                 $lastExec = \App\Http\Controllers\ExecutionContoller::getLastExecByComIdWorkID($company->id, $work->id);
               @endphp
-              <td class="colComID{{$company->id}} reportExec{{$work->work_type_id}} text-center">{{round($lastExec, 1)}}</td>
+              @if($lastExec == 0)
+                <td class="colComID{{$company->id}} reportExec{{$work->work_type_id}} text-center"></td>
+              @else
+                <td class="colComID{{$company->id}} reportExec{{$work->work_type_id}} text-center">{{round($lastExec, 1)}}</td>
+              @endif
             @endforeach
-            <td>{{round($previousReportExecution, 1)}}</td>
+            <td class="text-center">{{round($previousReportExecution, 1)}}</td>
           </tr>
         @endforeach
 
@@ -236,13 +244,17 @@
               $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByReportTime($company->id, $workTypeID);
               $allReportExecution = \App\Http\Controllers\ExecutionContoller::getSumExec2020ByCompany($company->id, $workTypeID);
             @endphp
-            <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{round($allReportExecution-$lastExec, 1)}}</td>
+            @if(($allReportExecution-$lastExec) <=0 )
+              <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center"></td>
+            @else
+              <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{round($allReportExecution-$lastExec, 1)}}</td>
+            @endif
           @endforeach
           @php
             $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg->id, $workTypeID);
             $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExec2020ByHeseg($heseg->id, $workTypeID);
           @endphp
-          <td>{{round($allExecByHeseg-$lastExec, 1)}}</td>
+          <td class="text-center">{{round($allExecByHeseg-$lastExec, 1)}}</td>
         </tr>
 
         <tr>
@@ -253,12 +265,16 @@
             @php
               $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByReportTime($company->id, $workTypeID);
             @endphp
-            <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{round($lastExec, 1)}}</td>
+            @if($lastExec == 0)
+              <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center"></td>
+            @else
+              <td class="colComID{{$company->id}} sumReportExec{{$company->id}} text-center">{{round($lastExec, 1)}}</td>
+            @endif
           @endforeach
           @php
             $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg->id, $workTypeID);
           @endphp
-          <td>{{round($lastExec, 1)}}</td>
+          <td class="text-center">{{round($lastExec, 1)}}</td>
         </tr>
         <tr>
           {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
@@ -273,7 +289,7 @@
           @php
             $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExec2020ByHeseg($heseg->id, $workTypeID);
           @endphp
-          <td>{{round($allExecByHeseg, 1)}}</td>
+          <td class="text-center">{{round($allExecByHeseg, 1)}}</td>
         </tr>
         <tr>
           {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
@@ -288,7 +304,7 @@
             @php
               $execPercent2020 = \App\Http\Controllers\ExecutionContoller::getAllHesegExecPercent2020($heseg->id, $workTypeID);
             @endphp
-            <td>{{round($execPercent2020, 1)}}%</td>
+            <td class="text-center">{{round($execPercent2020, 1)}}%</td>
         </tr>
         <tr>
           {{-- <td>Мэдээний хугацаанд гүйцэтгэсэн</td> --}}
@@ -312,7 +328,7 @@
           @if($plan == 0)
             <td></td>
           @else
-            <td>{{round($allExecByHeseg*100/$plan, 1)}}%</td>
+            <td class="text-center">{{round($allExecByHeseg*100/$plan, 1)}}%</td>
           @endif
         </tr>
       </tbody>
@@ -402,7 +418,7 @@
                   @endphp
                   <td class="text-center">{{round($allExec-$lastExec, 1)}}</td>
                 @endforeach
-                <td></td>
+                <td class="text-center"></td>
               </tr>
               <tr class="{{$work->work_type_id}} workType" id="report{{$work->id}}">
                 <td class="text-center">{{$work->name}}</td>
@@ -413,7 +429,7 @@
                   @endphp
                   <td class="text-center">{{round($lastExec, 1)}}</td>
                 @endforeach
-                <td></td>
+                <td class="text-center"></td>
               </tr>
             @endforeach
               <tr class="text-center">
@@ -428,9 +444,9 @@
                     $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg1->id, $workTypeID);
                     $sumPreviousExecOfHesegs = $sumPreviousExecOfHesegs + ($allExecByHeseg-$lastExec);
                   @endphp
-                  <td>{{round($allExecByHeseg-$lastExec, 1)}}</td>
+                  <td class="text-center">{{round($allExecByHeseg-$lastExec, 1)}}</td>
                 @endforeach
-                <td>{{round($sumPreviousExecOfHesegs, 1)}}</td>
+                <td class="text-center">{{round($sumPreviousExecOfHesegs, 1)}}</td>
               </tr>
               <tr class="text-center">
                 <td>Бүгд</td>
@@ -443,9 +459,9 @@
                     $lastExec = \App\Http\Controllers\ExecutionContoller::getAllExecByHesegReportTime($heseg1->id, $workTypeID);
                     $sumLastExecOfHesegs = $sumLastExecOfHesegs + $lastExec;
                   @endphp
-                  <td>{{round($lastExec, 1)}}</td>
+                  <td class="text-center">{{round($lastExec, 1)}}</td>
                 @endforeach
-                <td>{{round($sumLastExecOfHesegs, 1)}}</td>
+                <td class="text-center">{{round($sumLastExecOfHesegs, 1)}}</td>
               </tr>
               <tr class="allSumLastTable text-center">
                 <td>Бүгд</td>
@@ -460,7 +476,7 @@
                   @endphp
                   <td>{{round($allExecByHeseg, 1)}}</td>
                 @endforeach
-                <td>{{round($sumExecByHesegs, 1)}}</td>
+                <td class="text-center">{{round($sumExecByHesegs, 1)}}</td>
               </tr>
               <tr class="allSumLastTable text-center">
                 <td>Бүгд</td>
@@ -473,12 +489,12 @@
                     $execPercent2020 = \App\Http\Controllers\ExecutionContoller::getAllHesegExecPercent2020($heseg1->id, $workTypeID);
                     $sumExecByHesegs2020 = $sumExecByHesegs2020 + $execPercent2020;
                   @endphp
-                  <td>{{round($execPercent2020, 1)}}%</td>
+                  <td class="text-center">{{round($execPercent2020, 1)}}%</td>
                 @endforeach
                 @php
                   $execPercent2020 = \App\Http\Controllers\ExecutionContoller::getAllHesegExec2020Percent($workTypeID);
                 @endphp
-                <td>{{round($execPercent2020, 1)}}%</td>
+                <td class="text-center">{{round($execPercent2020, 1)}}%</td>
               </tr>
               <tr class="allSumLastTable text-center">
                 <td>Бүгд</td>
@@ -489,15 +505,15 @@
                     $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id, $workTypeID);
                   @endphp
                   @if ($plan == 0)
-                    <td>0</td>
+                    <td class="text-center">0</td>
                   @else
-                    <td>{{round($allExecByHeseg*100/$plan, 1)}}%</td>
+                    <td class="text-center">{{round($allExecByHeseg*100/$plan, 1)}}%</td>
                   @endif
                 @endforeach
                 @php
                   $allExecPercent = \App\Http\Controllers\ExecutionContoller::getAllHesegExecPercent($workTypeID);
                 @endphp
-                <td>{{round($allExecPercent, 1)}}%</td>
+                <td class="text-center">{{round($allExecPercent, 1)}}%</td>
               </tr>
           </tbody>
         </table>

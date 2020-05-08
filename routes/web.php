@@ -112,11 +112,16 @@ Route::post('/work/delete', 'WorkController@delete');
 Route::get("/getPlanWorkType", "planController@getPlanWorkTypeByCompany");
 Route::get("/getPlanWork/company/work_type", "planController@getPlanWorksByWorkTypeID");
 
+Route::post("/plan/get/sum/comID", "planController@getSumPlanByComID");
+
 Route::post("/execution/store", "ExecutionContoller@store");
 Route::post('/execution/execUpdate', "ExecutionContoller@execUpdate");
 Route::post('/execution/execDelete', "ExecutionContoller@execDelete");
 
 Route::post('/guitsetgel/getExecByCompany', "ExecutionContoller@getExecByCompany");
+Route::post('/get/other/exec/with/edit', 'ExecutionContoller@getOtherExec');
+
+
 
 // workType Visible start
 Route::get('workType/visible', "WorktypeController@visibleShowBlade");

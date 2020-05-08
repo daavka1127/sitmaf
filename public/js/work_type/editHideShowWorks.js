@@ -33,6 +33,7 @@ $(document).ready(function(){
   $("#modalEditCompany").on('hide.bs.modal', function(){
     $(".modal-body").each(function(){
       $(this).find(':checked').prop('checked', false);
+        $(this).find(':input').val("");
     });
     $(".vision").css("display","none");
     dataRow = "";

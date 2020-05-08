@@ -14,6 +14,7 @@ function refresh(){
                 "next": "Дараахи"
               }
           },
+          "order": [[ 1, "asc" ]],
           "processing": true,
           "serverSide": true,
           "stateSave": true,
@@ -29,6 +30,8 @@ function refresh(){
             { data: "id", name: "id",  render: function (data, type, row, meta) {
           return meta.row + meta.settings._iDisplayStart + 1;
       } },
+            { data: "heseg_id", name: "heseg_id", visible:false},
+            { data: "name", name: "name"},
             { data: "companyName", name: "companyName"},
             { data: "ajliinHeseg", name: "ajliinHeseg"},
             { data: "hunHuch", name: "hunHuch"},

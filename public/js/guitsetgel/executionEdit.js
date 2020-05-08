@@ -9,12 +9,23 @@ $(document).ready(function(){
         $('#modalEditGuitsetgel').modal('show');
         $('.printCompanyName').text(dataRow['companyName']);
         $('#hiddenCompanyName').text(dataRow['companyName']);
+
+        $.ajax({
+          type:"post",
+          url:getBtoohemjee,
+          data:{
+            _token: $("meta[name='csrf-token']").attr("content"),
+            comID: dataRow['id']
+          },
+          success:function(response){
+            // alertify.alert(response);
+            $("#batlagsanTooHenjee").text(response);
+          }
+        });
     });
 });
 
 function refreshExecEdit(comID){
-
-
   $('#editExecTable').dataTable().fnDestroy();
   $('#editExecTable').DataTable( {
       "language": {
@@ -29,6 +40,38 @@ function refreshExecEdit(comID){
             "next": "Дараахи"
           }
       },
+      "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // Total over all pages
+            total = api
+                .column( 4 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Total over this page
+            pageTotal = api
+                .column( 4, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api.column( 4 ).footer() ).html(
+                ''+parseFloat(pageTotal).toFixed(2) +' ( '+ parseFloat(total).toFixed(2) +' бүх хуудасны нийт)'
+            );
+        },
       "processing": true,
       "serverSide": true,
       "select":true,
@@ -48,7 +91,8 @@ function refreshExecEdit(comID){
           { data: "workTypeName", name: "workTypeName"},
           { data: "workName", name: "workName"},
           { data: "date", name: "date"},
-          { data: "execution", name: "execution" }
+          { data: "execution", name: "execution" },
+          { data: "work_id", name: "work_id", visible:false}
         ]
   }).ajax.reload();
 
@@ -58,6 +102,16 @@ function refreshExecEdit(comID){
 $(document).ready(function(){
     $("#btnEditPostGuitsetgel").click(function(e){
         e.preventDefault();
+        var plan = parseFloat($("#hidePlan").val());
+        var otherExec = parseFloat($("#hideExecOther").val());
+        var sumExec = otherExec + parseFloat($("#editExec").val());
+        // alert(sumExec);
+        $("#editExec").removeClass("redBorder");
+        if(plan<sumExec){
+          alertify.error("Гүйцэтгэлийн хэмжээ төлөвлөсөн ажлаас их байна!!!");
+          $("#editExec").addClass("redBorder");
+          return;
+        }
         var isInsert = true;
         if($("#editExec").val()==""||$("#editExec").val()==null){
             alertify.error("Гүйцэтгэлийн утга оруулаагүй байна!!!");
@@ -71,7 +125,7 @@ $(document).ready(function(){
           data: {
             _token: $('meta[name=csrf-token]').attr("content"),
             execRowID : execEditRow['id'],
-            editExec: execEditRow['execution'],
+            editExec: $("#editExec").val(),
             workName: execEditRow['workName'],
             comName: dataRow['companyName'],
             editDate: execEditRow['date']
