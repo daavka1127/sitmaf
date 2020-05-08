@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-2">
                   <label>Гүйцэтгэл</label>
-                  <input class="form-control" type="text" name="editExec" id="editExec" value=""/>
+                  <input class="form-control" type="number" name="editExec" id="editExec" value=""/>
                   <input type="hidden" id="hidePlan" name="" value="">
                   <input type="hidden" id="hideExecOther" name="" value="">
                 </div>

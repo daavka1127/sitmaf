@@ -116,6 +116,7 @@ $(document).ready(function () {
               alertify.alert(response);
               refresh();
               button.prop( "disabled", false );
+              $("#modalEditCompany").modal("hide");
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;

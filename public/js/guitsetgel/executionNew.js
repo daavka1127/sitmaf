@@ -73,8 +73,16 @@ function getWorks(workTypeID){
         }else{
           var execution = val.execution;
         }
+        if((parseFloat(val.quantity) - parseFloat(execution)) == 0){
+            var label = '<label style="font-size:11px;color:green">Үлдэгдэл: дууссан</label>';
+        }
+        else{
+            var label = '<label style="font-size: 11px;">Үлдэгдэл: ' + (parseFloat(val.quantity) - parseFloat(execution)).toFixed(2)+'</label>';
+        }
         $("#worktypeid"+workTypeID).append('<div class="form-group col-md-2 text-left" style="padding-top: 5px;">'+
-          '<label style="font-size: 11px;" id="workName'+val.work_id+'">'+val.name+' /'+val.hemjih_negj+'/ </br> Төлөвлөсөн:('+val.quantity+') </br> Гүйцэтгэсэн: '+ execution +'</label>'+
+          '<label style="font-size: 12px;color:red;" id="workName'+val.work_id+'">'+val.name+' /'+val.hemjih_negj+'/</label>' +
+          '<label style="font-size: 11px;">Төлөвлөсөн:('+val.quantity+') Гүйцэтгэсэн: '+ execution.toFixed(2) +'</label>'+
+          label+
           '<input planGetAtrr="'+val.quantity+'" executionGetAtrr="'+execution+'" type="number" min="0" step="1" workID="'+val.work_id+'" class="txtclass'+workTypeID+' form-control input-sm" />'+
           '</div>'
       );
