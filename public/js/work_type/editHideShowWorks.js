@@ -44,6 +44,7 @@ $(document).on('click', '[type=checkbox]', function(){
     var id = $(this).attr("workTypeId");
     if($(this).is(':checked')){
         $("#editWorktypeid" + id).css("display","block");
+        sumPlansEdit($(this).attr("worktypeid"));
     }
     else{
         $("#editWorktypeid" + id).css("display","none");
@@ -94,7 +95,8 @@ $(document).ready(function () {
           alertify.error("Хамгийн багадаа нэг төлөвлөсөн ажил оруулна уу!!!");
           return;
         }
-
+        $(this).prop( "disabled", true );
+        var button = $(this);
         $.ajax({
           type: 'post',
           url: editWorksUrl,
@@ -113,6 +115,7 @@ $(document).ready(function () {
           success:function(response){
               alertify.alert(response);
               refresh();
+              button.prop( "disabled", false );
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;
@@ -121,7 +124,27 @@ $(document).ready(function () {
                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
             });
             alert(errorsHtml);
+            button.prop("disabled", false);
           }
     });
+
+
   });
 });
+
+$(document).ready(function(){
+    $(".numbersPlanEdit").keyup(function(){
+        // alert($(this).attr("worktypeid"));
+        sumPlansEdit($(this).attr("worktypeid"));
+    });
+});
+
+function sumPlansEdit(workTypeID){
+    var sumPlan = 0;
+    $(".editTxtclass" + workTypeID).each(function(){
+        if($(this).val() != "")
+            sumPlan += parseFloat($(this).val());
+    });
+    console.log(sumPlan.toFixed(2));
+    $("#sumPlanEdit" + workTypeID).text("Нийт батлагдсан тоо хэмжээ: " + sumPlan.toFixed(2));
+}

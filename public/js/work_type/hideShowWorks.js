@@ -70,7 +70,8 @@ $(document).ready(function () {
           alertify.error("Хамгийн багадаа нэг төлөвлөсөн ажил оруулна уу!!!");
           return;
         }
-
+        $(this).prop( "disabled", true );
+        var button = $(this);
         $.ajax({
           type: 'post',
           url: newWorksUrl,
@@ -89,6 +90,7 @@ $(document).ready(function () {
               $("#worktypeid"+id).css("display","none");
               $("#checkBoxes"+id).prop("disabled", true);
               refresh();
+              button.prop( "disabled", false );
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;
@@ -97,7 +99,25 @@ $(document).ready(function () {
                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
             });
             alert(errorsHtml);
+            button.prop("disabled", false);
           }
         });
     });
 });
+
+$(document).ready(function(){
+    $(".numbersPlanNew").keyup(function(){
+        // alert($(this).attr("worktypeid"));
+        sumPlansNew($(this).attr("worktypeid"));
+    });
+});
+
+function sumPlansNew(workTypeID){
+    var sumPlan = 0;
+    $(".txtclass" + workTypeID).each(function(){
+        if($(this).val() != "")
+            sumPlan += parseFloat($(this).val());
+    });
+    console.log(sumPlan.toFixed(2));
+    $("#sumPlanNew" + workTypeID).text("Нийт батлагдсан тоо хэмжээ: " + sumPlan.toFixed(2));
+}

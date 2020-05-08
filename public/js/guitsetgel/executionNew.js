@@ -88,6 +88,7 @@ function getWorks(workTypeID){
 }
 
 $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
+  var button = $(this);
   var id = $(this).attr("btnworkid");
   jsonObj = [];
   var proceed = true;
@@ -140,6 +141,7 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
     // proceed = false;
     return;
   }
+  button.prop("disabled", true);
   $.ajax({
     type: 'post',
     url: executionStoreUrl,
@@ -160,6 +162,7 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
           $('#newGuitsetgelModal').modal('hide');
           refresh();
         }
+        button.prop("disabled", false);
     },
     error: function(jqXhr, json, errorThrown){// this are default for ajax errors
       var errors = jqXhr.responseJSON;
@@ -168,6 +171,7 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
           errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
       });
       alert(errorsHtml);
+      button.prop("disabled", false);
     }
   });
 });

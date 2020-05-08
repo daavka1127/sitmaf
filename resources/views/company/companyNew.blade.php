@@ -65,7 +65,7 @@
                   @foreach ($works as $work)
                     <div class="form-group col-md-2 text-left" style="padding-top: 5px;">
                       <label style="font-size: 11px;" id="workName{{$work->id}}">{{$work->name}} /{{$work->hemjih_negj}}/</label>
-                      <input type="number" min="0" step="1" workID="{{$work->id}}" class="txtclass{{$worktype->id}} form-control input-sm" />
+                      <input type="number" workTypeID="{{$worktype->id}}" min="0" step="1" workID="{{$work->id}}" class="txtclass{{$worktype->id}} numbersPlanNew form-control input-sm" />
                     </div>
                     @php $i++; @endphp
                     @if ($i%6 == 0)
@@ -74,6 +74,8 @@
 
                   @endforeach
                   @if (count($works) != 0)
+                    <div class="clearfix"></div>
+                    <label style="font-size: 19px;" id="sumPlanNew{{$worktype->id}}"></label>
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
                       <button type="button" btnworkid="{{$worktype->id}}" class="btnWorkTypeID btn btn-success">Хадгалах</button>
                     </div>

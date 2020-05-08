@@ -102,6 +102,7 @@ function refreshExecEdit(comID){
 $(document).ready(function(){
     $("#btnEditPostGuitsetgel").click(function(e){
         e.preventDefault();
+        var button = $(this);
         var plan = parseFloat($("#hidePlan").val());
         var otherExec = parseFloat($("#hideExecOther").val());
         var sumExec = otherExec + parseFloat($("#editExec").val());
@@ -119,6 +120,7 @@ $(document).ready(function(){
         }
 
         if(isInsert == false){return;}
+        button.prop("disabled", true);
         $.ajax({
           type: 'POST',
           url: executionUpdateUrl,
@@ -135,6 +137,7 @@ $(document).ready(function(){
               $('#modalEditGuitsetgel').modal('hide');
               execEditRow = "";
               refresh();
+              button.prop("disabled", false);
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;
@@ -143,6 +146,7 @@ $(document).ready(function(){
                 errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
             });
             alert(errorsHtml);
+            button.prop("disabled", false);
           }
         });
     });
@@ -150,6 +154,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#btnDeletePostGuitsetgel").click(function(){
+      var button = $(this);
         if(execEditRow == ""){
             alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
             return;
@@ -158,6 +163,7 @@ $(document).ready(function(){
         alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
           if (e) {
             var csrf = $('meta[name=csrf-token]').attr("content");
+            button.prop("disabled", true);
             $.ajax({
                 type: 'POST',
                 url: executionDeleteUrl,
@@ -173,9 +179,11 @@ $(document).ready(function(){
                     alertify.alert(response);
                     refreshExecEdit(dataRow['id']);
                     execEditRow="";
+                    button.prop("disabled", false);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
+                    button.prop("disabled", false);
                 }
             });
           } else {

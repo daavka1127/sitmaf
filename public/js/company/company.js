@@ -43,6 +43,7 @@ function refresh(){
 
 $(document).ready(function(){
     $("#btnDeleteCompany").click(function(){
+        var button = $(this);
         if(dataRow == ""){
             alertify.error('Та Устгах мөрөө дарж сонгоно уу!!!');
             return;
@@ -51,7 +52,7 @@ $(document).ready(function(){
         alertify.confirm( "Та устгахдаа итгэлтэй байна уу?", function (e) {
           if (e) {
             var csrf = $('meta[name=csrf-token]').attr("content");
-
+            button.prop( "disabled", true );
             $.ajax({
                 type: 'POST',
                 url: deleteCompanyUrl,
@@ -64,9 +65,11 @@ $(document).ready(function(){
                     alertify.alert(response);
                     refresh();
                     dataRow="";
+                    button.prop( "disabled", false );
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alertify.error("Status: " + textStatus); alertify.error("Error: " + errorThrown);
+                    button.prop("disabled", false);
                 }
             })
           } else {
