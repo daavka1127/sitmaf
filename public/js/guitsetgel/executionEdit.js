@@ -134,7 +134,7 @@ $(document).ready(function(){
               alertify.alert(response);
               $('#modalEditGuitsetgel').modal('hide');
               execEditRow = "";
-              // refresh();
+              refresh();
           },
           error: function(jqXhr, json, errorThrown){// this are default for ajax errors
             var errors = jqXhr.responseJSON;

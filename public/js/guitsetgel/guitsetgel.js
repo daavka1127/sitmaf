@@ -1,54 +1,50 @@
-// function refresh(){
-//
-//     var csrf = $('meta[name=csrf-token]').attr("content");
-//     $('#datatable').dataTable().fnDestroy();
-//       $('#datatable').DataTable( {
-//           "language": {
-//               "lengthMenu": "_MENU_ мөрөөр харах",
-//               "zeroRecords": "Хайлт илэрцгүй байна",
-//               "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
-//               "infoEmpty": "Хайлт илэрцгүй",
-//               "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
-//               "sSearch": "Хайх: ",
-//               "paginate": {
-//                 "previous": "Өмнөх",
-//                 "next": "Дараахи"
-//               }
-//           },
-//           "processing": true,
-//           "serverSide": true,
-//           "ajax":{
-//                    "url": getCompaniesUrl,
-//                    "dataType": "json",
-//                    "type": "POST",
-//                    "data":{
-//                         _token: csrf
-//                       }
-//                  },
-//           "columns": [
-//             { data: "id", name: "id",  render: function (data, type, row, meta) {
-//           return meta.row + meta.settings._iDisplayStart + 1;
-//       }   },
-//             { data: "companyID", name: "companyID", visible:false},
-//             { data: "companyName", name: "companyName"},
-//             { data: "gHursHuulalt", name: "gHursHuulalt"},
-//             { data: "gDalan", name: "gDalan" },
-//             { data: "gUhmal", name: "gUhmal" },
-//             { data: "gSuuriinUy", name: "gSuuriinUy" },
-//             { data: "gShuuduu", name: "gShuuduu" },
-//             { data: "gUhmaliinHamgaalalt", name: "gUhmaliinHamgaalalt" },
-//             { data: "gUuliinShuuduu", name: "gUuliinShuuduu" },
-//             { data: "ognoo", name: "ognoo" },
-//             { data: "hursHuulalt", name: "hursHuulalt", visible:false},
-//             { data: "dalan", name: "dalan", visible:false},
-//             { data: "uhmal", name: "uhmal", visible:false},
-//             { data: "suuriinUy", name: "suuriinUy", visible:false},
-//             { data: "shuuduu", name: "shuuduu", visible:false},
-//             { data: "uhmaliinHamgaalalt", name: "uhmaliinHamgaalalt", visible:false},
-//             { data: "uuliinShuuduu", name: "uuliinShuuduu", visible:false},
-//             ]
-//       }).ajax.reload();
-// }
+function refresh(){
+
+    var csrf = $('meta[name="csrf-token"]').attr("content");
+    $('#datatable').dataTable().fnDestroy();
+      $('#datatable').DataTable( {
+          "language": {
+              "lengthMenu": "_MENU_ мөрөөр харах",
+              "zeroRecords": "Хайлт илэрцгүй байна",
+              "info": "Нийт _PAGES_ -аас _PAGE_-р хуудас харж байна ",
+              "infoEmpty": "Хайлт илэрцгүй",
+              "infoFiltered": "(_MAX_ мөрөөс хайлт хийлээ)",
+              "sSearch": "Хайх: ",
+              "paginate": {
+                "previous": "Өмнөх",
+                "next": "Дараахи"
+              }
+          },
+          "order": [[ 1, "asc" ]],
+          "processing": true,
+          "serverSide": true,
+          "ajax":{
+                   "url": getCompaniesUrl,
+                   "dataType": "json",
+                   "type": "POST",
+                   "data":{
+                        _token: csrf
+                      }
+                 },
+                 "columns": [
+                     { data: "id", name: "id",  render: function (data, type, row, meta) {
+                   return meta.row + meta.settings._iDisplayStart + 1;
+               } },
+                     { data: "heseg_id", name: "heseg_id", visible:false},
+                     { data: "name", name: "name"},
+                     { data: "companyName", name: "companyName"},
+                     { data: "ajliinHeseg", name: "ajliinHeseg"},
+                     { data: "hunHuch", name: "hunHuch", visible:false},
+                     { data: "mashinTehnik", name: "mashinTehnik", visible:false},
+                     { data: "gereeOgnoo", name: "gereeOgnoo", visible:false },
+                     { data: "plan", name: "plan"},
+                     { data: "allExec", name: "allExec"},
+                     { data: "per", name: "per", render: function (data, type, full) {
+                          return data.toString().match(/\d+(\.\d{1,2})?/g)[0] + "%";
+                     }}
+                   ]
+      }).ajax.reload();
+}
 //
 // $(document).ready(function(){
 //     $("#btnPostNewGuitsetgel").click(function(e){

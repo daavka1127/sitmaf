@@ -78,7 +78,12 @@
               { data: "ajliinHeseg", name: "ajliinHeseg"},
               { data: "hunHuch", name: "hunHuch", visible:false},
               { data: "mashinTehnik", name: "mashinTehnik", visible:false},
-              { data: "gereeOgnoo", name: "gereeOgnoo" }
+              { data: "gereeOgnoo", name: "gereeOgnoo", visible:false },
+              { data: "plan", name: "plan"},
+              { data: "allExec", name: "allExec"},
+              { data: "per", name: "per", render: function (data, type, full) {
+                   return data.toString().match(/\d+(\.\d{1,2})?/g)[0] + "%";
+              }}
             ]
       });
   });
@@ -103,6 +108,7 @@
 
 <script src="{{url('public/js/guitsetgel/executionNew.js')}}"></script>
 <script src="{{url('public/js/guitsetgel/executionEdit.js')}}"></script>
+<script src="{{url('public/js/guitsetgel/guitsetgel.js')}}"></script>
 
 @if(Auth::user()->edit == 'on')
 <div class="col-md-12">
@@ -143,6 +149,9 @@
                   <th>Хүн хүч</th>
                   <th>Машин техник</th>
                   <th>Огноо</th>
+                  <th>Батлагдсан тоо хэмжээ</th>
+                  <th>Нийт гүйцэтгэл</th>
+                  <th>Хувь</th>
               </tr>
           </thead>
       </table>

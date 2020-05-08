@@ -158,6 +158,7 @@ $(document).on("click", 'button[class^="btnWorkTypeID"]', function(){
           $("#divGenerateReport").show();
           $("#generateReportAlert").html("");
           $('#newGuitsetgelModal').modal('hide');
+          refresh();
         }
     },
     error: function(jqXhr, json, errorThrown){// this are default for ajax errors
