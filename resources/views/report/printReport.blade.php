@@ -501,7 +501,7 @@
                 <td>Нийт хувь</td>
                 @foreach ($heseg1s as $heseg1)
                   @php
-                    $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExec2020ByHeseg($heseg1->id, $workTypeID);
+                    $allExecByHeseg = \App\Http\Controllers\ExecutionContoller::getAllExecByHeseg($heseg1->id, $workTypeID);
                     $plan = \App\Http\Controllers\planController::getPlanSections($heseg1->id, $workTypeID);
                   @endphp
                   @if ($plan == 0)

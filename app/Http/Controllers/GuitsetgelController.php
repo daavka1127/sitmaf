@@ -214,13 +214,37 @@ class GuitsetgelController extends Controller
                 ->get();
         }
 
-        foreach($companies as $company){
-            $dundaj = self::getGuitsetgelHuvi($company->id);
-            $dundajHuvi = $dundajHuvi + $dundaj;
-            $count++;
-        }
+        // foreach($companies as $company){
+        //     $dundaj = self::getGuitsetgelHuvi($company->id);
+        //     $dundajHuvi = $dundajHuvi + $dundaj;
+        //     $count++;
+        // }
+        //
+        // $dundajHuvi = $dundajHuvi / $count;
+        $avgPercent = self::getExecPercent($hesegID);
+        return round($avgPercent, 1);
+    }
 
-        $dundajHuvi = $dundajHuvi / $count;
-        return round($dundajHuvi, 2);
+    public static function getExecPercent($heseg){
+        if($heseg == 4){
+            $planAll = DB::table('tb_plan')
+                ->sum("quantity");
+            $execAll = DB::table("tb_execution")
+                ->sum("execution");
+            $percent = $execAll*100/$planAll;
+            return $percent;
+        }
+        else{
+            $planHeseg = DB::table("tb_plan")
+                ->join("tb_companies", "tb_plan.companyID", "=", "tb_companies.id")
+                ->where("tb_companies.heseg_id", "=", $heseg)
+                ->sum("tb_plan.quantity");
+            $execHeseg = DB::table("tb_execution")
+                ->join("tb_companies", "tb_execution.companyID", "=", "tb_companies.id")
+                ->where("tb_companies.heseg_id", "=", $heseg)
+                ->sum("tb_execution.execution");
+            $percent = $execHeseg * 100 / $planHeseg;
+            return $percent;
+        }
     }
 }
