@@ -39,8 +39,9 @@ function refresh(){
                      { data: "gereeOgnoo", name: "gereeOgnoo", visible:false },
                      { data: "plan", name: "plan"},
                      { data: "allExec", name: "allExec"},
-                     { data: "per", name: "per", render: function (data, type, full) {
-                          return data.toString().match(/\d+(\.\d{1,2})?/g)[0] + "%";
+                     { data: "per", name: "per", render:function(data, type, row, meta){
+                       if(data == null){return "";}
+                       else {return data + "%";}
                      }}
                    ]
       }).ajax.reload();
