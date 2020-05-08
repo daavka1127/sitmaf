@@ -108,6 +108,7 @@ class planController extends Controller
           DB::raw("(SELECT SUM(execution) FROM tb_execution WHERE tb_execution.work_id = tb_plan.work_id AND tb_execution.companyID = " . $req->companyID . ") as execution"))
           ->where('tb_plan.companyID', "=", $req->companyID)
           ->where("tb_plan.work_type_id", "=", $req->work_type_id)
+          ->orderBy("tb_work.daraalal", "ASC")
           ->get();
           return Response::json($works);
     }
