@@ -60,6 +60,7 @@
           "order": [[ 1, "asc" ]],
           "processing": true,
           "serverSide": true,
+          "stateSave": true,
           "ajax":{
                    "url": getCompaniesUrl,
                    "dataType": "json",
