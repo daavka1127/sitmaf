@@ -52,6 +52,9 @@ class ExecutionImport implements ToModel, WithStartRow
             return;
         }
         $nowExec = self::thinkExec($comID, $workID, $exec);
+        if($nowExec < 0){
+            return;
+        }
         if(self::checkExecToPlan($comID, $workID, $nowExec) == false){
             $errorExcel = new ErrorExcel;
             $errorExcel->company = $row[0];
@@ -165,6 +168,6 @@ class ExecutionImport implements ToModel, WithStartRow
             ->where('companyID', '=', $comID)
             ->where('work_id', '=', $wid)
             ->sum("execution");
-        return $nowExec - $prevExec;
+        return number_format($nowExec - $prevExec, 2, '.', '');
     }
 }
