@@ -140,3 +140,9 @@ Route::post('/adminSee', 'adminController@getAdmin');
 Route::get('/adminView', 'adminController@adminView');
 Route::post('/admin/adminUpdate', 'adminController@adminUpdate');
 Route::post("/admin/delete", "adminController@delete");
+
+// START EXCEL
+Route::get('/excel/header/execution/{hesegid}/{workTypeID}', "ExcellExecutionController@showExcelHeader");
+Route::get('/excel/header/execution/upload', "ExcellExecutionController@showExcelUpload");
+Route::post('/excel/execution/post', 'ExcellExecutionController@storeExec');
+// END EXCEL
