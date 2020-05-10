@@ -122,7 +122,7 @@
         </div>
         <div class="col-md-4">
           <div class='input-group date' >
-              <input type="datetime" name="date" id="date" value="" class="form-control"/>
+              <input type="datetime" name="date" id="date" value="" class="form-control" autocomplete="off"/>
               <span class="input-group-addon">
                   <span class="glyphicon glyphicon-calendar"></span>
               </span>
