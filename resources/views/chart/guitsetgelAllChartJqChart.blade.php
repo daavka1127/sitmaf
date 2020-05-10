@@ -19,6 +19,7 @@
                         @foreach ($hesegCompanies as $company)
                             '{!!$company->companyName!!}',
                         @endforeach
+                        0
                         ],
                       labels: {
                           font: '12px sans-serif',
@@ -37,6 +38,7 @@
                         @endphp
                             {{round($dundaj, 2)}},
                         @endforeach
+                        0
 
                       ]
                   }

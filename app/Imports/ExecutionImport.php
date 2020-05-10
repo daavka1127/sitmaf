@@ -40,7 +40,7 @@ class ExecutionImport implements ToModel, WithStartRow
             $errorExcel->save();
             return;
         }
-        else if($workID == 0){
+        if($workID == 0){
             $errorExcel = new ErrorExcel;
             $errorExcel->company = $row[0];
             $errorExcel->pk = $row[1];
@@ -52,7 +52,7 @@ class ExecutionImport implements ToModel, WithStartRow
             return;
         }
         $nowExec = self::thinkExec($comID, $workID, $exec);
-        if($nowExec < 0){
+        if($nowExec <= 0){
             return;
         }
         if(self::checkExecToPlan($comID, $workID, $nowExec) == false){
