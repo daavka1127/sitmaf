@@ -38,12 +38,8 @@
             <input type="date" id="txtEditGereeOgnoo" name="gereeOgnoo" class="form-control" required />
           </div>
           <div class="form-group col-md-3 text-left">
-            <label>Хүн хүч <span class="red-required">*</span> </label>
-            <input type="number" min="0" step="1" id="txtEditHunHuch" name="hunHuch" class="form-control" required />
-          </div>
-          <div class="form-group col-md-3 text-left">
-            <label>Ажлын машин техник <span class="red-required">*</span> </label>
-            <input type="number" min="0" step="1" id="txtEditMashinTehnik" name="mashinTehnik" class="form-control" required />
+            <label>Дугаар <span class="red-required">*</span> </label>
+            <input type="number" id="txtEditDaraalal" name="daraalal" class="form-control" required />
           </div>
           <div class="clearfix"></div>
 

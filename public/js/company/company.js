@@ -26,24 +26,21 @@ function refresh(){
                         _token: csrf
                       }
                  },
-           "columns": [
-             { data: "id", name: "id",  render: function (data, type, row, meta) {
-                 return meta.row + meta.settings._iDisplayStart + 1;
-             }  },
-             { data: "heseg_id", name: "heseg_id", visible:false},
-             { data: "name", name: "name"},
-             { data: "companyName", name: "companyName"},
-             { data: "ajliinHeseg", name: "ajliinHeseg"},
-             { data: "hunHuch", name: "hunHuch", visible:false},
-             { data: "mashinTehnik", name: "mashinTehnik", visible:false},
-             { data: "plan", name: "plan"},
-             { data: "allExec", name: "allExec"},
-             { data: "per", name: "per", render:function(data, type, row, meta){
-               if(data == null){return "";}
-               else {return data + "%";}
-             }},
-             { data: "ognoo1", name: "ognoo1" }
-             ]
+                 "columns": [
+                   { data: "daraalal", name: "daraalal"},
+                   { data: "id", name: "id", visible:false},
+                   { data: "heseg_id", name: "heseg_id", visible:false},
+                   { data: "name", name: "name"},
+                   { data: "companyName", name: "companyName"},
+                   { data: "ajliinHeseg", name: "ajliinHeseg"},
+                   { data: "plan", name: "plan"},
+                   { data: "allExec", name: "allExec"},
+                   { data: "per", name: "per", render:function(data, type, row, meta){
+                     if(data == null){return "";}
+                     else {return data + "%";}
+                   }},
+                   { data: "ognoo1", name: "ognoo1" }
+                   ]
       }).ajax.reload();
 }
 

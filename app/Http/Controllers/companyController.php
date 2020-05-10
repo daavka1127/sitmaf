@@ -149,6 +149,7 @@ class companyController extends Controller
         $company->heseg_id = $req->heseg_id;
         $company->ajliinHeseg = $req->ajliinHeseg;
         $company->gereeOgnoo = $req->gereeOgnoo;
+        $company->daraalal = $req->daraalal;
         $company->save();
         $comID = $company->id;
         $log = new logsController;
@@ -170,8 +171,7 @@ class companyController extends Controller
       $company->heseg_id = $req->heseg_id;
       $company->ajliinHeseg = $req->ajliinHeseg;
       $company->gereeOgnoo = $req->gereeOgnoo;
-      $company->hunHuch = $req->hunHuch;
-      $company->mashinTehnik = $req->mashinTehnik;
+      $company->daraalal = $req->daraalal;
       $company->save();
 
       $log = new logsController;

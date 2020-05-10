@@ -8,8 +8,7 @@ $(document).ready(function(){
         $("#cmbHeseg").val(dataRow["heseg_id"]);
         $("#txtEditAjliinHeseg").val(dataRow["ajliinHeseg"]);
         $("#txtEditGereeOgnoo").val(dataRow["gereeOgnoo"]);
-        $("#txtEditHunHuch").val(dataRow["hunHuch"]);
-        $("#txtEditMashinTehnik").val(dataRow["mashinTehnik"]);
+        $("#txtEditDaraalal").val(dataRow["daraalal"]);
         if(dataRow == ""){alertify.alert("Та засах мөрөө сонгоно уу!!!")}
         else{$('#modalEditCompany').modal('show');}
 
@@ -89,6 +88,10 @@ $(document).ready(function () {
             alertify.error("Ажил эхэлсэн огноо оруулаагүй байна!!!");
             isInsert = false;
         }
+        if($("#txtEditDaraalal").val() == ""){
+          alertify.error("Огноог оруулна уу.");
+          return;
+        }
         if(isInsert == false){return;}
 
         if(jsonObj.length == 0){
@@ -108,8 +111,7 @@ $(document).ready(function () {
             heseg_id: $("#cmbHeseg").val(),
             ajliinHeseg: $("#txtEditAjliinHeseg").val(),
             gereeOgnoo: $("#txtEditGereeOgnoo").val(),
-            hunHuch: $("#txtEditHunHuch").val(),
-            mashinTehnik: $("#txtEditMashinTehnik").val(),
+            daraalal: $("#txtEditDaraalal").val(),
             _token: $('meta[name="csrf-token"]').attr('content')
           },
           success:function(response){

@@ -47,15 +47,12 @@
                       }
                  },
           "columns": [
-            { data: "id", name: "id",  render: function (data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            }  },
+            { data: "daraalal", name: "daraalal"},
+            { data: "id", name: "id", visible:false},
             { data: "heseg_id", name: "heseg_id", visible:false},
             { data: "name", name: "name"},
             { data: "companyName", name: "companyName"},
             { data: "ajliinHeseg", name: "ajliinHeseg"},
-            { data: "hunHuch", name: "hunHuch", visible:false},
-            { data: "mashinTehnik", name: "mashinTehnik", visible:false},
             { data: "plan", name: "plan"},
             { data: "allExec", name: "allExec"},
             { data: "per", name: "per", render:function(data, type, row, meta){
@@ -82,13 +79,12 @@
       <table id="datatable" class="table table-striped table-bordered" style="width:100%;">
           <thead>
               <tr>
+                <th>д/д</th>
                 <th>ID</th>
                 <th></th>
                 <th>Хэсэг</th>
                 <th>Аж ахуй нэгжийн нэр</th>
                 <th>Ажлын хэсэг</th>
-                <th>Хүн хүч</th>
-                <th>Машин техник</th>
                 <th>Батлагдсан тоо хэмжээ</th>
                 <th>Нийт гүйцэтгэл</th>
                 <th>Хувь</th>

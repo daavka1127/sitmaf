@@ -66,6 +66,10 @@ $(document).ready(function () {
           alertify.error("Огноог оруулна уу.");
           return;
         }
+        if($("#txtNewDaraalal").val() == ""){
+          alertify.error("Огноог оруулна уу.");
+          return;
+        }
         if(jsonObj.length == 0){
           alertify.error("Хамгийн багадаа нэг төлөвлөсөн ажил оруулна уу!!!");
           return;
@@ -82,6 +86,7 @@ $(document).ready(function () {
             heseg_id: $("#cmbHeseg").val(),
             ajliinHeseg: $("#txtAjliinHeseg").val(),
             gereeOgnoo: $("#txtGereeOgnoo").val(),
+            daraalal: $("#txtNewDaraalal").val(),
             _token: $('meta[name="csrf-token"]').attr('content')
           },
           success:function(response){

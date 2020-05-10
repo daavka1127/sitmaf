@@ -37,6 +37,10 @@
             <label>Ажил эхэлсэн огноо <span class="red-required">*</span> </label>
             <input type="date" id="txtGereeOgnoo" name="gereeOgnoo" class="form-control" required />
           </div>
+          <div class="form-group col-md-3 text-left">
+            <label>Дугаар <span class="red-required">*</span> </label>
+            <input type="number" id="txtNewDaraalal" name="daraalal" class="form-control" required />
+          </div>
           {{-- <div class="form-group col-md-3 text-left">
             <label>Хүн хүч </label>
             <input type="number" min="0" step="1" id="txtHunHuch" name="hunHuch" class="form-control" required />
