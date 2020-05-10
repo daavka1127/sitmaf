@@ -49,6 +49,15 @@ class WorktypeController extends Controller
       //return $req->id;
   }
   public function delete(Request $req){
+      $exec = DB::table('tb_execution')
+          ->where('work_type_id', '=', $req->id);
+      $exec->delete();
+      $plan = DB::table('tb_plan')
+          ->where('work_type_id', '=', $req->id);
+      $plan->delete();
+      $work = DB::table('tb_work')
+          ->where('work_type_id', '=', $req->id);
+      $work->delete();
       $work_type = Work_type::find($req->id);
       $work_type->delete();
       return "Амжилттай устгалаа.";

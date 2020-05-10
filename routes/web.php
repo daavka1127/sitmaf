@@ -18,7 +18,9 @@
 
 
 // dadaa REPORT
-Route::post("/test/table1", function(){
+Route::get("test/sdashigreport1/{comID}/{workTypeID}", "ExecutionContoller@getExecutionWorkTypePercentAvg2019");
+Route::get("test/sdashigreport/{comID}/{workID}", "ExecutionContoller@getExecutionAllCompanyIDworkID");
+Route::get("/test/table1", function(){
   return view("report.companyTableReport");
 })->middleware('auth');
 Route::get('/show/html', function(){
