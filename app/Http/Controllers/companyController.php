@@ -23,7 +23,7 @@ class companyController extends Controller
     public static function getCompaniesExcel($heseg){
         $companies = DB::table("tb_companies")
             ->where('heseg_id', '=', $heseg)
-            ->orderBy('ajliinHeseg', "ASC")
+            ->orderBy('daraalal', "ASC")
             ->get();
         return $companies;
     }
